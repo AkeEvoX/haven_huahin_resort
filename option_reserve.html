@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/home.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<head>
+<title>Welcome to Reservation</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link href="plugin/bootstraps/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="css/default.css" rel="stylesheet" type="text/css" />
+	<link href="css/options.css" rel="stylesheet" type="text/css" />
+	<link href="plugin/jquery/ui/pepper_grinder/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<style>
+	div.ui-datepicker{
+		font-size:10px;
+	}
+</style>
+</head>
+<body>
+<div class='container'>
+	<form id='option_form' action='summery.html' method='post' >
+		<div class='row rowspan' >
+			<div class='col-md-4 text-center'>
+				<span class="stepflow">1</span><a href='selection_room.html'> เลือกห้องพัก</a>
+			</div>
+			<div class='col-md-4 text-center'>
+				<span class="stepflow_active" >2</span> เลือกบริการเสริม
+			</div>
+			<div class='col-md-4 text-center'>
+				<span class="stepflow">3</span>การจอง
+			</div>
+		</div>
+		<div class='row rowspan' >
+			<div class='panel panel-default'>
+				<div class="panel-body">
+					<div class='row'>
+						<div class='col-sm-3'>
+							 <div class="form-group">
+							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> มาถึง</label>
+							<input type="text" class="form-control" id="checkpoint_date" placeholder="" >
+						  </div>
+						</div>
+						<div class='col-sm-3'>
+							<div class="form-group">
+							<label for="travel_date"><span class='glyphicon glyphicon-calendar'></span> ออกเดินทาง</label>
+							<input type="text" class="form-control" id="travel_date" placeholder="" >
+						  </div>
+						</div>
+						<div class='col-sm-3'>
+							<div class="form-group">
+							<label for="rent_amount">&nbsp;</label>
+							<span id="rent_amount" placeholder="" >1 คืน</span>
+						  </div>
+						 </div>
+						<div class='col-sm-3 text-right'>
+							<button type='button' id='btn_used' class='btn btn-warning brown' >นำเงื่อนไขไปใช้</button>
+						</div>
+					</div>
+					<div class='row'>
+					<div class='col-sm-2'>
+						<label >ห้องพัก 1</label>
+					</div>
+						<div class='col-md-2'>
+							<!-- <form class="form-inline"> -->
+							  <div class="form-group" >
+								<div class="input-group" style='z-index: 0;'>
+								  <div class="input-group-btn">
+									<button type='button' class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-chevron-left'></span></button>
+								  </div>
+								  <input type="text" class="form-control" id='adult_amount' aria-label="...">
+								  <div class="input-group-btn">
+									<button type='button' class='btn btn-warning brown btn-md' >&nbsp;<span class='glyphicon glyphicon-chevron-right'></span></button>
+								  </div>
+								</div>
+							  </div>
+							<!-- </form> -->
+						</div>
+						<div class='col-sm-2'>
+							<label for="adult_amount">ผู้ใหญ่ / คน</label>
+						</div>
+						<div class='col-md-2'>
+							<!-- <form class="form-inline"> -->
+							  <div class="form-group">
+								<div class="input-group">
+								  <div class="input-group-btn">
+									<button type='button' class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-chevron-left'></span></button>
+								  </div>
+								  <input type="text" class="form-control" id='child_amount' aria-label="...">
+								  <div class="input-group-btn">
+									<button type='button' class='btn btn-warning brown btn-md' >&nbsp;<span class='glyphicon glyphicon-chevron-right'></span></button>
+								  </div>
+								</div>
+							  </div>
+							<!-- </form> -->
+						</div>
+						<div class='col-sm-2'>
+							<label for="child_amount">เด็ก / คน</label>
+						</div>
+					</div>
+					<div class='row rowspan'>
+						<div class='col-md-3'>
+							<button type="button" class="btn btn-link">+ เพิ่มห้องพัก</button>
+						</div>
+						<div class='col-md-3'>
+								<label for='hello'>รหัสโปรโมชั่นหรือรหัสธุรกิจ</label>
+						</div>
+						<div class='col-md-3'>
+								<input type='text' class='form-control' id='promo_code' />
+						</div>
+						<div class='col-md-3 text-right'>
+							&nbsp;<a href='#'><span class='glyphicon glyphicon-remove'></span></a>
+						</div>
+					</div>
+			  </div>
+			</div>
+		</div>
+		<div class='row rowspan' >
+			<div class='col-md-7'>
+				<div class='row'>
+					<h3 style='color:#996600;font-weight:bold;'>เลือกบริการเสริม</h3>
+				</div>
+				<div class='row'>
+					<div class="panel panel-default">
+					  <div class="panel-heading" style='background-color:#454545;'>
+						<h3 class="panel-title" style='color:white;margin:10px 5px 10px 1px;'>บริการเสริมดังนี้</h3>
+					  </div>
+					  <div class="panel-body" style='background-color:white;color:black;'>
+							<div class='row'>
+								<div class='col-md-3'>
+									<img src='images/dinner.png' class='img-responsive' />
+								</div>
+								<div class='col-md-7'>
+									<p><h4>Thai Set Dinner</h4></p>
+									<p><a href='#' >รายละเอียด ></a></p>
+									<p>$ 525 ผู้ใหญ่ 1 คน</p>
+								</div>
+								<div class='col-md-2 text-right'>
+									<span>เลือก</span> <input type='checkbox' name='option_reserve'  />
+								</div>
+								
+							</div>
+							<hr/>
+							<div class='row'>
+								<div class='col-md-3'>
+									<img src='images/van.png' class='img-responsive' />
+								</div>
+								<div class='col-md-7'>
+									<p><h4>Airport Transfer</h4></p>
+									<p><a href='#' >รายละเอียด ></a></p>
+									<p>$ 3,700</p>
+								</div>
+								<div class='col-md-2 text-right'>
+									<span>เลือก</span> <input type='checkbox' name='option_reserve'  />
+								</div>
+								
+							</div>
+							
+					  </div>
+					</div>
+				</div>
+				<div class='row'>
+					<div class="panel panel-default">
+					  <div class="panel-heading" style='background-color:#454545;'>
+						<h3 class="panel-title" style='color:white;margin:10px 5px 10px 1px;'>คำขอพิเศษสำหรับทางเลือกของท่าน</h3>
+					  </div>
+					  <div class="panel-body" style='background-color:white;color:black;'>
+							<div class='row'>
+								<div class='col-md-12'>
+									<textarea id='comment' class='form-control' rows='5' placeholder='โปรดอธิบายคำขอของท่าน เวลาที่เดินทางมาถึง การแพ้อาหาร, ห้องพักสำหรับผู้สูบบุหรี่'></textarea>
+								</div>
+							</div>
+							<div class='row rowspan'>
+								<div class='col-md-12'>
+									<span style='color:gray;'>ทางเราไม่รับประกันว่าคำขอของท่านจะได้รับการพิจารณา แต่เราจะตอบสนองความต้องการของท่านให้ดีที่สุด</span>
+								</div>
+							</div>
+					  </div>
+					</div>
+				</div>
+			</div>
+			<div class='col-md-5'>
+				<div class='row'>
+					<div class="list-group rowspan" style='margin:10px;'>
+						<span href="#" class="list-group-item" style="border-top:3px solid;">
+							<h4 class="list-group-item-heading">รวม <span class='pull-right'>$ 7,113.70</span></h4>
+							<p class="list-group-item-text ">
+							<a href='#' >รายละเอียด >  </a><span class='pull-right'>1 ห้องพัก, 1 คืน</span>
+							</p>
+						 </span>
+						 <span href="#" class="list-group-item">
+							<h4 class="list-group-item-heading">ห้องพัก 1<span class='pull-right'>$ 2,888.70</span></h4>
+							<h4 class="list-group-item-text ">
+							Superior<small class='pull-right'><a href='#'>นำออก</a></small>
+							Last Minute Promotion
+							</h4>
+						 </span>
+						 <span href="#" class="list-group-item">
+							<h4 class="list-group-item-heading">ทางเลือก <span class='pull-right'>$ 4,225</span></h4>
+							<p class="list-group-item-text ">
+							<a href='#'>รายละเอียด > </a>
+							</p>
+						 </span>
+						 <span href="#" class="list-group-item">
+							<div class='row'>
+								<div class='col-md-12'>
+									<h4 class="list-group-item-heading">Airport Trans.... <span class='pull-right'>$ 3,700</span></h4>
+									<p class="list-group-item-text ">
+									<a href='#'>นำออก</a>
+									</p>
+								</div>
+							</div>
+							<div class='row'>
+								<div class='col-md-12'>
+									<h4 class="list-group-item-heading">Thai Set Din.... <span class='pull-right'>$ 525</span></h4>
+									<p class="list-group-item-text ">
+									<a href='#'>นำออก</a>
+									</p>
+								</div>
+							</div>
+						 </span>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='col-md-12'>
+					<button type='submit' class='btn btn-large brown btn-block btn-warning' style='min-height:50px;'>จอง</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+
+<script src='plugin/jquery/jquery.min.js' ></script>
+<script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
+<script src='plugin/jquery/datepicker-th.js' ></script>
+
+<script src='plugin/jquery/holder.js' ></script>
+<script src='plugin/bootstraps/js/bootstrap.js' ></script>
+<script type="text/javascript">
+
+	$(document).ready(function(){
+		$("#checkpoint_date").datepicker(); 
+		$("#travel_date").datepicker(); 
+	   <!-- $('#carlendar').on('click',function(e){ -->
+			<!-- $("#check_in_date").datepicker('show'); -->
+	   <!-- }); -->
+   });
+  </script>
+</body>
+</html>
+
