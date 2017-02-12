@@ -45,3 +45,13 @@ function recalculate(){
 	money = total.toFixed(2).replace(money_pattern,"$1,");
 	view_total.html("฿ "+money);
 }
+
+room_list.get_info = function(){
+	var endpoint = "services/info.php";
+	var method = "get";
+	var args = {"_":new Date().getMilliseconds()};
+
+	utility.service(endpoint,method,args,function(data){
+		console.log(data);
+	});
+}

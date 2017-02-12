@@ -1,0 +1,413 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"v",
+				"vertical-align"
+			],
+			[
+				"w",
+				"width:100"
+			],
+			[
+				"back",
+				"background-size"
+			],
+			[
+				"getMil",
+				"getMilliseconds〔function〕"
+			],
+			[
+				"style",
+				"list-style"
+			],
+			[
+				"siz",
+				"font-size"
+			],
+			[
+				"text",
+				"text-decoration"
+			],
+			[
+				"s",
+				"cursive"
+			],
+			[
+				"fetch_",
+				"fetch_assoc"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 449.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/iake.air/Sites/haven_huahin_resort/_htaccess",
+		"/Users/iake.air/Sites/starsanitaryware/css/index.css",
+		"/Users/iake.air/Sites/starsanitaryware/admin/js/award-manager.js",
+		"/Users/iake.air/Sites/starsanitaryware/admin/services/gallery.php",
+		"/Users/iake.air/Sites/starsanitaryware/admin/js/product-manager.js",
+		"/Users/iake.air/Sites/starsanitaryware/admin/market-manager.html",
+		"/Users/iake.air/Sites/starsanitaryware/admin/product-edit.html",
+		"/Users/iake.air/Sites/starsanitaryware/controller/ProductManager.php",
+		"/Users/iake.air/Sites/starsanitaryware/admin/services/product.php",
+		"/Users/iake.air/Sites/starsanitaryware/admin/js/color-manager.js",
+		"/Users/iake.air/Sites/starsanitaryware/admin/product-manager.html",
+		"/Users/iake.air/Sites/starsanitaryware/admin/css/table.css",
+		"/Users/iake.air/Sites/starsanitaryware/admin/category-manager.html",
+		"/Users/iake.air/Sites/starsanitaryware/admin/reference-manager.html",
+		"/Users/iake.air/Sites/starsanitaryware/admin/award-manager.html",
+		"/Users/iake.air/Sites/starsanitaryware/admin/js/project-manager.js",
+		"/Users/iake.air/Sites/starsanitaryware/admin/color-add.html",
+		"/Users/iake.air/Sites/starsanitaryware/admin/color-manager.html",
+		"/Users/iake.air/Sites/starsanitaryware/lib/logger.php",
+		"/Users/iake.air/Sites/starsanitaryware/award.html",
+		"/Users/iake.air/Sites/starsanitaryware/compares.html",
+		"/Users/iake.air/Sites/starsanitaryware/js/product.js",
+		"/Users/iake.air/Sites/starsanitaryware/css/compare.css",
+		"/Users/iake.air/Sites/starsanitaryware/services/product.php",
+		"/Users/iake.air/Sites/starsanitaryware/css/product.css",
+		"/Users/iake.air/Sites/starsanitaryware/services/compare.php",
+		"/Users/iake.air/Sites/starsanitaryware/js/compare.js",
+		"/Users/iake.air/Sites/starsanitaryware/productdetail.html",
+		"/Users/iake.air/Sites/starsanitaryware/services/attributes.php",
+		"/Users/iake.air/Sites/starsanitaryware/controller/AttributeManager.php",
+		"/Users/iake.air/Sites/starsanitaryware/contact.html",
+		"/Users/iake.air/Sites/starsanitaryware/services/clearcache.php",
+		"/Users/iake.air/Sites/starsanitaryware/services/about.php",
+		"/Users/iake.air/Sites/starsanitaryware/reference.html",
+		"/Users/iake.air/Sites/starsanitaryware/services/press.php",
+		"/Users/iake.air/Sites/starsanitaryware/services/dealer.php",
+		"/Users/iake.air/Sites/starsanitaryware/category.html",
+		"/Users/iake.air/Sites/starsanitaryware/lib/connecter.php",
+		"/Users/iake.air/Sites/starsanitaryware/index.html",
+		"/Users/iake.air/Sites/starsanitaryware/css/theme.default.css",
+		"/Users/iake.air/Sites/starsanitaryware/config/datasource.ini",
+		"/Users/iake.air/Sites/starsanitaryware/products.html",
+		"/Users/iake.air/Sites/starsanitaryware/css/category.css",
+		"/Users/iake.air/Sites/starsanitaryware/about.html",
+		"/Users/iake.air/Sites/starsanitaryware/organization.html",
+		"/Users/iake.air/Sites/starsanitaryware/org_intermarket.html",
+		"/Users/iake.air/Sites/starsanitaryware/org_chart.html",
+		"/Users/iake.air/Sites/starsanitaryware/press.html",
+		"/Users/iake.air/Sites/starsanitaryware/press_detail.html",
+		"/Users/iake.air/Sites/starsanitaryware/gallery.html",
+		"/Users/iake.air/Sites/starsanitaryware/video.html",
+		"/Users/iake.air/Sites/starsanitaryware/faq.html",
+		"/Users/iake.air/Sites/starsanitaryware/download.html",
+		"/Users/iake.air/Sites/starsanitaryware/download_list.html",
+		"/Users/iake.air/Sites/starsanitaryware/refer-info.html",
+		"/Users/iake.air/Sites/starsanitaryware/refer-list.html",
+		"/Users/iake.air/Sites/starsanitaryware/js/index.js",
+		"/Users/iake.air/Sites/starsanitaryware/js/press.js",
+		"/Users/iake.air/Sites/starsanitaryware/dealer.html",
+		"/Users/iake.air/Sites/starsanitaryware/css/intro.css",
+		"/Users/iake.air/Sites/starsanitaryware/js/utility.js",
+		"/Users/iake.air/Sites/starsanitaryware/navbar.html",
+		"/Users/iake.air/Sites/starsanitaryware/js/intro.js",
+		"/Users/iake.air/Sites/starsanitaryware/intro.html",
+		"/Users/iake.air/Sites/starsanitaryware/js/org_reference.js",
+		"/Users/iake.air/Sites/starsanitaryware/js/about.js",
+		"/Users/iake.air/Sites/starsanitaryware/lib/common.php",
+		"/Users/iake.air/Sites/starsanitaryware/series.html",
+		"/Users/iake.air/Sites/starsanitaryware/showroom.html",
+		"/Users/iake.air/Sites/starsanitaryware/catalog.html",
+		"/Users/iake.air/Sites/starsanitaryware/css/icon.css",
+		"/Users/iake.air/Sites/starsanitaryware/admin/login.html",
+		"/Users/iake.air/Sites/starsanitaryware/css/navbar.css",
+		"/Users/iake.air/OneDrive/SourceCode/php/starsanitaryware/backup db/stardb_20161028.sql",
+		"/Users/iake.air/Sites/starsanitaryware/logs/warning_2016-10-30.log",
+		"/Users/iake.air/Sites/starsanitaryware/services/organization.php",
+		"/Users/iake.air/Sites/starsanitaryware/controller/OrgManager.php",
+		"/Users/iake.air/Sites/starsanitaryware/css/referal.css",
+		"/Users/iake.air/Sites/starsanitaryware/css/about.css",
+		"/Users/iake.air/Sites/controlcenter/index.html",
+		"/Users/iake.air/Sites/starsanitaryware/js/productdetail.js",
+		"/Users/iake.air/Sites/starsanitaryware/plugin/css/hover-effects.css",
+		"/Users/iake.air/Sites/starsanitaryware/lib/database.php",
+		"/Users/iake.air/Sites/starsanitaryware/temp_backup/menu_hightnachy.php",
+		"/Users/iake.air/Sites/starsanitaryware/services/contact.php",
+		"/Users/iake.air/Sites/starsanitaryware/js/award.js",
+		"/Users/iake.air/OneDrive/SourceCode/php/starsanitaryware/stardb_20160925.sql",
+		"/Users/iake.air/Sites/starsanitaryware/services/award.php",
+		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/lightslider/lightslider-content.css",
+		"/Users/iake.air/Sites/feature/unitegallery-master/package/grid_left.html",
+		"/Users/iake.air/OneDrive/SourceCode/command/mac.sh",
+		"/Users/iake.air/OneDrive/SourceCode/command/mac-change.sh",
+		"/Users/iake.air/Sites/starsanitaryware/productdetail.html.bak",
+		"/Users/iake.air/Sites/feature/elevatezoom-master/gallery.html",
+		"/Users/iake.air/Sites/feature/iziModal/demo.html",
+		"/Users/iake.air/Sites/feature/iziModal/index.html",
+		"/Users/iake.air/Sites/feature/Responsive-CSS3-Animated-jQuery-Modal-Plugin-iziModal/index.html",
+		"/Users/iake.air/Sites/readme.md",
+		"/Users/iake.air/Sites/feature/Responsive-CSS3-Animated-jQuery-Modal-Plugin-iziModal/README.md",
+		"/Users/iake.air/Sites/imagelightbox/readme.txt",
+		"/Users/iake.air/Sites/feature/simplemodal/Demos/index.html",
+		"/Users/iake.air/Sites/feature/simplemodal/Demos/assets/javascript/demo.js",
+		"/Users/iake.air/Sites/feature/simplemodal/Source/simple-modal.js",
+		"/Users/iake.air/Sites/feature/lightGallery-master/demo/index.html",
+		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/lightslider/lightslider.js",
+		"/Users/iake.air/Sites/backup/starsanitaryware_20160724/productdetail.php",
+		"/Users/iake.air/Sites/starsanitaryware/js/video.js",
+		"/Users/iake.air/OneDrive/SourceCode/php/feature/ultimate-image-hover-effects/index.html",
+		"/Users/iake.air/Sites/backup/starsanitaryware_20160724/category.php",
+		"/Users/iake.air/Sites/starsanitaryware/js/profile.js",
+		"/Users/iake.air/Sites/starsanitaryware/js/catalog.js",
+		"/Users/iake.air/Downloads/lightslider-master/demo/index.html",
+		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/lightslider/lightslider.css",
+		"/Users/iake.air/Sites/starsanitaryware/message.html",
+		"/Users/iake.air/Downloads/lightslider-master/dist/js/lightslider.js",
+		"/Users/iake.air/Sites/feature/CircularContentCarousel/test.html",
+		"/Users/iake.air/Sites/starsanitaryware/css/custom.control.css",
+		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/photogrid/photogrid.css",
+		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/immersive-slider/immersive-widescreen.css",
+		"/Users/iake.air/Sites/starsanitaryware/profile.html",
+		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/immersive-slider/immersive-slider.css",
+		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/immersive-slider/jquery.immersive-slider.js",
+		"/Users/iake.air/Sites/register/js/validator.js",
+		"/Users/iake.air/Sites/register/index.html",
+		"/Users/iake.air/Sites/backup/starsanitaryware_20160724/visitor.php",
+		"/Users/iake.air/Sites/backup/starsanitaryware_20160724/reference.php",
+		"/Users/iake.air/Sites/backup/starsanitaryware_20160724/about.php",
+		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/jquery.tree.layout.css"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/Users/iake.air/Sites/starsanitaryware/plugin/css",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"viewmenulist",
+			"set_item_product",
+			"get_fetch_product",
+			"setProduct",
+			"setProduct(",
+			"a.seq",
+			"setProduct",
+			"item",
+			"setviewitem",
+			"getattrs",
+			"title_control",
+			"btn_compare",
+			"lightslider",
+			"slider",
+			"setViewCompare",
+			"compare-slide",
+			"compare",
+			"setViewCompare",
+			"setviewitem",
+			"thumb",
+			"setproduct",
+			"setviewitem",
+			"setViewCompare",
+			"setviewitem",
+			"view-content",
+			"product-slider",
+			"menutree",
+			"#menutree",
+			"menutree",
+			"viewbuttom",
+			"title_series",
+			"loadslidepress",
+			"title_series",
+			"navtree",
+			"bindpage",
+			"logobar",
+			"view_press",
+			"viewslide",
+			"viewbuttom",
+			"viewmiddle",
+			"viewbuttom",
+			"logobar",
+			"getProductList",
+			"setProductList",
+			"loadcategorylist",
+			"getProduct",
+			"setProduct",
+			"setProduct(",
+			"setProduct",
+			"setProductType",
+			"getMenu",
+			"	\n",
+			"setMenu",
+			"product",
+			"'product'",
+			"product",
+			"menu_master",
+			"attribute",
+			"loadreference",
+			"content-data",
+			"loadcategorylist",
+			"console",
+			"none",
+			"content",
+			".text-desc",
+			"images",
+			"img",
+			"pagination",
+			"is-page",
+			"page",
+			"is-page",
+			"color",
+			"is-prev",
+			"slide is-slide",
+			"tree-toggle",
+			"nav-header",
+			"btn",
+			"30px",
+			"inputindex",
+			"saveitem",
+			".png",
+			"load",
+			"currentPage",
+			"naviitem",
+			"selectProductGroup",
+			"source",
+			"img",
+			"date_default_timezone_set",
+			"loadCategoryRestaurant",
+			"ï",
+			"ï»",
+			"ï»¿",
+			"right",
+			"netcalculate",
+			"\";\n",
+			"5",
+			"\")\n",
+			"\";\n",
+			"=\"\">",
+			"                \n",
+			"?>",
+			"60px",
+			"source\n",
+			"get\n",
+			"source\n",
+			">\n"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			".hover-desc"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 223.0,
+	"status_bar_visible": true
+}
