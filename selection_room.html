@@ -202,7 +202,7 @@
 			</div><!--Superior room-->
 		</div>
 		<div class='col-md-5'>
-			<form id='validate' action='option_reserve.html' method='post' >
+			<form id='validate' action='services/reserve.php?step=2' method='post' >
 			<div class='row' style='padding-left: 10px;'>
 				<div id='check_in_date'></div>
 			</div>
@@ -220,6 +220,7 @@
 			<div class='row'>
 				<button type='submit' class='btn btn-default brown col-sm-offset-1 col-sm-10' style='min-height:50px;'>ตรวจสอบความถูกต้อง</button>
 			</div>
+			<input type='hidden' id='data_reserve' name='data_reserve' />
 			</form>
 		</div>
 		
@@ -244,7 +245,7 @@
 	   <!-- }); -->
 
 
-	   room_list.get_info();
+	   //room_list.get_info();
    });
    
   </script>

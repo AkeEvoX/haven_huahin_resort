@@ -44,6 +44,8 @@ function recalculate(){
 	});
 	money = total.toFixed(2).replace(money_pattern,"$1,");
 	view_total.html("฿ "+money);
+	
+	$('#data_reserve').val(JSON.stringify(room_list.source));
 }
 
 room_list.get_info = function(){

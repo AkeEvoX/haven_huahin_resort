@@ -11,7 +11,7 @@ switch($_step){
 		step_one($_POST);
 	break;
 	case "2":
-
+		step_two($_POST);
 	break;
 	case "3":
 
@@ -47,16 +47,48 @@ function step_one($args){
 	exit();
 
 }
-//booking date & addion option
+//booking room & price addion option
 function step_two($data){
 
+	$rooms = $_SESSION["rooms"];
+	//print_r($data["data_reserve"]);
+	//echo $data["data_reserve"];
+	
+	
+	$item =  json_encode($data["data_reserve"]);
+	
+	//echo json_decode($item);
+	$out = array_values($data);
+	
+	print_r($out);
+	var_dump(json_decode(json_encode($data),true));
+	// foreach($item as $val){
+		// var_dump($val);
+	// }
+	
+	// foreach($data["data_reserve"]  as $val){
+		// print_r($val);
+	// }
+	
+	// foreach($data->data_reserve as $value){
+		// echo $value->key;
+	// }
+	
+	// foreach($data["data_reserve"] as $row){
+		// print_r($row);
+	// }
+	
 }
-//confirm trasection
+//booking add option
 function step_tree($data){
 
 }
-//complete trasection
+//confirm trasection
 function step_four($data){
+
+}
+//complete trasection
+function step_five($data){
 
 }
 

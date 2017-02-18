@@ -4,44 +4,24 @@ $(document).ready(function(){
 	$(".dropdown-menu .sub-menu").hide();
 });
 
-function viewlang(resp)
-{
-		switch(resp.result.lang)
-		 {
-			 case 'th':
-			  $('#lang').html("Thai <span class='caret'></span>")
-			 break;
-			 case 'en':
-			 $('#lang').html("English <span class='caret'></span>")
-			 break;
-		 }
-}
-
-function setfinddealer(){
-  $('#find_dealer').click(function(){
-    var name = $('#find_text').val();
-     window.location.href = "dealer.html?name="+name+"&_=" + new Date().getMilliseconds();
-  });
-}
-
 var utility = function(){};
 
 utility.initial = function(){
 	
 	
-	$('#view-navbar').load('navbar.html',{'_':new Date().getHours()},function(){
+	// $('#view-navbar').load('navbar.html',{'_':new Date().getHours()},function(){
 
-		setfinddealer();
-		utility.loadmenu();
-		var url = 'services/lang.php';
-		var args = {'_':new Date().getMilliseconds()};
-		utility.service(url,'GET',args ,viewlang);
+		// setfinddealer();
+		// utility.loadmenu();
+		// var url = 'services/lang.php';
+		// var args = {'_':new Date().getMilliseconds()};
+		// utility.service(url,'GET',args ,viewlang);
 		
-	});
+	// });
 
-	$('#view-footer').load('navfooter.html',{'_':new Date().getHours()},function(){
-		utility.loadbuttommenu();
-	});
+	// $('#view-footer').load('navfooter.html',{'_':new Date().getHours()},function(){
+		// utility.loadbuttommenu();
+	// });
 	
 	
 }
