@@ -40,9 +40,9 @@ function step_one($args){
 		,"adults"=>$adults
 		,"childern"=>$childern
 		,"code"=>$code);
-
+	//keep data 
 	$_SESSION["query"] = $data;
-
+	//redirect to next page
 	header("Location: ../selection_room.html");
 	exit();
 
@@ -50,34 +50,22 @@ function step_one($args){
 //booking room & price addion option
 function step_two($data){
 
-	$rooms = $_SESSION["rooms"];
-	//print_r($data["data_reserve"]);
-	//echo $data["data_reserve"];
+	//keep data
+	$_SESSION["rooms"] = json_decode($data["data_reserve"]);
+	$reserve = json_decode($data["data_reserve"]);
 	
+	/*
+	//print value room reserve
+	foreach($reserve as $val){
+		
+		echo $val->key ."|" .$val->room ."|".$val->type ."|".$val->price ."|"."<br/>";
+		
+	}
+	*/
+	//redirect to next page
+	header("Location: ../option_reserve.html");
 	
-	$item =  json_encode($data["data_reserve"]);
-	
-	//echo json_decode($item);
-	$out = array_values($data);
-	
-	print_r($out);
-	var_dump(json_decode(json_encode($data),true));
-	// foreach($item as $val){
-		// var_dump($val);
-	// }
-	
-	// foreach($data["data_reserve"]  as $val){
-		// print_r($val);
-	// }
-	
-	// foreach($data->data_reserve as $value){
-		// echo $value->key;
-	// }
-	
-	// foreach($data["data_reserve"] as $row){
-		// print_r($row);
-	// }
-	
+	exit();
 }
 //booking add option
 function step_tree($data){
