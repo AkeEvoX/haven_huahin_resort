@@ -14,6 +14,12 @@ switch($_step){
 		step_two($_POST);
 	break;
 	case "3":
+		step_three($_POST);
+	break;
+	case "4":
+
+	break;
+	case "5":
 
 	break;
 }
@@ -69,7 +75,13 @@ function step_two($data){
 }
 //booking add option
 function step_tree($data){
+	//step_three
+	$_SESSION["booking_date"];
 
+	$_SESSION_["booking_option"];
+
+	//$_SESSION[""]
+	//
 }
 //confirm trasection
 function step_four($data){

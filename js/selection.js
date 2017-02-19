@@ -1,5 +1,5 @@
-var room_list = {};
-room_list.source = [];
+var reserve = {};
+reserve.source = [];
 
 //list_reserve
 
@@ -10,7 +10,7 @@ function add_room(room,type,price){
 	var key = moment().format("YYYYMMDDHHMMSS");
 	console.log("add room >  " + key + "|" + room + "|"+type+"|"+price);
 	var data = { "key" : key , "room":room , "type" : type , "price" : price }; 
-	room_list.source.push(data); 
+	reserve.source.push(data); 
 	
 	item += "<span id='"+key+"'  href='#' class='list-group-item'>";
 	item += "<h4 class='list-group-item-heading'>"+ room +" <span class='pull-right'>"+price+"</span></h4>";
@@ -25,7 +25,7 @@ function add_room(room,type,price){
 function del_room(key){
 	
 	$('#'+key).remove();
-	room_list.source = jQuery.grep(room_list.source,function(item,index){ return item.key != key });
+	reserve.source = jQuery.grep(reserve.source,function(item,index){ return item.key != key });
 	recalculate();
 }
 
@@ -35,7 +35,7 @@ function recalculate(){
 	var money = 0.0;
 	var total_pattern = /[^0-9.-]+/g; //format calculate
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //formoney
-	$.each(room_list.source,function(i,val){
+	$.each(reserve.source,function(i,val){
 		
 		if(val.price != "")
 			total += parseFloat(val.price.replace(total_pattern,''));
@@ -45,15 +45,26 @@ function recalculate(){
 	money = total.toFixed(2).replace(money_pattern,"$1,");
 	view_total.html("฿ "+money);
 	
-	$('#data_reserve').val(JSON.stringify(room_list.source));
+	$('#data_reserve').val(JSON.stringify(reserve.source));
 }
 
-room_list.get_info = function(){
+reserve.get_info = function(){
 	var endpoint = "services/info.php";
 	var method = "get";
 	var args = {"_":new Date().getMilliseconds()};
 
 	utility.service(endpoint,method,args,function(data){
+		
 		console.log(data);
+
+		//$('#total_amount').val();
 	});
 }
+/*
+reserve.add_option = function(data){
+
+	var endpoint = "services/reserve.php";
+	var method = "get";
+	var args = {"_":new Date().getMilliseconds()};
+
+}*/

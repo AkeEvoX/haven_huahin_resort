@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class='container'>
-	<form id='option_form' action='summery.html' method='post' >
+	<form id='option_form' action='services/reserve.php' method='post' >
 		<div class='row rowspan' >
 			<div class='col-md-4 text-center'>
 				<span class="stepflow">1</span><a href='selection_room.html'> เลือกห้องพัก</a>
@@ -181,7 +181,7 @@
 				<div class='row'>
 					<div class="list-group rowspan" style='margin:10px;'>
 						<span href="#" class="list-group-item" style="border-top:3px solid;">
-							<h4 class="list-group-item-heading">รวม <span class='pull-right'>$ 7,113.70</span></h4>
+							<h4 class="list-group-item-heading">รวม <span id='total_amount' class='pull-right'>$ 7,113.70</span></h4>
 							<p class="list-group-item-text ">
 							<a href='#' >รายละเอียด >  </a><span class='pull-right'>1 ห้องพัก, 1 คืน</span>
 							</p>
@@ -235,14 +235,20 @@
 
 <script src='plugin/jquery/holder.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
+<script src='js/selection.js' ></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
+
 		$("#checkpoint_date").datepicker(); 
 		$("#travel_date").datepicker(); 
-	   <!-- $('#carlendar').on('click',function(e){ -->
-			<!-- $("#check_in_date").datepicker('show'); -->
-	   <!-- }); -->
+
+		$('#carlendar').on('click',function(e){
+			$("#check_in_date").datepicker('show');
+		});
+
+		reserve.get_info();
+
    });
   </script>
 </body>
