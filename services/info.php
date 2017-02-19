@@ -5,8 +5,8 @@ include("../lib/common.php");
 if(isset($_SESSION["query"])){
 
 	$info = $_SESSION["query"];
-	$rooms = $_SESSION["rooms"];
-	echo json_encode(array("info"=> $info ,"rooms"=>$rooms));
+	$reserve = $_SESSION["reserve"];
+	echo json_encode(array("info"=> $info ,"reserve"=>$reserve));
 }
 
 

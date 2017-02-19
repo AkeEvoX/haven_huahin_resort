@@ -57,9 +57,9 @@ function step_one($args){
 function step_two($data){
 
 	//keep data
-	$_SESSION["rooms"] = json_decode($data["data_reserve"]);
+	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
 	$reserve = json_decode($data["data_reserve"]);
-	
+	//var_dump($reserve);
 	/*
 	//print value room reserve
 	foreach($reserve as $val){

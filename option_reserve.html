@@ -131,10 +131,10 @@
 								<div class='col-md-7'>
 									<p><h4>Thai Set Dinner</h4></p>
 									<p><a href='#' >รายละเอียด ></a></p>
-									<p>$ 525 ผู้ใหญ่ 1 คน</p>
+									<p>฿ 525 ผู้ใหญ่ 1 คน</p>
 								</div>
 								<div class='col-md-2 text-right'>
-									<span>เลือก</span> <input type='checkbox' name='option_reserve'  />
+									<span>เลือก</span> <input type='checkbox' name='option_reserve' value='{"key":"opt1","title":"Thai Set Diner","price":"525" }'  />
 								</div>
 								
 							</div>
@@ -146,10 +146,10 @@
 								<div class='col-md-7'>
 									<p><h4>Airport Transfer</h4></p>
 									<p><a href='#' >รายละเอียด ></a></p>
-									<p>$ 3,700</p>
+									<p>฿ 3,700</p>
 								</div>
 								<div class='col-md-2 text-right'>
-									<span>เลือก</span> <input type='checkbox' name='option_reserve'  />
+									<span>เลือก</span> <input type='checkbox' name='option_reserve' value='{"key":"opt2","title":"Airport Transfer","price":"3700"}'  />
 								</div>
 								
 							</div>
@@ -179,44 +179,14 @@
 			</div>
 			<div class='col-md-5'>
 				<div class='row'>
-					<div class="list-group rowspan" style='margin:10px;'>
+					<div id='reserve_info' class="list-group rowspan" style='margin:10px;'>
 						<span href="#" class="list-group-item" style="border-top:3px solid;">
-							<h4 class="list-group-item-heading">รวม <span id='total_amount' class='pull-right'>$ 7,113.70</span></h4>
+							<h4 class="list-group-item-heading">รวม <span id='total_price' class='pull-right'>฿ 7,113.70</span></h4>
 							<p class="list-group-item-text ">
-							<a href='#' >รายละเอียด >  </a><span class='pull-right'>1 ห้องพัก, 1 คืน</span>
+							<a href='#' >รายละเอียด >  </a><span id='total_room' class='pull-right'></span>
 							</p>
 						 </span>
-						 <span href="#" class="list-group-item">
-							<h4 class="list-group-item-heading">ห้องพัก 1<span class='pull-right'>$ 2,888.70</span></h4>
-							<h4 class="list-group-item-text ">
-							Superior<small class='pull-right'><a href='#'>นำออก</a></small>
-							Last Minute Promotion
-							</h4>
-						 </span>
-						 <span href="#" class="list-group-item">
-							<h4 class="list-group-item-heading">ทางเลือก <span class='pull-right'>$ 4,225</span></h4>
-							<p class="list-group-item-text ">
-							<a href='#'>รายละเอียด > </a>
-							</p>
-						 </span>
-						 <span href="#" class="list-group-item">
-							<div class='row'>
-								<div class='col-md-12'>
-									<h4 class="list-group-item-heading">Airport Trans.... <span class='pull-right'>$ 3,700</span></h4>
-									<p class="list-group-item-text ">
-									<a href='#'>นำออก</a>
-									</p>
-								</div>
-							</div>
-							<div class='row'>
-								<div class='col-md-12'>
-									<h4 class="list-group-item-heading">Thai Set Din.... <span class='pull-right'>$ 525</span></h4>
-									<p class="list-group-item-text ">
-									<a href='#'>นำออก</a>
-									</p>
-								</div>
-							</div>
-						 </span>
+						
 					</div>
 				</div>
 				<div class='row'>
@@ -232,9 +202,10 @@
 <script src='plugin/jquery/jquery.min.js' ></script>
 <script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
 <script src='plugin/jquery/datepicker-th.js' ></script>
-
+<script src='plugin/jquery/moment.js' ></script>
 <script src='plugin/jquery/holder.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
+<script src='js/utility.js' ></script>
 <script src='js/selection.js' ></script>
 <script type="text/javascript">
 
@@ -245,6 +216,21 @@
 
 		$('#carlendar').on('click',function(e){
 			$("#check_in_date").datepicker('show');
+		});
+		
+		$('input[name="option_reserve"]').on('change',function(e){
+			//
+			var data = JSON.parse(this.value);
+			//console.warn(data.title);
+			
+			//console.warn("option = " + this.value + " checked = " + this.checked);
+			
+			if(this.checked==true){
+				reserve.add_option(data);
+			}
+			else{
+				reserve.del_option(data.key,data.price);
+			}
 		});
 
 		reserve.get_info();
