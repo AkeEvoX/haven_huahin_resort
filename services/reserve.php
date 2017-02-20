@@ -74,7 +74,7 @@ function step_two($data){
 	exit();
 }
 //booking add option
-function step_tree($data){
+function step_three($data){
 	//step_three
 	$_SESSION["booking_date"];
 
@@ -82,6 +82,7 @@ function step_tree($data){
 
 	//$_SESSION[""]
 	//
+	header("Location: ../summery.html");
 }
 //confirm trasection
 function step_four($data){

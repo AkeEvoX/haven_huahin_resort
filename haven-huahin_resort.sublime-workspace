@@ -47,7 +47,7 @@
 			"file": "services/reserve.php",
 			"settings":
 			{
-				"buffer_size": 1531,
+				"buffer_size": 1593,
 				"line_ending": "Unix"
 			}
 		},
@@ -63,18 +63,15 @@
 			"file": "services/info.php",
 			"settings":
 			{
-				"buffer_size": 210,
+				"buffer_size": 218,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\"><!-- InstanceBegin template=\"/Templates/home.dwt.php\" codeOutsideHTMLIsLocked=\"false\" -->\n<head>\n<title>Welcome to Reservation</title>\n	<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n	<meta http-equiv='X-UA-Compatible' content='IE=edge'>\n	<meta name='viewport' content='width=device-width, initial-scale=1'>\n	<link href=\"plugin/bootstraps/css/bootstrap.css\" rel=\"stylesheet\" type=\"text/css\" />\n	<link href=\"css/default.css\" rel=\"stylesheet\" type=\"text/css\" />\n	<link href=\"plugin/jquery/ui/pepper_grinder/jquery-ui.css\" rel=\"stylesheet\" type=\"text/css\" />\n	<style>\n	div.ui-datepicker{\n		font-size:10px;\n	}\n</style>\n</head>\n<body>\n<div class='container'>\n	<div class='row rowspan' >\n		<div class='col-md-4 text-center'>\n			<span class=\"stepflow_active\">1</span> เลือกห้องพัก\n		</div>\n		<div class='col-md-4 text-center'>\n			<span class=\"stepflow\" >2</span> เลือกบริการเสริม\n		</div>\n		<div class='col-md-4 text-center'>\n			<span class=\"stepflow\">3</span> การจอง\n		</div>\n	</div>\n	<div class='row rowspan' >\n		<div class='col-md-2 thumbnail'>\n			<div class='text-center'>ศ. 16 ธ.ค. </div><br>\n			<div>Deluxe<span class='pull-right'>2 Room</span></div>\n			<div>Superior<span class='pull-right'>3 Room</span></div>\n			<div>Villa<span class='pull-right'>1 Room</span></div>\n			<div>Villa At Sea<span class='pull-right'>0 Room</span></div>\n		</div>\n		<div class='col-md-2 thumbnail'>\n			<div class='text-center'>ศ. 17 ธ.ค. </div><br>\n			<div>Deluxe<span class='pull-right'>2 Room</span></div>\n			<div>Superior<span class='pull-right'>3 Room</span></div>\n			<div>Villa<span class='pull-right'>1 Room</span></div>\n			<div>Villa At Sea<span class='pull-right'>0 Room</span></div>\n		</div>\n		<div class='col-md-2 thumbnail' style='border:3px solid;'>\n			<div class='text-center' style='color:red;font-weight:bold;'>ศ. 18 ธ.ค. </div>\n			<div class='text-center' >จำนวนห้องว่าง</div>\n			<div>Deluxe<span class='pull-right'>2 Room</span></div>\n			<div>Superior<span class='pull-right'>3 Room</span></div>\n			<div>Villa<span class='pull-right'>1 Room</span></div>\n			<div>Villa At Sea<span class='pull-right'>0 Room</span></div>\n		</div>\n		<div class='col-md-2 thumbnail'>\n			<div class='text-center'>ศ. 19 ธ.ค. </div><br>\n			<div>Deluxe<span class='pull-right'>2 Room</span></div>\n			<div>Superior<span class='pull-right'>3 Room</span></div>\n			<div>Villa<span class='pull-right'>1 Room</span></div>\n			<div>Villa At Sea<span class='pull-right'>0 Room</span></div>\n		</div>\n		<div class='col-md-2 thumbnail'>\n			<div class='text-center'>ศ. 20 ธ.ค. </div><br>\n			<div>Deluxe<span class='pull-right'>2 Room</span></div>\n			<div>Superior<span class='pull-right'>3 Room</span></div>\n			<div>Villa<span class='pull-right'>1 Room</span></div>\n			<div>Villa At Sea<span class='pull-right'>0 Room</span></div>\n		</div>\n		<div class='col-md-2 thumbnail'>\n			<div id='calendar' class='text-center' style='cursor:pointer;'>\n			<span class='glyphicon glyphicon-calendar' style='font-size:85px;color:#80b3ff;'></span><br/>\n			<h5>เลือกวันอื่น</h5></div>\n		</div>\n	</div>\n	<div class='row rowspan' >\n		<div class='col-md-7'>\n			<div class='row'>\n				<h3 style='color:#996600;font-weight:bold;'>เลือกห้องพักของท่าน</h3>\n				<span style='color:#ff9900;font-weight:bold;' >เลือกห้องพักจากราคาที่ดีที่สุดจากเรา</span>\n			</div>\n			<div class='row'>\n				<div class=\"panel panel-default\">\n				  <div class=\"panel-heading\" style='background-color:black;'>\n					<h3 class=\"panel-title\" style='color:white;margin:10px 5px 10px 1px;'>Deluxe</h3>\n				  </div>\n				  <div class=\"panel-body\" style='margin:0px;padding:0px;'>\n					<img src='images/bed.png' class='img-responsive'/>\n						<form class=\"form-inline\" style='margin:10px;'>\n							<div class=\"form-group\">\n								<div class=\"input-group input-group-sm\">\n								<span class=\"input-group-addon\" ><span class='glyphicon glyphicon-bed'></span></span>\n									<input id='datatype' type=\"text\" class=\"form-control\" placeholder=\"\" value='' />\n									<div class='input-group-btn'>\n										<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">&nbsp;<span class=\"caret\"></span></button>\n										<ul class=\"dropdown-menu dropdown-menu-right\">\n										  <li><a href='#'>Bed 1</a></li>\n										  <li><a href='#'>Bed 2</a></li>\n										</ul>\n									</div>\n								</div>\n							</div>\n							<div class=\"form-group pull-right\">\n								<span class='control-label' for='datatype'>รายละเอียด</span>	\n							</div>\n							\n							<div class=\"list-group rowspan\">\n							  <span href=\"#\" class=\"list-group-item\">\n								<h4 class=\"list-group-item-heading\">Room Only<span class='pull-right'>2803.73</span></h4>\n								<small class=\"list-group-item-text \">\n									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่รวมอาหารเช้า</div>\n									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>\n									<div class='col-sm-3'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>\n									<button onclick=\"add_room('Deluxe','Room Only','2,803.73')\" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>\n									&nbsp;\n								</small>\n							  </span>\n							  <span href=\"#\" class=\"list-group-item\">\n								<h4 class=\"list-group-item-heading\">Last Minute Promotion<span class='pull-right'>$ 2,888.70</span></h4>\n								<small class=\"list-group-item-text \">\n									<div class='col-sm-3'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>\n									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>\n									<div class='col-sm-3'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>\n									<button onclick=\"add_room('Deluxe','Last Minute Promotion','2,888.70')\" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>\n									&nbsp;\n								</small>\n							  </span>\n							 <span href=\"#\" class=\"list-group-item\">\n								<h4 class=\"list-group-item-heading\">Internet Rate<span class='pull-right'>$ 3,398.47</span></h4>\n								<small class=\"list-group-item-text \">\n									<div class='col-sm-3'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>\n									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>\n									<div class='col-sm-3'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>\n									<button onclick=\"add_room('Deluxe','Internet Rate','3,398.47')\"   type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>\n									&nbsp;\n								</small>\n							  </span>\n							</div>\n						</form>\n				  </div>\n				</div>\n			</div><!--deluxe room-->\n			<div class='row'>\n				<div class=\"panel panel-default\">\n				  <div class=\"panel-heading\" style='background-color:black;'>\n					<h3 class=\"panel-title\" style='color:white;margin:10px 5px 10px 1px;'>Superior</h3>\n				  </div>\n				  <div class=\"panel-body\" style='margin:0px;padding:0px;'>\n					<img src='images/bed.png' class='img-responsive'/>\n						<form class=\"form-inline\" style='margin:10px;'>\n							<div class=\"form-group\">\n								<div class=\"input-group input-group-sm\">\n								<span class=\"input-group-addon\" ><span class='glyphicon glyphicon-bed'></span></span>\n									<input id='datatype' type=\"text\" class=\"form-control\" placeholder=\"\" value='' />\n									<div class='input-group-btn'>\n										<button type=\"button\" class=\"btn btn-default dropdown-toggle\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">&nbsp;<span class=\"caret\"></span></button>\n										<ul class=\"dropdown-menu dropdown-menu-right\">\n										  <li><a href='#'>Bed 1</a></li>\n										  <li><a href='#'>Bed 2</a></li>\n										</ul>\n									</div>\n								</div>\n							</div>\n							<div class=\"form-group pull-right\">\n								<span class='control-label' for='datatype'>รายละเอียด</span>	\n							</div>\n							\n							<div class=\"list-group rowspan\">\n							  <span href=\"#\" class=\"list-group-item\">\n								<h4 class=\"list-group-item-heading\">Room Only<span class='pull-right'>2803.73</span></h4>\n								<small class=\"list-group-item-text \">\n									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่รวมอาหารเช้า</div>\n									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>\n									<div class='col-sm-3'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>\n									<button onclick=\"add_room('superior','Room Only','2,803.73')\" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>\n									&nbsp;\n								</small>\n							  </span>\n							  <span href=\"#\" class=\"list-group-item\">\n								<h4 class=\"list-group-item-heading\">Last Minute Promotion<span class='pull-right'>$ 2,888.70</span></h4>\n								<small class=\"list-group-item-text \">\n									<div class='col-sm-3'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>\n									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>\n									<div class='col-sm-3'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>\n									<button onclick=\"add_room('superior','Last Minute Promotion','2,888.70')\" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>\n									&nbsp;\n								</small>\n							  </span>\n							 <span href=\"#\" class=\"list-group-item\">\n								<h4 class=\"list-group-item-heading\">Internet Rate<span class='pull-right'>$ 3,398.47</span></h4>\n								<small class=\"list-group-item-text \">\n									<div class='col-sm-3'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>\n									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>\n									<div class='col-sm-3'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>\n									<button onclick=\"add_room('superior','Internet Rate','3,398.47')\" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>\n									&nbsp;\n								</small>\n							  </span>\n							</div>\n							\n							\n						</form>\n				  </div>\n				</div>\n			</div><!--Superior room-->\n		</div>\n		<div class='col-md-5'>\n			<form id='validate' action='services/reserve.php?step=2' method='post' >\n			<div class='row' style='padding-left: 10px;'>\n				<div id='check_in_date'></div>\n			</div>\n			<div class='row'>\n				<div id='list_reserve' class=\"list-group rowspan\" style='margin:10px;'>\n					<span href=\"#\" class=\"list-group-item\">\n						<h4 class=\"list-group-item-heading\">รวม <span id='total_price' class='pull-right'>$ 0</span></h4>\n						<p class=\"list-group-item-text \">\n						รายละเอียด >  <span class='pull-right'>1 ห้องพัก, 1 คืน</span>\n						</p>\n					 </span>\n				</div>\n				<hr/>\n			</div>\n			<div class='row'>\n				<button type='submit' class='btn btn-default brown col-sm-offset-1 col-sm-10' style='min-height:50px;'>ตรวจสอบความถูกต้อง</button>\n			</div>\n			\n			<input type='hidden' id='data_reserve' name='data_reserve' />\n			</form>\n		</div>\n		\n	</div>\n	\n</div>\n\n<script src='plugin/jquery/jquery.min.js' ></script>\n<script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>\n<script src='plugin/jquery/datepicker-th.js' ></script>\n<script src='plugin/jquery/moment.js' ></script>\n<script src='plugin/jquery/holder.js' ></script>\n<script src='plugin/bootstraps/js/bootstrap.js' ></script>\n<script src='js/utility.js' ></script>\n<script src='js/selection.js' ></script>\n<script type=\"text/javascript\" >\n\n	$(document).ready(function(){\n		$(\"#check_in_date\").datepicker({ numberOfMonths:2}); \n	   <!-- $('#carlendar').on('click',function(e){ -->\n			<!-- $(\"#check_in_date\").datepicker('show'); -->\n	   <!-- }); -->\n\n\n	   //room_list.get_info();\n   });\n   \n  </script>\n</body>\n</html>\n",
 			"file": "selection_room.html",
-			"file_size": 13494,
-			"file_write_time": 1487488204000000,
 			"settings":
 			{
-				"buffer_size": 12230,
+				"buffer_size": 11777,
 				"line_ending": "Unix"
 			}
 		},
@@ -82,7 +79,7 @@
 			"file": "js/selection.js",
 			"settings":
 			{
-				"buffer_size": 1857,
+				"buffer_size": 5057,
 				"line_ending": "Unix"
 			}
 		},
@@ -90,7 +87,7 @@
 			"file": "option_reserve.html",
 			"settings":
 			{
-				"buffer_size": 9405,
+				"buffer_size": 8812,
 				"line_ending": "Unix"
 			}
 		}
@@ -274,6 +271,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"<form",
+			"form",
 			"viewmenulist",
 			"set_item_product",
 			"get_fetch_product",
@@ -406,24 +405,25 @@
 					"file": "services/reserve.php",
 					"settings":
 					{
-						"buffer_size": 1531,
+						"buffer_size": 1593,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1369,
-								1369
+								1214,
+								1214
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
-							"syntax": "Packages/PHP/PHP.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 630.0,
+						"translation.y": 681.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -461,15 +461,15 @@
 					"file": "services/info.php",
 					"settings":
 					{
-						"buffer_size": 210,
+						"buffer_size": 218,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								136,
-								141
+								0,
+								0
 							]
 						],
 						"settings":
@@ -488,15 +488,15 @@
 					"file": "selection_room.html",
 					"settings":
 					{
-						"buffer_size": 12230,
+						"buffer_size": 11777,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10538,
-								10538
+								10279,
+								10279
 							]
 						],
 						"settings":
@@ -506,7 +506,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2960.0,
+						"translation.y": 2928.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -516,15 +516,15 @@
 					"file": "js/selection.js",
 					"settings":
 					{
-						"buffer_size": 1857,
+						"buffer_size": 5057,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1645,
-								1645
+								0,
+								0
 							]
 						],
 						"settings":
@@ -534,7 +534,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 225.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -544,15 +544,15 @@
 					"file": "option_reserve.html",
 					"settings":
 					{
-						"buffer_size": 9405,
+						"buffer_size": 8812,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7133,
-								7145
+								953,
+								953
 							]
 						],
 						"settings":
@@ -562,7 +562,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2547.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
