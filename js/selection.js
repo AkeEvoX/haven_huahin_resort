@@ -68,40 +68,32 @@ reserve.get_info = function(){
 		console.log(result);
 		var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
 		
-		
 		//set rooms info;
 		reserve.info = result.info;
 		reserve.rooms = result.reserve.rooms;
 		reserve.summery = result.reserve.summery;
 		
+		if(reserve.summery!=undefined){
+			var total =parseFloat(reserve.summery.total_amount).toFixed(2).replace(money_pattern,"$1,");
+			$('#total_price').html("฿ " + total);
+			$('#total_room').html(reserve.rooms.length +"ห้องพัก " + reserve.info.night + "คืน");
+		}
 		
-		var total =parseFloat(reserve.summery.total_amount).toFixed(2).replace(money_pattern,"$1,");
-		$('#total_price').html("฿ " + total);
-		$('#total_room').html(reserve.rooms.length +"ห้องพัก " + reserve.info.night + "คืน");
-		
-		//replace to money
-		
-		$.each(reserve.rooms,function(i,val){
-			
-			//console.warn(val);
-			var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
-			
-			var item = "<span id='"+val.key+"' href='#' class='list-group-item'>";
-			item += "<h4 class='list-group-item-heading'>ห้องพัก "+(i+1)+"<span class='pull-right'>฿ "+money+"</span></h4>";
-			item += "<h4 class='list-group-item-text '>";
-			item += val.room +" <small class='pull-right'><a href='#'  >นำออก</a></small> ";
-			item += val.type + "</h4></span>";
-			$('#reserve_info').append(item);
-			
-		});
-		
-		// <span href="#" class="list-group-item">
-			// <h4 class="list-group-item-heading">ห้องพัก 1<span class='pull-right'>฿ 2,888.70</span></h4>
-			// <h4 class="list-group-item-text ">
-			// Superior<small class='pull-right'><a href='#'>นำออก</a></small>
-			// Last Minute Promotion
-			// </h4>
-		 // </span>
+		if(reserve.rooms != undefined && reserve.rooms.length!=0){
+			$.each(reserve.rooms,function(i,val){
+				
+				//console.warn(val);
+				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
+				
+				var item = "<span id='"+val.key+"' href='#' class='list-group-item'>";
+				item += "<h4 class='list-group-item-heading'>ห้องพัก "+(i+1)+"<span class='pull-right'>฿ "+money+"</span></h4>";
+				item += "<h4 class='list-group-item-text '>";
+				item += val.room +" <small class='pull-right'><a href='#'  >นำออก</a></small> ";
+				item += val.type + "</h4></span>";
+				$('#reserve_info').append(item);
+				
+			});
+		}
 	});
 }
 
@@ -149,9 +141,4 @@ reserve.del_option = function(key,price){
 	$('#total_price').html("฿ " + total);
 	//reserve.calucate_option();
 	
-}
-
-function remove_option(data){
-	console.log('remove' + data);
-	//reserve.del_option(data);
 }
