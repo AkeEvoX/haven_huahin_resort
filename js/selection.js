@@ -29,7 +29,6 @@ function add_room(name,type,price){
 	recalculate();
 }
 
-
 function del_room(key){
 	
 	$('#'+key).remove();
@@ -142,3 +141,13 @@ reserve.del_option = function(key,price){
 	//reserve.calucate_option();
 	
 }
+<<<<<<< HEAD
+=======
+
+function remove_option(data){
+	console.log('remove' + data);
+	//reserve.del_option(data);
+}
+
+
+>>>>>>> e328d2b4e2d794a2b2c8d8e29129afa3220c9165
