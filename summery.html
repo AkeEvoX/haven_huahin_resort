@@ -91,8 +91,22 @@
 				</tr>
 				<tr>
 					<td class='col-md-8'>
+						<div id='list_reserve'>
+							
+						</div>
 						<div class='row'>
 							<div class='col-md-2'><label>ห้องพัก 1</label><br><small>ผู้ใหญ่ 1</small></div>
+							<div class='col-md-7'>
+								Superior</br>
+								ทางเลือกชุดเครื่องนอน : ห้องคิงส์ + โซฟาเบด</br>
+								Last Minute Promotion</br>
+								รวมอาหารเช้า : อาหารเช้าแบบบุฟเฟต์</br>
+							</div>
+							<div class='col-md-3 text-right'><h4>฿ 2,888.70</h4></div>
+						</div>
+						<hr/>
+						<div class='row'>
+							<div class='col-md-2'><label>ห้องพัก 2</label><br><small>ผู้ใหญ่ 1</small></div>
 							<div class='col-md-7'>
 								Superior</br>
 								ทางเลือกชุดเครื่องนอน : ห้องคิงส์ + โซฟาเบด</br>
@@ -288,24 +302,29 @@
 <script src='plugin/jquery/jquery.min.js' ></script>
 <script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
 <script src='plugin/jquery/datepicker-th.js' ></script>
-
 <script src='plugin/jquery/holder.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
+<script src='js/utility.js' ></script>
+<script src='js/selection.js' ></script>
+
 <script type="text/javascript">
 
 	$(document).ready(function(){
+
 		<!-- $("#checkpoint_date").datepicker();  -->
 		<!-- $("#travel_date").datepicker();  -->
 	   <!-- $('#carlendar').on('click',function(e){ -->
-			<!-- $("#check_in_date").datepicker('show'); -->
+		<!-- $("#check_in_date").datepicker('show'); -->
 	   <!-- }); -->
 	   
 	   $('#summery_form').on('submit',function(e){
 			alert('บันทึกข้อมูลการจองเรียบร้อยแล้ว \r\n ขอบคุณที่ใช้บริการ.');
 			e.preventDefault();
 			window.location='quick_reservation.html';
-			//$(this).submit();
 	   });
+
+
+	   reserve.get_info();
    });
   </script>
 </body>

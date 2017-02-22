@@ -68,17 +68,22 @@ reserve.get_info = function(){
 		var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
 		
 		//set rooms info;
-		reserve.info = result.info;
-		reserve.rooms = result.reserve.rooms;
-		reserve.summery = result.reserve.summery;
+		reserve.info = result.data.info;
+		if(result.data.reserve != undefined){
+			
+			reserve.rooms = result.data.reserve.rooms;
+			reserve.summery = result.data.reserve.summery;
+		}
 		
 		if(reserve.summery!=undefined){
+
 			var total =parseFloat(reserve.summery.total_amount).toFixed(2).replace(money_pattern,"$1,");
 			$('#total_price').html("฿ " + total);
 			$('#total_room').html(reserve.rooms.length +"ห้องพัก " + reserve.info.night + "คืน");
 		}
 		
-		if(reserve.rooms != undefined && reserve.rooms.length!=0){
+		if(reserve.rooms != undefined ){
+			
 			$.each(reserve.rooms,function(i,val){
 				
 				//console.warn(val);
@@ -89,9 +94,30 @@ reserve.get_info = function(){
 				item += "<h4 class='list-group-item-text '>";
 				item += val.room +" <small class='pull-right'><a href='#'  >นำออก</a></small> ";
 				item += val.type + "</h4></span>";
+
 				$('#reserve_info').append(item);
 				
 			});
+		}
+	});
+}
+
+reserve.get_summery = function(){
+	var endpoint = "services/info.php";
+	var method="get";
+	var args = {"_":new Date().getMilliseconds()};
+
+	utility.service(endpoint,method,args,function(result){
+		
+		console.log(result);
+		var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
+		
+		//set rooms info;
+		reserve.info = result.data.info;
+		if(result.data.reserve != undefined){
+			
+			reserve.rooms = result.data.reserve.rooms;
+			reserve.summery = result.data.reserve.summery;
 		}
 	});
 }
@@ -141,13 +167,3 @@ reserve.del_option = function(key,price){
 	//reserve.calucate_option();
 	
 }
-<<<<<<< HEAD
-=======
-
-function remove_option(data){
-	console.log('remove' + data);
-	//reserve.del_option(data);
-}
-
-
->>>>>>> e328d2b4e2d794a2b2c8d8e29129afa3220c9165
