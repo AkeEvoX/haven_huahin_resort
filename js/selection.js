@@ -92,10 +92,10 @@ reserve.get_info = function(){
 				var item = "<span id='"+val.key+"' href='#' class='list-group-item'>";
 				item += "<h4 class='list-group-item-heading'>ห้องพัก "+(i+1)+"<span class='pull-right'>฿ "+money+"</span></h4>";
 				item += "<h4 class='list-group-item-text '>";
-				item += val.room +" <small class='pull-right'><a href='#'  >นำออก</a></small> ";
+				item += val.room +" <small class='pull-right' style='cursor:pointer;' onclick=del_room("+val.key+") >นำออก</small> ";
 				item += val.type + "</h4></span>";
 
-				$('#reserve_info').append(item);
+				$('#list_reserve').append(item);
 				
 			});
 		}
@@ -119,6 +119,27 @@ reserve.get_summery = function(){
 			reserve.rooms = result.data.reserve.rooms;
 			reserve.summery = result.data.reserve.summery;
 		}
+		
+		//list room
+		if(reserve.rooms != undefined ){
+				$.each(reserve.rooms,function(i,val){
+					var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
+					
+					var item = "<div class='row'>";
+					 item += "<div class='col-md-2'><label>ห้องพัก "+(i+1)+"</label><br><small>ผู้ใหญ่ 1</small></div>";
+					 item += "<div class='col-md-7'>";
+					 item += val.room+"</br>";
+					 item += val.type+"</br>";
+					 item += "</div >";
+					 item += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
+					 item += "</div ><hr/>";
+					 
+					$('#list_reserve').append(item);
+					
+				});
+		}
+		//list option
+		
 	});
 }
 
@@ -134,7 +155,7 @@ reserve.add_option = function(val){
 			item += "<h4 class='list-group-item-text '>";
 			item += "&nbsp;<small class='pull-right'>";//<a href='javascript:void(0)' onclick=reserve.del_option('"+val.key+"','" + val.price+"');  >นำออก</a></small> 
 			item += "</h4></span>";
-			$('#reserve_info').append(item);
+			$('#list_reserve').append(item);
 	
 	reserve.options.push(val);
 	

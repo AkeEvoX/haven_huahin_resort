@@ -179,7 +179,7 @@
 			</div>
 			<div class='col-md-5'>
 				<div class='row'>
-					<div id='reserve_info' class="list-group rowspan" style='margin:10px;'>
+					<div id='list_reserve' class="list-group rowspan" style='margin:10px;'>
 						<span href="#" class="list-group-item" style="border-top:3px solid;">
 							<h4 class="list-group-item-heading">รวม <span id='total_price' class='pull-right'>฿ 7,113.70</span></h4>
 							<p class="list-group-item-text ">
@@ -191,6 +191,7 @@
 				</div>
 				<div class='row'>
 					<div class='col-md-12'>
+					<input type='hidden' id='data_reserve' name='data_reserve' />
 					<button type='submit' class='btn btn-large brown btn-block btn-warning' style='min-height:50px;'>จอง</button>
 					</div>
 				</div>
@@ -219,10 +220,8 @@
 		});
 		
 		$('input[name="option_reserve"]').on('change',function(e){
-			//
 			var data = JSON.parse(this.value);
-			//console.warn(data.title);
-			
+	
 			//console.warn("option = " + this.value + " checked = " + this.checked);
 			
 			if(this.checked==true){
@@ -231,6 +230,10 @@
 			else{
 				reserve.del_option(data.key,data.price);
 			}
+		});
+		
+		$('#option_form').on('submit',function(e){		
+				$('#data_reserve').val(JSON.stringify(reserve));
 		});
 
 		reserve.get_info();

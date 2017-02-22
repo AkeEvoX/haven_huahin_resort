@@ -91,9 +91,7 @@
 				</tr>
 				<tr>
 					<td class='col-md-8'>
-						<div id='list_reserve'>
-							
-						</div>
+						<div id='list_reserve'></div>
 						<div class='row'>
 							<div class='col-md-2'><label>ห้องพัก 1</label><br><small>ผู้ใหญ่ 1</small></div>
 							<div class='col-md-7'>
@@ -311,12 +309,6 @@
 
 	$(document).ready(function(){
 
-		<!-- $("#checkpoint_date").datepicker();  -->
-		<!-- $("#travel_date").datepicker();  -->
-	   <!-- $('#carlendar').on('click',function(e){ -->
-		<!-- $("#check_in_date").datepicker('show'); -->
-	   <!-- }); -->
-	   
 	   $('#summery_form').on('submit',function(e){
 			alert('บันทึกข้อมูลการจองเรียบร้อยแล้ว \r\n ขอบคุณที่ใช้บริการ.');
 			e.preventDefault();
@@ -324,7 +316,8 @@
 	   });
 
 
-	   reserve.get_info();
+	   //reserve.get_info();
+	   reserve.get_summery();
    });
   </script>
 </body>

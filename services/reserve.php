@@ -75,13 +75,9 @@ function step_two($data){
 }
 //booking add option
 function step_three($data){
-	//step_three
-	$_SESSION["booking_date"];
-
-	$_SESSION_["booking_option"];
-
-	//$_SESSION[""]
-	//
+	
+	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
+	
 	header("Location: ../summery.html");
 }
 //confirm trasection
