@@ -111,18 +111,20 @@ reserve.get_summery = function(){
 		
 		console.log(result);
 		var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
-		
+		var summery_price = 0;
 		//set rooms info;
 		reserve.info = result.data.info;
 		if(result.data.reserve != undefined){
 			
 			reserve.rooms = result.data.reserve.rooms;
+			reserve.options = result.data.reserve.options;
 			reserve.summery = result.data.reserve.summery;
 		}
 		
 		//list room
 		if(reserve.rooms != undefined ){
 				$.each(reserve.rooms,function(i,val){
+					summery_price += parseFloat(val.price);
 					var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
 					
 					var item = "<div class='row'>";
@@ -139,7 +141,83 @@ reserve.get_summery = function(){
 				});
 		}
 		//list option
-		
+		if(reserve.options != undefined){
+
+			var item = "";
+			var price_option = 0;
+			$.each(reserve.options,function(i,val){
+				summery_price += parseFloat(val.price);
+				price_option += val.price;
+
+				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");	
+
+				item += "<div class='row'>";
+				item += "<div class='col-md-2'>&nbsp;</div>";
+				item += "<div class='col-md-7'>"+val.title+"</div>";
+				item += "<div class='col-md-3 text-right'>฿ "+money+"</div>";
+				item += "</div>";
+			})
+			//summery options
+			var money = parseFloat(price_option).toFixed(2).replace(money_pattern,"$1,");	
+			var summery_tag = "<div class='row'>";
+			summery_tag += "<div class='col-md-2'>ทางเลือก</div>";
+		  	summery_tag += "<div class='col-md-7'>&nbsp;</div>";
+		   	summery_tag += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
+			summery_tag += "</div>";
+			item = summery_tag + item + "<hr/>";
+
+			$('#list_reserve').append(item);
+		}
+
+		//summery price
+
+		var total = parseFloat(summery_price).toFixed(2).replace(money_pattern,"$1,");
+		var service_price = parseFloat(summery_price) * .03;
+		var tax_price = parseFloat(summery_price) * .07 ;
+		var net_price = parseFloat(summery_price) + tax_price + service_price;
+		console.log("net : "+net_price);
+		var service = parseFloat(service_price).toFixed(2).replace(money_pattern,"$1,");	
+		var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");	
+		var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");	
+		var	item = "<div class='row'>";
+		item += "<div class='col-md-2 '><h4>รวม</h4></div>";
+		item += "<div class='col-md-offset-7 col-md-3 text-right'><span><h4>$ "+total+"</h4></span></div>";
+		item += "</div>";
+		item += "<div class='row rowspan'>";
+		item += "<div class='col-md-offset-2 col-md-7'>ไม่รวมไว้ : ค่าบริการ 3%</div>";
+		item += "<div class='col-md-3 text-right'>฿ "+service+"</div>";
+		item += "</div>";
+		item += "<div class='row rowspan'>";
+		item += "<div class='col-md-offset-2 col-md-7'>ไม่รวมไว้ : ภาษีของรัฐ 7%</div>";
+		item += "<div class='col-md-3 text-right'>฿ "+tax+"</div>";
+		item += "</div>";
+		item += "<div class='row rowspan'>";
+		item += "<div class='col-md-offset-2 col-md-7'><pre >ภาษีที่ยังไม่ได้รวมอยู่ด้วยนี้จะต้องทำการชำระให้กับ</br>โรงแรง เป็นจำนวนเงิน</pre></div>";
+		item += "<div class='col-md-3 text-right'><pre><h4>฿ "+net+"</h4></pre></div>";
+		item += "</div>";
+
+
+		$('#list_reserve').append(item);
+
+/*
+			<div class='row'>
+				<div class='col-md-2 '><h4>รวม</h4></div>
+				<div class='col-md-offset-7 col-md-3 text-right'><span><h4>$ 7,113.70</h4></span></div>
+			</div>
+			<div class='row rowspan'>
+				<div class='col-md-offset-2 col-md-7'>ไม่รวมไว้ : ค่าบริการ</div>
+				<div class='col-md-3 text-right'>฿ 288.87</div>
+			</div>
+			<div class='row rowspan'>
+				<div class='col-md-offset-2 col-md-7'>ไม่รวมไว้ : ภาษีของรัฐ</div>
+				<div class='col-md-3 text-right'>฿ 222.45</div>
+			</div>
+			<div class='row rowspan'>
+				<!-- <div class='col-md-2'>&nbsp;</div> -->
+				<div class='col-md-offset-2 col-md-7'><pre >ภาษีที่ยังไม่ได้รวมอยู่ด้วยนี้จะต้องทำการชำระให้กับ</br>โรงแรง เป็นจำนวนเงิน</pre></div>
+				<div class='col-md-3 text-right'><pre><h4>฿ 7,625</h4></pre></div>
+			</div>
+*/
 	});
 }
 
