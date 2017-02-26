@@ -17,7 +17,7 @@ switch($_step){
 		step_three($_POST);
 	break;
 	case "4":
-
+		step_four($_POST);
 	break;
 	case "5":
 
@@ -82,7 +82,27 @@ function step_three($data){
 }
 //confirm trasection
 function step_four($data){
+	
+	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
+	#customer
+	$email = $data["email"];
+	$title = $data["title"];
+	$fname = $data["fname"];
+	$lname = $data["lname"];
+	$prefix_mobile = $data["prefix_mobile"];
+	$mobile = $data["mobile"];
 
+	#payment
+	$type_credit = $data["type_credit"];
+	$card_number = $data["card_number"];
+	$card_holder = $data["card_holder"];
+	$card_expire_month = $data["card_expire_month"];
+	$card_expire_year = $data["card_expire_year"];
+	$card_validate = $data["card_validate"];
+	
+	
+	
+	header("Location: ../quick_reservation.html");
 }
 //complete trasection
 function step_five($data){
