@@ -3,6 +3,8 @@ reserve.info = [];
 reserve.rooms = [];
 reserve.options =  [];
 reserve.summery = null;
+reserve.customer = [];
+reserve.payment = [];
 //genaral.get_info();
 
 

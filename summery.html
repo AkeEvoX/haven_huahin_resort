@@ -179,7 +179,7 @@
 								<p style='color:green'><label>โปรดกรอกข้อมูลส่วนบุคคลเป็นภาษาอังกฤษ</label></p>
 								<div class="form-group">
 									<label for="email"> ที่อยู่อีเมล</label>
-									<input type="email" class="form-control" id="email" placeholder=""  />
+									<input type="email" class="form-control" id="email" name="email" placeholder=""  />
 								</div><!--email-->
 								<div class="form-group">
 									<label for="title_group">คำนำหน้า</label><br/>
@@ -197,21 +197,21 @@
 								</div><!--title-->
 								<div class="form-group">
 									<label for="fname"> ชื่อ</label>
-									<input type="text" class="form-control" id="fname" placeholder="" maxlength="50"  />
+									<input type="text" class="form-control" id="fname" name="fname" placeholder="" maxlength="50"  />
 								</div><!--firstname-->
 								<div class="form-group">
 									<label for="lname"> สกุล</label>
-									<input type="text" class="form-control" id="lname" placeholder="" maxlength="50"  />
+									<input type="text" class="form-control" id="lname" name="lname" placeholder="" maxlength="50"  />
 								</div><!--lastname-->
 								
 								<div class="row form-group">
 									<div class='col-md-5'><label for="prefix_mobile"> หมายเลขโทรศัพท์</label>
-										<select class="form-control" id="prefix_mobile" >
+										<select class="form-control" id="prefix_mobile" name="prefix_mobile" >
 											<option value='66+'>ไทย (66+)</option>
 										</select>
 									</div>
 									<div class='col-md-7'><label for="prefix_mobile"> &nbsp;</label>
-										<input type="text" class="form-control" id="mobile" placeholder="" maxlength="20"  />
+										<input type="text" class="form-control" id="mobile" name="mobile" placeholder="" maxlength="20"  />
 									</div>
 								</div><!--mobile-->
 							</div>
@@ -224,22 +224,22 @@
 								<p>ระบบการจองของเรามีการรักษาความปลอดภัย</p>
 								<div class="form-group">
 									<label for="type_credit"> ประเภทบัตร</label>
-										<select class="form-control" id="type_credit" >
+										<select class="form-control" id="type_credit" name="type_credit">
 											<option value='mastercard'>MASTER CARD</option>
 											<option value='visa'>VISA</option>
 										</select>
 								</div><!-- credit card-->
 								<div class="form-group">
 									<label for="card_number"> หมายเลขที่บัตรเครดิต</label>
-									<input type="text" class="form-control" id="card_number" placeholder="" maxlength="30"  />
+									<input type="text" class="form-control" id="card_number" name="card_number" placeholder="" maxlength="30"  />
 								</div><!--card number-->
 								<div class="form-group">
 									<label for="card_holder">ชื่อผู้ถือบัตร</label>
-									<input type="text" class="form-control" id="card_holder" placeholder="" maxlength="60"  />
+									<input type="text" class="form-control" id="card_holder" name="card_holder" placeholder="" maxlength="60"  />
 								</div><!--card holder-->
 								<div class="row form-group">
 									<div class='col-md-4'><label for="card_expire_month"> วันหมดอายุ</label>
-										<select class="form-control" id="card_expire_month" >
+										<select class="form-control" id="card_expire_month" name="card_expire_month">
 											<option value='1'>มกราคม</option>
 											<option value='2'>กุมภาพันธ์</option>
 											<option value='3'>มีนาคม</option>
@@ -255,7 +255,7 @@
 										</select>
 									</div>
 									<div class='col-md-4'><label for="card_expire_year"> &nbsp;</label>
-										<select class="form-control" id="card_expire_year" >
+										<select class="form-control" id="card_expire_year" name="card_expire_year" >
 											<option value='2016'>2016</option>
 											<option value='2017'>2017</option>
 											<option value='2018'>2018</option>
@@ -269,7 +269,7 @@
 								<label for="card_validate"> รหัสรักษาความปลอดภัยของบัตร</label>
 								<div class="row form-group">
 									<div class='col-md-4'>
-										<input type="text" class="form-control" id="card_validate" placeholder="" maxlength="3"  />
+										<input type="text" class="form-control" id="card_validate" name="card_validate" placeholder="" maxlength="3"  />
 									</div>
 									<small>รหัส 3 หลักสุดท้ายของบัตรเครดิตของท่าน</small>
 								</div>
