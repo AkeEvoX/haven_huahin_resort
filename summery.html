@@ -293,6 +293,7 @@
 						 </div><!-- request comment -->
 					</td>
 				</tr>
+				<input type='hidden' id='data_reserve' name='data_reserve' />
 				</form>
 			</table>
 		</div>
@@ -312,6 +313,10 @@
 	$(document).ready(function(){
 
 	   $('#summery_form').on('submit',function(e){
+
+	   		//keep data to redirect complete
+			$('#data_reserve').val(JSON.stringify(reserve));
+
 			alert('บันทึกข้อมูลการจองเรียบร้อยแล้ว \r\n ขอบคุณที่ใช้บริการ.');
 			e.preventDefault();
 			window.location='quick_reservation.html';

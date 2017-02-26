@@ -147,7 +147,7 @@ reserve.get_summery = function(){
 			var price_option = 0;
 			$.each(reserve.options,function(i,val){
 				summery_price += parseFloat(val.price);
-				price_option += val.price;
+				price_option += parseFloat(val.price);
 
 				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");	
 
