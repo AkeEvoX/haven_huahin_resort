@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class='container'>
-	<form id='summery_form' action='quick_reservation.html' method='post' >
+	<form id='summary_form' action='services/reserve.php?step=4' method='post' >
 		<div class='row rowspan' >
 			<div class='col-md-4 text-center'>
 				<span class="stepflow">1</span> <a href='selection_room.html'>เลือกห้องพัก</a>
@@ -312,16 +312,16 @@
 
 	$(document).ready(function(){
 
-	   $('#summery_form').on('submit',function(e){
+	   $('#summary_form').on('submit',function(e){
 
 	   		//keep data to redirect complete
 			$('#data_reserve').val(JSON.stringify(reserve));
-
 			alert('บันทึกข้อมูลการจองเรียบร้อยแล้ว \r\n ขอบคุณที่ใช้บริการ.');
-			e.preventDefault();
-			window.location='quick_reservation.html';
-	   });
 
+			//e.preventDefault();
+			//window.location='quick_reservation.html';
+			//window.open("receipt.html");
+	   });
 
 	   //reserve.get_info();
 	   reserve.get_summery();

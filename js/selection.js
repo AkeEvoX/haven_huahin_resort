@@ -223,6 +223,17 @@ reserve.get_summery = function(){
 	});
 }
 
+reserve.get_receipt = function(val){
+	var endpoint = "services/info.php";
+	var method="get";
+	var args = {"_":new Date().getMilliseconds()};
+	utility.service(endpoint,method,args,function(result){
+		
+	});
+
+
+}
+
 reserve.add_option = function(val){
 	
 	//var val = JSON.parse(data);

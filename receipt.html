@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/home.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<head>
+<title>Welcome to Reservation</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link href="plugin/bootstraps/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="css/default.css" rel="stylesheet" type="text/css" />
+	<link href="plugin/jquery/ui/pepper_grinder/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<style>
+	div.ui-datepicker{
+		font-size:10px;
+	}
+</style>
+</head>
+<body>
+	<div class='container'>
+		<div class='row'>
+			<table class='table table-bordered'>
+				<tr class='col-md-12' colspan='2'></tr>
+				<tr>
+					<td class='col-md-4' >
+						Guest Information<br/>
+						<span id='cust_name'></span><br/>
+						<span id='cust_mobile'></span><br/>
+						<span id='cust_email'></span><br/>
+					</td>
+					<td class='col-md-8'>
+						Reservation guarantee
+						<span class='pull-right'></span><br/>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+<script src='plugin/jquery/jquery.min.js' ></script>
+<script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
+<script src='plugin/jquery/datepicker-th.js' ></script>
+<script src='plugin/jquery/holder.js' ></script>
+<script src='plugin/bootstraps/js/bootstrap.js' ></script>
+<script src='js/utility.js' ></script>
+<script src='js/selection.js' ></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+	   $('#summery_form').on('submit',function(e){
+
+	   		//keep data to redirect complete
+
+			//$('#data_reserve').val(JSON.stringify(reserve));
+			//alert('บันทึกข้อมูลการจองเรียบร้อยแล้ว \r\n ขอบคุณที่ใช้บริการ.');
+
+			//
+			//e.preventDefault();
+			//window.location='quick_reservation.html';
+	   });
+
+
+	   //reserve.get_info();
+	   //reserve.get_receipt();
+   });
+  </script>
+</body>
+</html>

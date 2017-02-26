@@ -2,6 +2,7 @@
 Session_Start();
 //include("../lib/utility.php");
 include("../lib/common.php");
+include("../managers/reserve_manager.php");
 
 
 $_step = GetParameter("step");
@@ -85,24 +86,44 @@ function step_four($data){
 	
 	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
 	#customer
-	$email = $data["email"];
+	/*$email = $data["email"];
 	$title = $data["title"];
 	$fname = $data["fname"];
 	$lname = $data["lname"];
 	$prefix_mobile = $data["prefix_mobile"];
 	$mobile = $data["mobile"];
+	*/
+
+	$_SESSION["customer"] = array("email"=>$data["email"]
+		,"title"=>$data["title"]
+		,"fname"=>$data["fname"]
+		,"lname"=>$data["lname"]
+		,"prefix_mobile"=>$data["prefix_mobile"]
+		,"mobile"=>$data["mobile"]);
 
 	#payment
+	/*
 	$type_credit = $data["type_credit"];
 	$card_number = $data["card_number"];
 	$card_holder = $data["card_holder"];
 	$card_expire_month = $data["card_expire_month"];
 	$card_expire_year = $data["card_expire_year"];
 	$card_validate = $data["card_validate"];
-	
-	
-	
-	header("Location: ../quick_reservation.html");
+	*/
+
+	$_SESSION["payment"] = array("type_credit"=>$data["type_credit"]
+		,"card_number"=>$data["card_number"]
+		,"card_holder"=>$data["card_holder"]
+		,"card_expire_month"=>$data["card_expire_month"]
+		,"card_expire_year"=>$data["card_expire_year"]
+		,"card_validate"=>$data["card_validate"]);
+
+	/*insert to database*/
+		
+
+
+	header("Location: ../receipt.html");
+	//header("Location: ../quick_reservation.html");
 }
 //complete trasection
 function step_five($data){
