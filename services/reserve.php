@@ -1,5 +1,5 @@
 <?php
-Session_Start();
+session_start();
 //include("../lib/utility.php");
 include("../lib/common.php");
 include("../managers/reserve_manager.php");
@@ -29,6 +29,9 @@ switch($_step){
 //find date available
 function step_one($args){
 
+	//detroy session
+	session_destroy();
+	session_start();
 	//##variable list
 	//check_in_date 	date
 	//nights 			dropdown
@@ -48,7 +51,7 @@ function step_one($args){
 		,"childern"=>$childern
 		,"code"=>$code);
 	//keep data 
-	$_SESSION["query"] = $data;
+	$_SESSION["info"] = $data;	
 	//redirect to next page
 	header("Location: ../selection_room.html");
 	exit();
@@ -58,6 +61,7 @@ function step_one($args){
 function step_two($data){
 
 	//keep data
+	//$_SESSION["reserve"] = "";
 	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
 	$reserve = json_decode($data["data_reserve"]);
 	//var_dump($reserve);
@@ -80,19 +84,12 @@ function step_three($data){
 	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
 	
 	header("Location: ../summery.html");
+	exit();
 }
 //confirm trasection
 function step_four($data){
 	
 	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
-	#customer
-	/*$email = $data["email"];
-	$title = $data["title"];
-	$fname = $data["fname"];
-	$lname = $data["lname"];
-	$prefix_mobile = $data["prefix_mobile"];
-	$mobile = $data["mobile"];
-	*/
 
 	$_SESSION["customer"] = array("email"=>$data["email"]
 		,"title"=>$data["title"]
@@ -101,17 +98,7 @@ function step_four($data){
 		,"prefix_mobile"=>$data["prefix_mobile"]
 		,"mobile"=>$data["mobile"]);
 
-	#payment
-	/*
-	$type_credit = $data["type_credit"];
-	$card_number = $data["card_number"];
-	$card_holder = $data["card_holder"];
-	$card_expire_month = $data["card_expire_month"];
-	$card_expire_year = $data["card_expire_year"];
-	$card_validate = $data["card_validate"];
-	*/
-
-	$_SESSION["payment"] = array("type_credit"=>$data["type_credit"]
+	$_SESSION["payment"] = array("card_type"=>$data["card_type"]
 		,"card_number"=>$data["card_number"]
 		,"card_holder"=>$data["card_holder"]
 		,"card_expire_month"=>$data["card_expire_month"]
@@ -121,8 +108,10 @@ function step_four($data){
 	/*insert to database*/
 		
 
-
+	//echo "<script >var mywin=window.open('../receipt.html', '_blank'); mywin.location='../quick_reservation.html';</script>";
+	//echo "<script type=\"text/javascript\">  window.location='../quick_reservation.html'; </script>";
 	header("Location: ../receipt.html");
+	//exit();
 	//header("Location: ../quick_reservation.html");
 }
 //complete trasection

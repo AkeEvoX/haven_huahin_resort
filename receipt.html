@@ -18,21 +18,101 @@
 	<div class='container'>
 		<div class='row'>
 			<table class='table table-bordered'>
-				<tr class='col-md-12' colspan='2'></tr>
+				<tr >
+					<td class='col-md-12 text-center' colspan='2' >
+						<small><p>New reservation for haven Resort Hua Hin</p>
+						<p>Trouble viewing this email? Click Here</p></small>
+						<h4>Booking confirmation for Haven Resort Hua Hin - <span>tesT9a0pfa95ThHa </span></h4>
+					</td>
+				</tr>
+				<tr >
+					<td class='col-md-12' colspan='2' >
+						<p><b>Reservation : </b><span>tesT9a0pfa95ThHa</span></p>
+						<p><b>Rate Plan : </b><span>Internet-Rate </span></p>
+					</td>
+				</tr>
 				<tr>
 					<td class='col-md-4' >
-						Guest Information<br/>
-						<span id='cust_name'></span><br/>
-						<span id='cust_mobile'></span><br/>
-						<span id='cust_email'></span><br/>
+						<b>Guest Information</b><br/><br/>
+						<span id='cust_name'>Mr. test testt</span><br/>
+						<span id='cust_mobile'>66875591895</span><br/>
+						<span id='cust_email'>gmassist@haven-huahin.com </span><br/>
 					</td>
 					<td class='col-md-8'>
-						Reservation guarantee
-						<span class='pull-right'></span><br/>
+						<b>Reservation guarantee</b><br/>
+						<i><div class='pull-right'>Credit card type: <span id='card_type'>xxxx</span></div><br/>
+						Name of card : <span id="card_holder"></span><br/>
+						Credit card number : <span id="card_number"></span><br/>
+						Expration date : <span id="card_expire"></span><br/>
+						Security code : <span id="card_validate"></span>
+						</i>
+					</td>
+				</tr>
+				<tr>
+					<td class='col-md-12' colspan='2' >
+						<div class='container'>
+							<div class='row'>
+								<div class='col-md-12'>
+									Reservation details, from Saturday, 18 March 2017 to Sunday, 19 March 2017 
+								</div>
+							</div>
+							<div id='list_reserve'></div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class='col-md-12' colspan='2' >
+					<b>Cancellation Policy </b><br/>
+					<span>
+					<small>
+					This offer can be canceled or modified free of charge until 2017-03-04, 00:00 (UTC).<br/>
+					In case of cancellation after this date, a penalty of 100% of full stay will apply.<br/>
+					In case of no-show, a penalty of 100% of full stay will apply.<br/>
+					</small>
+					</span>
+					</td>
+				</tr>
+				<tr>
+					<td class='col-md-12' colspan='2' >
+						<p>Terms & Conditions</p>
+						<small>
+						<p>* Rates are quoted in Thai Baht(THB).
+* Rates quoted are subjected to 7% government tax and 10% service charge.
+* A credit card number is required to confirm the booking.
+</p>
+						<p>If cancelled or modified up to 14 days before date of arrival, no fee will be charge.<br/>
+If cancelled or mordified later or in case of no-show, the total price of the reservation<br/>
+will be charge.<br/>
+*Deposit 100 percent of the first night will be charge at least 14 days period to arrival.<br/>
+* Check in time is from 14:00 hours & Check out until 12:00 noon.<br/>
+* Please note that children age 12 and older are charged the adult rate. Please include them in the number entered in the No. of Adults box.<br/>
+* Children below 12 years old sharing the existing bed with parents stay free. Breakfast for child is charged THB 234 per child per day subject to Tax and Service Charge.<br/>
+* Baby cot is free and advance request must be made. <br/>
+* Extra bed is charge at THB 1020 per bed per night subject to tax and service charge and full daily breakfast<br/>
+* Exchange rates for information only.<br/>
+* Method of Payment: On personal account upon departure.<br/>
+* Rate is subject to change without notice.<br/>
+* Should you wish to change an existing reservation, you are required to cancel the existing booking and proceed to create a new reservation. This maybe done by visiting our website www.haven-huahin.com<br/>
+* Should you wish to cancel an existing reservation, simply click on the reservation link at our website www.haven-huahin.com<br/>
+* Please do not hesitate to contact us at the following e-mail address: rsvn@haven-huahin.com, we are at your disposal for any further information you need. <br/>
+</p>
+</small>
+					</td>
+				</tr>
+				<tr>
+					<td class='col-md-12 text-center' colspan='2' >
+						<h3>Haven Resort Hua Hin  Client Service</h3>
+						<p>If you have any question, you can send an email to: support@havenresort.com </p>
+					</td>
+				</tr>
+				<tr>
+					<td class='col-md-12 text-center' colspan='2' style='background-color:#333333;color:#808080'>
+						© 2017 Haven Resort Hua Hin 
 					</td>
 				</tr>
 			</table>
 		</div>
+		<div class='text-center'><a href='#' onclick="window.print();" class='btn btn-default'>Print</a> <a href='quick_reservation.html' class='btn btn-default'>Complete</a> </div>
 	</div>
 <script src='plugin/jquery/jquery.min.js' ></script>
 <script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
@@ -46,21 +126,7 @@
 
 	$(document).ready(function(){
 
-	   $('#summery_form').on('submit',function(e){
-
-	   		//keep data to redirect complete
-
-			//$('#data_reserve').val(JSON.stringify(reserve));
-			//alert('บันทึกข้อมูลการจองเรียบร้อยแล้ว \r\n ขอบคุณที่ใช้บริการ.');
-
-			//
-			//e.preventDefault();
-			//window.location='quick_reservation.html';
-	   });
-
-
-	   //reserve.get_info();
-	   //reserve.get_receipt();
+	   reserve.get_receipt();
    });
   </script>
 </body>

@@ -10,14 +10,6 @@ error_reporting(E_ERROR | E_WARNING | E_CORE_ERROR | E_COMPILE_ERROR | E_PARSE) 
 
 /*define variable globle for client;*/
 $base_dir = "../";
-	
-if(!isset($_SESSION["lang"]) or empty($_SESSION["lang"]) or $_SESSION["lang"]== "" ){
-	$_SESSION["lang"] = "en";
-} 
-
-if(isset($_SESSION["lang"]))
-	$lang = $_SESSION["lang"];
-
 
 function SendMail($redirect,$receive,$sender,$subject,$message,$custname)
 {

@@ -1,8 +1,8 @@
 var reserve = {};
-reserve.info = [];
+reserve.info = null;
 reserve.rooms = [];
 reserve.options =  [];
-reserve.summery = null;
+reserve.summary = null;
 reserve.customer = [];
 reserve.payment = [];
 //genaral.get_info();
@@ -54,7 +54,7 @@ function recalculate() {
 	});
 	money = total.toFixed(2).replace(money_pattern,"$1,");
 	view_total.html("฿ "+money);
-	reserve.summery = {"total_amount":total.toFixed(2)};
+	reserve.summary = {"total_amount":total.toFixed(2)};
 	//$('#data_reserve').val(JSON.stringify(reserve.source));
 	$('#data_reserve').val(JSON.stringify(reserve));
 }
@@ -74,12 +74,12 @@ reserve.get_info = function(){
 		if(result.data.reserve != undefined){
 			
 			reserve.rooms = result.data.reserve.rooms;
-			reserve.summery = result.data.reserve.summery;
+			reserve.summary = result.data.reserve.summary;
 		}
 		
-		if(reserve.summery!=undefined){
+		if(reserve.summary!=undefined){
 
-			var total =parseFloat(reserve.summery.total_amount).toFixed(2).replace(money_pattern,"$1,");
+			var total =parseFloat(reserve.summary.total_amount).toFixed(2).replace(money_pattern,"$1,");
 			$('#total_price').html("฿ " + total);
 			$('#total_room').html(reserve.rooms.length +"ห้องพัก " + reserve.info.night + "คืน");
 		}
@@ -104,7 +104,7 @@ reserve.get_info = function(){
 	});
 }
 
-reserve.get_summery = function(){
+reserve.get_summary = function(){
 	var endpoint = "services/info.php";
 	var method="get";
 	var args = {"_":new Date().getMilliseconds()};
@@ -113,20 +113,20 @@ reserve.get_summery = function(){
 		
 		console.log(result);
 		var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
-		var summery_price = 0;
+		var summary_price = 0;
 		//set rooms info;
 		reserve.info = result.data.info;
 		if(result.data.reserve != undefined){
 			
 			reserve.rooms = result.data.reserve.rooms;
 			reserve.options = result.data.reserve.options;
-			reserve.summery = result.data.reserve.summery;
+			reserve.summary = result.data.reserve.summary;
 		}
 		
 		//list room
 		if(reserve.rooms != undefined ){
 				$.each(reserve.rooms,function(i,val){
-					summery_price += parseFloat(val.price);
+					summary_price += parseFloat(val.price);
 					var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
 					
 					var item = "<div class='row'>";
@@ -148,7 +148,7 @@ reserve.get_summery = function(){
 			var item = "";
 			var price_option = 0;
 			$.each(reserve.options,function(i,val){
-				summery_price += parseFloat(val.price);
+				summary_price += parseFloat(val.price);
 				price_option += parseFloat(val.price);
 
 				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");	
@@ -159,24 +159,24 @@ reserve.get_summery = function(){
 				item += "<div class='col-md-3 text-right'>฿ "+money+"</div>";
 				item += "</div>";
 			})
-			//summery options
+			//summary options
 			var money = parseFloat(price_option).toFixed(2).replace(money_pattern,"$1,");	
-			var summery_tag = "<div class='row'>";
-			summery_tag += "<div class='col-md-2'>ทางเลือก</div>";
-		  	summery_tag += "<div class='col-md-7'>&nbsp;</div>";
-		   	summery_tag += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
-			summery_tag += "</div>";
-			item = summery_tag + item + "<hr/>";
+			var summary_tag = "<div class='row'>";
+			summary_tag += "<div class='col-md-2'>ทางเลือก</div>";
+		  	summary_tag += "<div class='col-md-7'>&nbsp;</div>";
+		   	summary_tag += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
+			summary_tag += "</div>";
+			item = summary_tag + item + "<hr/>";
 
 			$('#list_reserve').append(item);
 		}
 
-		//summery price
+		//summary price
 
-		var total = parseFloat(summery_price).toFixed(2).replace(money_pattern,"$1,");
-		var service_price = parseFloat(summery_price) * .03;
-		var tax_price = parseFloat(summery_price) * .07 ;
-		var net_price = parseFloat(summery_price) + tax_price + service_price;
+		var total = parseFloat(summary_price).toFixed(2).replace(money_pattern,"$1,");
+		var service_price = parseFloat(summary_price) * .03;
+		var tax_price = parseFloat(summary_price) * .07 ;
+		var net_price = parseFloat(summary_price) + tax_price + service_price;
 		console.log("net : "+net_price);
 		var service = parseFloat(service_price).toFixed(2).replace(money_pattern,"$1,");	
 		var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");	
@@ -201,25 +201,6 @@ reserve.get_summery = function(){
 
 		$('#list_reserve').append(item);
 
-/*
-			<div class='row'>
-				<div class='col-md-2 '><h4>รวม</h4></div>
-				<div class='col-md-offset-7 col-md-3 text-right'><span><h4>$ 7,113.70</h4></span></div>
-			</div>
-			<div class='row rowspan'>
-				<div class='col-md-offset-2 col-md-7'>ไม่รวมไว้ : ค่าบริการ</div>
-				<div class='col-md-3 text-right'>฿ 288.87</div>
-			</div>
-			<div class='row rowspan'>
-				<div class='col-md-offset-2 col-md-7'>ไม่รวมไว้ : ภาษีของรัฐ</div>
-				<div class='col-md-3 text-right'>฿ 222.45</div>
-			</div>
-			<div class='row rowspan'>
-				<!-- <div class='col-md-2'>&nbsp;</div> -->
-				<div class='col-md-offset-2 col-md-7'><pre >ภาษีที่ยังไม่ได้รวมอยู่ด้วยนี้จะต้องทำการชำระให้กับ</br>โรงแรง เป็นจำนวนเงิน</pre></div>
-				<div class='col-md-3 text-right'><pre><h4>฿ 7,625</h4></pre></div>
-			</div>
-*/
 	});
 }
 
@@ -228,6 +209,88 @@ reserve.get_receipt = function(val){
 	var method="get";
 	var args = {"_":new Date().getMilliseconds()};
 	utility.service(endpoint,method,args,function(result){
+		console.log(result);
+		var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
+		var info = result.data.info;
+		
+		var cust = result.data.customer;
+		var payment = result.data.payment;
+		var reserve = result.data.reserve;
+		var summary = reserve.summary;
+		
+		$('#cust_name').html(cust.title+" "+cust.fname+ " "+cust.lname);
+		$('#cust_mobile').html(cust.prefix_mobile+""+cust.mobile);
+		$('#cust_email').html(cust.email);
+		$('#card_type').html(payment.card_type);
+		$('#card_holder').html(payment.card_holder);
+		$('#card_number').html(payment.card_number);
+		$('#card_expire').html(payment.card_expire_month+"/"+payment.card_expire_year);
+		$('#card_validate').html(payment.card_validate);
+		
+		
+		if(reserve!=undefined){
+			
+			$.each(reserve.rooms,function(i,val){
+				
+				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");	
+				var item = "<div class='row rowspan'>";
+				 item += "<div class='col-md-3'><b>Room "+(i+1)+"</b><br/></div>";
+				 item += "<div class='col-md-7'>"+val.room+"<br/>"+val.type+ "</div>";
+				 item += "<div class='col-md-2 text-right'>"+money+"</div>";
+				 item += "</div>";
+				/*
+				<div class='row rowspan'>
+					<div class='col-md-3'><b>Room 1</b><br/>
+					2 adults
+					</div>
+					<div class='col-md-7'>
+						Deluxe</br>
+						Internet Rate
+					</div>
+					<div class='col-md-2 text-right'>
+						4,248.00
+					</div>
+				</div>
+				*/
+				$('#list_reserve').append(item);
+			});
+			
+		}
+		var total = parseFloat(summary.total_amount).toFixed(2).replace(money_pattern,"$1,");	
+		var service_price = parseFloat(summary.total_amount) * .03;
+		var tax_price = parseFloat(summary.total_amount) * .07 ;
+		var net_price = parseFloat(summary.total_amount) + tax_price + service_price;
+		var service = parseFloat(service_price).toFixed(2).replace(money_pattern,"$1,");
+		var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");
+		var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");
+		
+		var item = "<div class='row rowspan'>";
+		item += "<div class='col-md-3'><b>Total</b><br/></div>";
+		item += "<div class='col-md-7'><br/>";
+		item += "<p>Not included : Service Charge</p>";
+		item += "<p>Not included : VAT</p>";
+		item += "<p>The taxes which are not included are to be paid to the hotel. The total amount is:</p>";
+		item += "</div>";
+		item += "<div class='col-md-2 text-right'>"+total+"<br/>";
+		item += "<p>"+service+"</p>";
+		item += "<p>"+tax+"</p>";
+		item += "<p>"+net+"</p>";
+		item += "</div>";
+		/*
+		<div class='row rowspan'>
+			<div class='col-md-3'><b>Total</b><br/></div>
+			<div class='col-md-7'><br/>
+				<p>Not included : Service Charge</p><br/>
+				<p>Not included : VAT</p><br/>
+				<p>The taxes which are not included are to be paid to the hotel. The total amount is:</p>
+			</div>
+			<div class='col-md-2 text-right'>
+				4,248.00
+			</div>
+		</div>
+		*/
+		
+		$('#list_reserve').append(item);
 		
 	});
 
@@ -251,10 +314,10 @@ reserve.add_option = function(val){
 	reserve.options.push(val);
 	
 	var price = parseFloat(val.price);
-	var total = parseFloat(reserve.summery.total_amount ) + price;
+	var total = parseFloat(reserve.summary.total_amount ) + price;
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
 	
-	reserve.summery.total_amount = total;
+	reserve.summary.total_amount = total;
 	total = parseFloat(total).toFixed(2).replace(money_pattern,"$1,");
 	$('#total_price').html("฿ " + total);
 	
@@ -270,10 +333,10 @@ reserve.del_option = function(key,price){
 	reserve.options = jQuery.grep(reserve.options,function(item,index){ return item.key != key });
 	
 	var price = parseFloat(price);
-	var total = parseFloat(reserve.summery.total_amount) - price;
+	var total = parseFloat(reserve.summary.total_amount) - price;
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
 	
-	reserve.summery.total_amount = total;
+	reserve.summary.total_amount = total;
 	total = parseFloat(total).toFixed(2).replace(money_pattern,"$1,");
 	$('#total_price').html("฿ " + total);
 	//reserve.calucate_option();

@@ -224,14 +224,14 @@
 								<p>ระบบการจองของเรามีการรักษาความปลอดภัย</p>
 								<div class="form-group">
 									<label for="type_credit"> ประเภทบัตร</label>
-										<select class="form-control" id="type_credit" name="type_credit">
+										<select class="form-control" id="card_type" name="card_type">
 											<option value='mastercard'>MASTER CARD</option>
 											<option value='visa'>VISA</option>
 										</select>
 								</div><!-- credit card-->
 								<div class="form-group">
 									<label for="card_number"> หมายเลขที่บัตรเครดิต</label>
-									<input type="text" class="form-control" id="card_number" name="card_number" placeholder="" maxlength="30"  />
+									<input type="text" class="form-control" id="card_number" name="card_number" placeholder="" maxlength="16"  />
 								</div><!--card number-->
 								<div class="form-group">
 									<label for="card_holder">ชื่อผู้ถือบัตร</label>
@@ -240,15 +240,15 @@
 								<div class="row form-group">
 									<div class='col-md-4'><label for="card_expire_month"> วันหมดอายุ</label>
 										<select class="form-control" id="card_expire_month" name="card_expire_month">
-											<option value='1'>มกราคม</option>
-											<option value='2'>กุมภาพันธ์</option>
-											<option value='3'>มีนาคม</option>
-											<option value='4'>เมษายน</option>
-											<option value='5'>พฤษภาคม</option>
-											<option value='6'>มิถุนายน</option>
-											<option value='7'>กรกฏาคม</option>
-											<option value='8'>สิงหาคม</option>
-											<option value='9'>กันยายน</option>
+											<option value='01'>มกราคม</option>
+											<option value='02'>กุมภาพันธ์</option>
+											<option value='03'>มีนาคม</option>
+											<option value='04'>เมษายน</option>
+											<option value='05'>พฤษภาคม</option>
+											<option value='06'>มิถุนายน</option>
+											<option value='07'>กรกฏาคม</option>
+											<option value='08'>สิงหาคม</option>
+											<option value='09'>กันยายน</option>
 											<option value='10'>ตุลาคม</option>
 											<option value='11'>พฤศจิกายน</option>
 											<option value='12'>ธันวาคม</option>
@@ -324,7 +324,7 @@
 	   });
 
 	   //reserve.get_info();
-	   reserve.get_summery();
+	   reserve.get_summary();
    });
   </script>
 </body>
