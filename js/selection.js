@@ -174,28 +174,29 @@ reserve.get_summary = function(){
 		//summary price
 
 		var total = parseFloat(summary_price).toFixed(2).replace(money_pattern,"$1,");
-		var service_price = parseFloat(summary_price) * .03;
-		var tax_price = parseFloat(summary_price) * .07 ;
-		var net_price = parseFloat(summary_price) + tax_price + service_price;
-		console.log("net : "+net_price);
-		var service = parseFloat(service_price).toFixed(2).replace(money_pattern,"$1,");	
-		var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");	
-		var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");	
+		//var service_price = parseFloat(summary_price) * .03;
+		//var tax_price = parseFloat(summary_price) * .07 ;
+		//var net_price = parseFloat(summary_price) + tax_price + service_price;
+		//console.log("net : "+net_price);
+		//var service = parseFloat(service_price).toFixed(2).replace(money_pattern,"$1,");	
+		//var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");	
+		//var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");	
+		
 		var	item = "<div class='row'>";
 		item += "<div class='col-md-2 '><h4>รวม</h4></div>";
 		item += "<div class='col-md-offset-7 col-md-3 text-right'><span><h4>$ "+total+"</h4></span></div>";
 		item += "</div>";
+		//item += "<div class='row rowspan'>";
+		//item += "<div class='col-md-offset-2 col-md-7'>ไม่รวมไว้ : ค่าบริการ 3%</div>";
+		//item += "<div class='col-md-3 text-right'>฿ "+service+"</div>";
+		//item += "</div>";
+		//item += "<div class='row rowspan'>";
+		//item += "<div class='col-md-offset-2 col-md-7'>ไม่รวมไว้ : ภาษีของรัฐ 7%</div>";
+		//item += "<div class='col-md-3 text-right'>฿ "+tax+"</div>";
+		//item += "</div>";
 		item += "<div class='row rowspan'>";
-		item += "<div class='col-md-offset-2 col-md-7'>ไม่รวมไว้ : ค่าบริการ 3%</div>";
-		item += "<div class='col-md-3 text-right'>฿ "+service+"</div>";
-		item += "</div>";
-		item += "<div class='row rowspan'>";
-		item += "<div class='col-md-offset-2 col-md-7'>ไม่รวมไว้ : ภาษีของรัฐ 7%</div>";
-		item += "<div class='col-md-3 text-right'>฿ "+tax+"</div>";
-		item += "</div>";
-		item += "<div class='row rowspan'>";
-		item += "<div class='col-md-offset-2 col-md-7'><pre >ภาษีที่ยังไม่ได้รวมอยู่ด้วยนี้จะต้องทำการชำระให้กับ</br>โรงแรง เป็นจำนวนเงิน</pre></div>";
-		item += "<div class='col-md-3 text-right'><pre><h4>฿ "+net+"</h4></pre></div>";
+		item += "<div class='col-md-offset-2 col-md-7'><pre><h4>รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น</h4></pre></div>";
+		item += "<div class='col-md-3 text-right'><pre><h4>฿ "+total+"</h4></pre></div>";
 		item += "</div>";
 
 

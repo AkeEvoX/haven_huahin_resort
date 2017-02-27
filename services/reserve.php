@@ -42,13 +42,13 @@ function step_one($args){
 	$date = $args["check_in_date"];
 	$night = $args["nights"];
 	$adults = $args["adults"];
-	$childern = $args["childern"];
+	$children = $args["children"];
 	$code = $args["code"];
 
 	$data = array("date"=>$date
 		,"night"=>$night
 		,"adults"=>$adults
-		,"childern"=>$childern
+		,"children"=>$children
 		,"code"=>$code);
 	//keep data 
 	$_SESSION["info"] = $data;	

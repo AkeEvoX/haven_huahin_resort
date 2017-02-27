@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/home.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<head>
+<title>Welcome to Reservation</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link href="plugin/bootstraps/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="css/default.css" rel="stylesheet" type="text/css" />
+	<link href="plugin/jquery/ui/pepper_grinder/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<style>
+	div.ui-datepicker{
+		font-size:10px;
+	}
+</style>
+</head>
+<body>
+<div class='container'>
+	<form id='confimation_form' action='quick_reservation.html' method='post' >
+		<div class='row rowspan' >
+		<!-- <div class='panel panel-default'> -->
+			<!-- <div class='panel-heading'> -->
+				<!-- <div class='row'> -->
+					<table class='table table-bordered text-center'>
+					<tr >
+						<td class='col-md-12' style='background-color:#333333;color:#fff'>
+							<h4>Your booking has been canceled</h4>
+							A cancellation email has been sent to <span id='email' >gmassist@haven-huahin.com</span>
+						</td>
+					</tr>
+					</table>
+				<!-- </div> -->
+			<!-- </div> -->
+		<!-- </div> -->
+		</div>
+		<div class='row rowspan' >
+			<table class='table table-bordered'  >
+				<tr>
+					<td class='col-md-12 bg-black' style='color:white;' colspan='2'>Your canceled booking</td>
+				</tr>
+				<tr class='bg-heading'>
+					<td class='col-md-12 ' colspan='2'>
+						<div class='row'>
+							<h3 class='col-md-12'>หมายเลขการจอง : tesT9a0pfa95ThHa</h3>
+							<small>ทำโดย test testt</small>
+						</div>
+						<div class='row rowspan'>
+							<div class='col-md-2'>ที่อยู่</div>
+							<div class='col-md-9'>1449  Chala samut Rd., Cha-am, Petchaburi 76120, Hua Hin, TH</div>
+						</div>
+						<div class='row rowspan'>
+							<div class='col-md-2'>แผนกต้อนรับ</div>
+							<div class='col-md-9'>24 ชม./24</div>
+						</div>
+						<div class='row rowspan'>
+							<div class='col-md-2'>เช็คอิน</div>
+							<div class='col-md-9'>14:00</div>
+						</div>
+						<div class='row rowspan'>
+							<div class='col-md-2'>เช็คเอาท์</div>
+							<div class='col-md-9'>12:00</div>
+						</div>
+						<div class='row rowspan'>
+							<div class='col-md-2'>ภาษาพูด</div>
+							<div class='col-md-9'>อังกฤษ , ไทย</div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td class='col-md-8'>
+						<div id='list_reserve'></div>
+					</td>
+					<td class='col-md-4 text-center'>
+						<div class='row rowspan'>
+							<span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span></br>
+							<label>ราคาดีที่สุด</label>
+							<p>
+								ท่านกำลังอยู่ที่เว็บไซต์ของโรงแรม ท่านจะได้รับ <br/>ราคาที่ดีที่สุดเนื่องจากไม่มีการผ่านคนกลาง
+							</p>
+						</div>
+						<div class='row rowspan'>
+							<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span></br>
+							<label>ชำระเฉพาะเงินจอง</label>
+							<p>
+								ใบสำคัญแสดงสิทธิฝากแจ้งให้ทราบล่วงหน้า 
+							</p>
+						</div>
+						<div class='row rowspan'>
+							<span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span></br>
+							<label>สามารถเปลี่ยนแปลงและยกเลิกได้</label><br/>
+							<div class='col-md-12'>
+							ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ 4 มีนาคม 2560, 00:00 (UTC+07:00)  (คำนวณจาก 14 วันก่อนการเข้าพัก)
+รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น
+	</div>
+						</div>
+					</td>
+				</tr>
+				<!--remove here-->
+			</table>
+		</div>
+	</form>
+</div>
+
+<script src='plugin/jquery/jquery.min.js' ></script>
+<script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
+<script src='plugin/jquery/datepicker-th.js' ></script>
+<script src='plugin/jquery/holder.js' ></script>
+<script src='plugin/bootstraps/js/bootstrap.js' ></script>
+<script src='js/utility.js' ></script>
+<script src='js/selection.js' ></script>
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+	   $('#summary_form').on('submit',function(e){
+
+	   		//keep data to redirect complete
+			$('#data_reserve').val(JSON.stringify(reserve));
+			alert('บันทึกข้อมูลการจองเรียบร้อยแล้ว \r\n ขอบคุณที่ใช้บริการ.');
+
+			//e.preventDefault();
+			//window.location='quick_reservation.html';
+			//window.open("receipt.html");
+	   });
+
+	   //reserve.get_info();
+	   reserve.get_summary();
+   });
+  </script>
+</body>
+</html>
+
+
+

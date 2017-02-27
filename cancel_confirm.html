@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/home.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<head>
+<title>Welcome to Reservation</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link href="plugin/bootstraps/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="css/default.css" rel="stylesheet" type="text/css" />
+	<link href="plugin/jquery/ui/pepper_grinder/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<style>
+	div.ui-datepicker{
+		font-size:10px;
+	}
+</style>
+</head>
+<body>
+	<div class='container'>
+		<div class='row rowspan'>
+			<div class='col-md-12'>
+				<div class="panel panel-default">
+					<div class="panel-heading" >
+						<h3 class="panel-title" style='margin:10px 5px 10px 1px;'>Cancel you reservation</h3>
+						<small>To cancel a reservation, please enter you reservation number and the e-mail address used for the reservation</small>
+					</div>
+					<div class='panel-body'>						
+						<form class="form-horizontal" action='services/cancel.php' method='post'>
+							<div class="form-group">
+							<label for="reserve_number" class="col-sm-3 control-label">Reservation number : </label>
+							<div class="col-sm-4">
+							  <input type="text" class="form-control" id="reserve_number" name='reserve_number' maxlength='30' >
+							</div>
+						  </div>
+						  <div class="form-group">
+							<label for="email" class="col-sm-3 control-label">E-mail address : </label>
+							<div class="col-sm-4">
+							  <input type="email" class="form-control" id="email" name='email' maxlength='30' >
+							</div>
+						  </div>
+						   <div class="form-group">
+						   <label for="btn_cancel" class="col-sm-3 control-label">&nbsp;</label>
+								<div class='col-sm-offset-3'>
+									<input type="button" class="col-sm-3 btn btn-warning" id="btn_cancel" name='btn_cancel' value='Cancel'>
+								</div>
+						  </div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<!--show modal-->
+<!-- Modal -->
+<div class="modal fade bs-example-modal-md" id="modaldialog" tabindex="-1" role="dialog" aria-labelledby="modaltitle">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content" >
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="modaltitle">Please confirm</h4>
+			</div>
+			<div class="modal-body"  >
+				<div id="modalcontent" >
+				Are you sure you want to cancel you reservation ? 
+				</div>
+			</div>
+		<div class='modal-footer'>
+				<button type="button" data-dismiss="modal" class="btn btn-default">Close</button><button type="button" id='btn_confirm' class="btn btn-warning">Confirm cancellation</button>
+		</div>
+    </div>
+  </div>
+</div>
+	<!--show modal-->
+<script src='plugin/jquery/jquery.min.js' ></script>
+<script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
+<script src='plugin/jquery/datepicker-th.js' ></script>
+<script src='plugin/jquery/moment.js' ></script>
+<script src='plugin/jquery/holder.js' ></script>
+<script src='plugin/bootstraps/js/bootstrap.js' ></script>
+<script src='js/utility.js' ></script>
+<script>
+$(document).ready(function(){
+
+	$('#btn_cancel').click(function(){
+		$('#modaldialog').modal();
+	});
+	
+	$('#btn_confirm').click(function(){
+		window.location='cancellation.html';
+	});
+
+});
+</script>
+</body>
+</html>
