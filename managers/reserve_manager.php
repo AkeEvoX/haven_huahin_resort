@@ -1,7 +1,7 @@
 <?php
 require_once("../lib/database.php");
 
-class AboutManager{
+class Reserve_Manager{
 	
 	protected $mysql;
 	function __construct(){
@@ -20,6 +20,19 @@ class AboutManager{
 
 	function __destruct(){ //page end
 		$this->mysql->disconnect();
+	}
+	
+	private static function generateRandomString($length=20) {
+		
+		$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$charactersLength = strlen($characters);
+		$randomString = '';
+		for ($i = 0; $i < $length; $i++) {
+			$randomString .= $characters[rand(0, $charactersLength - 1)];
+		}
+		
+		return $randomString;
+		
 	}
 
 	function getItem($lang){
@@ -54,83 +67,108 @@ class AboutManager{
 		
 	}
 	
-	function update_about($items){
+	function insert_reserve($info,$customer,$payment){
 		
 		try{
-			$id = $items["id"];
-			$title_th = $items["title_th"];
-			$title_en = $items["title_en"];
-			$detail_th = $items["detail_th"];
-			$detail_en = $items["detail_en"];
-			$link_th = $items["link_th"];
-			$link_en = $items["link_en"];
-			$update_by = $_SESSION["profile"]->id;
-			$update_date = "current_timestamp";
 			
-			$sql = "update about set  ";
-			$sql .= "title_th='$title_th' ";
-			$sql .= ",title_en='$title_en' ";
-			$sql .= ",detail_th='$detail_th' ";
-			$sql .= ",detail_en='$detail_en' ";
-			$sql .= ",link_th='$link_th' ";
-			$sql .= ",link_en='$link_en' ";
-			$sql .= ",update_by=$update_by ";
-			$sql .= ",update_date=$update_date ";
-			$sql .= "where id=$id ;";
+			$start_date = $date = str_replace('/', '-', $info->date);
+			$start_date = date('Y-m-d', strtotime($start_date));
 			
-			//echo $sql."<br/>";
-			log_warning("update_about > " . $sql);
+			$end_date = $date = str_replace('/', '-', $info->date);
+			$end_date = date('Y-m-d', strtotime($end_date));
 			
-			$result = $this->mysql->execute($sql);
-			return $result;
-		}
-		catch(Exception $e){
-			echo "Cannot Update AboutManager Info: ".$e->getMessage();
-		}
-	}
+			$unique_key = self::generateRandomString();
 
-	function insert_reserve($data){
-		try{
-			$title_th = $items["title_th"];
-			$title_en = $items["title_en"];
-			$detail_th = $items["detail_th"];
-			$detail_en = $items["detail_en"];
-			$link_th = $items["link_th"];
-			$link_en = $items["link_en"];
-			$update_by = $_SESSION["profile"]->id;
-			$update_date = "current_timestamp";
+			$reserve_startdate = $start_date;
+			$reserve_enddate = $end_date;
+			$reserve_status= "0"; /*0=new,1=complete,2=cancel*/
+			$reserve_amount = "0";
+			$reserve_charge = "0";
+			$reserve_tax = "0";
+			$reserve_net = "0";
+			$reserve_comment = "-";
+			$adults = $info->adults;
+			$children = $info->children;
+			$code = $info->code;
+			$night = $info->night;
 			
-			$sql = "update about set  ";
-			$sql .= "title_th='$title_th' ";
-			$sql .= ",title_en='$title_en' ";
-			$sql .= ",detail_th='$detail_th' ";
-			$sql .= ",detail_en='$detail_en' ";
-			$sql .= ",link_th='$link_th' ";
-			$sql .= ",link_en='$link_en' ";
-			$sql .= ",update_by=$update_by ";
-			$sql .= ",update_date=$update_date ";
-			$sql .= "where id=$id ;";
+			$email = $customer["email"];
+			$title_name = $customer["title"];
+			$first_name = $customer["fname"];
+			$last_name = $customer["lname"];
+			$prefix = $customer["prefix_mobile"];
+			$mobile = $customer["mobile"];
 			
-			//echo $sql."<br/>";
+			$payment_type = $payment["card_type"];
+			$payment_number = $payment["card_number"];
+			$payment_holder = $payment["card_holder"];
+			$payment_expire = $payment["card_expire_month"]."/".$payment["card_expire_year"];
+			$payment_secure = $payment["card_validate"];
+			
+			$create_date = "now()";
+			
+			$sql = "insert into reserve_info(unique_key,reserve_startdate,reserve_enddate,reserve_status,reserve_amount,reserve_charge,reserve_tax,reserve_net,reserve_comment,adults,children,night,acc_code ";
+			$sql .= " ,email ,title_name,first_name,last_name,prefix,mobile";
+			$sql .= " ,payment_type,payment_number,payment_holder,payment_expire,payment_secure,create_date ) ";
+			$sql .= "values('$unique_key','$reserve_startdate','$reserve_enddate','$reserve_status','$reserve_amount','$reserve_charge','$reserve_tax'  ";
+			$sql .= " ,'$reserve_net','$reserve_comment',$adults,$children,$night,'$code'  ";
+			$sql .= " ,'$email','$title_name','$first_name','$last_name','$prefix','$mobile' ";
+			$sql .= " ,'$payment_type','$payment_number','$payment_holder','$payment_expire','$payment_secure',$create_date); ";
+			
 			log_warning("insert_reserve > " . $sql);
 			
 			$this->mysql->execute($sql);
-
-			$result = $this->mysql->newid();
+			
+			$result = $unique_key;
 
 			return $result;
 		}
 		catch(Exception $e){
 			echo "Cannot Insert Reserve : ".$e->getMessage();
 		}
+		
 	}
 
 	function insert_customer($first,$last,$age,$email){
-
+		try{
+			
+		}catch(Exception $e){
+			
+		}
 	}
 
-	function insert_payment($card,$month,$year,$security){
-
+	function insert_options($unique_key,$option_key,$price){
+		try{
+			$sql = "insert into reserve_options(unique_key,option_key,option_price)";
+			$sql .= "values('$unique_key','$option_key','$price'); ";
+			
+			log_warning("insert_options > " . $sql);
+			
+			$result = $this->mysql->execute($sql);
+			
+			return $result;
+			
+		}catch(Exception $e){
+			echo "Cannot insert_options : ".$e->getMessage();
+		}
+	}
+	
+	function insert_rooms($unique_key,$room_key,$price){
+		
+		try{
+			
+			$sql = "insert into reserve_rooms(unique_key,room_key,room_price)";
+			$sql .= "values('$unique_key','$room_key','$price'); ";
+			
+			log_warning("insert_rooms > " . $sql);
+			
+			$result = $this->mysql->execute($sql);
+			
+			return $result;
+		}catch(Exception $e){
+			echo "Cannot insert_rooms : ".$e->getMessage();
+		}
+		
 	}
 
 	

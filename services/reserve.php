@@ -1,6 +1,6 @@
 <?php
 session_start();
-//include("../lib/utility.php");
+include("../lib/logger.php");
 include("../lib/common.php");
 include("../managers/reserve_manager.php");
 
@@ -91,28 +91,44 @@ function step_four($data){
 	
 	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
 
-	$_SESSION["customer"] = array("email"=>$data["email"]
-		,"title"=>$data["title"]
-		,"fname"=>$data["fname"]
-		,"lname"=>$data["lname"]
-		,"prefix_mobile"=>$data["prefix_mobile"]
-		,"mobile"=>$data["mobile"]);
+	
+	$customer	= array("email"=>$data["email"]
+	,"title"=>$data["title"]
+	,"fname"=>$data["fname"]
+	,"lname"=>$data["lname"]
+	,"prefix_mobile"=>$data["prefix_mobile"]
+	,"mobile"=>$data["mobile"]);
 
-	$_SESSION["payment"] = array("card_type"=>$data["card_type"]
+	$_SESSION["customer"] = $customer;
+		
+	$payment = array("card_type"=>$data["card_type"]
 		,"card_number"=>$data["card_number"]
 		,"card_holder"=>$data["card_holder"]
 		,"card_expire_month"=>$data["card_expire_month"]
 		,"card_expire_year"=>$data["card_expire_year"]
 		,"card_validate"=>$data["card_validate"]);
+		
+	$_SESSION["payment"] = $payment;
 
 	/*insert to database*/
-		
-
-	//echo "<script >var mywin=window.open('../receipt.html', '_blank'); mywin.location='../quick_reservation.html';</script>";
-	//echo "<script type=\"text/javascript\">  window.location='../quick_reservation.html'; </script>";
-	header("Location: ../receipt.html");
+	
+	$base = new Reserve_Manager();
+	//$unique_key = generateRandomString();
+	$unique_key = $base->insert_reserve($_SESSION["reserve"]->info,$customer,$payment);
+	
+	/*insert rooms*/
+	foreach($_SESSION["reserve"]->rooms as $val){
+		$base->insert_rooms($unique_key,$val->key,$val->price);
+	}
+	
+	/*insert options*/
+	foreach($_SESSION["reserve"]->options as $val){
+		$base->insert_options($unique_key,$val->key,$val->price);
+	}
+	
+	//echo "insert complete.";
+	header("Location: ../confirmation.html");
 	//exit();
-	//header("Location: ../quick_reservation.html");
 }
 //complete trasection
 function step_five($data){
