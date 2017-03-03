@@ -206,7 +206,7 @@ reserve.get_summary = function(){
 }
 
 reserve.get_receipt = function(val){
-	var endpoint = "services/info.php";
+	var endpoint = "services/process.php";
 	var method="get";
 	var args = {"_":new Date().getMilliseconds()};
 	utility.service(endpoint,method,args,function(result){

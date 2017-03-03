@@ -51,12 +51,45 @@ class Reserve_Manager{
 		
 	}
 	
-	function getInfo($id){
+	function get_reserve_options($unique_key){
 		
 		try{
 
-			$sql = "select id,title_th,title_en ,detail_th,detail_en,link_th,link_en ";
-			$sql .= "from about where active=1 order by create_date desc limit 1 ";
+			$sql = "select * ";
+			$sql .= "from reserve_options where unique_key='".$unique_key."' order by id";
+			$result = $this->mysql->execute($sql);
+			
+			return  $result;
+		}
+		catch(Exception $e){
+			echo "Cannot Get  Reserve Rooms : ".$e->getMessage();
+		}
+		
+	}
+	
+	function get_reserve_rooms($unique_key){
+		
+		try{
+
+			$sql = "select * ";
+			$sql .= "from reserve_rooms where unique_key='".$unique_key."' order by id";
+			$result = $this->mysql->execute($sql);
+			
+			return  $result;
+		}
+		catch(Exception $e){
+			echo "Cannot Get  Reserve Rooms : ".$e->getMessage();
+		}
+		
+	}
+	
+	
+	function get_reserve_info($unique_key){
+		
+		try{
+
+			$sql = "select * ";
+			$sql .= "from reserve_info where unique_key='".$unique_key."'  ";
 			$result = $this->mysql->execute($sql);
 			
 			return  $result;
@@ -64,7 +97,6 @@ class Reserve_Manager{
 		catch(Exception $e){
 			echo "Cannot Get  About info: ".$e->getMessage();
 		}
-		
 	}
 	
 	function insert_reserve($info,$customer,$payment){

@@ -1,138 +1,74 @@
 <?php
 session_start();
-include("../lib/logger.php");
 include("../lib/common.php");
 include("../managers/reserve_manager.php");
 
+//if(isset($_SESSION["query"])){
+	//$info = $_SESSION["query"];
+	//$reserve = array("info"=>$_SESSION["query"],"reserve"=>$_SESSION["reserve"]);
+	//"info"=> $info ,
+	//echo json_encode(array("data"=>$reserve));
+//}
+//$_SESSION["query"] = $data;
 
-$_step = GetParameter("step");
+//var_dump($_SESSION);
 
-switch($_step){
-	case "1":
-		step_one($_POST);
-	break;
-	case "2":
-		step_two($_POST);
-	break;
-	case "3":
-		step_three($_POST);
-	break;
-	case "4":
-		step_four($_POST);
-	break;
-	case "5":
+$key = GetParameter("key");
 
-	break;
+$base = new Reserve_Manager();
+$reserve_data = $base->get_reserve_info($key);
+
+$data = $reserve_data->fetch_object();
+
+$info = array(
+			"date_start"=>$data->date_start
+			,"date_end"=>$data->data_end
+			,"night"=>$data->night
+			,"adults"=>$data->adults
+			,"children"=>$data->children
+			,"code"=>$data->code);
+
+$customer = array(
+			"email"=>$data->email
+			,"title"=>$data->title
+			,"fname"=>$data->first_name
+			,"lname"=>$data->last_name
+			,"prefix_mobile"=>$data->prefix
+			,"mobile"=>$data->mobile
+			);
+			
+$payment = array(
+			"card_type"=>$data->payment_type
+			,"card_number"=>$data->payment_number
+			,"card_holder"=>$data->payment_holder
+			,"card_expire"=>$data->payment_expire
+			,"card_validate"=>$data->payment_secure
+			);
+$room_data = $base->get_reserve_rooms($key);
+while($row = $room_data->fetch_object()){
+	$rooms[] = array(
+					"key"=>$row->key
+					,"room"=>$row->room
+					,"type"=>$row->type
+					,"price"=>$row->price
+					);
 }
-//
 
-//find date available
-function step_one($args){
-
-	//detroy session
-	session_destroy();
-	session_start();
-	//##variable list
-	//check_in_date 	date
-	//nights 			dropdown
-	//adults 			dropdown
-	//childern 			text
-	//code 				text
-
-	$date = $args["check_in_date"];
-	$night = $args["nights"];
-	$adults = $args["adults"];
-	$children = $args["children"];
-	$code = $args["code"];
-
-	$data = array("date"=>$date
-		,"night"=>$night
-		,"adults"=>$adults
-		,"children"=>$children
-		,"code"=>$code);
-	//keep data 
-	$_SESSION["info"] = $data;	
-	//redirect to next page
-	header("Location: ../selection_room.html");
-	exit();
-
+$option_data = $base->get_reserve_options($key);
+while($row = $option_data->fetch_object()){
+	$options[] = array(
+					"key"=>$row->key
+					,"title"=>$row->title
+					,"price"=>$row->price
+					);
 }
-//booking room & price addion option
-function step_two($data){
 
-	//keep data
-	//$_SESSION["reserve"] = "";
-	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
-	$reserve = json_decode($data["data_reserve"]);
-	//var_dump($reserve);
-	/*
-	//print value room reserve
-	foreach($reserve as $val){
-		
-		echo $val->key ."|" .$val->room ."|".$val->type ."|".$val->price ."|"."<br/>";
-		
-	}
-	*/
-	//redirect to next page
-	header("Location: ../option_reserve.html");
-	
-	exit();
-}
-//booking add option
-function step_three($data){
-	
-	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
-	
-	header("Location: ../summery.html");
-	exit();
-}
-//confirm trasection
-function step_four($data){
-	
-	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
+$reserve = array("info"=>$info
+		,"rooms"=>$rooms
+		,"options"=>$options
+		,"customer"=>$customer
+		,"payment"=>$payment);
 
-	
-	$customer	= array("email"=>$data["email"]
-	,"title"=>$data["title"]
-	,"fname"=>$data["fname"]
-	,"lname"=>$data["lname"]
-	,"prefix_mobile"=>$data["prefix_mobile"]
-	,"mobile"=>$data["mobile"]);
-
-	$_SESSION["customer"] = $customer;
-		
-	$payment = array("card_type"=>$data["card_type"]
-		,"card_number"=>$data["card_number"]
-		,"card_holder"=>$data["card_holder"]
-		,"card_expire_month"=>$data["card_expire_month"]
-		,"card_expire_year"=>$data["card_expire_year"]
-		,"card_validate"=>$data["card_validate"]);
-		
-	$_SESSION["payment"] = $payment;
-
-	/*insert to database*/
-	
-	$base = new Reserve_Manager();
-	//$unique_key = generateRandomString();
-	$unique_key = $base->insert_reserve($_SESSION["reserve"]->info,$customer,$payment);
-	
-	/*insert rooms*/
-	foreach($_SESSION["reserve"]->rooms as $val){
-		$base->insert_rooms($unique_key,$val->key,$val->price);
-	}
-	
-	/*insert options*/
-	foreach($_SESSION["reserve"]->options as $val){
-		$base->insert_options($unique_key,$val->key,$val->price);
-	}
-	
-	//echo "insert complete.";
-	header("Location: ../confirmation.html");
-	//exit();
-}
-//complete trasection
-function step_five($data){
-
-}
+echo json_encode(array("data"=>$reserve));
 
 ?>
