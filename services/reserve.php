@@ -14,6 +14,7 @@ include("../managers/reserve_manager.php");
 //var_dump($_SESSION);
 
 $key = GetParameter("key");
+if(!isset($key)) return;
 
 $base = new Reserve_Manager();
 $reserve_data = $base->get_reserve_info($key);
@@ -44,14 +45,18 @@ $payment = array(
 			,"card_expire"=>$data->payment_expire
 			,"card_validate"=>$data->payment_secure
 			);
+			
 $room_data = $base->get_reserve_rooms($key);
-while($row = $room_data->fetch_object()){
-	$rooms[] = array(
-					"key"=>$row->key
-					,"room"=>$row->room
-					,"type"=>$row->type
-					,"price"=>$row->price
-					);
+
+if($room_data){
+	while($row = $room_data->fetch_object()){
+		$rooms[] = array(
+						"key"=>$row->key
+						,"room"=>$row->room
+						,"type"=>$row->type
+						,"price"=>$row->price
+						);
+	}
 }
 
 $option_data = $base->get_reserve_options($key);

@@ -56,7 +56,7 @@ class Reserve_Manager{
 		try{
 
 			$sql = "select * ";
-			$sql .= "from reserve_options where unique_key='".$unique_key."' order by id";
+			$sql .= "from reserve_options where unique_key='".$unique_key."' ";
 			$result = $this->mysql->execute($sql);
 			
 			return  $result;
@@ -72,7 +72,7 @@ class Reserve_Manager{
 		try{
 
 			$sql = "select * ";
-			$sql .= "from reserve_rooms where unique_key='".$unique_key."' order by id";
+			$sql .= "from reserve_rooms where unique_key='".$unique_key."'  ";
 			$result = $this->mysql->execute($sql);
 			
 			return  $result;
