@@ -213,7 +213,7 @@ class Reserve_Manager{
 
 		try{
 			$update_date = 'now()';
-			$sql = "update reserve_info set reserve_status='2', update_date='$update_date' ";
+			$sql = "update reserve_info set reserve_status='2', update_date=$update_date ";
 			$sql .= " where unique_key='".$unique_key."' and email='".$email."' ; ";
 			
 			log_warning("cancel_reserve > " . $sql);
