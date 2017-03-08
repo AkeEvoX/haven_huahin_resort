@@ -1,6 +1,6 @@
 <?php
 require_once("../lib/database.php");
-
+require_once("../lib/logger.php");
 class Reserve_Manager{
 	
 	protected $mysql;
@@ -35,34 +35,21 @@ class Reserve_Manager{
 		
 	}
 
-	function getItem($lang){
-		
-		try{
-
-			$sql = "select id,title_".$lang." as title,detail_".$lang." as detail ,type,link_".$lang." as link,update_date ";
-			$sql .= "from about where active=1 order by create_date desc ";
-			$result = $this->mysql->execute($sql);
-			
-			return  $result;
-		}
-		catch(Exception $e){
-			echo "Cannot Get  About View: ".$e->getMessage();
-		}
-		
-	}
 	
 	function get_reserve_options($unique_key){
 		
 		try{
 
-			$sql = "select * ";
-			$sql .= "from reserve_options where unique_key='".$unique_key."' ";
+			$sql = "select r.unique_key,o.* ";
+			$sql .= "from reserve_options r inner join service_options o on r.option_key = o.id where unique_key='".$unique_key."' ";
 			$result = $this->mysql->execute($sql);
+
+			log_warning("get_reserve_options > " . $sql);
 			
 			return  $result;
 		}
 		catch(Exception $e){
-			echo "Cannot Get  Reserve Rooms : ".$e->getMessage();
+			echo "Cannot Get Reserve Options : ".$e->getMessage();
 		}
 		
 	}
@@ -71,14 +58,16 @@ class Reserve_Manager{
 		
 		try{
 
-			$sql = "select * ";
-			$sql .= "from reserve_rooms where unique_key='".$unique_key."'  ";
+			$sql = "select rr.unique_key,r.* ";
+			$sql .= "from reserve_rooms rr inner join rooms r on rr.room_key = r.id where unique_key='".$unique_key."'  ";
 			$result = $this->mysql->execute($sql);
+
+			log_warning("get_reserve_rooms > " . $sql);
 			
 			return  $result;
 		}
 		catch(Exception $e){
-			echo "Cannot Get  Reserve Rooms : ".$e->getMessage();
+			echo "Cannot Get Reserve Rooms : ".$e->getMessage();
 		}
 		
 	}
@@ -95,11 +84,11 @@ class Reserve_Manager{
 			return  $result;
 		}
 		catch(Exception $e){
-			echo "Cannot Get  About info: ".$e->getMessage();
+			echo "Cannot Get Reserve info: ".$e->getMessage();
 		}
 	}
 	
-	function insert_reserve($info,$customer,$payment){
+	function insert_reserve($info,$customer,$payment,$summary){
 		
 		try{
 			
@@ -108,17 +97,17 @@ class Reserve_Manager{
 			
 			$end_date = $date = str_replace('/', '-', $info->date);
 			$end_date = date('Y-m-d', strtotime($end_date));
-			
+
 			$unique_key = self::generateRandomString();
 
 			$reserve_startdate = $start_date;
 			$reserve_enddate = $end_date;
-			$reserve_status= "0"; /*0=new,1=complete,2=cancel*/
-			$reserve_amount = "0";
-			$reserve_charge = "0";
-			$reserve_tax = "0";
-			$reserve_net = "0";
-			$reserve_comment = "-";
+			$reserve_status= "1"; /*0=delete,1=complete,2=cancel*/
+			$reserve_amount = $summary->total_amount;
+			$reserve_charge = $summary->charge;
+			$reserve_tax = $summary->tax;
+			$reserve_net = $summary->net;
+			$reserve_comment = $info->comment;
 			$adults = $info->adults;
 			$children = $info->children;
 			$code = $info->code;
@@ -201,6 +190,42 @@ class Reserve_Manager{
 			echo "Cannot insert_rooms : ".$e->getMessage();
 		}
 		
+	}
+
+	function verify_cancel($unique_key,$email){
+
+		try{
+
+			$sql = "select count(0) as found ";
+			$sql .= "from reserve_info where unique_key='".$unique_key."' and email='".$email."' ";
+			$result = $this->mysql->execute($sql);
+
+			log_warning("verify_cancel > " . $sql);
+			
+			return  $result;
+		}
+		catch(Exception $e){
+			echo "Cannot Get Reserve Verify Cancel : ".$e->getMessage();
+		}
+	}
+
+	function cancel_reserve($unique_key,$email){
+
+		try{
+			$update_date = 'now()';
+			$sql = "update reserve_info set reserve_status='2', update_date='$update_date' ";
+			$sql .= " where unique_key='".$unique_key."' and email='".$email."' ; ";
+			
+			log_warning("cancel_reserve > " . $sql);
+			
+			$result = $this->mysql->execute($sql);
+			
+			return $result;
+
+		}catch(Exception $e){
+			echo "Cannot Cancel Reserve ".$unique_key." : ".$e->getMessage();
+		}
+
 	}
 
 	

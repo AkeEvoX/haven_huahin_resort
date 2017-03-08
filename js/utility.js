@@ -7,23 +7,7 @@ $(document).ready(function(){
 var utility = function(){};
 
 utility.initial = function(){
-	
-	
-	// $('#view-navbar').load('navbar.html',{'_':new Date().getHours()},function(){
 
-		// setfinddealer();
-		// utility.loadmenu();
-		// var url = 'services/lang.php';
-		// var args = {'_':new Date().getMilliseconds()};
-		// utility.service(url,'GET',args ,viewlang);
-		
-	// });
-
-	// $('#view-footer').load('navfooter.html',{'_':new Date().getHours()},function(){
-		// utility.loadbuttommenu();
-	// });
-	
-	
 }
 /*for view data only*/
 utility.service = function(url,method,args,success_callback,complete_callback){
@@ -97,18 +81,6 @@ utility.log = function(type,message){
 	this.service("services/logger.php",'POST',args,null,null);
 }
 
-utility.loadmenu = function(){
- var endpoint ="services/menu.php";
-	var args = {'_':new Date().getHours()};
-	this.service(endpoint,'get',args ,getmenubar ,null);
-}
-
-utility.loadbuttommenu = function(){
-
- var endpoint = "services/attributes.php";
-	var args = {'_':new Date().getHours(),'type':'menu'};
-  this.service(endpoint,'get',args ,genbutton ,null);
-}
 
 utility.querystr = function(name,url){
 
@@ -119,14 +91,6 @@ utility.querystr = function(name,url){
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
-}
-
-utility.setpage = function(page,callback){
-	
-  var endpoint = "services/attributes.php";
-  var args = {'_':new Date().getHours(),'type':page};
-  utility.service(endpoint,'GET',args, bindpage,callback);
-  
 }
 
 utility.showmodal = function(){
@@ -183,7 +147,21 @@ function escapeRegExp(str) {
     return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
 }
 
+utility.date_format_th = function (date){
+
+
+	var months = [" มกราคม "," กุมภาพันธ์ "," มีนาคม "," เมษายน "," พฤษภาคม "," มิถุนายน "," กรกฏาคม "," สิงหาคม "," กันยายน "," ตุลาคม "," พฤศจิกายน "," ธันวาคม "];
+	var dates = date.split("/");
+	var day = dates[0];
+	var month = parseInt(dates[1].replace("0",""))-1;
+	var year = parseInt(dates[2]) + 543; 
+
+	return day + months[month] + year ; 
+
+}
+
 function centerModal() {
+
     $(this).css('display', 'block');
     var $dialog = $(this).find(".modal-dialog");
 
@@ -193,103 +171,6 @@ function centerModal() {
     var offset = ($(window).height() - $dialog.height()) / 2;
     // Center modal vertically in window
     $dialog.css("margin-top", offset);
-}
-
-function bindpage(response)
-{
-	if(response!==undefined)
-	{
-		$.each(response.result,function(i,val){
-			//console.log(val);
-			$("span[id='"+val.name+"']").html(val.value);
-		});
-	}
-	else { console.warn('attribute not found.'); }
-}
-
-//-----------------load globle menu-----------------
-
-function loadchildmenu(id){
-	var menu = $('#'+id);
-	if(menu.val() ==1) return false;
-
-	$.ajax({
-
-		url:'services/menu.php?_=' + new Date().getMilliseconds(),
-		type:'GET',
-		data: {"id":id} ,
-		dataType:'json' ,
-		success:function(data){
-			menu.val(1);
-			getchildmenu(id,data);
-		},
-		error:function(xhr,status,err){
-			menu.val(0);
-			alert("generate child menu error :"+xhr.responseText);
-		}
-
-	});
 
 }
 
-function getmenubar(data){
-		var menu = $('#menubar');
-		menu.html("");
-
-    var parent = data.result.filter(function(item){return item.parent=="0"});
-    var child = data.result.filter(function(item){return item.parent!="0"});
-
-		$.each(parent,function(id,val){
-
-			var item = "";
-		  var sub = child.filter(function(item){return item.parent==val.id });
-
-		  if(sub.length==0)
-		  {
-			item = "<li id='"+val.id+"' > <a href='"+val.link+"'>"+val.name+"</a></li>";
-		  }
-      else {
-			item = "<li id='"+val.id+"' class='dropdown' >"; 
-			item += "<a  class='dropdown-toggle' data-toggle='dropdown'  href='#'  aria-haspopup='false' >"+val.name+"</a>";
-			
-			  item += "<ul class='dropdown-menu' >";
-			  $.each(sub,function(subid,subval){
-				  item += "<li><a href='"+subval.link+"'>"+subval.name+"</a></li>";
-			  });
-          item += "</ul>";
-
-				item +="</li> ";
-
-      }
-
-      //console.warn(item);
-			menu.append(item);
-		});
-
-    //var inter = data.result.filter(function(item){ return item.local=="0"; });
-
-}
-
-function getchildmenu(id,data){
-
-	var menu = $('#'+id);
-
-	var item = "";
-	item = "<ul class='dropdown-menu'>";
-	$.each(data.result,function(idx,val){
-			item += "<li><a href='"+val.link+"'>"+val.name+"</a></li>";
-	});
-	item += "</ul>";
-	menu.append(item);
-}
-
-function genbutton(data){
-	$.each(data.result,function(idx,val){
-			$("div[id='"+val.name+ "'] label").text(val.title);
-			$("div[id='"+val.name+ "']").append(val.item);
-	});
-}
-
-
-
-//-----------------load globle menu-----------------

@@ -10,13 +10,13 @@ reserve.payment = [];
 
 //list_reserve
 
-function add_room(name,type,price){
+function add_room(id,name,type,price){
 	
 	var list = $('#list_reserve');
 	var item = "";
 	var key = moment().format("YYYYMMDDHHMMSS");
-	console.log("add room >  " + key + "|" + name + "|"+type+"|"+price);
-	var room = { "key" : key , "room":name , "type" : type , "price" : price }; 
+	console.log("add room >  " + key +"|"+ id + "|" + name + "|"+type+"|"+price);
+	var room = { "key" : key ,"id":id, "room":name , "type" : type , "price" : price }; 
 	reserve.rooms.push(room); 
 	
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //formoney
@@ -42,6 +42,7 @@ function recalculate() {
 	var view_total = $('#total_price');
 	var total = 0.0;
 	var money = 0.0;
+
 	//var total_pattern = /[^0-9.-]+/g; //format calculate
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //formoney
 	$.each(reserve.rooms,function(i,val){
@@ -54,6 +55,7 @@ function recalculate() {
 	});
 	money = total.toFixed(2).replace(money_pattern,"$1,");
 	view_total.html("฿ "+money);
+
 	reserve.summary = {"total_amount":total.toFixed(2)};
 	//$('#data_reserve').val(JSON.stringify(reserve.source));
 	$('#data_reserve').val(JSON.stringify(reserve));
@@ -69,8 +71,23 @@ reserve.get_info = function(){
 		console.log(result);
 		var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
 		
+		if(result.data.info==null) { 
+			alert('Sorry!! Not Found Information Reserve.');
+			window.location="quick_reservation.html";
+		}
+
 		//set rooms info;
 		reserve.info = result.data.info;
+
+		if(reserve.info!=undefined){
+			$('#checkpoint_date').val(reserve.info.date);
+			$('#travel_date').val(reserve.info.date);
+			$('#adult_amount').val(reserve.info.adults);
+			$('#child_amount').val(reserve.info.children);
+			$('#promo_code').val(reserve.info.code);
+			
+		}
+
 		if(result.data.reserve != undefined){
 			
 			reserve.rooms = result.data.reserve.rooms;
@@ -104,109 +121,10 @@ reserve.get_info = function(){
 	});
 }
 
-reserve.get_summary = function(){
-	var endpoint = "services/info.php";
-	var method="get";
-	var args = {"_":new Date().getMilliseconds()};
 
-	utility.service(endpoint,method,args,function(result){
-		
-		console.log(result);
-		var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
-		var summary_price = 0;
-		//set rooms info;
-		reserve.info = result.data.info;
-		if(result.data.reserve != undefined){
-			
-			reserve.rooms = result.data.reserve.rooms;
-			reserve.options = result.data.reserve.options;
-			reserve.summary = result.data.reserve.summary;
-		}
-		
-		//list room
-		if(reserve.rooms != undefined ){
-				$.each(reserve.rooms,function(i,val){
-					summary_price += parseFloat(val.price);
-					var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
-					
-					var item = "<div class='row'>";
-					 item += "<div class='col-md-2'><label>ห้องพัก "+(i+1)+"</label><br><small>ผู้ใหญ่ 1</small></div>";
-					 item += "<div class='col-md-7'>";
-					 item += val.room+"</br>";
-					 item += val.type+"</br>";
-					 item += "</div >";
-					 item += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
-					 item += "</div ><hr/>";
-					 
-					$('#list_reserve').append(item);
-					
-				});
-		}
-		//list option
-		if(reserve.options != undefined){
-
-			var item = "";
-			var price_option = 0;
-			$.each(reserve.options,function(i,val){
-				summary_price += parseFloat(val.price);
-				price_option += parseFloat(val.price);
-
-				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");	
-
-				item += "<div class='row'>";
-				item += "<div class='col-md-2'>&nbsp;</div>";
-				item += "<div class='col-md-7'>"+val.title+"</div>";
-				item += "<div class='col-md-3 text-right'>฿ "+money+"</div>";
-				item += "</div>";
-			})
-			//summary options
-			var money = parseFloat(price_option).toFixed(2).replace(money_pattern,"$1,");	
-			var summary_tag = "<div class='row'>";
-			summary_tag += "<div class='col-md-2'>ทางเลือก</div>";
-		  	summary_tag += "<div class='col-md-7'>&nbsp;</div>";
-		   	summary_tag += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
-			summary_tag += "</div>";
-			item = summary_tag + item + "<hr/>";
-
-			$('#list_reserve').append(item);
-		}
-
-		//summary price
-
-		var total = parseFloat(summary_price).toFixed(2).replace(money_pattern,"$1,");
-		//var service_price = parseFloat(summary_price) * .03;
-		//var tax_price = parseFloat(summary_price) * .07 ;
-		//var net_price = parseFloat(summary_price) + tax_price + service_price;
-		//console.log("net : "+net_price);
-		//var service = parseFloat(service_price).toFixed(2).replace(money_pattern,"$1,");	
-		//var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");	
-		//var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");	
-		
-		var	item = "<div class='row'>";
-		item += "<div class='col-md-2 '><h4>รวม</h4></div>";
-		item += "<div class='col-md-offset-7 col-md-3 text-right'><span><h4>$ "+total+"</h4></span></div>";
-		item += "</div>";
-		//item += "<div class='row rowspan'>";
-		//item += "<div class='col-md-offset-2 col-md-7'>ไม่รวมไว้ : ค่าบริการ 3%</div>";
-		//item += "<div class='col-md-3 text-right'>฿ "+service+"</div>";
-		//item += "</div>";
-		//item += "<div class='row rowspan'>";
-		//item += "<div class='col-md-offset-2 col-md-7'>ไม่รวมไว้ : ภาษีของรัฐ 7%</div>";
-		//item += "<div class='col-md-3 text-right'>฿ "+tax+"</div>";
-		//item += "</div>";
-		item += "<div class='row rowspan'>";
-		item += "<div class='col-md-offset-2 col-md-7'><pre><h4>รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น</h4></pre></div>";
-		item += "<div class='col-md-3 text-right'><pre><h4>฿ "+total+"</h4></pre></div>";
-		item += "</div>";
-
-
-		$('#list_reserve').append(item);
-
-	});
-}
 
 reserve.get_receipt = function(val){
-	var endpoint = "services/process.php";
+	var endpoint = "services/info.php";
 	var method="get";
 	var args = {"_":new Date().getMilliseconds()};
 	utility.service(endpoint,method,args,function(result){

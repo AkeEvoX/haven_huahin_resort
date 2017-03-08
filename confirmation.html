@@ -25,7 +25,7 @@
 					<tr >
 						<td class='col-md-10' style='background-color:#4EB022;color:#fff'>
 							<h4>ขอขอบคุณ การจองของท่านได้รับการยืนยันแล้ว !</h4>
-							อีเมลล์ยืนยันถูกส่งไปยัง <span id='email' >gmassist@haven-huahin.com</span> แล้ว
+							อีเมลล์ยืนยันถูกส่งไปยัง <span id='customer_email' >gmassist@haven-huahin.com</span> แล้ว
 						</td>
 						<td class='col-md-2 text-center' style='background-color:#333333;'><a href='receipt.html' target="_blank"><span class='glyphicon glyphicon-print' style='font-size:32px;'></span><br/>พิมพ์</a></td>
 					</tr>
@@ -45,12 +45,14 @@
 				<tr class='bg-heading'>
 					<td class='col-md-12 ' colspan='2'>
 						<div class='row'>
-							<h3 class='col-md-12'>หมายเลขการจอง : tesT9a0pfa95ThHa</h3>
-							<small>ทำโดย test testt</small>
+							<div class='col-md-12'>
+							<h3 >หมายเลขการจอง : <span id='reserve_id'></span></h3>
+							<small>ทำโดย <span id='create_by'>test test</span></small>
+							</div>
 						</div>
 						<div class='row rowspan'>
 							<div class='col-md-2'>ที่อยู่</div>
-							<div class='col-md-9'>1449  Chala samut Rd., Cha-am, Petchaburi 76120, Hua Hin, TH</div>
+							<div class='col-md-9'><span id='customer_address'></span>1449  Chala samut Rd., Cha-am, Petchaburi 76120, Hua Hin, TH</div>
 						</div>
 						<div class='row rowspan'>
 							<div class='col-md-2'>แผนกต้อนรับ</div>
@@ -58,11 +60,11 @@
 						</div>
 						<div class='row rowspan'>
 							<div class='col-md-2'>เช็คอิน</div>
-							<div class='col-md-9'>14:00</div>
+							<div class='col-md-9'><span id='checkin_date'>14:00</span></div>
 						</div>
 						<div class='row rowspan'>
 							<div class='col-md-2'>เช็คเอาท์</div>
-							<div class='col-md-9'>12:00</div>
+							<div class='col-md-9'><span id='checkout_date'>12:00</span></div>
 						</div>
 						<div class='row rowspan'>
 							<div class='col-md-2'>ภาษาพูด</div>
@@ -93,7 +95,7 @@
 							<span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span></br>
 							<label>สามารถเปลี่ยนแปลงและยกเลิกได้</label><br/>
 							<div class='col-md-12'>
-							ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ 4 มีนาคม 2560, 00:00 (UTC+07:00)  (คำนวณจาก 14 วันก่อนการเข้าพัก)
+							ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ <span id='cancel_date'> 4 มีนาคม 2560, 00:00 (UTC+07:00) </span>  (คำนวณจาก 14 วันก่อนการเข้าพัก)
 รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น
 	</div>
 						</div>
@@ -109,27 +111,20 @@
 <script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
 <script src='plugin/jquery/datepicker-th.js' ></script>
 <script src='plugin/jquery/holder.js' ></script>
+<script src='plugin/jquery/moment.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
 <script src='js/utility.js' ></script>
-<script src='js/selection.js' ></script>
+<script src='js/reserve.js' ></script>
 
 <script type="text/javascript">
 
 	$(document).ready(function(){
 
 	   $('#summary_form').on('submit',function(e){
-
-	   		//keep data to redirect complete
-			$('#data_reserve').val(JSON.stringify(reserve));
 			alert('บันทึกข้อมูลการจองเรียบร้อยแล้ว \r\n ขอบคุณที่ใช้บริการ.');
-
-			//e.preventDefault();
-			//window.location='quick_reservation.html';
-			//window.open("receipt.html");
 	   });
 
-	   //reserve.get_info();
-	   reserve.get_summary();
+	   reserve.get_confirmation();
    });
   </script>
 </body>

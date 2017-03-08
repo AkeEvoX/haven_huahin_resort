@@ -36,13 +36,13 @@
 						<div class='col-sm-3'>
 							 <div class="form-group">
 							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> มาถึง</label>
-							<input type="text" class="form-control" id="checkpoint_date" placeholder="" >
+							<input type="text" class="form-control" id="checkpoint_date" name="checkpoint_date" placeholder="" >
 						  </div>
 						</div>
 						<div class='col-sm-3'>
 							<div class="form-group">
 							<label for="travel_date"><span class='glyphicon glyphicon-calendar'></span> ออกเดินทาง</label>
-							<input type="text" class="form-control" id="travel_date" placeholder="" >
+							<input type="text" class="form-control" id="travel_date" name="travel_date" placeholder="" >
 						  </div>
 						</div>
 						<div class='col-sm-3'>
@@ -64,11 +64,11 @@
 							  <div class="form-group" >
 								<div class="input-group" style='z-index: 0;'>
 								  <div class="input-group-btn">
-									<button type='button' class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-chevron-left'></span></button>
+									<button type='button' onclick='adult_decrease()' class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-chevron-left'></span></button>
 								  </div>
-								  <input type="text" class="form-control" id='adult_amount' aria-label="...">
+								  <input type="text" class="form-control" id='adult_amount' name='adult_amount' aria-label="..." value="">
 								  <div class="input-group-btn">
-									<button type='button' class='btn btn-warning brown btn-md' >&nbsp;<span class='glyphicon glyphicon-chevron-right'></span></button>
+									<button type='button' onclick='adult_increase()' class='btn btn-warning brown btn-md' >&nbsp;<span class='glyphicon glyphicon-chevron-right'></span></button>
 								  </div>
 								</div>
 							  </div>
@@ -82,11 +82,11 @@
 							  <div class="form-group">
 								<div class="input-group">
 								  <div class="input-group-btn">
-									<button type='button' class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-chevron-left'></span></button>
+									<button type='button' onclick="child_decrease()" class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-chevron-left'></span></button>
 								  </div>
-								  <input type="text" class="form-control" id='child_amount' aria-label="...">
+								  <input type="text" class="form-control" id='child_amount' name='child_amount' aria-label="..." value="0">
 								  <div class="input-group-btn">
-									<button type='button' class='btn btn-warning brown btn-md' >&nbsp;<span class='glyphicon glyphicon-chevron-right'></span></button>
+									<button type='button' onclick='child_increase()' class='btn btn-warning brown btn-md' >&nbsp;<span class='glyphicon glyphicon-chevron-right'></span></button>
 								  </div>
 								</div>
 							  </div>
@@ -104,7 +104,7 @@
 								<label for='hello'>รหัสโปรโมชั่นหรือรหัสธุรกิจ</label>
 						</div>
 						<div class='col-md-3'>
-								<input type='text' class='form-control' id='promo_code' />
+								<input type='text' class='form-control' id='promo_code' name='promo_code' />
 						</div>
 						<div class='col-md-3 text-right'>
 							&nbsp;<a href='#'><span class='glyphicon glyphicon-remove'></span></a>
@@ -134,7 +134,7 @@
 									<p>฿ 525 ผู้ใหญ่ 1 คน</p>
 								</div>
 								<div class='col-md-2 text-right'>
-									<span>เลือก</span> <input type='checkbox' name='option_reserve' value='{"key":"opt1","title":"Thai Set Diner","price":"525" }'  />
+									<span>เลือก</span> <input type='checkbox' name='option_reserve' value='{"key":"1","title":"Thai Set Diner","price":"525" }'  />
 								</div>
 								
 							</div>
@@ -149,7 +149,7 @@
 									<p>฿ 3,700</p>
 								</div>
 								<div class='col-md-2 text-right'>
-									<span>เลือก</span> <input type='checkbox' name='option_reserve' value='{"key":"opt2","title":"Airport Transfer","price":"3700"}'  />
+									<span>เลือก</span> <input type='checkbox' name='option_reserve' value='{"key":"2","title":"Airport Transfer","price":"3700"}'  />
 								</div>
 								
 							</div>
@@ -165,7 +165,7 @@
 					  <div class="panel-body" style='background-color:white;color:black;'>
 							<div class='row'>
 								<div class='col-md-12'>
-									<textarea id='comment' class='form-control' rows='5' placeholder='โปรดอธิบายคำขอของท่าน เวลาที่เดินทางมาถึง การแพ้อาหาร, ห้องพักสำหรับผู้สูบบุหรี่'></textarea>
+									<textarea id='comment' name='comment' class='form-control' rows='5' placeholder='โปรดอธิบายคำขอของท่าน เวลาที่เดินทางมาถึง การแพ้อาหาร, ห้องพักสำหรับผู้สูบบุหรี่'></textarea>
 								</div>
 							</div>
 							<div class='row rowspan'>
@@ -208,6 +208,7 @@
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
 <script src='js/utility.js' ></script>
 <script src='js/selection.js' ></script>
+<script src='js/common.js' ></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){

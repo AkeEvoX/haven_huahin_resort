@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/home.dwt.php" codeOutsideHTMLIsLocked="false" -->
 <head>
-<title>Welcome to Reservation</title>
+<title>Welcome to haven huahin resort.</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class='container'>
-	<form id='summary_form' action='services/reserve.php?step=4' method='post' >
+	<form id='summary_form' action='services/process.php?step=4' method='post' >
 		<div class='row rowspan' >
 			<div class='col-md-4 text-center'>
 				<span class="stepflow">1</span> <a href='selection_room.html'>เลือกห้องพัก</a>
@@ -41,13 +41,13 @@
 					<div class='col-sm-3'>
 						<div class="form-group">
 							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> ออกเดินทาง</label>
-							<span type="text" class="form-control" id="checkpoint_date" placeholder=""  >15/12/2016</span>
+							<span type="text" class="form-control" id="travle_date" placeholder=""  >15/12/2016</span>
 						</div>
 					</div>
 					<div class='col-sm-3'>
 						<div class="form-group">
 							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> ห้องพัก 1</label>
-							<span type="text" class="form-control" id="checkpoint_date" placeholder=""  >ผู้ใหญ่ 1 คน</span>
+							<span type="text" class="form-control" id="rent_amount" placeholder=""  >ผู้ใหญ่ 1 คน</span>
 						</div>
 					</div>
 					<div class='col-sm-3 text-right'>
@@ -60,7 +60,7 @@
 		<div class='row rowspan' >
 			<table class='table table-bordered'  >
 				<tr>
-					<td class='col-md-12 bg-black' style='color:white;' colspan='2'>การจองของท่าน - จาก 14 ธันวาคม 2559 ถึง 15 ธันวาคอม 2559</td>
+					<td class='col-md-12 bg-black' style='color:white;' colspan='2'>การจองของท่าน - จาก <span id='date_start'>14 ธันวาคม 2559</span> ถึง <span id='date_end'>15 ธันวาคอม 2559</span></td>
 				</tr>
 				<tr class='bg-heading'>
 					<td class='col-md-12 ' colspan='2'>
@@ -239,7 +239,7 @@
 						 <div class="row form-group">
 							<div class='col-md-12'>
 								<label for="check_confirm">คำขอทพิเศษของท่าน</label>
-								<textarea  id="check_confirm" class='form-control' rows='6' maxlength="60" placeholder="โปรดอธิบายคำขอของท่าน : เวลาที่เดินทางมาถึง, การแพ้อาหาร, ห้องที่พักสำหรับผู้สูบบุหรี่...."></textarea>
+								<textarea  id="comment" name='comment' class='form-control' rows='6' maxlength="60" placeholder="โปรดอธิบายคำขอของท่าน : เวลาที่เดินทางมาถึง, การแพ้อาหาร, ห้องที่พักสำหรับผู้สูบบุหรี่...." readonly></textarea>
 							</div>
 						 </div><!-- request comment -->
 					</td>
@@ -257,7 +257,7 @@
 <script src='plugin/jquery/holder.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
 <script src='js/utility.js' ></script>
-<script src='js/selection.js' ></script>
+<script src='js/reserve.js' ></script>
 
 <script type="text/javascript">
 

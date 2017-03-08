@@ -24,7 +24,7 @@
 						<small>To cancel a reservation, please enter you reservation number and the e-mail address used for the reservation</small>
 					</div>
 					<div class='panel-body'>						
-						<form class="form-horizontal" action='services/cancel.php' method='post'>
+						<form id='cancel_form' class="form-horizontal" action='services/cancel.php' method='post'>
 							<div class="form-group">
 							<label for="reserve_number" class="col-sm-3 control-label">Reservation number : </label>
 							<div class="col-sm-4">
@@ -86,7 +86,13 @@ $(document).ready(function(){
 	});
 	
 	$('#btn_confirm').click(function(){
-		window.location='cancellation.html';
+
+
+		$('form#cancel_form').submit();
+
+
+		//window.location='cancellation.html';
+
 	});
 
 });

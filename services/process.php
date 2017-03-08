@@ -82,7 +82,28 @@ function step_two($data){
 function step_three($data){
 	
 	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
-	
+
+	$_SESSION["info"]["date_start"] = $data["checkpoint_date"];
+	$_SESSION["info"]["date_end"] = $data["travel_date"];
+	$_SESSION["info"]["adults"] = $data["adult_amount"];
+	$_SESSION["info"]["children"] = $data["child_amount"];
+	$_SESSION["info"]["code"] = $data["promo_code"];
+	$_SESSION["info"]["comment"] = $data["comment"];
+
+	//summary.total_amount
+	$summary = $_SESSION["reserve"]->summary;
+	$total = $summary->total_amount;
+	//tax 7%
+	$tax=($total*7)/100;
+	//charge 3%
+	$charge=($total*3)/100;
+	//net
+	$net = $total+$tax+$charge;
+
+	$_SESSION["reserve"]->summary->tax=$tax;
+	$_SESSION["reserve"]->summary->charge=$charge;
+	$_SESSION["reserve"]->summary->net=$net;
+
 	header("Location: ../summery.html");
 	exit();
 }
@@ -92,7 +113,7 @@ function step_four($data){
 	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
 
 	
-	$customer	= array("email"=>$data["email"]
+	$customer = array("email"=>$data["email"]
 	,"title"=>$data["title"]
 	,"fname"=>$data["fname"]
 	,"lname"=>$data["lname"]
@@ -114,8 +135,10 @@ function step_four($data){
 	
 	$base = new Reserve_Manager();
 	//$unique_key = generateRandomString();
-	$unique_key = $base->insert_reserve($_SESSION["reserve"]->info,$customer,$payment);
+	$unique_key = $base->insert_reserve($_SESSION["reserve"]->info,$customer,$payment,$_SESSION["reserve"]->summary);
 	
+	$_SESSION["unique_key"] = $unique_key;
+
 	/*insert rooms*/
 	foreach($_SESSION["reserve"]->rooms as $val){
 		$base->insert_rooms($unique_key,$val->key,$val->price);
@@ -127,7 +150,7 @@ function step_four($data){
 	}
 	
 	//echo "insert complete.";
-	header("Location: ../confirmation.html");
+	header("Location: ../confirmation.html?reserve_id=".$unique_key);
 	//exit();
 }
 //complete trasection

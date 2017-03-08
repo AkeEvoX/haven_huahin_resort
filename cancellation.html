@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/home.dwt.php" codeOutsideHTMLIsLocked="false" -->
 <head>
-<title>Welcome to Reservation</title>
+<title>Welcome to Haven huahin Resort</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -25,7 +25,7 @@
 					<tr >
 						<td class='col-md-12' style='background-color:#333333;color:#fff'>
 							<h4>Your booking has been canceled</h4>
-							A cancellation email has been sent to <span id='email' >gmassist@haven-huahin.com</span>
+							A cancellation email has been sent to <span id='customer_email' >gmassist@haven-huahin.com</span>
 						</td>
 					</tr>
 					</table>
@@ -44,8 +44,10 @@
 				<tr class='bg-heading'>
 					<td class='col-md-12 ' colspan='2'>
 						<div class='row'>
-							<h3 class='col-md-12'>หมายเลขการจอง : tesT9a0pfa95ThHa</h3>
+							<div class='col-md-12'>
+							<h3 >หมายเลขการจอง : <span id='reserve_id'></span></h3>
 							<small>ทำโดย test testt</small>
+							</div>
 						</div>
 						<div class='row rowspan'>
 							<div class='col-md-2'>ที่อยู่</div>
@@ -92,7 +94,7 @@
 							<span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span></br>
 							<label>สามารถเปลี่ยนแปลงและยกเลิกได้</label><br/>
 							<div class='col-md-12'>
-							ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ 4 มีนาคม 2560, 00:00 (UTC+07:00)  (คำนวณจาก 14 วันก่อนการเข้าพัก)
+							ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ <span id='cancel_date'>4 มีนาคม 2560, 00:00 (UTC+07:00) </span> (คำนวณจาก 14 วันก่อนการเข้าพัก)
 รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น
 	</div>
 						</div>
@@ -108,27 +110,26 @@
 <script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
 <script src='plugin/jquery/datepicker-th.js' ></script>
 <script src='plugin/jquery/holder.js' ></script>
+<script src='plugin/jquery/moment.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
 <script src='js/utility.js' ></script>
-<script src='js/selection.js' ></script>
+<script src='js/reserve.js' ></script>
 
 <script type="text/javascript">
 
 	$(document).ready(function(){
 
+		reserve.get_confirmation();
+
 	   $('#summary_form').on('submit',function(e){
 
 	   		//keep data to redirect complete
-			$('#data_reserve').val(JSON.stringify(reserve));
-			alert('บันทึกข้อมูลการจองเรียบร้อยแล้ว \r\n ขอบคุณที่ใช้บริการ.');
+			ฝฝ$('#data_reserve').val(JSON.stringify(reserve));
+			alert('ยกเลิกข้อมูลการจองเรียบร้อยแล้ว \r\n ขอบคุณที่ใช้บริการ.');
 
-			//e.preventDefault();
-			//window.location='quick_reservation.html';
-			//window.open("receipt.html");
 	   });
 
-	   //reserve.get_info();
-	   reserve.get_summary();
+	   
    });
   </script>
 </body>
