@@ -75,6 +75,7 @@ reserve.get_summary = function(){
 		
 		//list room
 		if(reserve.rooms != undefined ){
+			console.warn("found cancel rooms.");
 				$.each(reserve.rooms,function(i,val){
 					summary_price += parseFloat(val.price);
 					var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
