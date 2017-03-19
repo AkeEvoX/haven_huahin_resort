@@ -261,3 +261,72 @@ reserve.del_option = function(key,price){
 	//reserve.calucate_option();
 	
 }
+
+reserve.modal = function(title,detail,image){
+	
+	var view = '<div class="media">';
+	
+	if(image!='')
+		view += '<div class="media-left"><a href="#"><img class="media-object" src="'+image+'" alt="..."></a></div>';
+	
+	view += '<div class="media-body">'+detail+'</div>';
+	view += '</div>';
+	
+	$('#modaltitle').text(title);
+	$('#modalcontent').html(view);
+	$('#modaldialog').modal();
+}
+
+reserve.modal_nochange = function(){
+	var title = 'ไม่สามารถยกเลิกได้และเปลี่ยนแปลงได้';
+	var view = '<div class="media">';
+	view += '<div class="media-body">ในกรณีที่ท่านไม่มาแสดงตัว จะมีค่าปรับ 100%</div>';
+	view += '</div>';
+	
+	$('#modaltitle').text(title);
+	$('#modalcontent').html(view);
+	$('#modaldialog').modal();
+}
+
+reserve.modal_change = function(){
+	
+	var title = 'ยกเลิกได้และเปลี่ยนแปลงได้';
+	var view = '<div class="media">';
+	
+	view += '<div class="media-body">ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ 4 มีนาคม 2560,00:00 (UTC+07:00) หลังจากวันที่ดังกล่าวอาจมีค่าธรรมเนียมในการยกเลิกหรือแก้ไข ในกรณีทีท่านไม่มาแสดงตัว จะมีค่าปรับ 100%</div>';
+	view += '</div>';
+	
+	$('#modaltitle').text(title);
+	$('#modalcontent').html(view);
+	$('#modaldialog').modal();
+}
+
+reserve.modal_internet = function(){
+	
+	var title = 'ชำระเงินจองทางอินเทอร์เน็ต';
+	var view = '<div class="media">';
+	
+	view += '<div class="media-body">ชำระค่ามัดจำ 100% of 1 คืน เดี๋ยวนี้เพื่อรับรองการจองของท่าน ยอดเงินส่วนที่เหลือจะถูกเรียกเก็บที่โรงแรม</div>';
+	view += '</div>';
+	
+	$('#modaltitle').text(title);
+	$('#modalcontent').html(view);
+	$('#modaldialog').modal();
+}
+
+reserve.modal_breakfast = function(){
+	
+	var title = 'อาหารเช้า';
+	var view = '<div class="media">';
+	
+	if(image!='')
+		view += '<div class="media-left"><a href="#"><img class="media-object" src="'+image+'" alt="..."></a></div>';
+	
+	view += '<div class="media-body">เราให้บริการอาหารไทย และอาหารนานาชาติ คัดสรรคุณภาพดี รสชาติอร่อย และพิธีพิถันในการปรุงอาหาร <br/> เปิดบริการตั้งแต่เวลา 7.00 - 10.00 น.</div>';
+	view += '</div>';
+	
+	$('#modaltitle').text(title);
+	$('#modalcontent').html(view);
+	$('#modaldialog').modal();
+	
+}

@@ -104,8 +104,8 @@
 								<h4 class="list-group-item-heading">Room Only<span class='pull-right'>฿ 2,803.73</span></h4>
 								<small class="list-group-item-text ">
 									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่รวมอาหารเช้า</div>
-									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
+									<div class='col-sm-3' onclick='reserve.modal_change()'; style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
+									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
 									<button onclick="add_room(1,'Deluxe','Room Only','2803.73')" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
 									&nbsp;
 								</small>
@@ -113,9 +113,9 @@
 							  <span href="#" class="list-group-item">
 								<h4 class="list-group-item-heading">Last Minute Promotion<span class='pull-right'>฿ 2,888.70</span></h4>
 								<small class="list-group-item-text ">
-									<div class='col-sm-3'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
-									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
+									<div class='col-sm-3' onclick='reserve.modal_breakfast()'; style='cursor:pointer;'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
+									<div class='col-sm-3' onclick='reserve.modal_nochange()'; style='cursor:pointer;'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
+									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
 									<button onclick="add_room(2,'Deluxe','Last Minute Promotion','2888.70')" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
 									&nbsp;
 								</small>
@@ -123,9 +123,9 @@
 							 <span href="#" class="list-group-item">
 								<h4 class="list-group-item-heading">Internet Rate<span class='pull-right'>฿ 3,398.47</span></h4>
 								<small class="list-group-item-text ">
-									<div class='col-sm-3'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
-									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
+									<div class='col-sm-3' onclick='reserve.modal_breakfast()'; style='cursor:pointer;'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
+									<div class='col-sm-3' onclick='reserve.modal_change()'; style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
+									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
 									<button onclick="add_room(3,'Deluxe','Internet Rate','3398.47')"   type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
 									&nbsp;
 								</small>
@@ -163,8 +163,8 @@
 								<h4 class="list-group-item-heading">Room Only<span class='pull-right'>฿ 2,803.73</span></h4>
 								<small class="list-group-item-text ">
 									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่รวมอาหารเช้า</div>
-									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
+									<div class='col-sm-3' onclick='reserve.modal_change()'; style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
+									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
 									<button onclick="add_room(4,'superior','Room Only','2803.73')" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
 									&nbsp;
 								</small>
@@ -172,9 +172,9 @@
 							  <span href="#" class="list-group-item">
 								<h4 class="list-group-item-heading">Last Minute Promotion<span class='pull-right'>฿ 2,888.70</span></h4>
 								<small class="list-group-item-text ">
-									<div class='col-sm-3'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
-									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
+									<div class='col-sm-3' onclick='reserve.modal_breakfast()'; style='cursor:pointer;'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
+									<div class='col-sm-3' onclick='reserve.modal_nochange()'; style='cursor:pointer;'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
+									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
 									<button onclick="add_room(5,'superior','Last Minute Promotion','2888.70')" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
 									&nbsp;
 								</small>
@@ -182,9 +182,9 @@
 							 <span href="#" class="list-group-item">
 								<h4 class="list-group-item-heading">Internet Rate<span class='pull-right'>฿ 3,398.47</span></h4>
 								<small class="list-group-item-text ">
-									<div class='col-sm-3'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
-									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
+									<div class='col-sm-3' onclick='reserve.modal_breakfast()'; style='cursor:pointer;'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
+									<div class='col-sm-3' onclick='reserve.modal_change()'; style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
+									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
 									<button onclick="add_room(6,'superior','Internet Rate','3398.47')" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
 									&nbsp;
 								</small>
@@ -223,7 +223,27 @@
 	</div>
 	
 </div>
-
+<!--show modal-->
+<!-- Modal -->
+<div class="modal fade bs-example-modal-md" id="modaldialog" tabindex="-1" role="dialog" aria-labelledby="modaltitle">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content" >
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="modaltitle">&nbsp;</h4>
+			</div>
+			<div class="modal-body"  >
+				<div id="modalcontent" >
+					loading...
+				</div>
+			</div>
+		<div class='modal-footer'>
+				<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		</div>
+    </div>
+  </div>
+</div>
+	<!--show modal-->
 <script src='plugin/jquery/jquery.min.js' ></script>
 <script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
 <script src='plugin/jquery/datepicker-th.js' ></script>
