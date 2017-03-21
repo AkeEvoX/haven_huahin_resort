@@ -121,7 +121,8 @@ function step_four($data){
 	,"mobile"=>$data["mobile"]);
 
 	$_SESSION["customer"] = $customer;
-		
+	
+	var card
 	$payment = array("card_type"=>$data["card_type"]
 		,"card_number"=>$data["card_number"]
 		,"card_holder"=>$data["card_holder"]
@@ -130,7 +131,7 @@ function step_four($data){
 		,"card_validate"=>$data["card_validate"]);
 		
 	$_SESSION["payment"] = $payment;
-
+	$_SESSION["payment"]->card_number =substr($data["card_number"],0,8)+"xxxxxxxx";
 	/*insert to database*/
 	
 	$base = new Reserve_Manager();

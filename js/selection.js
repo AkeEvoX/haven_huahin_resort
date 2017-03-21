@@ -280,11 +280,23 @@ reserve.modal = function(title,detail,image){
 reserve.modal_nochange = function(){
 	var title = 'ไม่สามารถยกเลิกได้และเปลี่ยนแปลงได้';
 	var view = '<div class="media">';
-	view += '<div class="media-body">ในกรณีที่ท่านไม่มาแสดงตัว จะมีค่าปรับ 100%</div>';
+	view += '<div class="media-body">ในกรณีที่ท่านไม่มาแสดงตัว จะมีค่าปรับ 100%<br/>';
+	//view += '<button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#modal_condition">เงื่อนไข</button></div>';
 	view += '</div>';
+	
+	
+	var condition = "<h3>เงื่อนไขการขาย</h3>";
+	condition += "<p>";
+	condition += "เงินค่าที่พักเต็มจำนวนจะถูกเรียกเก็บจากบัตรเครดิตของท่านไม่นานหลังจากยืนยันการจองของท่าน<br/>";
+	condition += "การจองนี้ไม่สามารถยกเลิกหรือแก้ไข<br/>";
+	condition += "ในกรณีที่ท่านไม่แสดงตัว จะมีค่าปรับ 100%<br/>";
+	condition += "</p>";
+	condition += add_default_condition();
 	
 	$('#modaltitle').text(title);
 	$('#modalcontent').html(view);
+	$('#modal_condition').collapse('hide');
+	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
 }
 
@@ -295,9 +307,19 @@ reserve.modal_change = function(){
 	
 	view += '<div class="media-body">ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ 4 มีนาคม 2560,00:00 (UTC+07:00) หลังจากวันที่ดังกล่าวอาจมีค่าธรรมเนียมในการยกเลิกหรือแก้ไข ในกรณีทีท่านไม่มาแสดงตัว จะมีค่าปรับ 100%</div>';
 	view += '</div>';
+	var condition = "<h3>เงื่อนไขการขาย</h3>";
+	condition += "<p>";
+	condition += "ชำระค่ามัดจำ 100% ของ 1 คืน เดี๋ยวนี้เพื่อรับรองการจองของท่าน ยอดเงินส่วนที่เหลือจะถูกเรียกเก็บที่โรงแรม<br/>";
+	condition += "ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ 4 มีนาคม 2560, 00:00 (UTC+07:00)<br/>";
+	condition += "หลังจากวันที่ดังกล่าวอาจมีค่าธรรมเนียมในการยกเลิกหรือแก้ไข<br/>";
+	condition += "ในกรณีที่ท่านไม่แสดงตัว จะมีค่าปรับ 100%<br/>";
+	condition += "</p>";
+	condition += add_default_condition();
 	
 	$('#modaltitle').text(title);
 	$('#modalcontent').html(view);
+	$('#modal_condition').collapse('hide');
+	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
 }
 
@@ -309,8 +331,19 @@ reserve.modal_internet = function(){
 	view += '<div class="media-body">ชำระค่ามัดจำ 100% of 1 คืน เดี๋ยวนี้เพื่อรับรองการจองของท่าน ยอดเงินส่วนที่เหลือจะถูกเรียกเก็บที่โรงแรม</div>';
 	view += '</div>';
 	
+	var condition = "<h3>เงื่อนไขการขาย</h3>";
+	condition += "<p>";
+	condition += "ชำระค่ามัดจำ 100% ของ 1 คืน เดี๋ยวนี้เพื่อรับรองการจองของท่าน ยอดเงินส่วนที่เหลือจะถูกเรียกเก็บที่โรงแรม<br/>";
+	condition += "ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ 4 มีนาคม 2560, 00:00 (UTC+07:00)<br/>";
+	condition += "หลังจากวันที่ดังกล่าวอาจมีค่าธรรมเนียมในการยกเลิกหรือแก้ไข<br/>";
+	condition += "ในกรณีที่ท่านไม่แสดงตัว จะมีค่าปรับ 100%<br/>";
+	condition += "</p>";
+	condition += add_default_condition();
+	
 	$('#modaltitle').text(title);
 	$('#modalcontent').html(view);
+	$('#modal_condition').collapse('hide');
+	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
 }
 
@@ -325,8 +358,43 @@ reserve.modal_breakfast = function(){
 	view += '<div class="media-body">เราให้บริการอาหารไทย และอาหารนานาชาติ คัดสรรคุณภาพดี รสชาติอร่อย และพิธีพิถันในการปรุงอาหาร <br/> เปิดบริการตั้งแต่เวลา 7.00 - 10.00 น.</div>';
 	view += '</div>';
 	
+	var condition = "<h3>เงื่อนไขการขาย</h3>";
+	condition += "<p>";
+	condition += "ชำระค่ามัดจำ 100% ของ 1 คืน เดี๋ยวนี้เพื่อรับรองการจองของท่าน ยอดเงินส่วนที่เหลือจะถูกเรียกเก็บที่โรงแรม<br/>";
+	condition += "ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ 4 มีนาคม 2560, 00:00 (UTC+07:00)<br/>";
+	condition += "หลังจากวันที่ดังกล่าวอาจมีค่าธรรมเนียมในการยกเลิกหรือแก้ไข<br/>";
+	condition += "ในกรณีที่ท่านไม่แสดงตัว จะมีค่าปรับ 100%<br/>";
+	condition += "</p>";
+	condition += add_default_condition();
+	
 	$('#modaltitle').text(title);
 	$('#modalcontent').html(view);
+	$('#modal_condition').collapse('hide');
+	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
 	
+}
+
+function add_default_condition(){
+	var condition= "";
+	condition += "<p>Terms & Conditions</p>";
+	condition += "<p>* Full payment in advance required. Yur credit card will be charged at the time of reservation.<br/>";
+	condition += "* Rules & Restrictions Payments for bookings at Advance Purchase/Non-Refundable rates are not refundable and bookings may not be modified.<br/>";
+	condition += "* The above rate are not include breakfast.<br/>";
+	condition += "* If you depart early or you cancel or fail to honor this reservation for any reason, you will not receive any credit or refund. <br/>";
+	condition += "* Extensions will require a new reservation for the additional date(s), subject to availability and prevailing rates, and this rate shall not apply<br/>";
+	condition += "* This rate is not combinable with any other offers and promotions and is not available to groups.<br/>";
+	condition += "* Rates are subject to availability.<br/>";
+	condition += "* Rates are quoted in Thai Baht(THB)<br/>";
+	condition += "* Rates quoted are subjected to 7% government tax and 10% service charge.<br/>";
+	condition += "* Rate is subject to change without notice.</p>";
+	condition += "<p>* Check in time is from 14:00 hours & Check out until 12:00 noon.<br/>";
+	condition += "* Please note that children age 12 and older are charged the adult rate. Please include them in the number entered in the No. of Aduts box.<br/>";
+	condition += "* Children below 12 years old sharing the existing bed with parents stay free. Breakfast for child is charged THB 234 per child per day subject to Tax and Servce Charge.<br/>";
+	condition += "* Baby cot is free and advance request must be made.<br/>";
+	condition += "* Extra bed is charge at THB 1020 per bed per night subject to tax and service charge and full daily breakfast.<br/>";
+	condition += "* Exchange rates for information only.<br/>";
+	condition += "* Please do not hesitate to contact us at the following e-amil address: rsvn@haven-huahin.com, we are at your disposal for any further information you need.<br/>";
+	
+	return condition;
 }

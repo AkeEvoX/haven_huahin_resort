@@ -226,7 +226,7 @@
 <!--show modal-->
 <!-- Modal -->
 <div class="modal fade bs-example-modal-md" id="modaldialog" tabindex="-1" role="dialog" aria-labelledby="modaltitle">
-  <div class="modal-dialog modal-md" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" >
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -236,9 +236,15 @@
 				<div id="modalcontent" >
 					loading...
 				</div>
+				
+				
 			</div>
 		<div class='modal-footer'>
-				<button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+		<!-- data-dismiss="modal" -->
+		<!-- <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#modal_condition">เงื่อนไข</button> -->
+				<button type="button"  class="btn btn-warning" data-toggle="collapse" data-target="#modal_condition">เงื่อนไข</button><p/>
+				<div id='modal_condition' class='collapse well well-sm text-left'>
+				</div>
 		</div>
     </div>
   </div>
