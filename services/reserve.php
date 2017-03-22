@@ -43,10 +43,10 @@ if(isset($data)){
 				
 	$payment = array(
 				"card_type"=>$data->payment_type
-				,"card_number"=>$data->payment_number
+				,"card_number"=>substr($data->payment_number,0,8)."xxxxxxxx"
 				,"card_holder"=>$data->payment_holder
 				,"card_expire"=>$data->payment_expire
-				,"card_validate"=>$data->payment_secure
+				,"card_validate"=>"xxx"
 				);
 }
 			
@@ -55,10 +55,10 @@ $room_data = $base->get_reserve_rooms($key);
 if(isset($room_data)){
 	while($row = $room_data->fetch_object()){
 		$rooms[] = array(
-						"key"=>$row->key
-						,"room"=>$row->room
-						,"type"=>$row->type
-						,"price"=>$row->price
+						"key"=>$row->id
+						,"room"=>$row->room_title
+						,"type"=>$row->type_title
+						,"price"=>$row->room_price
 						);
 	}
 }
@@ -67,8 +67,8 @@ $option_data = $base->get_reserve_options($key);
 if(isset($option_data)){
 	while($row = $option_data->fetch_object()){
 		$options[] = array(
-						"key"=>$row->key
-						,"title"=>$row->title
+						"key"=>$row->id
+						,"title"=>$row->option_title
 						,"price"=>$row->price
 						);
 	}

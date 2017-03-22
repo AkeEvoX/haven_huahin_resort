@@ -124,9 +124,14 @@ reserve.get_info = function(){
 
 
 reserve.get_receipt = function(val){
-	var endpoint = "services/info.php";
+	
+	var reserve_id = utility.querystr("reserve_id");
+	$('#reserve_id').html(reserve_id);
+	
+	var endpoint = "services/reserve.php";
 	var method="get";
-	var args = {"_":new Date().getMilliseconds()};
+	//var args = {"_":new Date().getMilliseconds()};
+	var args = {"key":reserve_id,"_":new Date().getMilliseconds()};
 	utility.service(endpoint,method,args,function(result){
 		console.log(result);
 		var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
@@ -134,8 +139,8 @@ reserve.get_receipt = function(val){
 		
 		var cust = result.data.customer;
 		var payment = result.data.payment;
-		var reserve = result.data.reserve;
-		var summary = reserve.summary;
+		var reserve = {};
+		var summary_price = 0;
 		
 		$('#cust_name').html(cust.title+" "+cust.fname+ " "+cust.lname);
 		$('#cust_mobile').html(cust.prefix_mobile+""+cust.mobile);
@@ -143,45 +148,76 @@ reserve.get_receipt = function(val){
 		$('#card_type').html(payment.card_type);
 		$('#card_holder').html(payment.card_holder);
 		$('#card_number').html(payment.card_number);
-		$('#card_expire').html(payment.card_expire_month+"/"+payment.card_expire_year);
+		$('#card_expire').html(payment.card_expire);
 		$('#card_validate').html(payment.card_validate);
+		
+			//define information
+		if(result.data != undefined){
+			
+			reserve.rooms = result.data.rooms;
+			reserve.options = result.data.options;
+			reserve.summary = result.data.summary;
+		}
 		
 		
 		if(reserve!=undefined){
 			
 			$.each(reserve.rooms,function(i,val){
-				
+				console.log("price="+val.price);
+				summary_price += parseFloat(val.price);
 				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");	
 				var item = "<div class='row rowspan'>";
 				 item += "<div class='col-md-3'><b>Room "+(i+1)+"</b><br/></div>";
 				 item += "<div class='col-md-7'>"+val.room+"<br/>"+val.type+ "</div>";
 				 item += "<div class='col-md-2 text-right'>"+money+"</div>";
 				 item += "</div>";
-				/*
-				<div class='row rowspan'>
-					<div class='col-md-3'><b>Room 1</b><br/>
-					2 adults
-					</div>
-					<div class='col-md-7'>
-						Deluxe</br>
-						Internet Rate
-					</div>
-					<div class='col-md-2 text-right'>
-						4,248.00
-					</div>
-				</div>
-				*/
+				
 				$('#list_reserve').append(item);
 			});
 			
+			if(reserve.options != undefined){
+				var item = "";
+				var price_option = 0;
+				
+				$.each(reserve.options,function(i,val){
+					//summary.total_amount += parseFloat(val.price);
+					summary_price += parseFloat(val.price);
+					price_option += parseFloat(val.price);
+
+					var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");	
+
+					item += "<div class='row'>";
+					item += "<div class='col-md-2'>&nbsp;</div>";
+					item += "<div class='col-md-7'>"+val.title+"</div>";
+					item += "<div class='col-md-3 text-right'>฿ "+money+"</div>";
+					item += "</div>";
+				});
+				
+				//summary options
+			var money = parseFloat(price_option).toFixed(2).replace(money_pattern,"$1,");	
+			var summary_tag = "<div class='row'>";
+			summary_tag += "<div class='col-md-2'><b>ทางเลือก</b></div>";
+		  	summary_tag += "<div class='col-md-7'>&nbsp;</div>";
+		   	summary_tag += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
+			summary_tag += "</div>";
+			item = summary_tag + item + "<hr/>";
+
+			$('#list_reserve').append(item);
+			
+			}
+			
 		}
-		var total = parseFloat(summary.total_amount).toFixed(2).replace(money_pattern,"$1,");	
-		var service_price = parseFloat(summary.total_amount) * .03;
-		var tax_price = parseFloat(summary.total_amount) * .07 ;
-		var net_price = parseFloat(summary.total_amount) + tax_price + service_price;
+	
+		
+		var total = parseFloat(summary_price).toFixed(2).replace(money_pattern,"$1,");	
+		var service_price = parseFloat(summary_price) * .10;
+		var tax_price = parseFloat(summary_price) * .07 ;
+		var net_price = parseFloat(summary_price) + tax_price + service_price;
 		var service = parseFloat(service_price).toFixed(2).replace(money_pattern,"$1,");
 		var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");
 		var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");
+		
+		console.log("service="+service_price);
 		
 		var item = "<div class='row rowspan'>";
 		item += "<div class='col-md-3'><b>Total</b><br/></div>";

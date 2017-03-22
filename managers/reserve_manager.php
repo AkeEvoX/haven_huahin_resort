@@ -58,10 +58,12 @@ class Reserve_Manager{
 		
 		try{
 
-			$sql = "select rr.unique_key,r.* ";
-			$sql .= "from reserve_rooms rr inner join rooms r on rr.room_key = r.id where unique_key='".$unique_key."'  ";
+			$sql = " select rr.unique_key,r.* ,rt.title as type_title ";
+			$sql .= " from reserve_rooms rr inner join rooms r on rr.room_key = r.id ";
+			$sql .= " left join room_types rt on r.room_type = rt.id ";
+			$sql .= " where rr.unique_key='".$unique_key."'  ";
 			$result = $this->mysql->execute($sql);
-
+			
 			log_warning("get_reserve_rooms > " . $sql);
 			
 			return  $result;

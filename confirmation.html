@@ -25,9 +25,9 @@
 					<tr >
 						<td class='col-md-10' style='background-color:#4EB022;color:#fff'>
 							<h4>ขอขอบคุณ การจองของท่านได้รับการยืนยันแล้ว !</h4>
-							อีเมลล์ยืนยันถูกส่งไปยัง <span id='customer_email' >gmassist@haven-huahin.com</span> แล้ว
+							อีเมลล์ยืนยันถูกส่งไปยัง <span id='customer_email' >..</span> แล้ว
 						</td>
-						<td class='col-md-2 text-center' style='background-color:#333333;'><a href='receipt.html' target="_blank"><span class='glyphicon glyphicon-print' style='font-size:32px;'></span><br/>พิมพ์</a></td>
+						<td class='col-md-2 text-center' style='background-color:#333333;'><a href='javascript:void(0);' id='btn_print'><span class='glyphicon glyphicon-print' style='font-size:32px;'></span><br/>พิมพ์</a></td>
 					</tr>
 					</table>
 				<!-- </div> -->
@@ -125,6 +125,12 @@
 	   });
 
 	   reserve.get_confirmation();
+	   
+		$('#btn_print').click(function(){
+			var id = $('#reserve_id').html();
+			window.open('receipt.html?reserve_id='+id,'_blank');
+		});
+	   
    });
   </script>
 </body>

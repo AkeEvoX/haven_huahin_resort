@@ -10,8 +10,6 @@ include("../lib/common.php");
 //}
 //$_SESSION["query"] = $data;
 
-//var_dump($_SESSION);
-
 $reserve = array("info"=>$_SESSION["info"]
 		,"reserve"=>$_SESSION["reserve"]
 		,"customer"=>$_SESSION["customer"]
