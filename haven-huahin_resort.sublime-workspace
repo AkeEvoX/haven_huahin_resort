@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"date_",
+				"date_format_th"
+			],
+			[
 				"v",
 				"vertical-align"
 			],
@@ -47,7 +51,24 @@
 			"file": "services/reserve.php",
 			"settings":
 			{
-				"buffer_size": 1593,
+				"buffer_size": 1964,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "services/cancel.php",
+			"settings":
+			{
+				"buffer_size": 766,
+				"line_ending": "Unix",
+				"name": "<?php"
+			}
+		},
+		{
+			"file": "managers/reserve_manager.php",
+			"settings":
+			{
+				"buffer_size": 6143,
 				"line_ending": "Unix"
 			}
 		},
@@ -55,39 +76,7 @@
 			"file": "quick_reservation.html",
 			"settings":
 			{
-				"buffer_size": 4859,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "services/info.php",
-			"settings":
-			{
-				"buffer_size": 218,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "selection_room.html",
-			"settings":
-			{
-				"buffer_size": 11777,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "js/selection.js",
-			"settings":
-			{
-				"buffer_size": 5057,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "option_reserve.html",
-			"settings":
-			{
-				"buffer_size": 8812,
+				"buffer_size": 4906,
 				"line_ending": "Unix"
 			}
 		}
@@ -124,6 +113,23 @@
 	},
 	"file_history":
 	[
+		"/Users/iake.air/Sites/haven_huahin_resort/cancel_confirm.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/confirmation.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/reserve.js",
+		"/Users/iake.air/Sites/haven_huahin_resort/cancellation.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/logs/warning_2017-03-08.log",
+		"/Users/iake.air/Sites/haven_huahin_resort/services/process.php",
+		"/Users/iake.air/Sites/haven_huahin_resort/managers/reserve_manager.php",
+		"/Users/iake.air/Sites/haven_huahin_resort/summery.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/services/info.php",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/selection.js",
+		"/Users/iake.air/Sites/haven_huahin_resort/option_reserve.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/selection_room.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/utility.js",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/common.js",
+		"/Users/iake.air/Sites/haven_huahin_resort/receipt.html",
+		"/Users/iake.air/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/iake.air/Sites/haven_huahin_resort/quick_reservation.html",
 		"/Users/iake.air/Sites/haven_huahin_resort/lib/datasource.ini",
 		"/Users/iake.air/Sites/haven_huahin_resort/reserve.php",
 		"/Users/iake.air/Sites/haven_huahin_resort/_htaccess",
@@ -234,24 +240,7 @@
 		"/Users/iake.air/Sites/backup/starsanitaryware_20160724/productdetail.php",
 		"/Users/iake.air/Sites/starsanitaryware/js/video.js",
 		"/Users/iake.air/OneDrive/SourceCode/php/feature/ultimate-image-hover-effects/index.html",
-		"/Users/iake.air/Sites/backup/starsanitaryware_20160724/category.php",
-		"/Users/iake.air/Sites/starsanitaryware/js/profile.js",
-		"/Users/iake.air/Sites/starsanitaryware/js/catalog.js",
-		"/Users/iake.air/Downloads/lightslider-master/demo/index.html",
-		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/lightslider/lightslider.css",
-		"/Users/iake.air/Sites/starsanitaryware/message.html",
-		"/Users/iake.air/Downloads/lightslider-master/dist/js/lightslider.js",
-		"/Users/iake.air/Sites/feature/CircularContentCarousel/test.html",
-		"/Users/iake.air/Sites/starsanitaryware/css/custom.control.css",
-		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/photogrid/photogrid.css",
-		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/immersive-slider/immersive-widescreen.css",
-		"/Users/iake.air/Sites/starsanitaryware/profile.html",
-		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/immersive-slider/immersive-slider.css",
-		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/immersive-slider/jquery.immersive-slider.js",
-		"/Users/iake.air/Sites/register/js/validator.js",
-		"/Users/iake.air/Sites/register/index.html",
-		"/Users/iake.air/Sites/backup/starsanitaryware_20160724/visitor.php",
-		"/Users/iake.air/Sites/backup/starsanitaryware_20160724/reference.php"
+		"/Users/iake.air/Sites/backup/starsanitaryware_20160724/category.php"
 	],
 	"find":
 	{
@@ -271,6 +260,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"comment",
+			"form>",
+			"form",
 			"<form",
 			"form",
 			"viewmenulist",
@@ -397,7 +389,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -405,15 +397,15 @@
 					"file": "services/reserve.php",
 					"settings":
 					{
-						"buffer_size": 1593,
+						"buffer_size": 1964,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1214,
-								1214
+								0,
+								0
 							]
 						],
 						"settings":
@@ -423,58 +415,31 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 681.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "quick_reservation.html",
-					"settings":
-					{
-						"buffer_size": 4859,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1060,
-								1067
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "services/info.php",
+					"buffer": 1,
+					"file": "services/cancel.php",
 					"settings":
 					{
-						"buffer_size": 218,
+						"buffer_size": 766,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								762,
+								762
 							]
 						],
 						"settings":
 						{
 							"auto_complete": false,
+							"auto_name": "<?php",
 							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
@@ -484,19 +449,47 @@
 					"type": "text"
 				},
 				{
+					"buffer": 2,
+					"file": "managers/reserve_manager.php",
+					"settings":
+					{
+						"buffer_size": 6143,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								248,
+								248
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
 					"buffer": 3,
-					"file": "selection_room.html",
+					"file": "quick_reservation.html",
 					"settings":
 					{
-						"buffer_size": 11777,
+						"buffer_size": 4906,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10279,
-								10279
+								3543,
+								3543
 							]
 						],
 						"settings":
@@ -506,63 +499,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2928.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "js/selection.js",
-					"settings":
-					{
-						"buffer_size": 5057,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "option_reserve.html",
-					"settings":
-					{
-						"buffer_size": 8812,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								953,
-								953
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 955.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
