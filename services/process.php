@@ -43,12 +43,14 @@ function step_one($args){
 	$night = $args["nights"];
 	$adults = $args["adults"];
 	$children = $args["children"];
+	$children_2 = $args["children_2"];
 	$code = $args["code"];
 
 	$data = array("date"=>$date
 		,"night"=>$night
 		,"adults"=>$adults
 		,"children"=>$children
+		,"children_2"=>$children_2
 		,"code"=>$code);
 	//keep data 
 	$_SESSION["info"] = $data;	
@@ -87,6 +89,7 @@ function step_three($data){
 	$_SESSION["info"]["date_end"] = $data["travel_date"];
 	$_SESSION["info"]["adults"] = $data["adult_amount"];
 	$_SESSION["info"]["children"] = $data["child_amount"];
+	$_SESSION["info"]["children_2"] = $data["child_2_amount"];
 	$_SESSION["info"]["code"] = $data["promo_code"];
 	$_SESSION["info"]["comment"] = $data["comment"];
 
@@ -149,6 +152,13 @@ function step_four($data){
 	foreach($_SESSION["reserve"]->options as $val){
 		$base->insert_options($unique_key,$val->key,$val->price);
 	}
+
+	$receive[] = array("email"=>"contact@baankunnan.com","alias"=>"admin");
+	$sender = $customer["email"];
+	$custname = $customer["fname"]." ".$customer["lname"];
+	$subject = "Thank You Reservation";
+	$message = "Your ID is ".$unique_key;
+	SendMail($receive,$sender,$subject,$message,$custname);
 	
 	//echo "insert complete.";
 	header("Location: ../confirmation.html?reserve_id=".$unique_key);

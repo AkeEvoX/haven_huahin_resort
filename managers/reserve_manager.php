@@ -112,6 +112,7 @@ class Reserve_Manager{
 			$reserve_comment = $info->comment;
 			$adults = $info->adults;
 			$children = $info->children;
+			$children_2 = $info->children_2;
 			$code = $info->code;
 			$night = $info->night;
 			
@@ -130,11 +131,11 @@ class Reserve_Manager{
 			
 			$create_date = "now()";
 			
-			$sql = "insert into reserve_info(unique_key,reserve_startdate,reserve_enddate,reserve_status,reserve_amount,reserve_charge,reserve_tax,reserve_net,reserve_comment,adults,children,night,acc_code ";
+			$sql = "insert into reserve_info(unique_key,reserve_startdate,reserve_enddate,reserve_status,reserve_amount,reserve_charge,reserve_tax,reserve_net,reserve_comment,adults,children,children_2,night,acc_code ";
 			$sql .= " ,email ,title_name,first_name,last_name,prefix,mobile";
 			$sql .= " ,payment_type,payment_number,payment_holder,payment_expire,payment_secure,create_date ) ";
 			$sql .= "values('$unique_key','$reserve_startdate','$reserve_enddate','$reserve_status','$reserve_amount','$reserve_charge','$reserve_tax'  ";
-			$sql .= " ,'$reserve_net','$reserve_comment',$adults,$children,$night,'$code'  ";
+			$sql .= " ,'$reserve_net','$reserve_comment',$adults,$children,$children_2,$night,'$code'  ";
 			$sql .= " ,'$email','$title_name','$first_name','$last_name','$prefix','$mobile' ";
 			$sql .= " ,'$payment_type','$payment_number','$payment_holder','$payment_expire','$payment_secure',$create_date); ";
 			

@@ -11,7 +11,7 @@ error_reporting(E_ERROR | E_WARNING | E_CORE_ERROR | E_COMPILE_ERROR | E_PARSE) 
 /*define variable globle for client;*/
 $base_dir = "../";
 
-function SendMail($redirect,$receive,$sender,$subject,$message,$custname)
+function SendMail($receive,$sender,$subject,$message,$custname)
 {
 		$mail = new PHPMailer();
 
@@ -28,7 +28,7 @@ function SendMail($redirect,$receive,$sender,$subject,$message,$custname)
 		$mail->Password = "hmcKxJfCj"; 
 		$mail->SetFrom($sender, $custname);
 		//$mail->SetFrom("contact@baankunnan.com", "starsanitaryware.com");
-		$mail->AddBcc("contact@baankunnan.com", "contact :: starsanitaryware");
+		$mail->AddBcc("contact@baankunnan.com", "contact :: admin@haven-huahin-resort.com");
 		//$mail->AddReplyTo("mail@andamantaxis.com", "admin");
 		
 		/*list receive email */
@@ -51,7 +51,7 @@ function SendMail($redirect,$receive,$sender,$subject,$message,$custname)
 				echo "<script>alert('Thankyou for feedback.');</script>";
 		}
 		
-		echo "<script>window.location.href='".$redirect."';</script>";
+		//echo "<script>window.location.href='".$redirect."';</script>";
 }
 
 function replace_specialtext($message){

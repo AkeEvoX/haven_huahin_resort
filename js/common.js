@@ -24,24 +24,24 @@ function adult_decrease(){
 	}
 }
 
-function child_increase(){
+function child_increase(obj){
 
-	var value = $('#child_amount').val();
+	var value = $('#'+obj).val();
 	console.log('child increase :'+value);
 	if(value!=''){
 		value = parseInt(value)+1;
-		if(value>15) return false;
-		$('#child_amount').val(value);
+		if(value>2) return false;
+		$('#'+obj).val(value);
 	}
 }
 
-function child_decrease(){
-	var value = $('#child_amount').val();
+function child_decrease(obj){
+	var value = $('#'+obj).val();
 	console.log('child decrease :'+value);
 	if(value!=''){
 		value = parseInt(value)-1;
 
 		if(value<0) return false;
-		$('#child_amount').val(value);
+		$('#'+obj).val(value);
 	}
 }

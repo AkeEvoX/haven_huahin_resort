@@ -74,7 +74,7 @@
 							  </div>
 							<!-- </form> -->
 						</div>
-						<div class='col-sm-2'>
+						<div class='col-sm-1'>
 							<label for="adult_amount">ผู้ใหญ่ / คน</label>
 						</div>
 						<div class='col-md-2'>
@@ -82,18 +82,36 @@
 							  <div class="form-group">
 								<div class="input-group">
 								  <div class="input-group-btn">
-									<button type='button' onclick="child_decrease()" class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-chevron-left'></span></button>
+									<button type='button' onclick="child_decrease('child_amount')" class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-chevron-left'></span></button>
 								  </div>
 								  <input type="text" class="form-control" id='child_amount' name='child_amount' aria-label="..." value="0">
 								  <div class="input-group-btn">
-									<button type='button' onclick='child_increase()' class='btn btn-warning brown btn-md' >&nbsp;<span class='glyphicon glyphicon-chevron-right'></span></button>
+									<button type='button' onclick="child_increase('child_amount')" class='btn btn-warning brown btn-md' >&nbsp;<span class='glyphicon glyphicon-chevron-right'></span></button>
 								  </div>
 								</div>
 							  </div>
 							<!-- </form> -->
 						</div>
-						<div class='col-sm-2'>
-							<label for="child_amount">เด็ก / คน</label>
+						<div class='col-sm-1'>
+							<label for="child_amount">เด็ก 0 - 4 / คน</label>
+						</div>
+						<div class='col-md-2'>
+							<!-- <form class="form-inline"> -->
+							  <div class="form-group">
+								<div class="input-group">
+								  <div class="input-group-btn">
+									<button type='button' onclick="child_decrease('child_2_amount')" class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-chevron-left'></span></button>
+								  </div>
+								  <input type="text" class="form-control" id='child_2_amount' name='child_2_amount' aria-label="..." value="0">
+								  <div class="input-group-btn">
+									<button type='button' onclick="child_increase('child_2_amount')" class='btn btn-warning brown btn-md' >&nbsp;<span class='glyphicon glyphicon-chevron-right'></span></button>
+								  </div>
+								</div>
+							  </div>
+							<!-- </form> -->
+						</div>
+						<div class='col-sm-1'>
+							<label for="child_2_amount">เด็ก 5 - 11 / คน</label>
 						</div>
 					</div>
 					<div class='row rowspan'>
