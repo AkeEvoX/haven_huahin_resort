@@ -29,21 +29,21 @@
 	</div>
 	<div class='row rowspan' >
 		<div class='col-md-2 thumbnail'>
-			<div class='text-center'>ศ. 16 ธ.ค. </div><br>
-			<div>Deluxe<span class='pull-right'>2 Room</span></div>
-			<div>Superior<span class='pull-right'>3 Room</span></div>
-			<div>Villa<span class='pull-right'>1 Room</span></div>
+			<div class='text-center' id='date_one'>ศ. 16 ธ.ค. </div><br>
+			<div>Deluxe<span class='pull-right'>0 Room</span></div>
+			<div>Superior<span class='pull-right'>0 Room</span></div>
+			<div>Villa<span class='pull-right'>0 Room</span></div>
 			<div>Villa At Sea<span class='pull-right'>0 Room</span></div>
 		</div>
 		<div class='col-md-2 thumbnail'>
-			<div class='text-center'>ศ. 17 ธ.ค. </div><br>
+			<div class='text-center' id='date_two'>ศ. 17 ธ.ค. </div><br>
 			<div>Deluxe<span class='pull-right'>2 Room</span></div>
 			<div>Superior<span class='pull-right'>3 Room</span></div>
 			<div>Villa<span class='pull-right'>1 Room</span></div>
 			<div>Villa At Sea<span class='pull-right'>0 Room</span></div>
 		</div>
 		<div class='col-md-2 thumbnail' style='border:3px solid;'>
-			<div class='text-center' style='color:red;font-weight:bold;'>ศ. 18 ธ.ค. </div>
+			<div class='text-center' id='date_three' style='color:red;font-weight:bold;'>ศ. 18 ธ.ค. </div>
 			<div class='text-center' >จำนวนห้องว่าง</div>
 			<div>Deluxe<span class='pull-right'>2 Room</span></div>
 			<div>Superior<span class='pull-right'>3 Room</span></div>
@@ -51,14 +51,14 @@
 			<div>Villa At Sea<span class='pull-right'>0 Room</span></div>
 		</div>
 		<div class='col-md-2 thumbnail'>
-			<div class='text-center'>ศ. 19 ธ.ค. </div><br>
+			<div class='text-center' id='date_four'>ศ. 19 ธ.ค. </div><br>
 			<div>Deluxe<span class='pull-right'>2 Room</span></div>
 			<div>Superior<span class='pull-right'>3 Room</span></div>
 			<div>Villa<span class='pull-right'>1 Room</span></div>
 			<div>Villa At Sea<span class='pull-right'>0 Room</span></div>
 		</div>
 		<div class='col-md-2 thumbnail'>
-			<div class='text-center'>ศ. 20 ธ.ค. </div><br>
+			<div class='text-center' id='date_five'>ศ. 20 ธ.ค. </div><br>
 			<div>Deluxe<span class='pull-right'>2 Room</span></div>
 			<div>Superior<span class='pull-right'>3 Room</span></div>
 			<div>Villa<span class='pull-right'>1 Room</span></div>
@@ -261,7 +261,8 @@
 <script type="text/javascript" >
 
 	$(document).ready(function(){
-		$("#check_in_date").datepicker({ numberOfMonths:2}); 
+	
+		$("#check_in_date").datepicker({ numberOfMonths:2 }); 
 	   <!-- $('#carlendar').on('click',function(e){ -->
 			<!-- $("#check_in_date").datepicker('show'); -->
 	   <!-- }); -->
@@ -269,7 +270,7 @@
    });
 
 	reserve.get_info();
-   
+	reserve.get_roomofweek();
   </script>
 </body>
 </html>

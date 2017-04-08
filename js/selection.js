@@ -121,8 +121,6 @@ reserve.get_info = function(){
 	});
 }
 
-
-
 reserve.get_receipt = function(val){
 	
 	var reserve_id = utility.querystr("reserve_id");
@@ -409,6 +407,20 @@ reserve.modal_breakfast = function(){
 	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
 	
+}
+
+reserve.get_roomofweek = function(){
+	var endpoint = "services/daysofweek.php";
+	var method="get";
+	//var args = {"_":new Date().getMilliseconds()};
+	var args = {"_":new Date().getMilliseconds()};
+	
+	utility.service(endpoint,method,args,function(resp){
+		console.log(resp);
+		
+		
+		
+	});
 }
 
 function add_default_condition(){
