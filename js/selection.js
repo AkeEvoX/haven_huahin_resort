@@ -250,6 +250,16 @@ reserve.get_receipt = function(val){
 
 }
 
+
+reserve.get_roomofweek = function(){
+	var endpoint = "services/daysofweek.php";
+	var method="get";
+	//var args = {"_":new Date().getMilliseconds()};
+	var args = {"_":new Date().getMilliseconds()};
+	
+	utility.service(endpoint,method,args,view_dayofweek);
+}
+
 reserve.add_option = function(val){
 	
 	//var val = JSON.parse(data);
@@ -277,7 +287,6 @@ reserve.add_option = function(val){
 	
 	//reserve.calucate_option();
 }
-
 reserve.del_option = function(key,price){
 	
 	//var val = JSON.parse(data);
@@ -295,7 +304,6 @@ reserve.del_option = function(key,price){
 	//reserve.calucate_option();
 	
 }
-
 reserve.modal = function(title,detail,image){
 	
 	var view = '<div class="media">';
@@ -310,7 +318,6 @@ reserve.modal = function(title,detail,image){
 	$('#modalcontent').html(view);
 	$('#modaldialog').modal();
 }
-
 reserve.modal_nochange = function(){
 	var title = 'ไม่สามารถยกเลิกได้และเปลี่ยนแปลงได้';
 	var view = '<div class="media">';
@@ -333,7 +340,6 @@ reserve.modal_nochange = function(){
 	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
 }
-
 reserve.modal_change = function(){
 	
 	var title = 'ยกเลิกได้และเปลี่ยนแปลงได้';
@@ -356,7 +362,6 @@ reserve.modal_change = function(){
 	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
 }
-
 reserve.modal_internet = function(){
 	
 	var title = 'ชำระเงินจองทางอินเทอร์เน็ต';
@@ -380,7 +385,6 @@ reserve.modal_internet = function(){
 	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
 }
-
 reserve.modal_breakfast = function(){
 	
 	var title = 'อาหารเช้า';
@@ -408,21 +412,6 @@ reserve.modal_breakfast = function(){
 	$('#modaldialog').modal();
 	
 }
-
-reserve.get_roomofweek = function(){
-	var endpoint = "services/daysofweek.php";
-	var method="get";
-	//var args = {"_":new Date().getMilliseconds()};
-	var args = {"_":new Date().getMilliseconds()};
-	
-	utility.service(endpoint,method,args,function(resp){
-		console.log(resp);
-		
-		
-		
-	});
-}
-
 function add_default_condition(){
 	var condition= "";
 	condition += "<p>Terms & Conditions</p>";
@@ -445,4 +434,46 @@ function add_default_condition(){
 	condition += "* Please do not hesitate to contact us at the following e-amil address: rsvn@haven-huahin.com, we are at your disposal for any further information you need.<br/>";
 	
 	return condition;
+}
+function view_dayofweek(resp){
+	console.log(resp);
+
+	var view = $('#view_dayofweek');
+	view.html('');
+	//one day
+	var item = "";
+
+
+	if(resp.data!=undefined){
+		$.each(resp.data,function(i,val){
+
+			item += "<div class='col-md-2 thumbnail'>";
+			item += "<div class='text-center'> "+val.format_date+"</div><br>";
+			item += "<div > Deluxe"+"<span class='pull-right'>0 "+" Room</span></div>";
+			item += "<div > Superior"+"<span class='pull-right'>0 "+" Room</span></div>";
+			item += "<div > Villa"+"<span class='pull-right'>0 "+" Room</span></div>";
+			item += "<div > Villa At Sea"+"<span class='pull-right'>0 "+" Room</span></div>";
+			item += "</div>";
+
+		});
+		
+
+	}
+
+	view.html(item);
+	/*<div class='col-md-2 thumbnail'>
+			<div class='text-center' id='date_one'>ศ. 16 ธ.ค. </div><br>
+			<div>Deluxe<span class='pull-right'>0 Room</span></div>
+			<div>Superior<span class='pull-right'>0 Room</span></div>
+			<div>Villa<span class='pull-right'>0 Room</span></div>
+			<div>Villa At Sea<span class='pull-right'>0 Room</span></div>
+		</div>*/
+	//two day
+
+	//three day
+
+	//four day
+
+	//five day
+
 }

@@ -48,35 +48,42 @@
 	"buffers":
 	[
 		{
-			"file": "services/reserve.php",
-			"settings":
-			{
-				"buffer_size": 1964,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "services/cancel.php",
-			"settings":
-			{
-				"buffer_size": 766,
-				"line_ending": "Unix",
-				"name": "<?php"
-			}
-		},
-		{
 			"file": "managers/reserve_manager.php",
 			"settings":
 			{
-				"buffer_size": 6143,
+				"buffer_size": 6202,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "quick_reservation.html",
+			"file": "services/process.php",
 			"settings":
 			{
-				"buffer_size": 4906,
+				"buffer_size": 4126,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "services/daysofweek.php",
+			"settings":
+			{
+				"buffer_size": 3122,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "selection_room.html",
+			"settings":
+			{
+				"buffer_size": 13877,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "js/selection.js",
+			"settings":
+			{
+				"buffer_size": 17529,
 				"line_ending": "Unix"
 			}
 		}
@@ -113,6 +120,13 @@
 	},
 	"file_history":
 	[
+		"/Users/iake.air/Sites/haven_huahin_resort/services/reserve.php",
+		"/Users/iake.air/Sites/haven_huahin_resort/option_reserve.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/lib/common.php",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/common.js",
+		"/Users/iake.air/Sites/haven_huahin_resort/quick_reservation.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/selection.js",
+		"/Users/iake.air/Sites/haven_huahin_resort/services/cancel.php",
 		"/Users/iake.air/Sites/haven_huahin_resort/cancel_confirm.html",
 		"/Users/iake.air/Sites/haven_huahin_resort/confirmation.html",
 		"/Users/iake.air/Sites/haven_huahin_resort/js/reserve.js",
@@ -122,14 +136,10 @@
 		"/Users/iake.air/Sites/haven_huahin_resort/managers/reserve_manager.php",
 		"/Users/iake.air/Sites/haven_huahin_resort/summery.html",
 		"/Users/iake.air/Sites/haven_huahin_resort/services/info.php",
-		"/Users/iake.air/Sites/haven_huahin_resort/js/selection.js",
-		"/Users/iake.air/Sites/haven_huahin_resort/option_reserve.html",
 		"/Users/iake.air/Sites/haven_huahin_resort/selection_room.html",
 		"/Users/iake.air/Sites/haven_huahin_resort/js/utility.js",
-		"/Users/iake.air/Sites/haven_huahin_resort/js/common.js",
 		"/Users/iake.air/Sites/haven_huahin_resort/receipt.html",
 		"/Users/iake.air/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/Users/iake.air/Sites/haven_huahin_resort/quick_reservation.html",
 		"/Users/iake.air/Sites/haven_huahin_resort/lib/datasource.ini",
 		"/Users/iake.air/Sites/haven_huahin_resort/reserve.php",
 		"/Users/iake.air/Sites/haven_huahin_resort/_htaccess",
@@ -237,10 +247,7 @@
 		"/Users/iake.air/Sites/feature/simplemodal/Source/simple-modal.js",
 		"/Users/iake.air/Sites/feature/lightGallery-master/demo/index.html",
 		"/Users/iake.air/Sites/starsanitaryware/plugin/jquery/lightslider/lightslider.js",
-		"/Users/iake.air/Sites/backup/starsanitaryware_20160724/productdetail.php",
-		"/Users/iake.air/Sites/starsanitaryware/js/video.js",
-		"/Users/iake.air/OneDrive/SourceCode/php/feature/ultimate-image-hover-effects/index.html",
-		"/Users/iake.air/Sites/backup/starsanitaryware_20160724/category.php"
+		"/Users/iake.air/Sites/backup/starsanitaryware_20160724/productdetail.php"
 	],
 	"find":
 	{
@@ -389,23 +396,23 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "services/reserve.php",
+					"file": "managers/reserve_manager.php",
 					"settings":
 					{
-						"buffer_size": 1964,
+						"buffer_size": 6202,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								121,
+								121
 							]
 						],
 						"settings":
@@ -422,46 +429,18 @@
 				},
 				{
 					"buffer": 1,
-					"file": "services/cancel.php",
+					"file": "services/process.php",
 					"settings":
 					{
-						"buffer_size": 766,
+						"buffer_size": 4126,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								762,
-								762
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"auto_name": "<?php",
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "managers/reserve_manager.php",
-					"settings":
-					{
-						"buffer_size": 6143,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								248,
-								248
+								788,
+								792
 							]
 						],
 						"settings":
@@ -471,25 +450,53 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 355.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "quick_reservation.html",
+					"buffer": 2,
+					"file": "services/daysofweek.php",
 					"settings":
 					{
-						"buffer_size": 4906,
+						"buffer_size": 3122,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3543,
-								3543
+								800,
+								800
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 30.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "selection_room.html",
+					"settings":
+					{
+						"buffer_size": 13877,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1563,
+								1215
 							]
 						],
 						"settings":
@@ -499,7 +506,35 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 955.0,
+						"translation.y": 266.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "js/selection.js",
+					"settings":
+					{
+						"buffer_size": 17529,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16627,
+								16627
+							]
+						],
+						"settings":
+						{
+							"auto_complete": false,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2115.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

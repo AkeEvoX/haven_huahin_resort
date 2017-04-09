@@ -4,18 +4,28 @@ date_default_timezone_set('Asia/Bangkok');
 
 $result = "";
 if(isset($_SESSION["info"])){
-	
-	$date = $_SESSION["info"]["check_in_date"]; 
-	$days = get_days_th(date('w',strtotime($date.'-2 days'))) ." ".date('d',strtotime($date.'-2 days'))." ".get_month_name_th(date('m',strtotime($date.'-2 days')));
-	$result[] = array("format"=>$days,"date"=>date('d',strtotime($date.'-2 days')));	
-	$days = get_days_th(date('w',strtotime($date.'-1 days'))) ." ".date('d',strtotime($date.'-1 days'))." ".get_month_name_th(date('m',strtotime($date.'-1 days')));
-	$result[] = array("format"=>$days,"date"=>date('d',strtotime($date.'-1 days')));
-	$days = get_days_th(date('w',strtotime($date.'0 days'))) ." ".date('d',strtotime($date.'0 days'))." ".get_month_name_th(date('m',strtotime($date.'0 days')));
-	$result[] = array("format"=>$days ,"date"=>date('d',strtotime($date.'0 days')));
-	$days = get_days_th(date('w',strtotime($date.'+1 days'))) ." ".date('d',strtotime($date.'+1 days'))." ".get_month_name_th(date('m',strtotime($date.'+1 days')));
-	$result[] = array("format"=>$days ,"date"=>date('d',strtotime($date.'+1 days')));
-	$days = get_days_th(date('w',strtotime($date.'+2 days'))) ." ".date('d',strtotime($date.'+2 days'))." ".get_month_name_th(date('m',strtotime($date.'+2 days')));
-	$result[] = array("format"=>$days ,"date"=>date('d',strtotime($date.'+2 days')));
+	$select_date = date("Y-d-m",strtotime($_SESSION["info"]["date"])); //example:: 08/04/2017 (month/day/year)
+	for($i=-2 ; $i<=2;$i++){
+		$date_add = $i.' days';
+		$week =get_days_th(date('w',strtotime($select_date.$date_add))) ;
+		$day =date('d',strtotime($select_date.$date_add));
+		$month =get_month_name_th(date('m',strtotime($select_date.$date_add)));
+		$format_date = $week." ".$day." ".$month; //ex: พฤ. 06 เม.ย.
+		$full_date = date('Y-m-d',strtotime($select_date.$date_add));
+
+		//find reserve type room 
+		
+
+		$result[] = array("format_date"=>$format_date
+			,"full_date"=>$full_date
+			,"date_add"=>$date_add
+			,"deluxe"=>0
+			,"superior"=>0
+			,"villa"=>0
+			,"viall_at_sea"=>0);
+
+	}
+
 	
 }
 
