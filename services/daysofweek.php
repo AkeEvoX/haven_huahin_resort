@@ -4,7 +4,9 @@ date_default_timezone_set('Asia/Bangkok');
 
 $result = "";
 if(isset($_SESSION["info"])){
-	$select_date = date("Y-d-m",strtotime($_SESSION["info"]["date"])); //example:: 08/04/2017 (month/day/year)
+	
+	$get_date = $date = str_replace('/', '-', $_SESSION["info"]["date"]);
+	$select_date = date("Y-m-d",strtotime($get_date)); //example:: 08/14/2017 (month/day/year)
 	for($i=-2 ; $i<=2;$i++){
 		$date_add = $i.' days';
 		$week =get_days_th(date('w',strtotime($select_date.$date_add))) ;
@@ -29,7 +31,8 @@ if(isset($_SESSION["info"])){
 	
 }
 
-echo json_encode(array("data"=>$result));
+echo json_encode(array("data"=>$result,"transform_date"=>$select_date,"select_date"=>$_SESSION["info"]["date"]
+,"check-in"=>$_SESSION["info"]["check_in_date"]));
 /*
 $date =date('Y-m-d'); 
 echo "day of week<br/>";

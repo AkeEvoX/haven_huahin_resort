@@ -317,6 +317,7 @@ reserve.modal = function(title,detail,image){
 	$('#modaltitle').text(title);
 	$('#modalcontent').html(view);
 	$('#modaldialog').modal();
+	
 }
 reserve.modal_nochange = function(){
 	var title = 'ไม่สามารถยกเลิกได้และเปลี่ยนแปลงได้';
@@ -336,6 +337,7 @@ reserve.modal_nochange = function(){
 	
 	$('#modaltitle').text(title);
 	$('#modalcontent').html(view);
+	$('#view_condition').css('display','block');
 	$('#modal_condition').collapse('hide');
 	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
@@ -358,6 +360,7 @@ reserve.modal_change = function(){
 	
 	$('#modaltitle').text(title);
 	$('#modalcontent').html(view);
+	$('#view_condition').css('display','block');
 	$('#modal_condition').collapse('hide');
 	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
@@ -381,6 +384,7 @@ reserve.modal_internet = function(){
 	
 	$('#modaltitle').text(title);
 	$('#modalcontent').html(view);
+	$('#view_condition').css('display','block');
 	$('#modal_condition').collapse('hide');
 	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
@@ -407,11 +411,23 @@ reserve.modal_breakfast = function(){
 	
 	$('#modaltitle').text(title);
 	$('#modalcontent').html(view);
+	$('#view_condition').css('display','block');
 	$('#modal_condition').collapse('hide');
 	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
 	
 }
+
+reserve.modal_view_deluxe = function(){
+	
+	$('#modaltitle').text("Deluxe");
+	$('#modalcontent').load('view_detail_deluxe.html');
+	// $('#modal_condition').collapse('hide');
+	//$('#modal_condition').html(condition);
+	$('#view_condition').css('display','none');
+	$('#modaldialog').modal();
+}
+
 function add_default_condition(){
 	var condition= "";
 	condition += "<p>Terms & Conditions</p>";
@@ -442,8 +458,6 @@ function view_dayofweek(resp){
 	view.html('');
 	//one day
 	var item = "";
-
-
 	if(resp.data!=undefined){
 		$.each(resp.data,function(i,val){
 
@@ -456,8 +470,6 @@ function view_dayofweek(resp){
 			item += "</div>";
 
 		});
-		
-
 	}
 
 	view.html(item);
@@ -477,3 +489,5 @@ function view_dayofweek(resp){
 	//five day
 
 }
+
+

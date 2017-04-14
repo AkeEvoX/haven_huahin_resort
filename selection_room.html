@@ -96,7 +96,7 @@
 								</div>
 							</div>
 							<div class="form-group pull-right">
-								<span class='control-label' for='datatype'>รายละเอียด</span>	
+								<a href='javascript:void(0)' onclick='reserve.modal_view_deluxe()'><span class='control-label' for='datatype'>รายละเอียด</span></a>
 							</div>
 							
 							<div class="list-group rowspan">
@@ -236,15 +236,15 @@
 				<div id="modalcontent" >
 					loading...
 				</div>
-				
-				
 			</div>
 		<div class='modal-footer'>
 		<!-- data-dismiss="modal" -->
 		<!-- <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#modal_condition">เงื่อนไข</button> -->
-				<button type="button"  class="btn btn-warning" data-toggle="collapse" data-target="#modal_condition">เงื่อนไข</button><p/>
-				<div id='modal_condition' class='collapse well well-sm text-left'>
+				<div id='view_condition' >
+					<button type="button"  class="btn btn-warning" data-toggle="collapse" data-target="#modal_condition">เงื่อนไข</button><p/>
+					<div id='modal_condition' class='collapse well well-sm text-left'></div>
 				</div>
+				
 		</div>
     </div>
   </div>

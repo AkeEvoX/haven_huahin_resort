@@ -33,7 +33,7 @@ function step_one($args){
 	session_destroy();
 	session_start();
 	//##variable list
-	//check_in_date 	date
+	//check_in_date 	date				14/04/2017
 	//nights 			dropdown
 	//adults 			dropdown
 	//childern 			text
