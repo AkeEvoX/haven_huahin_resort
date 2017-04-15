@@ -114,7 +114,7 @@ reserve.get_confirmation = function(){
 		item += "</div>";
 		
 		item += "<div class='row rowspan'>";
-		item += "<div class='col-md-offset-2 col-md-7'><pre><h4>รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น</h4></pre></div>";
+		item += "<div class='col-md-offset-2 col-md-7'><pre><h4>รวมเป็นเงินที่ต้องชำระทั้งสิ้น</h4></pre></div>";
 		item += "<div class='col-md-3 text-right'><pre><h4>฿ "+net+"</h4></pre></div>";
 		item += "</div>";
 
@@ -128,6 +128,7 @@ reserve.get_confirmation = function(){
 
 
 reserve.get_summary = function(){
+
 	var endpoint = "services/info.php";
 	var method="get";
 	var args = {"_":new Date().getMilliseconds()};
@@ -156,7 +157,8 @@ reserve.get_summary = function(){
 
 			var rent ="";
 			rent = "ผู้ใหญ่ "+ info.adults + " ท่าน ";
-			rent += "เด็ก "+ info.children +" ท่าน"
+			rent += "เด็ก 5-11 "+ info.children_2 +" ท่าน"
+			rent += "เด็ก 0-4 "+ info.children +" ท่าน"
 			$('#rent_amount').html(rent);
 
 			$('#comment').text(reserve.info.comment);
@@ -221,16 +223,32 @@ reserve.get_summary = function(){
 		//summary price
 
 		var total = parseFloat(summary_price).toFixed(2).replace(money_pattern,"$1,");
-		
+		var service_price = parseFloat(summary_price) * .10;
+		var tax_price = parseFloat(summary_price) * .07 ;
+		var net_price = parseFloat(summary_price) + tax_price + service_price;
+		console.log(net_price);
+		var service = parseFloat(service_price).toFixed(2).replace(money_pattern,"$1,");
+		var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");
+		var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");
 		
 		var	item = "<div class='row'>";
 		item += "<div class='col-md-2 '><h4>รวม</h4></div>";
 		item += "<div class='col-md-offset-7 col-md-3 text-right'><span><h4>$ "+total+"</h4></span></div>";
 		item += "</div>";
 	
+
+		item += "<div class='row'>";
+		item += "<div class='col-md-offset-2 col-md-3 '><h4>ค่าบริการ</h4></div>";
+		item += "<div class='col-md-offset-4 col-md-3 text-right'><span><h4>$ "+service+"</h4></span></div>";
+		item += "</div>";
+		
+		item += "<div class='row'>";
+		item += "<div class='col-md-offset-2 col-md-3 '><h4>ภาษีของรัฐ</h4></div>";
+		item += "<div class='col-md-offset-3 col-md-4 text-right'><span><h4>$ "+tax+"</h4></span></div>";
+		item += "</div>";
 		
 		item += "<div class='row rowspan'>";
-		item += "<div class='col-md-offset-2 col-md-7'><pre><h4>รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น</h4></pre></div>";
+		item += "<div class='col-md-offset-2 col-md-7'><pre><h4>รวมเป็นเงินที่ต้องชำระทั้งสิ้น</h4></pre></div>";
 		item += "<div class='col-md-3 text-right'><pre><h4>฿ "+net+"</h4></pre></div>";
 		item += "</div>";
 

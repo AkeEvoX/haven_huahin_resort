@@ -98,8 +98,8 @@ function step_three($data){
 	$total = $summary->total_amount;
 	//tax 7%
 	$tax=($total*7)/100;
-	//charge 3%
-	$charge=($total*3)/100;
+	//charge 10%
+	$charge=($total*10)/100;
 	//net
 	$net = $total+$tax+$charge;
 
@@ -121,6 +121,7 @@ function step_four($data){
 	,"fname"=>$data["fname"]
 	,"lname"=>$data["lname"]
 	,"prefix_mobile"=>$data["prefix_mobile"]
+	,"birthdate"=>$data["birth_year"].'-'.$data["birth_month"].'-'.$data["birth_date"]
 	,"mobile"=>$data["mobile"]);
 
 	$_SESSION["customer"] = $customer;
@@ -161,10 +162,17 @@ function step_four($data){
 	$message = "Your ID is ".$unique_key;
 	SendMail($receive,$sender,$subject,$message,$custname);
 	*/
+	$receive = array($customer["email"]=>"customer");
+	$sender = "contact@baankunnan.com";
+	$sender_name = "system haven huahin resort";
+	$subject = "Thank You Reservation";
+	$message = "Your ID is ".$unique_key;
+	SendMail($receive,$sender,$subject,$message,$sender_name);
 	
 	//echo "insert complete.";
-	header("Location: ../confirmation.html?reserve_id=".$unique_key);
-	//exit();
+	//header("Location: ../confirmation.html?reserve_id=".$unique_key);
+	echo "<script>window.location.href='../confirmation.html?reserve_id=".$unique_key."';</script>";
+	exit();
 }
 //complete trasection
 function step_five($data){

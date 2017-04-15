@@ -269,8 +269,8 @@ reserve.add_option = function(val){
 	
 	var item = "<span id='"+val.key+"' href='#' class='list-group-item'>";
 			item += "<h4 class='list-group-item-heading'>"+val.title+"<span class='pull-right'>฿ "+money+"</span></h4>";
-			item += "<h4 class='list-group-item-text '>";
-			item += "&nbsp;<small class='pull-right'>";//<a href='javascript:void(0)' onclick=reserve.del_option('"+val.key+"','" + val.price+"');  >นำออก</a></small> 
+			item += "<h4 class='list-group-item-text'>";
+			item += "<span class='text-right'>"+val.desc+"</span><small/>";//<a href='javascript:void(0)' onclick=reserve.del_option('"+val.key+"','" + val.price+"');  >นำออก</a></small> 
 			item += "</h4></span>";
 			$('#list_reserve').append(item);
 	
@@ -284,16 +284,14 @@ reserve.add_option = function(val){
 	total = parseFloat(total).toFixed(2).replace(money_pattern,"$1,");
 	$('#total_price').html("฿ " + total);
 	
-	
 	//reserve.calucate_option();
 }
 reserve.del_option = function(key,price){
-	
+
 	//var val = JSON.parse(data);
 	$('#'+key).remove();
 	
 	reserve.options = jQuery.grep(reserve.options,function(item,index){ return item.key != key });
-	
 	var price = parseFloat(price);
 	var total = parseFloat(reserve.summary.total_amount) - price;
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
@@ -302,7 +300,6 @@ reserve.del_option = function(key,price){
 	total = parseFloat(total).toFixed(2).replace(money_pattern,"$1,");
 	$('#total_price').html("฿ " + total);
 	//reserve.calucate_option();
-	
 }
 reserve.modal = function(title,detail,image){
 	
@@ -420,13 +417,75 @@ reserve.modal_breakfast = function(){
 
 reserve.modal_view_deluxe = function(){
 	
-	$('#modaltitle').text("Deluxe");
-	$('#modalcontent').load('view_detail_deluxe.html');
-	// $('#modal_condition').collapse('hide');
-	//$('#modal_condition').html(condition);
+	call_room_detail_modal("Deluxe","deluxe","1");
+	
+}
+
+reserve.modal_view_superior = function(){
+	call_room_detail_modal("Superior","superior","2");
+}
+
+function call_room_detail_modal(title,room_name,room_type){
+
+	$('#modaltitle').text(title);
+
+	//load page detail
+	$('#modalcontent').load('view_detail_room.html',function(){
+		//after load page success.
+
+
+		//load data detail
+		var lang = utility.readCookie('lang');
+		var room = room_name+'.json';
+		if(lang==null) lang="en";
+		$.getJSON('js/rooms/'+lang+'/'+room,function(resp){
+			$.each(resp,function(name,val){
+				$('#'+name).html(val);
+			});
+		});
+
+		var endpoint = "services/rooms.php";
+		var method ="get";
+		var data ={"service":"gallery","room_type":room_type};
+		$('#gallery').html("");
+		utility.service(endpoint,method,data,function(resp){
+			console.debug(resp);
+			//inital image
+			if(resp.data!=undefined){
+				var item = "";
+				$.each(resp.data,function(i,val){
+					
+					item = "<img src='"+val.image+"' data-image='"+val.image+"' onerror=this.src='images/common/unavaliable.jpg' data-description=''  />";
+					$('#gallery').append(item);
+
+				});
+			}
+
+		},function(){
+
+			//setting gallery
+			$('#gallery').unitegallery({
+
+				theme_panel_position: "bottom"
+				,gallery_height:600
+				,gallery_theme: "grid"
+				,slider_scale_mode: "fit"
+				,thumb_fixed_size:false
+				,thumb_loader_type:"light"
+				,grid_num_cols:1
+				,grid_num_rows:1
+				,gridpanel_grid_align: "top"
+			});
+
+		});
+
+	});
+
 	$('#view_condition').css('display','none');
 	$('#modaldialog').modal();
 }
+
+
 
 function add_default_condition(){
 	var condition= "";

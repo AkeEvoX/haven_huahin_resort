@@ -11,7 +11,7 @@ error_reporting(E_ERROR | E_WARNING | E_CORE_ERROR | E_COMPILE_ERROR | E_PARSE) 
 /*define variable globle for client;*/
 $base_dir = "../";
 
-function SendMail($receive,$sender,$subject,$message,$custname)
+function SendMail($receive,$sender,$subject,$message,$sender_name)
 {
 		$mail = new PHPMailer();
 
@@ -26,17 +26,22 @@ function SendMail($receive,$sender,$subject,$message,$custname)
 		$mail->IsHTML(true);
 		$mail->Username = "contact@baankunnan.com"; 
 		$mail->Password = "hmcKxJfCj"; 
-		$mail->SetFrom($sender, $custname);
-		//$mail->SetFrom("contact@baankunnan.com", "starsanitaryware.com");
-		$mail->AddBcc("contact@baankunnan.com", "contact :: admin@haven-huahin-resort.com");
+		$mail->SetFrom($sender, $sender_name);
+		$mail->AddCC('rsvn@haven-huahin.com', 'rsvn@haven-huahin.com');
+		$mail->AddCC('fo@haven-huahin.com', 'fo@haven-huahin.com');
+		$mail->AddCC('sales@haven-huahin.con', 'sales@haven-huahin.con');
+		$mail->AddCC('gmassist@haven-huahin.com', 'gmassist@haven-huahin.com');
+
+		//$mail->AddBcc("contact@baankunnan.com", "contact :: admin@haven-huahin-resort.com");
 		//$mail->AddReplyTo("mail@andamantaxis.com", "admin");
 		
 		/*list receive email */
-		foreach($receive as $key=>$item){
-			$mail->AddAddress($item->email,$item->alias); 
+		foreach($receive as $email=>$name){
+			$mail->AddAddress($email,$item->$name); 
 		}
 		
 		//$mail->AddAddress("sales@starsanitaryware.com"); 
+		//$mail->AddAddress($receive); 
 		
 		if(!$mail->Send()) {
 			//echo "Mailer Error: " . $mail->ErrorInfo;

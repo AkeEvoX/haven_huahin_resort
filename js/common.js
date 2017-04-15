@@ -11,6 +11,7 @@ function adult_increase(){
 		if(value>15) return false;
 		$('#adult_amount').val(value);
 	}
+	$('input[name="option_diner"]:checked').trigger('click');
 }
 
 function adult_decrease(){
@@ -22,6 +23,7 @@ function adult_decrease(){
 		if(value==0) return false;
 		$('#adult_amount').val(value);
 	}
+	$('input[name="option_diner"]:checked').trigger('click');
 }
 
 function child_increase(obj){
@@ -33,6 +35,9 @@ function child_increase(obj){
 		if(value>2) return false;
 		$('#'+obj).val(value);
 	}
+
+	//.trigger('click');
+	$('input[name="option_diner"]:checked').trigger('click');
 }
 
 function child_decrease(obj){
@@ -44,4 +49,6 @@ function child_decrease(obj){
 		if(value<0) return false;
 		$('#'+obj).val(value);
 	}
+	//$('input[name="option_diner"]').attr('checked',false);
+	$('input[name="option_diner"]:checked').trigger('click');
 }

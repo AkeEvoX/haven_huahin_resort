@@ -52,12 +52,12 @@
 						  </div>
 						 </div>
 						<div class='col-sm-3 text-right'>
-							<button type='button' id='btn_used' class='btn btn-warning brown' >นำเงื่อนไขไปใช้</button>
+							<!--<button type='button' id='btn_used' class='btn btn-warning brown' >นำเงื่อนไขไปใช้</button>-->
 						</div>
 					</div>
 					<div class='row'>
 					<div class='col-sm-2'>
-						<label >ห้องพัก 1</label>
+						<label >จำนวนผู้เข้าพัก</label>
 					</div>
 						<div class='col-md-2'>
 							<!-- <form class="form-inline"> -->
@@ -116,7 +116,7 @@
 					</div>
 					<div class='row rowspan'>
 						<div class='col-md-3'>
-							<button type="button" class="btn btn-link">+ เพิ่มห้องพัก</button>
+							<button type="button" class="btn btn-link"><!--+ เพิ่มห้องพัก--></button>
 						</div>
 						<div class='col-md-3'>
 								<label for='hello'>รหัสโปรโมชั่นหรือรหัสธุรกิจ</label>
@@ -125,7 +125,7 @@
 								<input type='text' class='form-control' id='promo_code' name='promo_code' />
 						</div>
 						<div class='col-md-3 text-right'>
-							&nbsp;<a href='#'><span class='glyphicon glyphicon-remove'></span></a>
+							<!--&nbsp;<a href='#'><span class='glyphicon glyphicon-remove'></span></a>-->
 						</div>
 					</div>
 			  </div>
@@ -162,10 +162,12 @@
 									<p>ข้าวผัดกระเทียมและข้าวหอมมะลิ</p>
 									<p>ผลไม้ตามฤดูกาล</p>
 									</div>
-									<p>฿ 525 ผู้ใหญ่ 1 คน</p>
+									<p>฿ 525 ผู้ใหญ่ 1 ท่าน</p>
+									<p>฿ 262 เด็กอายุ 5-11 ปีต่อ 1 ท่าน</p>
+									<p>฿ 0 เด็กอายุ 0- 4 ปีต่อ 1 ท่าน</p>
 								</div>
 								<div class='col-md-2 text-right'>
-									<span>เลือก</span> <input type='checkbox' name='option_reserve' value='{"key":"1","title":"Thai Set Diner","price":"525" }'  />
+									<span>เลือก</span> <input type='checkbox' name='option_diner' value='{"key":"1","title":"Thai Set Diner","price":"525" }'  />
 								</div>
 								
 							</div>
@@ -185,7 +187,7 @@
 									<p>฿ 3,700</p>
 								</div>
 								<div class='col-md-2 text-right'>
-									<span>เลือก</span> <input type='checkbox' name='option_reserve' value='{"key":"2","title":"Airport Transfer","price":"3700"}'  />
+									<span>เลือก</span> <input type='checkbox' name='option_reserve' value='{"key":"2","title":"Airport Transfer","desc":"&nbsp;","price":"3700"}'  />
 								</div>
 								
 							</div>
@@ -268,12 +270,82 @@
 				reserve.del_option(data.key,data.price);
 			}
 		});
+
+		$('input[name="option_diner"]').on('change',function(e){
+			/*
+			var net = 0;
+			try{
+
+				var adult = 525;
+				var child = 262;
+				var adult_unit = parseFloat($('#adult_amount').val());
+				var child_unit = parseFloat($('#child_2_amount').val()); //5-11
+				var baby_unit =  parseFloat($('#child_amount').val()); //0-4
+
+				var adult_total = (adult*adult_unit) ;
+				var child_total = (child*child_unit);
+				net = adult_total + child_total;
+
+			}catch(err){
+				console.error(err);
+			}
+			//Thai Set Diner
+			var desc = '<i><small>';
+			desc+= '<div class=col-md-8 >adults = '+adult+' x '+adult_unit+ ' </div><div classcol-md-4> '+adult_total  + '</div>';
+			desc+= '<div class=col-md-8 >children age 5-11 = '+child+' x '+child_unit+ ' </div><div classcol-md-4> '+child_total  +'</div>';
+			desc+= '<div class=col-md-8 >children age 0-4 = 0 x '+baby_unit+ ' </div><div classcol-md-4> 0</div>';
+			desc+= '</small></i>';
+
+			var data = JSON.parse('{"key":"1","title":"Thai Set Diner","desc":"'+desc+'","price":"'+net+'"}');*/
+			//{"key":"1","title":"Thai Set Diner","price":"525" }
+			
+			if(this.checked==true){
+
+				var data = calculate_diner();
+
+				reserve.add_option(data);
+			}
+			else{
+
+				var data = jQuery.grep(reserve.options,function(item,index){ return item.key == 1 });;
+				reserve.del_option(data[0].key,data[0].price);
+			}
+		});
 		
 		$('#option_form').on('submit',function(e){		
 				$('#data_reserve').val(JSON.stringify(reserve));
 		});
 
 		reserve.get_info();
+
+		function calculate_diner(){
+			var net = 0;
+			try{
+
+				var adult = 525;
+				var child = 262;
+				var adult_unit = parseFloat($('#adult_amount').val());
+				var child_unit = parseFloat($('#child_2_amount').val()); //5-11
+				var baby_unit =  parseFloat($('#child_amount').val()); //0-4
+
+				var adult_total = (adult*adult_unit) ;
+				var child_total = (child*child_unit);
+				net = adult_total + child_total;
+
+			}catch(err){
+				console.error(err);
+			}
+			//Thai Set Diner
+			var desc = '<i><small>';
+			desc+= '<div class=col-md-8 >adults = '+adult+' x '+adult_unit+ ' </div><div classcol-md-4> '+adult_total  + '</div>';
+			desc+= '<div class=col-md-8 >children age 5-11 = '+child+' x '+child_unit+ ' </div><div classcol-md-4> '+child_total  +'</div>';
+			desc+= '<div class=col-md-8 >children age 0-4 = 0 x '+baby_unit+ ' </div><div classcol-md-4> 0</div>';
+			desc+= '</small></i>';
+
+			var result = JSON.parse('{"key":"1","title":"Thai Set Diner","desc":"'+desc+'","price":"'+net+'"}');
+
+			return result;
+		}
 
    });
   </script>

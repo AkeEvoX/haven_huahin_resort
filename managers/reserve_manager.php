@@ -122,6 +122,7 @@ class Reserve_Manager{
 			$last_name = $customer["lname"];
 			$prefix = $customer["prefix_mobile"];
 			$mobile = $customer["mobile"];
+			$birthdate = $customer["birthdate"];
 			
 			$payment_type = $payment["card_type"];
 			$payment_number = $payment["card_number"];
@@ -132,11 +133,11 @@ class Reserve_Manager{
 			$create_date = "now()";
 			
 			$sql = "insert into reserve_info(unique_key,reserve_startdate,reserve_enddate,reserve_status,reserve_amount,reserve_charge,reserve_tax,reserve_net,reserve_comment,adults,children,children_2,night,acc_code ";
-			$sql .= " ,email ,title_name,first_name,last_name,prefix,mobile";
+			$sql .= " ,email ,title_name,first_name,last_name,prefix,mobile,birthdate";
 			$sql .= " ,payment_type,payment_number,payment_holder,payment_expire,payment_secure,create_date ) ";
 			$sql .= "values('$unique_key','$reserve_startdate','$reserve_enddate','$reserve_status','$reserve_amount','$reserve_charge','$reserve_tax'  ";
 			$sql .= " ,'$reserve_net','$reserve_comment',$adults,$children,$children_2,$night,'$code'  ";
-			$sql .= " ,'$email','$title_name','$first_name','$last_name','$prefix','$mobile' ";
+			$sql .= " ,'$email','$title_name','$first_name','$last_name','$prefix','$mobile','$birthdate' ";
 			$sql .= " ,'$payment_type','$payment_number','$payment_holder','$payment_expire','$payment_secure',$create_date); ";
 			
 			log_warning("insert_reserve > " . $sql);
