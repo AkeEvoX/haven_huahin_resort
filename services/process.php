@@ -154,14 +154,6 @@ function step_four($data){
 		$base->insert_options($unique_key,$val->key,$val->price);
 	}
 
-	/*
-	$receive[] = array("email"=>"contact@baankunnan.com","alias"=>"admin");
-	$sender = $customer["email"];
-	$custname = $customer["fname"]." ".$customer["lname"];
-	$subject = "Thank You Reservation";
-	$message = "Your ID is ".$unique_key;
-	SendMail($receive,$sender,$subject,$message,$custname);
-	*/
 	$receive = array($customer["email"]=>"customer");
 	$sender = "contact@baankunnan.com";
 	$sender_name = "system haven huahin resort";
@@ -169,7 +161,6 @@ function step_four($data){
 	$message = "Your ID is ".$unique_key;
 	SendMail($receive,$sender,$subject,$message,$sender_name);
 	
-	//echo "insert complete.";
 	//header("Location: ../confirmation.html?reserve_id=".$unique_key);
 	echo "<script>window.location.href='../confirmation.html?reserve_id=".$unique_key."';</script>";
 	exit();

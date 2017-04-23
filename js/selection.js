@@ -510,6 +510,7 @@ function add_default_condition(){
 	
 	return condition;
 }
+
 function view_dayofweek(resp){
 	console.log(resp);
 
@@ -547,6 +548,46 @@ function view_dayofweek(resp){
 
 	//five day
 
+}
+
+function view_list_room(resp){
+	var rows = "";
+	
+	if(resp.data!=null){
+		
+		
+		$.each(resp.data,function(room){
+			rows += "<div class='row'>";
+			rows += "<div class='panel panel-default'>";
+			rows += "<div class='panel-heading' style='background-color:black;'>";
+			rows += "<h3 class='panel-title' style='color:white;margin:10px 5px 10px 1px;'>"+room.name+"</h3>";
+			rows += "</div>";
+			rows += "";
+			rows += "";
+			rows += "";
+			rows += "";
+			rows += "";
+			rows += "";
+			rows += "";
+			rows += "";
+			rows += "";
+			rows += "";
+			rows += "";
+			rows += "";
+			rows += "";
+			rows += "";
+			rows += "";
+		});
+		
+		
+		//resp.rooms
+		
+		
+		
+	}
+	
+	
+	
 }
 
 

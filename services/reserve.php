@@ -30,6 +30,7 @@ if(isset($data)){
 				,"night"=>$data->night
 				,"adults"=>$data->adults
 				,"children"=>$data->children
+				,"children_2"=>$data->children_2
 				,"code"=>$data->acc_code);
 
 	$customer = array(
@@ -69,7 +70,7 @@ if(isset($option_data)){
 		$options[] = array(
 						"key"=>$row->id
 						,"title"=>$row->option_title
-						,"price"=>$row->price
+						,"price"=>$row->option_price
 						);
 	}
 }

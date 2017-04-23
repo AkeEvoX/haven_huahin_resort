@@ -40,7 +40,7 @@ class Reserve_Manager{
 		
 		try{
 
-			$sql = "select r.unique_key,o.* ";
+			$sql = "select r.unique_key,r.option_price,o.option_title,o.price ";
 			$sql .= "from reserve_options r inner join service_options o on r.option_key = o.id where unique_key='".$unique_key."' ";
 			$result = $this->mysql->execute($sql);
 
