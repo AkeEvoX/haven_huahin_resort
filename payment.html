@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/home.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<head>
+<title>Welcome to Haven huahin resort</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link href="plugin/bootstraps/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="css/default.css" rel="stylesheet" type="text/css" />
+	<link href="css/options.css" rel="stylesheet" type="text/css" />
+	<link href="plugin/jquery/ui/pepper_grinder/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<style>
+	div.ui-datepicker{
+		font-size:10px;
+	}
+</style>
+<body>
+<div class='container'>
+	<div class='row rowspan'>
+		<div class='col-md-6 well'>
+		<h3>Confirm Payment</h3>
+			<form name='payFormCcard' action='https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp' method='post'  >
+				  <div class="form-group">
+					<label for="exampleInputEmail1">Customer Name</label>
+					<input type="text" class="form-control" id="custname" placeholder="Full Name">
+				  </div>
+				  <div class="form-group">
+					<label for="exampleInputEmail1">Mobile</label>
+					<input type="text" class="form-control" id="mobile" placeholder="08xxxxxxxx">
+				  </div>
+				  <button type="submit" class="btn btn-default">Submit</button>
+				  <input type='hidden' name='merchantId' value="4796" />
+				  <input type='hidden' name='amount' value="100" />
+				  <input type='hidden' name='orderRef' value="pV3XkFiRpMcV1KQoZvQX" />
+				  <input type='hidden' name='currCode' value="764" />
+				  <input type='hidden' name='successUrl' value="https://reserve.baankunnan.com/verify/Success.html" />
+				  <input type='hidden' name='failUrl' value="https://reserve.baankunnan.com/verify/Fail.html" />
+				  <input type='hidden' name='cancelUrl' value="https://reserve.baankunnan.com/verify/Cancel.html" />
+				  <input type='hidden' name='payType' value="N" />
+				  <input type='hidden' name='payMethod' value="ALL" />
+				  <input type='hidden' name='lang' value="E" />
+				  <input type='hidden' name='remark' value="-" />
+				</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>

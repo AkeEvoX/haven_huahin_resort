@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/home.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<head>
+<title>Welcome to Haven huahin resort</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<link href="../plugin/bootstraps/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="../css/default.css" rel="stylesheet" type="text/css" />
+	<link href="../css/options.css" rel="stylesheet" type="text/css" />
+	<link href="../plugin/jquery/ui/pepper_grinder/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<style>
+	div.ui-datepicker{
+		font-size:10px;
+	}
+</style>
+<body>
+<div class='container'>
+	<div class='row rowspan'>
+		<div class='col-md-12'>
+		<div class='well'>
+			<h3>Payment Error. </h3>
+				<h5>Sorry Paymet has problem. Please new reserve again.</h5>
+				<h5>automatic redirect to quick reservation page in <span id='timer'>10</span> sec </h5>
+				<a class='btn btn-warning' href='../quick_reservation.html' >Back</a>
+			</div>
+		</div>
+	</div>
+</div>
+<script src='../plugin/jquery/jquery.min.js'></script>
+<script>
+$(document).ready(function(){
+
+	var timeout = 10 ;
+	setInterval(function(){ 
+
+		if(timeout==0)
+			window.location ='../quick_reservation.html'; 
+		else{
+			timeout-=1;
+			$('#timer').html(timeout); 
+			console.log('timeout = '+timeout);
+		}
+	},1000);
+
+});
+
+</script>
+</body>
+</html>
