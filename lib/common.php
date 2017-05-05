@@ -46,14 +46,14 @@ function SendMail($receive,$sender,$subject,$message,$sender_name)
 		if(!$mail->Send()) {
 			//echo "Mailer Error: " . $mail->ErrorInfo;
 			if($_SESSION["lang"]!="en")
-				echo "<script>alert('ขออภัยระบบขัดข้องค่ะ');</script>";
+				echo "<script>alert('ขออภัยการส่งเมลล์ ขัดข้อง');</script>";
 			else 
-				echo "<script>alert('Sorry !! , Send Feedback Error.');</script>";
+				echo "<script>alert('Sorry !! Can't Send email .');</script>";
 		} else {
 			if($_SESSION["lang"]!="en")
 				echo "<script>alert('ข้อมูลของคุณส่งเรียบร้อยแล้วค่ะ');</script>";
 			else 
-				echo "<script>alert('Thankyou for feedback.');</script>";
+				echo "<script>alert('Send email complete, Thankyou.');</script>";
 		}
 		
 		//echo "<script>window.location.href='".$redirect."';</script>";

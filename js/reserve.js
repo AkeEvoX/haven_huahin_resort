@@ -118,6 +118,8 @@ reserve.get_confirmation = function(){
 		item += "<div class='col-md-3 text-right'><pre><h4>฿ "+net+"</h4></pre></div>";
 		item += "</div>";
 
+		$("input[name='orderRef']").val(reserve_id);
+		$("input[name='amount']").val(net_price);
 
 		$('#list_reserve').append(item);
 		
@@ -154,6 +156,11 @@ reserve.get_summary = function(){
 
 			$('#date_start').html(utility.date_format_th(info.date_start));
 			$('#date_end').html(utility.date_format_th(info.date_end));
+			
+			var date = moment(info.date_start).add('days',14).format('DD/MM/YYYY');
+			console.log(date + " || " + info.date_start);
+			var cancel_date = utility.date_format_th(date);
+			$('#cancel_date').html(cancel_date);
 
 			var rent ="";
 			rent = "ผู้ใหญ่ "+ info.adults + " ท่าน ";
@@ -251,7 +258,6 @@ reserve.get_summary = function(){
 		item += "<div class='col-md-offset-2 col-md-7'><pre><h4>รวมเป็นเงินที่ต้องชำระทั้งสิ้น</h4></pre></div>";
 		item += "<div class='col-md-3 text-right'><pre><h4>฿ "+net+"</h4></pre></div>";
 		item += "</div>";
-
 
 		$('#list_reserve').append(item);
 

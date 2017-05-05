@@ -21,27 +21,34 @@
 		<div class='well'>
 			<h3>Payment Error. </h3>
 				<h5>Sorry Paymet has problem. Please new reserve again.</h5>
-				<h5>automatic redirect to quick reservation page in <span id='timer'>10</span> sec </h5>
-				<a class='btn btn-warning' href='../quick_reservation.html' >Back</a>
+				<h5>automatic redirect to back page in <span id='timer'>15</span> sec </h5>
+				<a class='btn btn-warning' id='backpage' onclick=redirect() href='javascript:void(0);'  >Back</a>
 			</div>
 		</div>
 	</div>
 </div>
 <script src='../plugin/jquery/jquery.min.js'></script>
+<script src='../plugin/bootstraps/js/bootstrap.js' ></script>
+<script src='../js/utility.js' ></script>
 <script>
 $(document).ready(function(){
 
-	var timeout = 10 ;
+	var timeout = 15 ;
 	setInterval(function(){ 
 
 		if(timeout==0)
-			window.location ='../quick_reservation.html'; 
+			redirect();
 		else{
 			timeout-=1;
 			$('#timer').html(timeout); 
 			console.log('timeout = '+timeout);
 		}
 	},1000);
+	
+	
+	function redirect(){
+		window.location ='../confirmation.html?reserve_id='+utility.querystr("Ref"); 
+	}
 
 });
 

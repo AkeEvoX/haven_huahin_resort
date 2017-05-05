@@ -16,7 +16,7 @@
 </head>
 <body>
 <div class='container'>
-	<form id='confimation_form' action='quick_reservation.html' method='post' >
+	
 		<div class='row rowspan' >
 		<!-- <div class='panel panel-default'> -->
 			<!-- <div class='panel-heading'> -->
@@ -34,10 +34,8 @@
 			<!-- </div> -->
 		<!-- </div> -->
 		</div>
-		<div class='row rowspan'>
-			<button class='col-md-12 btn btn-default'>จองเพิ่ม</button>
-		</div>
 		<div class='row rowspan' >
+			<form id='payFormCcard' action='https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp' method='post' >
 			<table class='table table-bordered'  >
 				<tr>
 					<td class='col-md-12 bg-black' style='color:white;' colspan='2'>การจองของท่าน</td>
@@ -101,10 +99,25 @@
 						</div>
 					</td>
 				</tr>
-				<!--remove here-->
+				<tr>
+					<td class='col-md-12 text-center' colspan='2'>
+						<button class='btn btn-success'>ชำระเงิน online</button> <a href='quick_reservation.html' class='btn btn-warning'>จองใหม่</a>
+					</td>
+				</tr>
 			</table>
+			<input type='hidden' name='merchantId' value="4796" />
+			<input type='hidden' name='amount' value="" />
+			<input type='hidden' name='orderRef' value="" />
+			<input type='hidden' name='currCode' value="764" />
+			<input type='hidden' name='successUrl' value="https://reserve.baankunnan.com/verify/Success.html" />
+			<input type='hidden' name='failUrl' value="https://reserve.baankunnan.com/verify/Fail.html" />
+			<input type='hidden' name='cancelUrl' value="https://reserve.baankunnan.com/verify/Cancel.html" />
+			<input type='hidden' name='payType' value="N" />
+			<input type='hidden' name='payMethod' value="ALL" />
+			<input type='hidden' name='lang' value="E" />
+			<input type='hidden' name='remark' value="-" />
+			</form>
 		</div>
-	</form>
 </div>
 
 <script src='plugin/jquery/jquery.min.js' ></script>
@@ -120,10 +133,11 @@
 
 	$(document).ready(function(){
 
+	/*
 	   $('#summary_form').on('submit',function(e){
 			alert('บันทึกข้อมูลการจองเรียบร้อยแล้ว \r\n ขอบคุณที่ใช้บริการ.');
 	   });
-
+*/
 	   reserve.get_confirmation();
 	   
 		$('#btn_print').click(function(){
