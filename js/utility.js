@@ -186,6 +186,12 @@ utility.eraseCookie = function(name) {
     utility.createCookie(name,"",-1);
 }
 
+utility.get_templete = function(src){
+
+	var result = $.get(src,'html');
+	return result;
+}
+
 
 function centerModal() {
 

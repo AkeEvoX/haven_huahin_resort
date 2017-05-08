@@ -35,7 +35,7 @@
 		<!-- </div> -->
 		</div>
 		<div class='row rowspan' >
-			<form id='payFormCcard' action='https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp' method='post' >
+			<form id='payment_form' action='' method='get' >
 			<table class='table table-bordered'  >
 				<tr>
 					<td class='col-md-12 bg-black' style='color:white;' colspan='2'>การจองของท่าน</td>
@@ -93,30 +93,36 @@
 							<span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span></br>
 							<label>สามารถเปลี่ยนแปลงและยกเลิกได้</label><br/>
 							<div class='col-md-12'>
-							ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ <span id='cancel_date'> 4 มีนาคม 2560, 00:00 (UTC+07:00) </span>  (คำนวณจาก 14 วันก่อนการเข้าพัก)
-รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น
-	</div>
+							ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ <span id='cancel_date'> 4 มีนาคม 2560, 00:00 (UTC+07:00) 
+							</span>  (คำนวณจาก 14 วันก่อนการเข้าพัก)
+							รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น
+							</div>
 						</div>
 					</td>
 				</tr>
+			</table>
+			</form>
+		</div>
+		<div class='row rowspan' >
+			<form id='payFormCcard' action='https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp' method='post' >
+			<table class='table table-bordered'  >
 				<tr>
-					<td class='col-md-12 text-center' colspan='2'>
-						<a href='' onclick='payment_manual()' >ชำระธนาคาร</a><button class='btn btn-success'>ชำระเงิน online</button> <a href='quick_reservation.html' class='btn btn-warning'>จองใหม่</a>
+					<td class='col-md-12 bg-black' style='color:white;' colspan='2'>ข้อมูลการโอนเงินผ่านธนาคาร</td>
+				</tr>
+				<tr>
+					<td class='col-md-4'>
+						<h4>
+							<span id='condition_info'>หลังจากทำการจองกรุณาโอนเงินภายใน 24 ชั่วโมง มิเช่นนั้นระบบจะทำการยกเลิกการจอง</span>
+						</h4>
+					</td>
+					<td class='col-md-8 text-center'>
+						<h3 style='color:blue;'><span id='paymen_info'>แจ้งการชำระเงิน</span></h3>
+						<form class=''>
+
+						</form>
 					</td>
 				</tr>
 			</table>
-			<input type='hidden' name='merchantId' value="4796" />
-			<input type='hidden' name='amount' value="" />
-			<input type='hidden' name='orderRef' value="" />
-			<input type='hidden' name='currCode' value="764" />
-			<input type='hidden' name='successUrl' value="https://reserve.baankunnan.com/verify/Success.html" />
-			<input type='hidden' name='failUrl' value="https://reserve.baankunnan.com/verify/Fail.html" />
-			<input type='hidden' name='cancelUrl' value="https://reserve.baankunnan.com/verify/Cancel.html" />
-			<input type='hidden' name='payType' value="N" />
-			<input type='hidden' name='payMethod' value="ALL" />
-			<input type='hidden' name='lang' value="E" />
-			<input type='hidden' name='remark' value="-" />
-			</form>
 		</div>
 </div>
 
