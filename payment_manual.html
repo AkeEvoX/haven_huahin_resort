@@ -7,7 +7,8 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<link href="plugin/bootstraps/css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="css/default.css" rel="stylesheet" type="text/css" />
-	<link href="plugin/jquery/ui/pepper_grinder/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<!-- <link href="plugin/jquery/ui/pepper_grinder/jquery-ui.css" rel="stylesheet" type="text/css" /> -->
+	<link rel="stylesheet" href="plugin/datetimepicker/jquery.datetimepicker.css" />
 	<style>
 	div.ui-datepicker{
 		font-size:10px;
@@ -35,7 +36,6 @@
 		<!-- </div> -->
 		</div>
 		<div class='row rowspan' >
-			<form id='payment_form' action='' method='get' >
 			<table class='table table-bordered'  >
 				<tr>
 					<td class='col-md-12 bg-black' style='color:white;' colspan='2'>การจองของท่าน</td>
@@ -76,24 +76,24 @@
 					</td>
 					<td class='col-md-4 text-center'>
 						<div class='row rowspan'>
-							<span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span></br>
+							<span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span><br>
 							<label>ราคาดีที่สุด</label>
 							<p>
 								ท่านกำลังอยู่ที่เว็บไซต์ของโรงแรม ท่านจะได้รับ <br/>ราคาที่ดีที่สุดเนื่องจากไม่มีการผ่านคนกลาง
 							</p>
 						</div>
 						<div class='row rowspan'>
-							<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span></br>
+							<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span><br>
 							<label>ชำระเฉพาะเงินจอง</label>
 							<p>
-								ใบสำคัญแสดงสิทธิฝากแจ้งให้ทราบล่วงหน้า 
+								ใบสำคัญแสดงสิทธิฝากแจ้งให้ทราบล่วงหน้า
 							</p>
 						</div>
 						<div class='row rowspan'>
-							<span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span></br>
-							<label>สามารถเปลี่ยนแปลงและยกเลิกได้</label><br/>
+							<span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span><br>
+							<label>สามารถเปลี่ยนแปลงและยกเลิกได้</label><br>
 							<div class='col-md-12'>
-							ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ <span id='cancel_date'> 4 มีนาคม 2560, 00:00 (UTC+07:00) 
+							ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ <span id='cancel_date'> 4 มีนาคม 2560, 00:00 (UTC+07:00)
 							</span>  (คำนวณจาก 14 วันก่อนการเข้าพัก)
 							รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น
 							</div>
@@ -101,10 +101,8 @@
 					</td>
 				</tr>
 			</table>
-			</form>
 		</div>
 		<div class='row rowspan' >
-			<form id='payFormCcard' action='https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp' method='post' >
 			<table class='table table-bordered bg-heading'  >
 				<tr>
 					<td class='col-md-12 bg-black' style='color:white;' colspan='2'>ข้อมูลการโอนเงินผ่านธนาคาร</td>
@@ -130,6 +128,7 @@
 					</td>
 					<td class='col-md-8 text-center'>
 						<h3 style='color:blue;'><span id='paymen_info'>แจ้งการชำระเงิน</span></h3>
+						<form id='payment_form' action='' method='post'>
 						<div class="form-horizontal">
 							<div class="form-group">
 								<label for="reserve_id" class="col-sm-3 control-label">หมายเลขการจอง : </label>
@@ -169,16 +168,22 @@
 								</div>
 							</div>
 								<div class="form-group">
-								<label for="amount" class="col-sm-3 control-label">หลักฐานการโอนเงิน : </label>
+								<label for="file_evident" class="col-sm-3 control-label">หลักฐานการโอนเงิน : </label>
 								<div class="col-sm-7">
-									<input type='file' class='form-control' id="amount" name='amount' >
+									<input type='file' class='form-control' id="file_evident" name='file_evident' >
 									<span id='file_condition' style='color:green;'>ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประเภท PDF หรือ JPG, JPEG, PNG เท่านั้น</span>
-									<span id='file_evident' style='color:red;'>การใช้หลักฐานปลอม มีความผิดตาม พรบ. คอมพิวเตอร์</span>
+									<span id='file_warning' style='color:red;'>การใช้หลักฐานปลอม มีความผิดตาม พรบ. คอมพิวเตอร์</span>
 								</div>
 							</div>
 							<div class="form-group">
 								<label for="remark" class="col-sm-3 control-label">วันที่โอน : </label>
-								<div class="col-sm-2"><select  class='form-control' id="ddl_date" name='ddl_date' ></select></div>&nbsp;<div class='col-md-2'><select  class='form-control' id="ddl_month" name='ddl_month' ></select></div>&nbsp;<div class='col-md-2'><select class='form-control' id="ddl_year" name='ddl_year' ></select></div>
+								<div class="col-sm-4">
+									<div class='input-group date' id='payment_date_ctrl'>
+										<input type='text' class='form-control' id='paymen_date' /><span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+									</div>
+								</div>
 							</div>
 							<div class="form-group">
 								<label for="remark" class="col-sm-3 control-label">หมายเหตุ : </label>
@@ -193,6 +198,7 @@
 								</div>
 							</div>
 						</div>
+						</form>
 					</td>
 				</tr>
 			</table>
@@ -200,30 +206,41 @@
 </div>
 
 <script src='plugin/jquery/jquery.min.js' ></script>
-<script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
-<script src='plugin/jquery/datepicker-th.js' ></script>
+<!-- <script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script> -->
+<!-- <script src='plugin/jquery/datepicker-th.js' ></script> -->
 <script src='plugin/jquery/holder.js' ></script>
 <script src='plugin/jquery/moment.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
+<script src='plugin/datetimepicker/jquery.datetimepicker.js' ></script>
 <script src='js/utility.js' ></script>
 <script src='js/reserve.js' ></script>
 
 <script type="text/javascript">
 
 	$(document).ready(function(){
+	
+		$('#paymen_date').datetimepicker({
+			format: 'd/M/yyyy'
+			,pickTime: false
+		});
 
 	   reserve.get_confirmation();
 	   
-		$('#btn_print').click(function(){
-			var id = $('#reserve_id').html();
-			window.open('receipt.html?reserve_id='+id,'_blank');
-		});
+		<!-- $('#btn_print').click(function(){ -->
+			<!-- var id = $('#reserve_id').html(); -->
+			<!-- window.open('receipt.html?reserve_id='+id,'_blank'); -->
+			<!-- }); -->
 
+				$('#payment_form').on('submit',function(e){
+					e.preventDefault();
+					
+					reserve.payment_manual();
+				});
 
-		function payment_manual(){
-			var id = $('#reserve_id').html();
-			window.open('payment_manual.html?reserve_id='+id,'_blank');
-		}
+		<!-- function payment_manual(){ -->
+			<!-- var id = $('#reserve_id').html(); -->
+			<!-- window.open('payment_manual.html?reserve_id='+id,'_blank'); -->
+		<!-- } -->
 	   
    });
   </script>

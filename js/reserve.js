@@ -118,8 +118,12 @@ reserve.get_confirmation = function(){
 		item += "<div class='col-md-3 text-right'><pre><h4>฿ "+net+"</h4></pre></div>";
 		item += "</div>";
 
-		$("input[name='orderRef']").val(reserve_id);
-		$("input[name='amount']").val(net_price);
+		
+		if($("input[name='orderRef']").length!=0) 
+			$("input[name='orderRef']").val(reserve_id);
+		
+		if($("input[name='amount']").length!=0) 
+			$("input[name='amount']").val(net_price);
 
 		$('#list_reserve').append(item);
 		
@@ -262,4 +266,9 @@ reserve.get_summary = function(){
 		$('#list_reserve').append(item);
 
 	});
+}
+
+reserve.payment_manual = function(){
+	
+	
 }

@@ -232,7 +232,34 @@ class Reserve_Manager{
 
 	}
 
-	
-}
+	function update_payment($data){
+
+		try{
+			
+			$reserve_id = $data["reserve_id"];
+			$customer_name =  $data["fullname"];
+			$bank_name = $data["bank_name"];
+			$branch_name = $data["branch_name"];
+			$customer_name = $data["mobile"];
+			$payment_date = $data["payment_date"];
+			$payment_amount = $data["payment_amount"];
+			$payment_evident = $data["file_evident"];
+			$remark = $data["remark"];
+			
+			
+			$sql = "update reserve_info set (unique_key,option_key,option_price)";
+			$sql .= "where unique_key='$reserve_id' ";
+			
+			log_warning("insert_options > " . $sql);
+			
+			$result = $this->mysql->execute($sql);
+			
+			return $result;
+			
+		}catch(Exception $e){
+			echo "Cannot insert_options : ".$e->getMessage();
+		}
+
+	}
 
 ?>
