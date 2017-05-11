@@ -237,29 +237,39 @@ class Reserve_Manager{
 		try{
 			
 			$reserve_id = $data["reserve_id"];
-			$customer_name =  $data["fullname"];
-			$bank_name = $data["bank_name"];
-			$branch_name = $data["branch_name"];
-			$customer_name = $data["mobile"];
+			$payment_type = 'banking';
+			$payment_bank = $data["bank_name"];
+			$payment_holder =  $data["fullname"];
+			$payment_branch = $data["branch_name"];
 			$payment_date = $data["payment_date"];
 			$payment_amount = $data["payment_amount"];
-			$payment_evident = $data["file_evident"];
-			$remark = $data["remark"];
+			$payment_evident = "";
+				
+			if($_FILES['file_evident']['name']!=""){
+					$category = ($items["category"]=="1" ?  "award"  :  "standard"  );
+					$filename = "images/".$_FILES['file_evident']['name'];
+					$distination =  "../../".$filename;
+					$source = $_FILES['file_evident']['tmp_name'];  
+					$items["thumbnail"] = $filename;
+			}
 			
+			$payment_remark = $data["remark"];
+			$payment_mobile = $data["mobile"];
 			
-			$sql = "update reserve_info set (unique_key,option_key,option_price)";
+			$sql = "update reserve_info set payment_type='$payment_type',payment_bank='$payment_bank',payment_holder='$payment_holder',payment_branch='$payment_branch' ";
+			$sql = ",payment_date='$payment_date',payment_amount='$payment_amount',payment_evident='$payment_evident',payment_remark='$payment_remark',payment_mobile='$payment_mobile' ";
 			$sql .= "where unique_key='$reserve_id' ";
 			
-			log_warning("insert_options > " . $sql);
+			log_warning("update payment > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
 			
 			return $result;
 			
 		}catch(Exception $e){
-			echo "Cannot insert_options : ".$e->getMessage();
+			echo "Cannot update payment : ".$e->getMessage();
 		}
 
 	}
-
+}
 ?>
