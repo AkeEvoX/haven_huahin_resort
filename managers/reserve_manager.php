@@ -236,28 +236,18 @@ class Reserve_Manager{
 
 		try{
 			
-			$reserve_id = $data["reserve_id"];
+			$reserve_id = $data["payment_reserve_id"];
 			$payment_type = 'banking';
 			$payment_bank = $data["bank_name"];
-			$payment_holder =  $data["fullname"];
+			$payment_holder =  $data["customer_name"];
 			$payment_branch = $data["branch_name"];
 			$payment_date = $data["payment_date"];
 			$payment_amount = $data["payment_amount"];
-			$payment_evident = "";
-				
-			if($_FILES['file_evident']['name']!=""){
-					$category = ($items["category"]=="1" ?  "award"  :  "standard"  );
-					$filename = "images/".$_FILES['file_evident']['name'];
-					$distination =  "../../".$filename;
-					$source = $_FILES['file_evident']['tmp_name'];  
-					$items["thumbnail"] = $filename;
-			}
-			
 			$payment_remark = $data["remark"];
-			$payment_mobile = $data["mobile"];
+			$payment_evident = $data["payment_evident"];
 			
 			$sql = "update reserve_info set payment_type='$payment_type',payment_bank='$payment_bank',payment_holder='$payment_holder',payment_branch='$payment_branch' ";
-			$sql = ",payment_date='$payment_date',payment_amount='$payment_amount',payment_evident='$payment_evident',payment_remark='$payment_remark',payment_mobile='$payment_mobile' ";
+			$sql .= ",payment_date='$payment_date',payment_amount='$payment_amount',payment_evident='$payment_evident',payment_remark='$payment_remark' ,update_date=current_timestamp";
 			$sql .= "where unique_key='$reserve_id' ";
 			
 			log_warning("update payment > " . $sql);
