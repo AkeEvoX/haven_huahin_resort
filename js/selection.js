@@ -80,8 +80,9 @@ reserve.get_info = function(){
 		reserve.info = result.data.info;
 
 		if(reserve.info!=undefined){
-			$('#checkpoint_date').val(reserve.info.date);
-			$('#travel_date').val(reserve.info.date);
+			$('#checkpoint_date').val(reserve.info.start_date);
+			$('#travel_date').val(reserve.info.end_date);
+			$('#night_unit').val(reserve.info.night);
 			$('#adult_amount').val(reserve.info.adults);
 			$('#child_amount').val(reserve.info.children);
 			$('#promo_code').val(reserve.info.code);

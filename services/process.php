@@ -32,12 +32,19 @@ function step_one($args){
 	//detroy session
 	session_destroy();
 	session_start();
-	//##variable list
-	//check_in_date 	date				14/04/2017
-	//nights 			dropdown
-	//adults 			dropdown
-	//childern 			text
-	//code 				text
+	/*
+	##variable list
+	check_in_date 	date				14/04/2017
+	nights 			dropdown
+	adults 			dropdown
+	childern 			text
+	code 				text
+	*/
+	/*
+	#mysql  date_add
+	DATE_ADD(now(), INTERVAL 2 day) 
+
+	*/
 
 	$date = $args["check_in_date"];
 	$night = $args["nights"];
@@ -45,15 +52,19 @@ function step_one($args){
 	$children = $args["children"];
 	$children_2 = $args["children_2"];
 	$code = $args["code"];
+	$start_date = $date;//str_replace('/','-',$date);
+	$end_date = date('d/m/Y',strtotime(str_replace('/','-',$start_date). "+ ". $night ."days")) ;
 
 	$data = array("date"=>$date
 		,"night"=>$night
 		,"adults"=>$adults
-		,"children"=>$children
-		,"children_2"=>$children_2
-		,"code"=>$code);
+		,"children"=>$children // 0 - 4 year
+		,"children_2"=>$children_2  //5 - 11 year
+		,"code"=>$code //packate code
+		,"start_date"=>$start_date 
+		,"end_date"=>$end_date);
 	//keep data 
-	$_SESSION["info"] = $data;	
+	$_SESSION["info"] = $data;
 	//redirect to next page
 	header("Location: ../selection_room.html");
 	exit();

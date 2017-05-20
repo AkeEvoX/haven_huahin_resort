@@ -74,6 +74,21 @@ class Room_Manager{
 		
 	}
 
+	//## command date add on my sql
+	//select reserve_startdate ,DATE_ADD(reserve_startdate, INTERVAL 2 day) as enddate from reserve_info limit 1 ;
+	/*
+	##filter room by date##
+	select a.*,COALESCE(r.reserve_unit, 0) as reserve_unit from room_types a
+		left join (
+ 			select b.room_key,count(b.room_key) as reserve_unit from reserve_info as info 
+ 			left join reserve_rooms b on info.unique_key = b.unique_key 
+ 			where info.create_date between '2017-04-01 :00:00:00' and '2017-04-30 :00:00:00'
+ 			group by b.room_key
+ 		) r on a.id = r.room_key
+	where COALESCE(r.reserve_unit, 0)  <= unit 
+;
+
+	*/
 }
 
 ?>

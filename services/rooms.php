@@ -23,7 +23,11 @@ switch($service){
 		$result = get_gallery($data);
 
 	break;
-	case "":
+	case "filter":
+		$startdate = GetParameter("startdate");
+		$enddate = GetParameter("enddate");
+
+		$result = call_rooms_avaliable($startdate,$enddate);
 
 	break;
 }
@@ -35,6 +39,35 @@ function get_gallery($data){
 		$result[] = array("id"=>$row->id,"image"=>$row->image);
 	}
 	return $result;
+}
+
+function call_room_avaliable($startdate,$enddate){
+
+	$base = new Room_Manager();
+	$data = $base->get_room_avaliable($startdate,$enddate);
+	while($row = $data->fetch_object()){
+
+		$result[] = array(""=>""
+			,""=>"");
+
+		/*
+		room name
+			->gallerys
+			->beds
+			->service
+				->thai Set Dinner , price
+				->Airport Transfer , price
+			->packates
+				->package_name
+				->price
+				->food_service on/off
+				->cancel_reserve on/off
+				->payment_online on/off
+
+		*/
+
+	}
+
 }
 	
 echo json_encode(array("data"=>$result));
