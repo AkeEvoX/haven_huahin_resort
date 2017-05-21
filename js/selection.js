@@ -85,6 +85,7 @@ reserve.get_info = function(){
 			$('#night_unit').val(reserve.info.night);
 			$('#adult_amount').val(reserve.info.adults);
 			$('#child_amount').val(reserve.info.children);
+			$('#child_2_amount').val(reserve.info.children_2);
 			$('#promo_code').val(reserve.info.code);
 			
 		}

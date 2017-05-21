@@ -187,8 +187,12 @@ utility.eraseCookie = function(name) {
 }
 
 utility.get_templete = function(src){
-
-	var result = $.get(src,'html');
+	var result = "";
+	result = $.ajax({
+		url:src,
+		type:'get',
+		async: false
+	}).responseText;
 	return result;
 }
 

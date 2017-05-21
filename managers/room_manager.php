@@ -22,12 +22,12 @@ class Room_Manager{
 		$this->mysql->disconnect();
 	}
 	
-	function get_room_gallery($room_type_id){
+	function get_room_gallery($room_id){
 		
 		try{
 
 			$sql = "select * ";
-			$sql .= "from room_gallery where room_type='".$room_type_id."' ";
+			$sql .= "from room_gallery where room_type='".$room_id."' ";
 			$result = $this->mysql->execute($sql);
 
 			log_warning("get_room_gallery > " . $sql);
@@ -38,6 +38,61 @@ class Room_Manager{
 			echo "Cannot Get get room gallery : ".$e->getMessage();
 		}
 		
+	}
+
+	function get_room_available($startdate,$enddate,$lang){
+		try{
+
+			$sql = "select a.id ,a.title_".$lang."  as title,a.unit,COALESCE(r.reserve_unit, 0) as reserve_unit ";
+			$sql .= "from room_types a left join (";
+			$sql .= "select b.room_key,count(b.room_key) as reserve_unit from reserve_info as info ";
+			$sql .= "left join reserve_rooms b on info.unique_key = b.unique_key ";
+			$sql .= "where info.create_date between '".$startdate." 00:00:00' and '".$enddate." 00:00:00' ";
+			$sql .= "group by b.room_key ";
+			$sql .= ") r on a.id = r.room_key ";
+			$sql .= "where COALESCE(r.reserve_unit, 0)  <= unit ";
+			$result = $this->mysql->execute($sql);
+
+			log_warning("get_room_available > " . $sql);
+
+			return  $result;
+		}
+		catch(Exception $e){
+			echo "Cannot Get get room available : ".$e->getMessage();
+		}
+	}
+
+	function get_room_package($room_id,$lang){
+		try{
+
+			$sql = "select id,title_".$lang." as title,package_price,food_service,cancel_room,payment_online ";
+			$sql .= " from room_packages where room_type='".$room_id."' ";
+			$result = $this->mysql->execute($sql);
+
+			log_warning("get_room_package > " . $sql);
+
+			return  $result;
+		}
+		catch(Exception $e){
+			echo "Cannot Get get room package : ".$e->getMessage();
+		}
+	}
+
+	function get_room_bed($room_id,$lang){
+		try{
+
+			$sql = "select b.id,b.title_".$lang." as title ";
+			$sql .= "from room_beds a left join bed_type b on a.bed_id=b.id ";
+			$sql .= "where a.room_id='".$room_id."' ";
+			$result = $this->mysql->execute($sql);
+
+			log_warning("get_room_bed > " . $sql);
+
+			return  $result;
+		}
+		catch(Exception $e){
+			echo "Cannot Get get room bed : ".$e->getMessage();
+		}
 	}
 	
 	function insert_options($unique_key,$option_key,$price){

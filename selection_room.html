@@ -310,7 +310,6 @@
 <script src='plugin/jquery/jquery.min.js' ></script>
 <script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
 <!-- <script src='plugin/jquery/datepicker-th.js' ></script> -->
-<!-- <script src='plugin/jquery/moment.js' ></script> -->
 <script src='plugin/jquery/holder.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
 <script src='plugin/jquery/moment.js' ></script>
@@ -319,6 +318,7 @@
 <script src='plugin/jquery/unitegallery/themes/grid/ug-theme-grid.js' ></script>
 <script src='js/utility.js' ></script>
 <script src='js/selection.js' ></script>
+<script src='js/rooms.js' ></script>
 <script src='js/common.js' ></script>
 <script type="text/javascript" >
 
@@ -352,9 +352,20 @@
 			}
 		});
 
+		$('#btn_apply').click(function(e){
+			apply_room();
+		});
+
    });
 
+	function apply_room(){
+		var startdate = moment($('#btn_checkin').find("input").val(),"DD/MM/YYYY").format("YYYY-MM-DD");
+		var enddate = moment($('#btn_checkout').find("input").val(),"DD/MM/YYYY").format("YYYY-MM-DD");
+		rooms.filter_room(startdate,enddate);
+	}
+
 	reserve.get_info();
+	apply_room();
 	//reserve.get_roomofweek();
   </script>
 </body>
