@@ -76,8 +76,22 @@ function step_two($data){
 	//keep data
 	//$_SESSION["reserve"] = "";
 	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
-	$reserve = json_decode($data["data_reserve"]);
-	//var_dump($reserve);
+	$_SESSION["info"]["start_date"] = $data["checkpoint_date"];
+	$_SESSION["info"]["end_date"] = $data["travel_date"];
+	$_SESSION["info"]["night"] = $data["night_unit"];
+	$_SESSION["info"]["adults"] = $data["adult_amount"];
+	$_SESSION["info"]["children"] = $data["child_amount"];
+	$_SESSION["info"]["children_2"] = $data["child_2_amount"];
+	$_SESSION["info"]["code"] = $data["promo_code"];
+	
+	
+	//$_SESSION["reserve"]->summary = $data["promo_code"];
+	
+	//summary
+	//$reserve = json_decode($data["data_reserve"]);
+	
+	//var_dump($_SESSION["reserve"]);
+	
 	/*
 	//print value room reserve
 	foreach($reserve as $val){
@@ -86,6 +100,7 @@ function step_two($data){
 		
 	}
 	*/
+	
 	//redirect to next page
 	header("Location: ../option_reserve.html");
 	

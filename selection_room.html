@@ -19,6 +19,8 @@
 </head>
 <body>
 <div class='container'>
+	<!-- form request -->
+	<form id='validate' action='services/process.php?step=2' method='post' >
 	<div class='row rowspan' >
 		<div class='col-md-4 text-center'>
 			<span class="stepflow_active">1</span> Select Room
@@ -31,8 +33,8 @@
 		</div>
 	</div>
 	<div class='row rowspan' >
-			<div class='panel panel-default' style='background-color:#999966;'>
-				<div class="panel-body">
+			<div class='panel panel-default' id='filter_bar' ><!-- #454545 | 999966 -->
+				<div class="panel-body" >
 					<div class='row'>
 						<div class='col-sm-3'>
 							 <div class="form-group">
@@ -133,138 +135,17 @@
 				<span style='color:#ff9900;font-weight:bold;' ><span id='title_desc'>เลือกห้องพักจากราคาที่ดีที่สุดจากเรา</span></span>
 			</div>
 			<div id="list_room"></div>
-			<div class='row'>
-				<div class="panel panel-default">
-				  <div class="panel-heading" style='background-color:black;'>
-					<h3 class="panel-title" style='color:white;margin:10px 5px 10px 1px;'>Deluxe</h3>
-				  </div>
-				  <div class="panel-body" style='margin:0px;padding:0px;'>
-					<img src='images/bed.png' class='img-responsive'/>
-						<form class="form-inline" style='margin:10px;'>
-							<div class="form-group">
-								<div class="input-group input-group-sm">
-								<span class="input-group-addon" ><span class='glyphicon glyphicon-bed'></span></span>
-									<div class='input-group-btn'>
-										<select class='form-control' id='type_bed_deluxe' name='type_bed_deluxe'>
-											<option value='300'>King + Sofa bed</option>
-											<option value='500'>Twin + Sofa bed</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="form-group pull-right">
-								<a href='javascript:void(0)' onclick='reserve.modal_view_deluxe()'><span class='control-label' for='datatype'>รายละเอียด</span></a>
-							</div>
-							
-							<div class="list-group rowspan">
-							  <span href="#" class="list-group-item">
-								<h4 class="list-group-item-heading">Room Only<span class='pull-right'>฿ 2,500.00</span></h4>
-								<small class="list-group-item-text ">
-									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่รวมอาหารเช้า</div>
-									<div class='col-sm-3' onclick='reserve.modal_change()'; style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
-									<button onclick="add_room(1,'Deluxe','Room Only','2500')" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
-									&nbsp;
-								</small>
-							  </span>
-							  <span href="#" class="list-group-item">
-								<h4 class="list-group-item-heading">Last Minute Promotion<span class='pull-right'>฿ 2,800.00</span></h4>
-								<small class="list-group-item-text ">
-									<div class='col-sm-3' onclick='reserve.modal_breakfast()'; style='cursor:pointer;'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
-									<div class='col-sm-3' onclick='reserve.modal_nochange()'; style='cursor:pointer;'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
-									<button onclick="add_room(2,'Deluxe','Last Minute Promotion','2888.70')" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
-									&nbsp;
-								</small>
-							  </span>
-							 <span href="#" class="list-group-item">
-								<h4 class="list-group-item-heading">Internet Rate<span class='pull-right'>฿ 3,300.00</span></h4>
-								<small class="list-group-item-text ">
-									<div class='col-sm-3' onclick='reserve.modal_breakfast()'; style='cursor:pointer;'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
-									<div class='col-sm-3' onclick='reserve.modal_change()'; style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
-									<button onclick="add_room(3,'Deluxe','Internet Rate','3398.47')"   type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
-									&nbsp;
-								</small>
-							  </span>
-							</div>
-						</form>
-				  </div>
-				</div>
-			</div><!--deluxe room-->
-			<div class='row'>
-				<div class="panel panel-default">
-				  <div class="panel-heading" style='background-color:black;'>
-					<h3 class="panel-title" style='color:white;margin:10px 5px 10px 1px;'>Superior</h3>
-				  </div>
-				  <div class="panel-body" style='margin:0px;padding:0px;'>
-					<img src='images/bed.png' class='img-responsive'/>
-						<form class="form-inline" style='margin:10px;'>
-							<div class="form-group">
-								<div class="input-group input-group-sm">
-								<span class="input-group-addon" ><span class='glyphicon glyphicon-bed'></span></span>
-									<div class='input-group-btn'>
-										<select class='form-control' id='type_bed_superior' name='type_bed_superior'>
-											<option value='500'>King + Sofa bed</option>
-											<option value='800'>Twin + Sofa bed</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							<div class="form-group pull-right">
-								<a href="javascript:void(0);" onclick="reserve.modal_view_superior()"><span class='control-label' for='datatype'>รายละเอียด</span></a>
-							</div>
-							
-							<div class="list-group rowspan">
-							  <span href="#" class="list-group-item">
-								<h4 class="list-group-item-heading">Room Only<span class='pull-right'>฿ 2,803.73</span></h4>
-								<small class="list-group-item-text ">
-									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่รวมอาหารเช้า</div>
-									<div class='col-sm-3' onclick='reserve.modal_change()'; style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
-									<button onclick="add_room(4,'superior','Room Only','2803.73')" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
-									&nbsp;
-								</small>
-							  </span>
-							  <span href="#" class="list-group-item">
-								<h4 class="list-group-item-heading">Last Minute Promotion<span class='pull-right'>฿ 2,888.70</span></h4>
-								<small class="list-group-item-text ">
-									<div class='col-sm-3' onclick='reserve.modal_breakfast()'; style='cursor:pointer;'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
-									<div class='col-sm-3' onclick='reserve.modal_nochange()'; style='cursor:pointer;'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
-									<button onclick="add_room(5,'superior','Last Minute Promotion','2888.70')" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
-									&nbsp;
-								</small>
-							  </span>
-							 <span href="#" class="list-group-item">
-								<h4 class="list-group-item-heading">Internet Rate<span class='pull-right'>฿ 3,398.47</span></h4>
-								<small class="list-group-item-text ">
-									<div class='col-sm-3' onclick='reserve.modal_breakfast()'; style='cursor:pointer;'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
-									<div class='col-sm-3' onclick='reserve.modal_change()'; style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
-									<button onclick="add_room(6,'superior','Internet Rate','3398.47')" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
-									&nbsp;
-								</small>
-							  </span>
-							</div>
-							
-							
-						</form>
-				  </div>
-				</div>
-			</div><!--Superior room-->
 		</div>
 		<div class='col-md-5'>
-			<form id='validate' action='services/process.php?step=2' method='post' >
 			<div class='row' style='padding-left: 10px;'>
 				<div id='check_in_date'></div>
 			</div>
 			<div class='row'>
 				<div id='list_reserve' class="list-group rowspan" style='margin:10px;'>
 					<span href="#" class="list-group-item">
-						<h4 class="list-group-item-heading">รวม <span id='total_price' class='pull-right'>฿ 0</span></h4>
+						<h4 class="list-group-item-heading"><span id='str_summary'>summary </span><span id='total_price' name='total_price' class='pull-right'>฿ 0</span></h4>
 						<p class="list-group-item-text ">
-						รายละเอียด >  <span class='pull-right'>1 ห้องพัก, 1 คืน</span>
+						<span id='str_total_detail'>รายละเอียด</span>  <span class='pull-right'><span id='total_room'>0</span> ห้องพัก, <span id='total_night'>1</span> คืน</span>
 						</p>
 					 </span>
 				</div>
@@ -274,11 +155,11 @@
 				<button type='submit' class='btn btn-default brown col-sm-offset-1 col-sm-10' style='min-height:50px;'>ตรวจสอบความถูกต้อง</button>
 			</div>
 			<input type='hidden' id='data_reserve' name='data_reserve' />
-			</form>
+			
 		</div>
 		
 	</div>
-	
+	</form>
 </div>
 <!--show modal-->
 <!-- Modal -->
@@ -332,6 +213,7 @@
 
 			if(days>-1){
 				$('#night_unit').val(days);
+				$('#total_night').html(days);
 			}
 			else{
 				$('#night_unit').val('error');
@@ -346,6 +228,7 @@
 
 			if(days>-1){
 				$('#night_unit').val(days);
+				$('#total_night').html(days);
 			}else{
 				alert('Sorry !! Date Invalid . / เลือกวันที่ไม่ถูกต้อง');
 				$('#night_unit').val('error');
@@ -361,6 +244,7 @@
 	function apply_room(){
 		var startdate = moment($('#btn_checkin').find("input").val(),"DD/MM/YYYY").format("YYYY-MM-DD");
 		var enddate = moment($('#btn_checkout').find("input").val(),"DD/MM/YYYY").format("YYYY-MM-DD");
+		console.log("fillter room "+startdate + " to "+ enddate);
 		rooms.filter_room(startdate,enddate);
 	}
 
