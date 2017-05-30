@@ -1,64 +1,30 @@
 <div class='row'>
-				<div class="panel panel-default">
-				  <div class="panel-heading" style='background-color:black;'>
-					<h3 class="panel-title" style='color:white;margin:10px 5px 10px 1px;'>{room_name}</h3>
-				  </div>
-				  <div class="panel-body" style='margin:0px;padding:0px;'>
-					<img src='images/bed.png' class='img-responsive'/><!--image rooms-->
-						<form class="form-inline" style='margin:10px;'>
+	<div class="panel panel-default">
+	  <div class="panel-heading" style='background-color:black;'>
+		<h3 class="panel-title" style='color:white;margin:10px 5px 10px 1px;'>{room_name}</h3>
+	  </div>
+	  <div class="panel-body" style='margin:0px;padding:0px;'>
+	  <!--room gallery-->
+		{gallery_list}
+			<form class="form-inline" style='margin:10px;'>
+				<!-- list bed -->
+				<div class="form-group">
+					<div class="input-group input-group-sm">
+					<span class="input-group-addon" ><span class='glyphicon glyphicon-bed'></span></span>
+						<div class='input-group-btn'>
 							{bed_list}
-							<!-- list bed -->
-							<!--<div class="form-group">
-								<div class="input-group input-group-sm">
-								<span class="input-group-addon" ><span class='glyphicon glyphicon-bed'></span></span>
-									<div class='input-group-btn'>
-										<select class='form-control' id='type_bed_superior' name='type_bed_superior'>
-											<option value='500'>King + Sofa bed</option>
-											<option value='800'>Twin + Sofa bed</option>
-										</select>
-									</div>
-								</div>
-							</div>
-							-->
-							<!-- show room detail -->
-							<div class="form-group pull-right">
-								<a href="javascript:void(0);" {link_pop_detail}  onclick="reserve.modal_view_superior()"><span class='control-label' for='datatype'>รายละเอียด</span></a>
-							</div>
-							<!-- list room type -->
-							{room_type_list}
-							<!--<div class="list-group rowspan">
-							  <span href="#" class="list-group-item">
-								<h4 class="list-group-item-heading">Room Only<span class='pull-right'>฿ 2,803.73</span></h4>
-								<small class="list-group-item-text ">
-									<div class='col-sm-3'><span class='glyphicon glyphicon-remove'></span> ไม่รวมอาหารเช้า</div>
-									<div class='col-sm-3' onclick='reserve.modal_change()'; style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
-									<button onclick="add_room(4,'superior','Room Only','2803.73')" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
-									&nbsp;
-								</small>
-							  </span>
-							  <span href="#" class="list-group-item">
-								<h4 class="list-group-item-heading">Last Minute Promotion<span class='pull-right'>฿ 2,888.70</span></h4>
-								<small class="list-group-item-text ">
-									<div class='col-sm-3' onclick='reserve.modal_breakfast()'; style='cursor:pointer;'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
-									<div class='col-sm-3' onclick='reserve.modal_nochange()'; style='cursor:pointer;'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
-									<button onclick="add_room(5,'superior','Last Minute Promotion','2888.70')" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
-									&nbsp;
-								</small>
-							  </span>
-							 <span href="#" class="list-group-item">
-								<h4 class="list-group-item-heading">Internet Rate<span class='pull-right'>฿ 3,398.47</span></h4>
-								<small class="list-group-item-text ">
-									<div class='col-sm-3' onclick='reserve.modal_breakfast()'; style='cursor:pointer;'><span class='glyphicon glyphicon-cutlery'></span> รวมอาหารเช้า</div>
-									<div class='col-sm-3' onclick='reserve.modal_change()'; style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>
-									<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>
-									<button onclick="add_room(6,'superior','Internet Rate','3398.47')" type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>
-									&nbsp;
-								</small>
-							  </span>
-							</div>-->
-						</form>
-				  </div>
+						</div>
+					</div>
 				</div>
-			</div><!--Superior room-->
+				<!-- show room detail -->
+				<div class="form-group pull-right">
+					<a href="javascript:void(0);" {link_pop_detail}  ><span class='control-label' for='datatype'>รายละเอียด</span></a>
+				</div>
+				<!-- list room type -->
+				<div class="list-group rowspan">
+					{package_list}
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

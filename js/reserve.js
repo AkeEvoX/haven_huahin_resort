@@ -124,7 +124,13 @@ reserve.get_confirmation = function(){
 		
 		if($("input[name='amount']").length!=0) 
 			$("input[name='amount']").val(net_price);
-
+		
+		if($("input[name='payment_reserve_id']").length!=0) 
+			$("input[name='payment_reserve_id']").val(reserve_id);
+		
+		if($("input[name='payment_amount']").length!=0) 
+			$("input[name='payment_amount']").val(net_price);
+		
 		$('#list_reserve').append(item);
 		
 
@@ -268,7 +274,17 @@ reserve.get_summary = function(){
 	});
 }
 
-reserve.payment_manual = function(){
+reserve.payment_manual = function(args){
 	
+	var endpoint = "services/payment.php";
+	var method = "POST";
+
+	utility.data(endpoint,method,args,function(data){
+		
+		console.info(data);
+		var response = JSON.parse(data);
+		alert(response.result);
+		window.location='quick_reservation.html';
+	});
 	
 }

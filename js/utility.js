@@ -148,7 +148,7 @@ function escapeRegExp(str) {
 }
 
 utility.date_format_th = function (date){
-
+	//dd/MM/yyyy
 
 	var months = [" มกราคม "," กุมภาพันธ์ "," มีนาคม "," เมษายน "," พฤษภาคม "," มิถุนายน "," กรกฏาคม "," สิงหาคม "," กันยายน "," ตุลาคม "," พฤศจิกายน "," ธันวาคม "];
 	var dates = date.split("/");
@@ -156,6 +156,27 @@ utility.date_format_th = function (date){
 	var month = parseInt(dates[1].replace("0",""))-1;
 	var year = parseInt(dates[2]) + 543; 
 
+	return day + months[month] + year ; 
+
+}
+
+utility.date_format = function (date,lang){
+	
+	var dates = date.split("/");
+	var months = Array();
+	var day = dates[0];
+	var month = parseInt(dates[1].replace("0",""))-1;
+	var year =0;
+	
+	if(lang=="th"){
+		months = [" มกราคม "," กุมภาพันธื "," มีนาคม "," เมษายน "," พฤษภาคม "," มิถุนายน "," กรกฏาคม "," สิงหาคม "," กันยายน "," ตุลาคม "," พฤศจิกายน "," ธันวาคม "];
+		year = parseInt(dates[2])+543;
+	}else  //default : english
+	{
+		months = [" January "," Febuary "," March "," April "," May "," June "," July "," August "," September "," October "," November "," December "];	
+		year =parseInt(dates[2]);
+	}
+	
 	return day + months[month] + year ; 
 
 }
@@ -187,8 +208,12 @@ utility.eraseCookie = function(name) {
 }
 
 utility.get_templete = function(src){
-
-	var result = $.get(src,'html');
+	var result = "";
+	result = $.ajax({
+		url:src,
+		type:'get',
+		async: false
+	}).responseText;
 	return result;
 }
 

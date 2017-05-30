@@ -18,12 +18,18 @@ switch($service){
 	case "gallery":
 
 		$room_type = GetParameter("room_type");
-		$base = new Room_Manager();
-		$data = $base->get_room_gallery($room_type);
-		$result = get_gallery($data);
+		//$base = new Room_Manager();
+		//$data = $base->get_room_gallery($room_type);
+		//$result = get_gallery($data);
+		$lang = "en";
+		$result = call_room_gallery($room_type,$lang);
 
 	break;
-	case "":
+	case "filter":
+		$startdate = GetParameter("startdate");
+		$enddate = GetParameter("enddate");
+		$lang = 'en';
+		$result = call_rooms_available($startdate,$enddate,$lang);
 
 	break;
 }
@@ -34,6 +40,87 @@ function get_gallery($data){
 	while($row = $data->fetch_object()){
 		$result[] = array("id"=>$row->id,"image"=>$row->image);
 	}
+	return $result;
+}
+
+function call_room_gallery($room_id,$lang){
+	$base = new Room_Manager();
+	$data = $base->get_room_gallery($room_id,$lang);
+	while($row = $data->fetch_object()){
+		$result[] = array(
+			"id"=>$row->id,
+			"image"=>$row->image
+		);
+	}
+
+	return $result;
+}
+
+function call_rooms_available($startdate,$enddate,$lange){
+
+	$base = new Room_Manager();
+	$lang='en';
+	$data = $base->get_room_available($startdate,$enddate,$lang);
+	while($row = $data->fetch_object()){
+
+		$result[] = array(
+			"id"=>$row->id,
+			"title"=>$row->title,
+			"unit"=>$row->unit,
+			"beds"=>call_room_bed($row->id,$lang),
+			"packages"=>call_room_package($row->id,$lang),
+			"gallerys"=>call_room_gallery($row->id,$lang)
+		);
+
+		/*
+		room name
+			->gallerys
+			->beds
+			->service
+				->thai Set Dinner , price
+				->Airport Transfer , price
+			->packates
+				->package_name
+				->price
+				->food_service on/off
+				->cancel_reserve on/off
+				->payment_online on/off
+
+		*/
+
+	}
+
+	return $result;
+
+}
+
+function call_room_package($room_id,$lang){
+	$base = new Room_Manager();
+	$data = $base->get_room_package($room_id,$lang);
+	while($row = $data->fetch_object()){
+		$result[] = array(
+			"id"=>$row->id,
+			"title"=>$row->title,
+			"price"=>$row->package_price,
+			"food_service"=>$row->food_service,
+			"cancel_room"=>$row->cancel_room,
+			"payment_online"=>$row->payment_online
+		);
+	}
+
+	return $result ;
+}
+
+function call_room_bed($room_id,$lang){
+	$base = new Room_Manager();
+	$data = $base->get_room_bed($room_id,$lang);
+	while($row = $data->fetch_object()){
+		$result[] = array(
+			"id"=>$row->id,
+			"title"=>$row->title
+			);
+	}
+
 	return $result;
 }
 	

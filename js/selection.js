@@ -15,8 +15,10 @@ function add_room(id,name,type,price){
 	var list = $('#list_reserve');
 	var item = "";
 	var key = moment().format("YYYYMMDDHHMMSS");
+	name = decodeURIComponent(name);
+	type = decodeURIComponent(type);
 	console.log("add room >  " + key +"|"+ id + "|" + name + "|"+type+"|"+price);
-	var room = { "key" : key ,"id":id, "room":name , "type" : type , "price" : price }; 
+	var room = { "key" : key ,"package id":id, "room":name , "type" : type , "price" : price }; 
 	reserve.rooms.push(room); 
 	
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //formoney
@@ -57,8 +59,12 @@ function recalculate() {
 	view_total.html("฿ "+money);
 
 	reserve.summary = {"total_amount":total.toFixed(2)};
+	
 	//$('#data_reserve').val(JSON.stringify(reserve.source));
+	
+	$('#total_room').html(reserve.rooms.length); 
 	$('#data_reserve').val(JSON.stringify(reserve));
+	
 }
 
 reserve.get_info = function(){
@@ -75,19 +81,22 @@ reserve.get_info = function(){
 			alert('Sorry!! Not Found Information Reserve.');
 			window.location="quick_reservation.html";
 		}
-
+		$('#data_reserve').val(JSON.stringify(result.data));
+		console.warn($('#data_reserve').val());
 		//set rooms info;
 		reserve.info = result.data.info;
 
 		if(reserve.info!=undefined){
-			$('#checkpoint_date').val(reserve.info.date);
-			$('#travel_date').val(reserve.info.date);
+			$('#checkpoint_date').val(reserve.info.start_date);
+			$('#travel_date').val(reserve.info.end_date);
+			$('#night_unit').val(reserve.info.night);
 			$('#adult_amount').val(reserve.info.adults);
 			$('#child_amount').val(reserve.info.children);
+			$('#child_2_amount').val(reserve.info.children_2);
 			$('#promo_code').val(reserve.info.code);
 			
 		}
-
+		console.log(result.data.reserve);
 		if(result.data.reserve != undefined){
 			
 			reserve.rooms = result.data.reserve.rooms;
@@ -95,10 +104,11 @@ reserve.get_info = function(){
 		}
 		
 		if(reserve.summary!=undefined){
-
+			
 			var total =parseFloat(reserve.summary.total_amount).toFixed(2).replace(money_pattern,"$1,");
 			$('#total_price').html("฿ " + total);
-			$('#total_room').html(reserve.rooms.length +"ห้องพัก " + reserve.info.night + "คืน");
+			$('#total_room').html(reserve.rooms.length);
+			$('#total_night').html(reserve.info.night);
 		}
 		
 		if(reserve.rooms != undefined ){
@@ -250,7 +260,6 @@ reserve.get_receipt = function(val){
 
 }
 
-
 reserve.get_roomofweek = function(){
 	var endpoint = "services/daysofweek.php";
 	var method="get";
@@ -317,20 +326,22 @@ reserve.modal = function(title,detail,image){
 	
 }
 reserve.modal_nochange = function(){
+	
 	var title = 'ไม่สามารถยกเลิกได้และเปลี่ยนแปลงได้';
 	var view = '<div class="media">';
 	view += '<div class="media-body">ในกรณีที่ท่านไม่มาแสดงตัว จะมีค่าปรับ 100%<br/>';
 	//view += '<button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#modal_condition">เงื่อนไข</button></div>';
 	view += '</div>';
 	
+	var expireDate = new Date();
+	var numberOfDaysToAdd = 14;
+	var lang = 'th';
+	expireDate.setDate(expireDate.getDate() + numberOfDaysToAdd); 
+	expireDate = moment(expireDate).format("DD/MM/YYYY");
+	expireDate = utility.date_format(expireDate,lang);
+	var condition = utility.get_templete("templete_nochange_detail.html");
+	condition = condition.replace("{reserve_expire}",expireDate);
 	
-	var condition = "<h3>เงื่อนไขการขาย</h3>";
-	condition += "<p>";
-	condition += "เงินค่าที่พักเต็มจำนวนจะถูกเรียกเก็บจากบัตรเครดิตของท่านไม่นานหลังจากยืนยันการจองของท่าน<br/>";
-	condition += "การจองนี้ไม่สามารถยกเลิกหรือแก้ไข<br/>";
-	condition += "ในกรณีที่ท่านไม่แสดงตัว จะมีค่าปรับ 100%<br/>";
-	condition += "</p>";
-	condition += add_default_condition();
 	
 	$('#modaltitle').text(title);
 	$('#modalcontent').html(view);
@@ -342,18 +353,19 @@ reserve.modal_nochange = function(){
 reserve.modal_change = function(){
 	
 	var title = 'ยกเลิกได้และเปลี่ยนแปลงได้';
-	var view = '<div class="media">';
+	var expireDate = new Date();
+	var numberOfDaysToAdd = 14;
+	var lang = 'th';
+	expireDate.setDate(expireDate.getDate() + numberOfDaysToAdd); 
+	expireDate = moment(expireDate).format("DD/MM/YYYY");
+	expireDate = utility.date_format(expireDate,lang);
 	
-	view += '<div class="media-body">ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ 4 มีนาคม 2560,00:00 (UTC+07:00) หลังจากวันที่ดังกล่าวอาจมีค่าธรรมเนียมในการยกเลิกหรือแก้ไข ในกรณีทีท่านไม่มาแสดงตัว จะมีค่าปรับ 100%</div>';
+	var view = '<div class="media">';
+	view += '<div class="media-body">ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ '+expireDate+',00:00 (UTC+07:00) หลังจากวันที่ดังกล่าวอาจมีค่าธรรมเนียมในการยกเลิกหรือแก้ไข ในกรณีทีท่านไม่มาแสดงตัว จะมีค่าปรับ 100%</div>';
 	view += '</div>';
-	var condition = "<h3>เงื่อนไขการขาย</h3>";
-	condition += "<p>";
-	condition += "ชำระค่ามัดจำ 100% ของ 1 คืน เดี๋ยวนี้เพื่อรับรองการจองของท่าน ยอดเงินส่วนที่เหลือจะถูกเรียกเก็บที่โรงแรม<br/>";
-	condition += "ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ 4 มีนาคม 2560, 00:00 (UTC+07:00)<br/>";
-	condition += "หลังจากวันที่ดังกล่าวอาจมีค่าธรรมเนียมในการยกเลิกหรือแก้ไข<br/>";
-	condition += "ในกรณีที่ท่านไม่แสดงตัว จะมีค่าปรับ 100%<br/>";
-	condition += "</p>";
-	condition += add_default_condition();
+
+	var condition = utility.get_templete("templete_change_detail.html");
+	condition = condition.replace("{reserve_expire}",expireDate);
 	
 	$('#modaltitle').text(title);
 	$('#modalcontent').html(view);
@@ -370,14 +382,14 @@ reserve.modal_internet = function(){
 	view += '<div class="media-body">ชำระค่ามัดจำ 100% of 1 คืน เดี๋ยวนี้เพื่อรับรองการจองของท่าน ยอดเงินส่วนที่เหลือจะถูกเรียกเก็บที่โรงแรม</div>';
 	view += '</div>';
 	
-	var condition = "<h3>เงื่อนไขการขาย</h3>";
-	condition += "<p>";
-	condition += "ชำระค่ามัดจำ 100% ของ 1 คืน เดี๋ยวนี้เพื่อรับรองการจองของท่าน ยอดเงินส่วนที่เหลือจะถูกเรียกเก็บที่โรงแรม<br/>";
-	condition += "ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ 4 มีนาคม 2560, 00:00 (UTC+07:00)<br/>";
-	condition += "หลังจากวันที่ดังกล่าวอาจมีค่าธรรมเนียมในการยกเลิกหรือแก้ไข<br/>";
-	condition += "ในกรณีที่ท่านไม่แสดงตัว จะมีค่าปรับ 100%<br/>";
-	condition += "</p>";
-	condition += add_default_condition();
+	var expireDate = new Date();
+	var numberOfDaysToAdd = 14;
+	var lang = 'th';
+	expireDate.setDate(expireDate.getDate() + numberOfDaysToAdd); 
+	expireDate = moment(expireDate).format("DD/MM/YYYY");
+	expireDate = utility.date_format(expireDate,lang);
+	var condition = utility.get_templete("templete_internet_detail.html");
+	condition = condition.replace("{reserve_expire}",expireDate);
 	
 	$('#modaltitle').text(title);
 	$('#modalcontent').html(view);
@@ -391,21 +403,18 @@ reserve.modal_breakfast = function(){
 	var title = 'อาหารเช้า';
 	var view = '<div class="media">';
 	
-	if(image!='')
-		view += '<div class="media-left"><a href="#"><img class="media-object" src="'+image+'" alt="..."></a></div>';
-	
 	view += '<div class="media-body">เราให้บริการอาหารไทย และอาหารนานาชาติ คัดสรรคุณภาพดี รสชาติอร่อย และพิธีพิถันในการปรุงอาหาร <br/> เปิดบริการตั้งแต่เวลา 7.00 - 10.00 น.</div>';
 	view += '</div>';
 	
-	var condition = "<h3>เงื่อนไขการขาย</h3>";
-	condition += "<p>";
-	condition += "ชำระค่ามัดจำ 100% ของ 1 คืน เดี๋ยวนี้เพื่อรับรองการจองของท่าน ยอดเงินส่วนที่เหลือจะถูกเรียกเก็บที่โรงแรม<br/>";
-	condition += "ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ 4 มีนาคม 2560, 00:00 (UTC+07:00)<br/>";
-	condition += "หลังจากวันที่ดังกล่าวอาจมีค่าธรรมเนียมในการยกเลิกหรือแก้ไข<br/>";
-	condition += "ในกรณีที่ท่านไม่แสดงตัว จะมีค่าปรับ 100%<br/>";
-	condition += "</p>";
-	condition += add_default_condition();
+	var expireDate = new Date();
+	var numberOfDaysToAdd = 14;
+	var lang = 'th';
+	expireDate.setDate(expireDate.getDate() + numberOfDaysToAdd); 
+	expireDate = moment(expireDate).format("DD/MM/YYYY");
+	expireDate = utility.date_format(expireDate,lang);
 	
+	var condition = utility.get_templete("templete_breakfast_detail.html");
+	condition = condition.replace("{reserve_expire}",expireDate);
 	$('#modaltitle').text(title);
 	$('#modalcontent').html(view);
 	$('#view_condition').css('display','block');
@@ -425,6 +434,30 @@ reserve.modal_view_superior = function(){
 	call_room_detail_modal("Superior","superior","2");
 }
 
+
+reserve.modal_room_detail =function (id){
+	
+	if(id==='1'){
+		call_room_detail_modal("Deluxe","deluxe","1");
+	}
+	else if(id==='2'){
+		call_room_detail_modal("Superior","superior","2");
+	}
+	else if(id==='2'){
+		call_room_detail_modal("Villa","villa","3");
+	}
+	else if(id==='4'){
+		call_room_detail_modal("Villa @ Sea","Villa@Sea","4");
+	}
+	else if(id==='5'){
+		call_room_detail_modal("Suite","Suite","5");
+	}
+	else if(id==='6'){
+		call_room_detail_modal("Suite @ Sea","Suite@Sea","6");
+	}
+	
+}
+
 function call_room_detail_modal(title,room_name,room_type){
 
 	$('#modaltitle').text(title);
@@ -432,7 +465,6 @@ function call_room_detail_modal(title,room_name,room_type){
 	//load page detail
 	$('#modalcontent').load('view_detail_room.html',function(){
 		//after load page success.
-
 
 		//load data detail
 		var lang = utility.readCookie('lang');
@@ -485,10 +517,12 @@ function call_room_detail_modal(title,room_name,room_type){
 	$('#modaldialog').modal();
 }
 
-
-
+//remove
 function add_default_condition(){
 	var condition= "";
+	
+	
+	
 	condition += "<p>Terms & Conditions</p>";
 	condition += "<p>* Full payment in advance required. Yur credit card will be charged at the time of reservation.<br/>";
 	condition += "* Rules & Restrictions Payments for bookings at Advance Purchase/Non-Refundable rates are not refundable and bookings may not be modified.<br/>";
@@ -549,53 +583,4 @@ function view_dayofweek(resp){
 	//five day
 
 }
-
-function view_list_room(resp){
-	var rooms = "";
-	
-	if(resp.data!=null){
-
-		console.debug(resp.data);
-		var templete_master = "";
-		var templete = "";
-		templete_master = utility.get_templete("../templete_room.html");
-		
-		templete = templete_master.replace("{room_name}","deluxe");
-		/*
-		$.each(resp.data,function(room){
-
-			rooms += "<div class='row'>";
-			rooms += "<div class='panel panel-default'>";
-			rooms += "<div class='panel-heading' style='background-color:black;'>";
-			rooms += "<h3 class='panel-title' style='color:white;margin:10px 5px 10px 1px;'>"+room.name+"</h3>";
-			rooms += "</div>";
-			rooms += "";
-			rooms += "";
-			rooms += "";
-			rooms += "";
-			rooms += "";
-			rooms += "";
-			rooms += "";
-			rooms += "";
-			rooms += "";
-			rooms += "";
-			rooms += "";
-			rooms += "";
-			rooms += "";
-		});
-
-		templete = templete.repace("{}",row);
-		*/
-		$('#list_room').append(templete);
-		//resp.rooms
-		
-		//$('#list_room').append(templete);
-		
-		
-	}
-	
-	
-	
-}
-
 
