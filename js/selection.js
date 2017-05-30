@@ -71,6 +71,9 @@ reserve.get_info = function(){
 	var endpoint = "services/info.php";
 	var method = "get";
 	var args = {"_":new Date().getMilliseconds()};
+	
+	//clear object
+	$('#data_reserve').html('');
 
 	utility.service(endpoint,method,args,function(result){
 		
@@ -86,7 +89,7 @@ reserve.get_info = function(){
 		//set rooms info;
 		reserve.info = result.data.info;
 
-		if(reserve.info!=undefined){
+		if(reserve.info!==undefined){
 			$('#checkpoint_date').val(reserve.info.start_date);
 			$('#travel_date').val(reserve.info.end_date);
 			$('#night_unit').val(reserve.info.night);
@@ -97,13 +100,13 @@ reserve.get_info = function(){
 			
 		}
 		console.log(result.data.reserve);
-		if(result.data.reserve != undefined){
+		if(result.data.reserve !== undefined){
 			
 			reserve.rooms = result.data.reserve.rooms;
 			reserve.summary = result.data.reserve.summary;
 		}
 		
-		if(reserve.summary!=undefined){
+		if(reserve.summary!==undefined){
 			
 			var total =parseFloat(reserve.summary.total_amount).toFixed(2).replace(money_pattern,"$1,");
 			$('#total_price').html("฿ " + total);
@@ -111,7 +114,7 @@ reserve.get_info = function(){
 			$('#total_night').html(reserve.info.night);
 		}
 		
-		if(reserve.rooms != undefined ){
+		if(reserve.rooms !== undefined ){
 			
 			$.each(reserve.rooms,function(i,val){
 				
@@ -160,7 +163,7 @@ reserve.get_receipt = function(val){
 		$('#card_validate').html(payment.card_validate);
 		
 			//define information
-		if(result.data != undefined){
+		if(result.data !== undefined){
 			
 			reserve.rooms = result.data.rooms;
 			reserve.options = result.data.options;
@@ -168,7 +171,7 @@ reserve.get_receipt = function(val){
 		}
 		
 		
-		if(reserve!=undefined){
+		if(reserve!==undefined){
 			
 			$.each(reserve.rooms,function(i,val){
 				console.log("price="+val.price);
@@ -183,7 +186,7 @@ reserve.get_receipt = function(val){
 				$('#list_reserve').append(item);
 			});
 			
-			if(reserve.options != undefined){
+			if(reserve.options !== undefined){
 				var item = "";
 				var price_option = 0;
 				
@@ -218,8 +221,8 @@ reserve.get_receipt = function(val){
 	
 		
 		var total = parseFloat(summary_price).toFixed(2).replace(money_pattern,"$1,");	
-		var service_price = parseFloat(summary_price) * .10;
-		var tax_price = parseFloat(summary_price) * .07 ;
+		var service_price = parseFloat(summary_price) * 0.10;
+		var tax_price = parseFloat(summary_price) * 0.07 ;
 		var net_price = parseFloat(summary_price) + tax_price + service_price;
 		var service = parseFloat(service_price).toFixed(2).replace(money_pattern,"$1,");
 		var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");
