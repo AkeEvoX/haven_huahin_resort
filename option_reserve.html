@@ -30,25 +30,37 @@
 			</div>
 		</div>
 		<div class='row rowspan' >
-			<div class='panel panel-default'>
-				<div class="panel-body">
+			<div class='panel panel-default' id='filter_bar' ><!-- #454545 | 999966 -->
+				<div class="panel-body" >
 					<div class='row'>
 						<div class='col-sm-3'>
 							 <div class="form-group">
-							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> มาถึง</label>
-							<input type="text" class="form-control" id="checkpoint_date" name="checkpoint_date" placeholder="" >
+							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> Check In</label>
+							<div class="input-group date" id='btn_checkin' >
+							  <input type="text" class="form-control" id='checkpoint_date' name='checkpoint_date' placeholder="" readonly/>
+							   <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+							</div>
+
 						  </div>
 						</div>
 						<div class='col-sm-3'>
 							<div class="form-group">
-							<label for="travel_date"><span class='glyphicon glyphicon-calendar'></span> ออกเดินทาง</label>
-							<input type="text" class="form-control" id="travel_date" name="travel_date" placeholder="" >
+							<label for="travel_date"><span class='glyphicon glyphicon-calendar'></span> Check Out</label>
+							<!-- <input type="text" class="form-control" id="travel_date" name="travel_date" placeholder="" > -->
+							<div class="input-group date" id='btn_checkout' >
+							  <input type="text" class="form-control" id='travel_date' name='travel_date' placeholder="" readonly />
+							   <span class="input-group-addon">
+			                        <span class="glyphicon glyphicon-calendar"></span>
+			                    </span>
+							</div>
 						  </div>
 						</div>
 						<div class='col-sm-3'>
 							<div class="form-group">
-							<label for="rent_amount">&nbsp;</label>
-							<span id="rent_amount" placeholder="" >1 คืน</span>
+							<label for="night_unit"><span class='glyphicon glyphicon-time'></span>&nbsp;Night</label>
+							<input type='text' id="night_unit" name='night_unit' class='form-control' placeholder="" value='' readonly>
 						  </div>
 						 </div>
 						<div class='col-sm-3 text-right'>
@@ -56,15 +68,10 @@
 						</div>
 					</div>
 					<div class='row'>
-					<div class='col-sm-12'>
-						<label >จำนวนผู้เข้าพัก</label>
-					</div>
-					</div>
-					<div class='row'>
-						<div class='col-md-2'>
-							<!-- <form class="form-inline"> -->
-							  <div class="form-group" >
-								<div class="input-group" style='z-index: 0;'>
+						<div class='col-sm-3'>
+							<div class="form-group">
+							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span>&nbsp;Adults</label>
+							<div class="input-group" style='z-index: 0;'>
 								  <div class="input-group-btn">
 									<button type='button' onclick='adult_decrease()' class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-minus'></span></button>
 								  </div>
@@ -74,35 +81,27 @@
 								  </div>
 								</div>
 							  </div>
-							<!-- </form> -->
 						</div>
-						<div class='col-sm-2'>
-							<label for="adult_amount">ผู้ใหญ่ / คน</label>
-						</div>
-						<div class='col-md-2'>
-							<!-- <form class="form-inline"> -->
-							  <div class="form-group">
-								<div class="input-group">
+						<div class='col-sm-3'>
+							<div class="form-group">
+							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span>&nbsp;Children 5 - 11 Year</label>
+							<div class="input-group" style='z-index: 0;'>
 								  <div class="input-group-btn">
 									<button type='button' onclick="child_decrease('child_2_amount')" class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-minus'></span></button>
 								  </div>
 								  <input type="text" class="form-control" id='child_2_amount' name='child_2_amount' aria-label="..." value="0">
 								  <div class="input-group-btn">
-									<button type='button' onclick="child_increase('child_2_amount')" class='btn btn-warning brown btn-md' >&nbsp;<span class='glyphicon glyphicon-plus'></span></button>
+									<button type='button' onclick="child_increase('child_2_amount')"  class='btn btn-warning brown btn-md' >&nbsp;<span class='glyphicon glyphicon-plus'></span></button>
 								  </div>
 								</div>
 							  </div>
-							<!-- </form> -->
-						</div>
-						<div class='col-sm-2'>
-							<label for="child_2_amount">เด็ก 5 - 11 / คน</label>
-						</div>
-						<div class='col-md-2'>
-							<!-- <form class="form-inline"> -->
-							  <div class="form-group">
-								<div class="input-group">
+						  </div>
+						  <div class='col-sm-3'>
+							<div class="form-group">
+							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span>&nbsp;Children 0 - 4 Year</label>
+							<div class="input-group" style='z-index: 0;'>
 								  <div class="input-group-btn">
-									<button type='button' onclick="child_decrease('child_amount')" class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-minus'></span></button>
+									<button type='button' onclick="child_decrease('child_amount')"  class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-minus'></span></button>
 								  </div>
 								  <input type="text" class="form-control" id='child_amount' name='child_amount' aria-label="..." value="0">
 								  <div class="input-group-btn">
@@ -110,25 +109,17 @@
 								  </div>
 								</div>
 							  </div>
-							<!-- </form> -->
-						</div>
-						<div class='col-sm-2'>
-							<label for="child_amount">เด็ก 0 - 4 / คน</label>
-						</div>
-						
+						  </div>
 					</div>
-					<div class='row rowspan'>
-						<div class='col-md-3'>
-							<button type="button" class="btn btn-link"><!--+ เพิ่มห้องพัก--></button>
+					<div class='row'>
+						<div class='col-sm-3'>
+							 <div class="form-group">
+							<label for="promo_code"><span class='glyphicon glyphicon-tasks'></span> Access Code</label>
+							  <input type="text" class="form-control" id='promo_code' name='promo_code' placeholder="Package Code" readonly />
+						  </div>
 						</div>
-						<div class='col-md-3'>
-								<label for='hello'>รหัสโปรโมชั่นหรือรหัสธุรกิจ</label>
-						</div>
-						<div class='col-md-3'>
-								<input type='text' class='form-control' id='promo_code' name='promo_code' />
-						</div>
-						<div class='col-md-3 text-right'>
-							<!--&nbsp;<a href='#'><span class='glyphicon glyphicon-remove'></span></a>-->
+						<div class='col-sm-9 text-right'><br>
+							<!-- <input type='button' class='btn btn-warning' id='btn_apply' Value='Apply'/> -->
 						</div>
 					</div>
 			  </div>
@@ -222,7 +213,7 @@
 				<div class='row'>
 					<div id='list_reserve' class="list-group rowspan" style='margin:10px;'>
 						<span href="#" class="list-group-item" style="border-top:3px solid;">
-							<h4 class="list-group-item-heading">รวม <span id='total_price' class='pull-right'>฿ 7,113.70</span></h4>
+							<h4 class="list-group-item-heading">รวม <span id='total_price' class='pull-right'>฿ Error !!</span></h4>
 							<p class="list-group-item-text ">
 							<a href='#' >รายละเอียด >  </a><span id='total_room' class='pull-right'></span>
 							</p>
@@ -254,12 +245,14 @@
 
 	$(document).ready(function(){
 
-		$("#checkpoint_date").datepicker(); 
-		$("#travel_date").datepicker(); 
+		//$("#checkpoint_date").datepicker(); 
+		//$("#travel_date").datepicker(); 
 
+		/*
 		$('#carlendar').on('click',function(e){
 			$("#check_in_date").datepicker('show');
 		});
+		*/
 		
 		$('input[name="option_reserve"]').on('change',function(e){
 			var data = JSON.parse(this.value);
@@ -289,6 +282,7 @@
 		});
 		
 		$('#option_form').on('submit',function(e){		
+				alert('submit form optional');
 				$('#data_reserve').val(JSON.stringify(reserve));
 		});
 

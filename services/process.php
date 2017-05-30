@@ -75,6 +75,8 @@ function step_two($data){
 
 	//keep data
 	//$_SESSION["reserve"] = "";
+	
+	
 	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
 	$_SESSION["info"]["start_date"] = $data["checkpoint_date"];
 	$_SESSION["info"]["end_date"] = $data["travel_date"];
@@ -111,12 +113,12 @@ function step_three($data){
 	
 	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
 
-	$_SESSION["info"]["date_start"] = $data["checkpoint_date"];
-	$_SESSION["info"]["date_end"] = $data["travel_date"];
+	//$_SESSION["info"]["date_start"] = $data["checkpoint_date"];
+	//$_SESSION["info"]["date_end"] = $data["travel_date"];
 	$_SESSION["info"]["adults"] = $data["adult_amount"];
 	$_SESSION["info"]["children"] = $data["child_amount"];
 	$_SESSION["info"]["children_2"] = $data["child_2_amount"];
-	$_SESSION["info"]["code"] = $data["promo_code"];
+	//$_SESSION["info"]["code"] = $data["promo_code"];
 	$_SESSION["info"]["comment"] = $data["comment"];
 
 	//summary.total_amount
