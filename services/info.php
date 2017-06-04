@@ -17,12 +17,19 @@ include("../lib/common.php");
 
 //echo print_r($_SESSION["reserve"]->reserve->rooms);
 //echo "<p>";
+
+
 if(isset($_SESSION["reserve"])){
+	
+	//echo "found reserve.<br/>";
 	$data = array(
-		"rooms"=>$_SESSION["reserve"]->reserve->rooms
-		,"options"=>$_SESSION["reserve"]->reserve->options
-		,"summary"=>$_SESSION["reserve"]->reserve->summary
+		"rooms"=>$_SESSION["reserve"]->rooms
+		,"options"=>$_SESSION["reserve"]->options
+		,"summary"=>$_SESSION["reserve"]->summary
 	);
+	
+	//var_dump($_SESSION["reserve"]->rooms);
+	//echo "<br>";
 }
 	
 $reserve = array("reserve"=>$data

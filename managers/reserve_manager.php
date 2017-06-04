@@ -123,7 +123,7 @@ class Reserve_Manager{
 			$prefix = $customer["prefix_mobile"];
 			$mobile = $customer["mobile"];
 			$birthdate = $customer["birthdate"];
-			
+			//cancel enter credit card 
 			$payment_type = $payment["card_type"];
 			$payment_number = $payment["card_number"];
 			$payment_holder = $payment["card_holder"];
@@ -178,12 +178,12 @@ class Reserve_Manager{
 		}
 	}
 	
-	function insert_rooms($unique_key,$room_key,$price){
+	function insert_rooms($unique_key,$room_key,$price,$bed_key){
 		
 		try{
 			
-			$sql = "insert into reserve_rooms(unique_key,room_key,room_price)";
-			$sql .= "values('$unique_key','$room_key','$price'); ";
+			$sql = "insert into reserve_rooms(unique_key,room_key,room_price,bed_key) ";
+			$sql .= "values('$unique_key','$room_key','$price','$bed_key'); ";
 			
 			log_warning("insert_rooms > " . $sql);
 			

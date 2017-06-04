@@ -1,7 +1,7 @@
 var reserve = {};
 //reserve.info = null;
 reserve.rooms = [];
-reserve.options =  [];
+//reserve.options =  [];
 reserve.summary = null;
 reserve.customer = [];
 reserve.payment = [];
@@ -10,19 +10,20 @@ reserve.payment = [];
 
 //list_reserve
 
-function add_room(id,name,type,price){
+function add_room(id,name,type,price,room_id){
 	
 	var list = $('#list_reserve');
 	var item = "";
 	var key = moment().format("YYYYMMDDHHMMSS");
+	var bed = $('#type_bed_'+room_id).val();
 	name = decodeURIComponent(name);
 	type = decodeURIComponent(type);
-	console.log("add room >  " + key +"|"+ id + "|" + name + "|"+type+"|"+price);
-	var room = { "key" : key ,"package id":id, "room":name , "type" : type , "price" : price }; 
+	console.warn("add room >  " + key +"|"+ id + "|" + name + "|"+type+"|"+price+"|"+bed);
+	var room = { "key" : key ,"package":id, "room":name , "type" : type , "price" : price ,"bed":bed}; 	
 	reserve.rooms.push(room); 
 	
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //formoney
-	var money = parseFloat(price).toFixed(2).replace(money_pattern,"$1,")
+	var money = parseFloat(price).toFixed(2).replace(money_pattern,"$1,");
 	
 	item += "<span id='"+key+"'  href='#' class='list-group-item'>";
 	item += "<h4 class='list-group-item-heading'>"+ name +" <span class='pull-right'>฿ "+money+"</span></h4>";
@@ -68,6 +69,7 @@ function recalculate() {
 }
 
 reserve.get_info = function(){
+	
 	var endpoint = "services/info.php";
 	var method = "get";
 	var args = {"_":new Date().getMilliseconds()};
@@ -87,7 +89,7 @@ reserve.get_info = function(){
 			window.location="quick_reservation.html";
 		}
 		
-		$('#data_reserve').val(JSON.stringify(result.data));
+		$('#data_reserve').val(JSON.stringify(result.data.reserve));
 		console.warn($('#data_reserve').val());
 		
 		//set rooms info;
@@ -101,6 +103,8 @@ reserve.get_info = function(){
 			$('#child_amount').val(info.children);
 			$('#child_2_amount').val(info.children_2);
 			$('#promo_code').val(info.code);
+			$('#total_night').html(info.night);
+			$('#comment').html(info.comment);
 		}
 		
 		//console.log(result.data.reserve);
@@ -116,14 +120,12 @@ reserve.get_info = function(){
 			reserve.summary = items.reserve.summary;
 			var total =parseFloat(reserve.summary.total_amount).toFixed(2).replace(money_pattern,"$1,");
 			$('#total_price').html("฿ " + total);
-			$('#total_room').html(reserve.rooms.length);
-			$('#total_night').html(info.night);
 		}
 		
 		if(items.reserve !==null && items.reserve.rooms !== null ){
 			//assign rooms list
 			reserve.rooms = items.reserve.rooms;
-			
+			$('#total_room').html(reserve.rooms.length); 
 			$.each(reserve.rooms,function(i,val){
 				
 				//console.warn(val);
@@ -139,6 +141,23 @@ reserve.get_info = function(){
 				
 			});
 		}
+		
+		if(items.reserve!=null && items.reserve.options!=null){
+			
+			reserve.options = items.reserve.options;
+			console.warn(reserve.options);
+			
+			$.each(reserve.options,function(i,val){
+				//$('#option_'+val.key).trigger('click');
+				var item_option = 'option_'+val.key;
+				console.log('trigger item = 'item_option);
+				$('input[name="'+item_option+'"]:checked').trigger('click');
+			});
+			
+		}
+		
+		
+		
 	});
 }
 
@@ -297,7 +316,7 @@ reserve.add_option = function(val){
 	reserve.options.push(val);
 	
 	var price = parseFloat(val.price);
-	var total = parseFloat(reserve.summary.total_amount ) + price;
+	var total = parseFloat(reserve.summary.total_amount) + price;
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
 	
 	reserve.summary.total_amount = total;
@@ -306,13 +325,15 @@ reserve.add_option = function(val){
 	
 	//reserve.calucate_option();
 }
-reserve.del_option = function(key,price){
+reserve.del_option = function(key,money){
 
 	//var val = JSON.parse(data);
 	$('#'+key).remove();
 	
 	reserve.options = jQuery.grep(reserve.options,function(item,index){ return item.key != key });
-	var price = parseFloat(price);
+	
+	var price = parseFloat(money);
+	console.log('remove option price :' + price);
 	var total = parseFloat(reserve.summary.total_amount) - price;
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
 	

@@ -18,12 +18,13 @@ switch($service){
 	case "gallery":
 
 		$room_type = GetParameter("room_type");
-		//$base = new Room_Manager();
-		//$data = $base->get_room_gallery($room_type);
-		//$result = get_gallery($data);
 		$lang = "en";
 		$result = call_room_gallery($room_type,$lang);
 
+	break;
+	case "options":
+		$lang = "en";
+		$result = call_room_options($lang);
 	break;
 	case "filter":
 		$startdate = GetParameter("startdate");
@@ -50,6 +51,24 @@ function call_room_gallery($room_id,$lang){
 		$result[] = array(
 			"id"=>$row->id,
 			"image"=>$row->image
+		);
+	}
+
+	return $result;
+}
+
+function call_room_options($lang){
+	
+	$base = new Room_Manager();
+	$data = $base->get_room_options($lang);
+	while($row = $data->fetch_object()){
+		$result[] = array(
+			"id"=>$row->id,
+			"title"=>$row->title,
+			"detail"=>$row->detail,
+			"remark"=>$row->remark,
+			"image"=>$row->image,
+			"price"=>$row->price
 		);
 	}
 

@@ -135,7 +135,7 @@
 					  <div class="panel-heading" style='background-color:#454545;'>
 						<h3 class="panel-title" style='color:white;margin:10px 5px 10px 1px;'>บริการเสริมดังนี้</h3>
 					  </div>
-					  <div class="panel-body" style='background-color:white;color:black;'>
+					  <div class="panel-body" style='background-color:white;color:black;' id='list_options' >
 							<div class='row'>
 								<div class='col-md-3'>
 									<img src='images/dinner.png' class='img-responsive' />
@@ -155,10 +155,10 @@
 									<p>ไก่ย่างผัดพริกไทยดำ</p>
 									<p>ข้าวผัดกระเทียมและข้าวหอมมะลิ</p>
 									<p>ผลไม้ตามฤดูกาล</p>
-									</div>
 									<p>฿ 525 ผู้ใหญ่ 1 ท่าน</p>
 									<p>฿ 262 เด็กอายุ 5-11 ปีต่อ 1 ท่าน</p>
 									<p>฿ 0 เด็กอายุ 0- 4 ปีต่อ 1 ท่าน</p>
+									</div>
 								</div>
 								<div class='col-md-2 text-right'>
 									<span>เลือก</span> <input type='checkbox' name='option_diner' value='{"key":"1","title":"Thai Set Diner","price":"525" }'  />
@@ -215,7 +215,7 @@
 						<span href="#" class="list-group-item" style="border-top:3px solid;">
 							<h4 class="list-group-item-heading">รวม <span id='total_price' class='pull-right'>฿ Error !!</span></h4>
 							<p class="list-group-item-text ">
-							<a href='#' >รายละเอียด >  </a><span id='total_room' class='pull-right'></span>
+							<a href='#' >รายละเอียด >  </a><span class='pull-right'><span id='total_room'>0</span> ห้องพัก, <span id='total_night'>0</span> คืน</span>
 							</p>
 						 </span>
 						
@@ -240,11 +240,18 @@
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
 <script src='js/utility.js' ></script>
 <script src='js/selection.js' ></script>
+<script src='js/rooms.js' ></script>
 <script src='js/common.js' ></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
 
+		rooms.call_view_options();
+		reserve.get_info();
+		
+		$('#option_form').on('submit',function(e){		
+				$('#data_reserve').val(JSON.stringify(reserve));
+		});
 		//$("#checkpoint_date").datepicker(); 
 		//$("#travel_date").datepicker(); 
 
@@ -253,7 +260,9 @@
 			$("#check_in_date").datepicker('show');
 		});
 		*/
-		
+
+		//#option transfer
+		/*
 		$('input[name="option_reserve"]').on('change',function(e){
 			var data = JSON.parse(this.value);
 			//console.warn("option = " + this.value + " checked = " + this.checked);
@@ -265,7 +274,9 @@
 				reserve.del_option(data.key,data.price);
 			}
 		});
-
+		*/
+		//# option dinner
+		/*
 		$('input[name="option_diner"]').on('change',function(e){
 		
 			if(this.checked==true){
@@ -281,13 +292,9 @@
 			}
 		});
 		
-		$('#option_form').on('submit',function(e){		
-				alert('submit form optional');
-				$('#data_reserve').val(JSON.stringify(reserve));
-		});
-
-		reserve.get_info();
-
+*/
+		
+/*
 		function calculate_diner(){
 			var net = 0;
 			try{
@@ -312,12 +319,17 @@
 			desc+= '<div class=col-md-8 >children age 0-4 = 0 x '+baby_unit+ ' </div><div classcol-md-4> 0</div>';
 			desc+= '</small></i>';
 
-			var result = JSON.parse('{"key":"1","title":"Thai Set Diner","desc":"'+desc+'","price":"'+net+'"}');
+			var result = JSON.parse('{"key":"1","title":"Thai Set Diner","desc":"'+desc+'","price":"'+net+'","adults":"'+adult+'","children":"'+baby_unit+'","children_1":"'+child_total+'"}');
 
 			return result;
 		}
+		*/
+		
+		
 
    });
+   
+   	
   </script>
 </body>
 </html>

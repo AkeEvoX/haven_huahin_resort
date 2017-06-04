@@ -152,23 +152,23 @@ reserve.get_summary = function(){
 		var summary_price = 0;
 		//set rooms info;
 		reserve.info = result.data.info;
-
-		if(result.data.info==null) { 
+		
+		if(result.info==null) { 
 			alert('Sorry!! Not Found Information Reserve.');
 			window.location="quick_reservation.html";
 		}
 
-		if(result.data.info){
+		if(result.info){
 			
-			var info = result.data.info;
-			$('#checkpoint_date').html(info.date_start);
-			$('#travle_date').html(info.date_start);
+			var info = result.info;
+			$('#checkpoint_date').html(info.start_date);
+			$('#travle_date').html(info.end_date);
 
-			$('#date_start').html(utility.date_format_th(info.date_start));
-			$('#date_end').html(utility.date_format_th(info.date_end));
+			$('#date_start').html(utility.date_format_th(info.start_date));
+			$('#date_end').html(utility.date_format_th(info.end_date));
 			
-			var date = moment(info.date_start).add('days',14).format('DD/MM/YYYY');
-			console.log(date + " || " + info.date_start);
+			var date = moment(info.start_date).add('days',14).format('DD/MM/YYYY');
+			console.log(date + " || " + info.start_date);
 			var cancel_date = utility.date_format_th(date);
 			$('#cancel_date').html(cancel_date);
 
@@ -178,7 +178,7 @@ reserve.get_summary = function(){
 			rent += "เด็ก 0-4 "+ info.children +" ท่าน"
 			$('#rent_amount').html(rent);
 
-			$('#comment').text(reserve.info.comment);
+			$('#comment').text(info.comment);
 		}
 
 		if(result.data.reserve != undefined){

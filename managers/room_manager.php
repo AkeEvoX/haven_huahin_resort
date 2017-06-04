@@ -39,6 +39,24 @@ class Room_Manager{
 		}
 		
 	}
+	
+	function get_room_options($lang){
+		
+		try{
+
+			$sql = "select id,title_".$lang." as title,detail_".$lang." as detail , remark_".$lang." as remark ,price,image ";
+			$sql .= "from room_options order by id ";
+			$result = $this->mysql->execute($sql);
+
+			log_warning("room_options > " . $sql);
+			
+			return  $result;
+		}
+		catch(Exception $e){
+			echo "Cannot Get get room optinals : ".$e->getMessage();
+		}
+		
+	}
 
 	function get_room_available($startdate,$enddate,$lang){
 		try{

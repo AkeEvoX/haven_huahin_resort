@@ -116,8 +116,8 @@ function step_three($data){
 	//$_SESSION["info"]["date_start"] = $data["checkpoint_date"];
 	//$_SESSION["info"]["date_end"] = $data["travel_date"];
 	$_SESSION["info"]["adults"] = $data["adult_amount"];
-	$_SESSION["info"]["children"] = $data["child_amount"];
-	$_SESSION["info"]["children_2"] = $data["child_2_amount"];
+	$_SESSION["info"]["children"] = $data["child_amount"]; // 0 - 4 year
+	$_SESSION["info"]["children_2"] = $data["child_2_amount"];//5 - 11 year
 	//$_SESSION["info"]["code"] = $data["promo_code"];
 	$_SESSION["info"]["comment"] = $data["comment"];
 
@@ -154,16 +154,18 @@ function step_four($data){
 
 	$_SESSION["customer"] = $customer;
 	
+	//## cencal card information .
 	
-	$payment = array("card_type"=>$data["card_type"]
-		,"card_number"=>$data["card_number"]
-		,"card_holder"=>$data["card_holder"]
-		,"card_expire_month"=>$data["card_expire_month"]
-		,"card_expire_year"=>$data["card_expire_year"]
-		,"card_validate"=>$data["card_validate"]);
+	// $payment = array("card_type"=>$data["card_type"]
+		// ,"card_number"=>$data["card_number"]
+		// ,"card_holder"=>$data["card_holder"]
+		// ,"card_expire_month"=>$data["card_expire_month"]
+		// ,"card_expire_year"=>$data["card_expire_year"]
+		// ,"card_validate"=>$data["card_validate"]);
 		
-	$_SESSION["payment"] = $payment;
-	$_SESSION["payment"]["card_number"] =substr($data["card_number"],0,8)."xxxxxxxx";
+	// $_SESSION["payment"] = $payment;
+	// $_SESSION["payment"]["card_number"] =substr($data["card_number"],0,8)."xxxxxxxx";
+	
 	/*insert to database*/
 	
 	$base = new Reserve_Manager();
@@ -174,7 +176,7 @@ function step_four($data){
 
 	/*insert rooms*/
 	foreach($_SESSION["reserve"]->rooms as $val){
-		$base->insert_rooms($unique_key,$val->id,$val->price);
+		$base->insert_rooms($unique_key,$val->id,$val->price,$val->bed);
 	}
 	
 	/*insert options*/
