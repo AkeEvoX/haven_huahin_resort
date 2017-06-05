@@ -52,28 +52,6 @@ function set_view_options(resp){
 			items+="</div><hr/>";
 		});
 		
-		/*
-		<div class='row'>
-			<div class='col-md-3'>
-				<img src='images/van.png' class='img-responsive' />
-			</div>
-			<div class='col-md-7'>
-				<p><h4>Airport Transfer</h4></p>
-				<p><a href='javascript:void(0);' data-toggle="collapse" data-target="#transfer">รายละเอียด ></a></p>
-				<div id='transfer' class='collapse'>
-				<p>Suwannaphum airport - Haven Resort</p>
-				<p>or </p>
-				<p>Haven Resort - Suwannaphum airport</p>
-				</div>
-				<p>฿ 3,700</p>
-			</div>
-			<div class='col-md-2 text-right'>
-				<span>เลือก</span> <input type='checkbox' name='option_reserve' value='{"key":"2","title":"Airport Transfer","desc":"&nbsp;","price":"3700"}'  />
-			</div>
-			
-		</div>
-		*/
-		
 		view.append(items);
 	}
 }

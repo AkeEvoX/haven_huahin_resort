@@ -145,18 +145,15 @@ reserve.get_info = function(){
 		if(items.reserve!=null && items.reserve.options!=null){
 			
 			reserve.options = items.reserve.options;
-			console.warn(reserve.options);
+			//console.warn(reserve.options);
 			
 			$.each(reserve.options,function(i,val){
-				//$('#option_'+val.key).trigger('click');
 				var item_option = 'option_'+val.key;
-				console.log('trigger item = 'item_option);
+				//console.log('trigger item = ' + item_option);
 				$('input[name="'+item_option+'"]:checked').trigger('click');
 			});
 			
 		}
-		
-		
 		
 	});
 }
