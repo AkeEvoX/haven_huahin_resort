@@ -217,6 +217,30 @@ utility.get_templete = function(src){
 	return result;
 }
 
+utility.load_prefix = function(obj){
+
+	//http://country.io/phone.json
+
+	$.getJSON('js/prefix_mobile.json',function(resp){
+		console.warn(resp);
+		var items = sortResults(resp,0,true);
+		console.warn(items);
+		
+		/*
+		$.each(resp,function(name,prefix){
+			var lang = (navigator.language) ? navigator.language : navigator.userLanguage
+			var list = $('#'+obj);
+			list.append($('<option>', { 
+        		value: prefix,
+        		text : "( "+name+" ) "+prefix
+    		}));
+			//console.warn('('+ name + ') +'+prefix);
+		});
+*/
+		
+	});
+}
+
 
 function centerModal() {
 
@@ -231,4 +255,17 @@ function centerModal() {
     $dialog.css("margin-top", offset);
 
 }
-//hello
+
+function sortResults(obj,prop, asc) {
+    var result = obj.sort(function(a, b) {
+        if (asc) {
+            return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+        } else {
+            return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+        }
+    });
+
+    return result;
+    //showResults();
+}
+

@@ -132,7 +132,7 @@ reserve.get_info = function(){
 				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
 				
 				var item = "<span id='"+val.key+"' href='#' class='list-group-item'>";
-				item += "<h4 class='list-group-item-heading'>ห้องพัก "+(i+1)+"<span class='pull-right'>฿ "+money+"</span></h4>";
+				item += "<h4 class='list-group-item-heading'>ห้องพัก "+(i+1)+"<span class='`pull-right'>฿ "+money+"</span></h4>";
 				item += "<h4 class='list-group-item-text '>";
 				item += val.room +" <small class='pull-right' style='cursor:pointer;' onclick=del_room("+val.key+") >นำออก</small> ";
 				item += val.type + "</h4></span>";
@@ -310,6 +310,9 @@ reserve.add_option = function(val){
 			item += "</h4></span>";
 			$('#list_reserve').append(item);
 	
+	if(reserve.options === undefined){
+		reserve.options = [];
+	}
 	reserve.options.push(val);
 	
 	var price = parseFloat(val.price);

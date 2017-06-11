@@ -6,6 +6,7 @@
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
 	<link href="plugin/bootstraps/css/bootstrap.css" rel="stylesheet" type="text/css" />
+	<link href="plugin/bootstraps/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
 	<link href="css/default.css" rel="stylesheet" type="text/css" />
 	<link href="plugin/jquery/ui/pepper_grinder/jquery-ui.css" rel="stylesheet" type="text/css" />
 	<style>
@@ -34,24 +35,49 @@
 				<div class='row'>
 					<div class='col-sm-3'>
 						<div class="form-group">
-							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> มาถึง</label>
-							<span type="text" class="form-control" id="checkpoint_date" placeholder=""  >14/12/2016</span>
+							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> Check in</label>
+							<span type="text" class="form-control" id="checkpoint_date" placeholder=""  ></span>
 						</div>
 					</div>
 					<div class='col-sm-3'>
 						<div class="form-group">
-							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> ออกเดินทาง</label>
-							<span type="text" class="form-control" id="travle_date" placeholder=""  >15/12/2016</span>
+							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> Check out</label>
+							<span type="text" class="form-control" id="travle_date" placeholder=""  ></span>
 						</div>
 					</div>
 					<div class='col-sm-3'>
 						<div class="form-group">
-							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> ห้องพัก 1</label>
-							<span type="text" class="form-control" id="rent_amount" placeholder=""  >ผู้ใหญ่ 1 คน</span>
+							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> Night</label>
+							<span type="text" class="form-control" id="night_unit" name='night_unit' placeholder=""  ></span>
 						</div>
 					</div>
-					<div class='col-sm-3 text-right'>
-						<label>เปลี่ยนเกณฑ์การเลือก ></label>
+				</div>
+				<div class='row'>
+					<div class='col-sm-3'>
+						<div class="form-group">
+							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> Adults</label>
+							<span type="text" class="form-control" id="adult_amount" name='adult_amount' placeholder=""  ></span>
+						</div>
+					</div>
+					<div class='col-sm-3'>
+						<div class="form-group">
+							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> Children 5 - 11 Year</label>
+							<span type="text" class="form-control" id="child_2_amount" name='child_2_amount' placeholder=""  ></span>
+						</div>
+					</div>
+					<div class='col-sm-3'>
+						<div class="form-group">
+							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> Children 0 - 4 Year</label>
+							<span type="text" class="form-control" id="child_amount" name='child_amount' placeholder=""  ></span>
+						</div>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='col-sm-3'>
+						<div class="form-group">
+							<label for="promo_code"><span class='glyphicon glyphicon-tasks'></span> Access Code</label>
+							  <span type="text" class="form-control" id='promo_code' name='promo_code' placeholder="Package Code" ></span>
+						  </div>
 					</div>
 				</div>
 			</div>
@@ -68,24 +94,24 @@
 							<h3 class='col-md-12'>Haven Resort Hua Hin</h3>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'>ที่อยู่</div>
-							<div class='col-md-9'>1449  Chala samut Rd., Cha-am, Petchaburi 76120, Hua Hin, TH</div>
+							<div id='address_title' class='col-md-2'>ที่อยู่</div>
+							<div id='address_value' class='col-md-9'>1449  Chala samut Rd., Cha-am, Petchaburi 76120, Hua Hin, TH</div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'>แผนกต้อนรับ</div>
-							<div class='col-md-9'>24 ชม./24</div>
+							<div id='service_title' class='col-md-2'>แผนกต้อนรับ</div>
+							<div id='service_value' class='col-md-9'>24 ชม./24</div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'>เช็คอิน</div>
-							<div class='col-md-9'>14:00</div>
+							<div id='checkin_title' class='col-md-2'>เช็คอิน</div>
+							<div id='checkin_value' class='col-md-9'>14:00</div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'>เช็คเอาท์</div>
-							<div class='col-md-9'>12:00</div>
+							<div id='checkout_title' class='col-md-2'>เช็คเอาท์</div>
+							<div id='checkout_value' class='col-md-9'>12:00</div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'>ภาษาพูด</div>
-							<div class='col-md-9'>อังกฤษ , ไทย</div>
+							<div id='language_title' class='col-md-2'>ภาษาพูด</div>
+							<div id='languate_value' class='col-md-9'>อังกฤษ , ไทย</div>
 						</div>
 					</td>
 				</tr>
@@ -96,15 +122,15 @@
 					<td class='col-md-4 text-center'>
 						<div class='row rowspan'>
 							<span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span></br>
-							<label>ราคาดีที่สุด</label>
-							<p>
+							<label id='price_title' >ราคาดีที่สุด</label>
+							<p id='hotel_title'>
 								ท่านกำลังอยู่ที่เว็บไซต์ของโรงแรม ท่านจะได้รับ <br/>ราคาที่ดีที่สุดเนื่องจากไม่มีการผ่านคนกลาง
 							</p>
 						</div>
 						<div class='row rowspan'>
 							<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span></br>
-							<label>ชำระเฉพาะเงินจอง</label>
-							<p>
+							<label id='payment_title'>ชำระเฉพาะเงินจอง</label>
+							<p id='evident_title'>
 								ใบสำคัญแสดงสิทธิฝากแจ้งให้ทราบล่วงหน้า 
 							</p>
 						</div>
@@ -112,7 +138,7 @@
 							<span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span></br>
 							<label>สามารถเปลี่ยนแปลงและยกเลิกได้</label><br/>
 							<div class='col-md-12'>
-							ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ 4 มีนาคม 2560, 00:00 (UTC+07:00)  (คำนวณจาก 14 วันก่อนการเข้าพัก)
+							ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ <span id='reserve_expire'>4 มีนาคม 2560</span>, 00:00 (UTC+07:00)  (คำนวณจาก 14 วันก่อนการเข้าพัก)
 รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น
 	</div>
 						</div>
@@ -152,7 +178,18 @@
 								</div><!--lastname-->
 								<label ><span id='dateofbirth'>วันเกิด</span></label>
 								<div class="row form-group">
-									<div class='col-md-3'><label for="birth_date"><span id='birth_date_title'> วัน</span></label>
+									<div class='col-md-6'>
+										<div class="input-group date" id='btn_birthdate' >
+										  <input type="text" class="form-control" id='birth_date' name='birth_date' placeholder="" />
+										   <span class="input-group-addon">
+						                        <span class="glyphicon glyphicon-calendar"></span>
+						                    </span>
+										</div>
+									</div>
+									<!--
+									<div class='col-md-3'>
+
+										<label for="birth_date"><span id='birth_date_title'> วัน</span></label>
 										<select class="form-control" id="birth_date" name="birth_date">
 											<option value='01'>01</option>
 											<option value='02'>02</option>
@@ -214,6 +251,7 @@
 											<option value='2022'>2022</option>
 										</select>
 									</div>
+								-->
 								</div><!--card expire-->
 								<div class="row form-group">
 									<div class='col-md-5'><label for="prefix_mobile"> หมายเลขโทรศัพท์</label>
@@ -241,15 +279,15 @@
 											<option value='mastercard'>MASTER CARD</option>
 											<option value='visa'>VISA</option>
 										</select>
-								</div><!-- credit card-- >
+								</div><!- - credit card- - >
 								<div class="form-group">
 									<label for="card_number"> หมายเลขที่บัตรเครดิต/เดบิต</label>
 									<input type="text" class="form-control" id="card_number" name="card_number" placeholder="" maxlength="16"  />
-								</div><!--card number-- >
+								</div><!- -card number- - >
 								<div class="form-group">
 									<label for="card_holder">ชื่อผู้ถือบัตร</label>
 									<input type="text" class="form-control" id="card_holder" name="card_holder" placeholder="" maxlength="60"  />
-								</div><!--card holder-- >
+								</div><!- -card holder - - >
 								<div class="row form-group">
 									<div class='col-md-4'><label for="card_expire_month"> วันหมดอายุ</label>
 										<select class="form-control" id="card_expire_month" name="card_expire_month">
@@ -278,14 +316,15 @@
 											<option value='2022'>2022</option>
 										</select>
 									</div>
-								</div><!--card expire-- >
+								</div><! - -card expire- - >
 								<label for="card_validate"> รหัสรักษาความปลอดภัยของบัตร</label>
 								<div class="row form-group">
 									<div class='col-md-4'>
 										<input type="password" class="form-control" id="card_validate" name="card_validate" placeholder="" maxlength="3"  />
 									</div>
 									รหัส 3 หลักสุดท้ายของบัตรเครดิตของท่าน
-								</div>-->
+								</div>
+							-->
 							</div>
 					</td>
 				</tr>
@@ -322,12 +361,15 @@
 <script src='plugin/jquery/holder.js' ></script>
 <script src='plugin/jquery/moment.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
+<script src='plugin/bootstraps/js/bootstrap-datetimepicker.js' ></script>
 <script src='js/utility.js' ></script>
 <script src='js/reserve.js' ></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
 
+		$('#btn_birthdate').datetimepicker({"format":"DD/MM/YYYY"});
+		utility.load_prefix('prefix_mobile');
 	   $('#summary_form').on('submit',function(e){
 
 	   		//keep data to redirect complete

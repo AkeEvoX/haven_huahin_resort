@@ -87,33 +87,33 @@ function room_option_change(type){
 }
 
 function calculate_diner(){
-			var net = 0;
-			try{
+	var net = 0;
+	try{
 
-				var adult = 525;
-				var child = 262;
-				var adult_unit = parseFloat($('#adult_amount').val());
-				var child_unit = parseFloat($('#child_2_amount').val()); //5-11
-				var baby_unit =  parseFloat($('#child_amount').val()); //0-4
+		var adult = 525;
+		var child = 262;
+		var adult_unit = parseFloat($('#adult_amount').val());
+		var child_unit = parseFloat($('#child_2_amount').val()); //5-11
+		var baby_unit =  parseFloat($('#child_amount').val()); //0-4
 
-				var adult_total = (adult*adult_unit) ;
-				var child_total = (child*child_unit);
-				net = adult_total + child_total;
+		var adult_total = (adult*adult_unit) ;
+		var child_total = (child*child_unit);
+		net = adult_total + child_total;
 
-			}catch(err){
-				console.error(err);
-			}
-			//Thai Set Diner
-			var desc = '<i><small>';
-			desc+= '<div class=col-md-8 >adults = '+adult+' x '+adult_unit+ ' </div><div classcol-md-4> '+adult_total  + '</div>';
-			desc+= '<div class=col-md-8 >children age 5-11 = '+child+' x '+child_unit+ ' </div><div classcol-md-4> '+child_total  +'</div>';
-			desc+= '<div class=col-md-8 >children age 0-4 = 0 x '+baby_unit+ ' </div><div classcol-md-4> 0</div>';
-			desc+= '</small></i>';
+	}catch(err){
+		console.error(err);
+	}
+	//Thai Set Diner
+	var desc = '<i><small>';
+	desc+= '<div class=col-md-8 >adults = '+adult+' x '+adult_unit+ ' </div><div classcol-md-4> '+adult_total  + '</div>';
+	desc+= '<div class=col-md-8 >children age 5-11 = '+child+' x '+child_unit+ ' </div><div classcol-md-4> '+child_total  +'</div>';
+	desc+= '<div class=col-md-8 >children age 0-4 = 0 x '+baby_unit+ ' </div><div classcol-md-4> 0</div>';
+	desc+= '</small></i>';
 
-			var result = JSON.parse('{"key":"1","title":"Thai Set Diner","desc":"'+desc+'","price":"'+net+'","adults":"'+adult+'","children":"'+baby_unit+'","children_1":"'+child_total+'"}');
+	var result = JSON.parse('{"key":"1","title":"Thai Set Diner","desc":"'+desc+'","price":"'+net+'","adults":"'+adult+'","children":"'+baby_unit+'","children_1":"'+child_total+'"}');
 
-			return result;
-		}
+	return result;
+}
 
 function view_list_room(resp){
 	var rooms = "";

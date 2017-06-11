@@ -167,16 +167,23 @@ reserve.get_summary = function(){
 			$('#date_start').html(utility.date_format_th(info.start_date));
 			$('#date_end').html(utility.date_format_th(info.end_date));
 			
-			var date = moment(info.start_date).add('days',14).format('DD/MM/YYYY');
-			console.log(date + " || " + info.start_date);
-			var cancel_date = utility.date_format_th(date);
-			$('#cancel_date').html(cancel_date);
+			var date = moment(info.start_date,'DD/MM/YYYY').add('days',14).format('DD/MM/YYYY');
+			console.log("exp : " + date + " || start :" + info.start_date);
+			var expire_date = utility.date_format_th(date);
+			$('#cancel_date').html(expire_date);
+			$('#reserve_expire').html(expire_date);
 
 			var rent ="";
 			rent = "ผู้ใหญ่ "+ info.adults + " ท่าน ";
 			rent += "เด็ก 5-11 "+ info.children_2 +" ท่าน"
 			rent += "เด็ก 0-4 "+ info.children +" ท่าน"
 			$('#rent_amount').html(rent);
+
+			$('#night_unit').html(info.night);
+			$('#adult_amount').html(info.adults);
+			$('#child_2_amount').html(info.children_2);
+			$('#child_amount').html(info.children);
+			$('#promo_code').html(info.code);
 
 			$('#comment').text(info.comment);
 		}
@@ -238,15 +245,30 @@ reserve.get_summary = function(){
 		}
 
 		//summary price
+		if(reserve.summary!=undefined){
 
+			/*
+			charge
+			tax
+			net
+			total_amount
+			*/
+			var total = parseFloat(reserve.summary.total_amount).toFixed(2).replace(money_pattern,"$1,");
+			var service = parseFloat(reserve.summary.charge).toFixed(2).replace(money_pattern,"$1,");
+			var tax = parseFloat(reserve.summary.tax).toFixed(2).replace(money_pattern,"$1,");
+			var net = parseFloat(reserve.summary.net).toFixed(2).replace(money_pattern,"$1,");
+		}
+		/*
 		var total = parseFloat(summary_price).toFixed(2).replace(money_pattern,"$1,");
 		var service_price = parseFloat(summary_price) * .10;
 		var tax_price = parseFloat(summary_price) * .07 ;
 		var net_price = parseFloat(summary_price) + tax_price + service_price;
-		console.log(net_price);
+		
 		var service = parseFloat(service_price).toFixed(2).replace(money_pattern,"$1,");
 		var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");
 		var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");
+		console.log(net_price);
+		*/
 		
 		var	item = "<div class='row'>";
 		item += "<div class='col-md-2 '><h4>รวม</h4></div>";
