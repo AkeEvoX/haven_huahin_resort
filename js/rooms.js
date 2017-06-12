@@ -18,7 +18,7 @@ rooms.filter_room = function(startdate,enddate){
 
 };
 
-rooms.call_view_options = function(){
+rooms.call_view_options = function(callback){
 	
 	var endpoint = "services/rooms.php";
 	var method="get";
@@ -26,7 +26,7 @@ rooms.call_view_options = function(){
 		"_":new Date().getMilliseconds()
 		,"service":"options"
 	};
-	utility.service(endpoint,method,args,set_view_options);
+	utility.service(endpoint,method,args,set_view_options,callback);
 
 }
 
@@ -53,7 +53,9 @@ function set_view_options(resp){
 		});
 		
 		view.append(items);
+		console.log("load view option complete.");
 	}
+	
 }
 
 	

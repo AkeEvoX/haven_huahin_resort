@@ -143,13 +143,14 @@ function step_four($data){
 	
 	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
 
+	$info = $_SESSION["info"];
 	
 	$customer = array("email"=>$data["email"]
 	,"title"=>$data["title"]
 	,"fname"=>$data["fname"]
 	,"lname"=>$data["lname"]
 	,"prefix_mobile"=>$data["prefix_mobile"]
-	,"birthdate"=>$data["birth_year"].'-'.$data["birth_month"].'-'.$data["birth_date"]
+	,"birthdate"=>$data["birth_date"] //$data["birth_year"].'-'.$data["birth_month"].'-'.$data["birth_date"]
 	,"mobile"=>$data["mobile"]);
 
 	$_SESSION["customer"] = $customer;
@@ -170,7 +171,7 @@ function step_four($data){
 	
 	$base = new Reserve_Manager();
 	//$unique_key = generateRandomString();
-	$unique_key = $base->insert_reserve($_SESSION["reserve"]->info,$customer,$payment,$_SESSION["reserve"]->summary);
+	$unique_key = $base->insert_reserve($info,$customer,$payment,$_SESSION["reserve"]->summary);
 	
 	$_SESSION["unique_key"] = $unique_key;
 
@@ -188,10 +189,11 @@ function step_four($data){
 	$sender = "contact@baankunnan.com";
 	$sender_name = "system haven huahin resort";
 	$subject = "Thank You Reservation";
-	$message = "Your ID is ".$unique_key;
+	echo $message = "Your ID is ".$unique_key;
 	SendMail($receive,$sender,$subject,$message,$sender_name);
 	
 	//header("Location: ../confirmation.html?reserve_id=".$unique_key);
+	
 	echo "<script>window.location.href='../confirmation.html?reserve_id=".$unique_key."';</script>";
 	exit();
 }

@@ -16,6 +16,9 @@ include("../managers/reserve_manager.php");
 $key = GetParameter("key");
 if(!isset($key)) return;
 
+
+$lang = 'en';
+
 $base = new Reserve_Manager();
 $reserve_data = $base->get_reserve_info($key);
 
@@ -40,36 +43,37 @@ if(isset($data)){
 				,"lname"=>$data->last_name
 				,"prefix_mobile"=>$data->prefix
 				,"mobile"=>$data->mobile
+				,"birthdate"=>$data->birthdate
 				);
 				
-	$payment = array(
+	/* $payment = array(
 				"card_type"=>$data->payment_type
 				,"card_number"=>substr($data->payment_number,0,8)."xxxxxxxx"
 				,"card_holder"=>$data->payment_holder
 				,"card_expire"=>$data->payment_expire
 				,"card_validate"=>"xxx"
-				);
+				); */
 }
 			
-$room_data = $base->get_reserve_rooms($key);
+$room_data = $base->get_reserve_rooms($key,$lang);
 
 if(isset($room_data)){
 	while($row = $room_data->fetch_object()){
 		$rooms[] = array(
 						"key"=>$row->id
-						,"room"=>$row->room_title
-						,"type"=>$row->type_title
+						,"room"=>$row->title
+						,"type"=>$row->room_type
 						,"price"=>$row->room_price
 						);
 	}
 }
 
-$option_data = $base->get_reserve_options($key);
+$option_data = $base->get_reserve_options($key,$lang);
 if(isset($option_data)){
 	while($row = $option_data->fetch_object()){
 		$options[] = array(
 						"key"=>$row->id
-						,"title"=>$row->option_title
+						,"title"=>$row->title
 						,"price"=>$row->option_price
 						);
 	}

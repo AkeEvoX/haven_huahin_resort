@@ -36,12 +36,12 @@ class Reserve_Manager{
 	}
 
 	
-	function get_reserve_options($unique_key){
+	function get_reserve_options($unique_key,$lang){
 		
 		try{
 
-			$sql = "select r.unique_key,r.option_price,o.option_title,o.price ";
-			$sql .= "from reserve_options r inner join service_options o on r.option_key = o.id where unique_key='".$unique_key."' ";
+			$sql = "select r.unique_key,r.option_price,o.title_".$lang." as title,o.price ";
+			$sql .= "from reserve_options r inner join room_options o on r.option_key = o.id where unique_key='".$unique_key."' ";
 			$result = $this->mysql->execute($sql);
 
 			log_warning("get_reserve_options > " . $sql);
@@ -54,12 +54,12 @@ class Reserve_Manager{
 		
 	}
 	
-	function get_reserve_rooms($unique_key){
+	function get_reserve_rooms($unique_key,$lang){
 		
 		try{
 
-			$sql = " select rr.unique_key,r.* ,rt.title as type_title ";
-			$sql .= " from reserve_rooms rr inner join rooms r on rr.room_key = r.id ";
+			$sql = " select rr.unique_key,r.id,r.title_".$lang." as title ,rt.title_".$lang." as room_type ";
+			$sql .= " from reserve_rooms rr inner join room_packages r on rr.room_key = r.id ";
 			$sql .= " left join room_types rt on r.room_type = rt.id ";
 			$sql .= " where rr.unique_key='".$unique_key."'  ";
 			$result = $this->mysql->execute($sql);
@@ -109,12 +109,12 @@ class Reserve_Manager{
 			$reserve_charge = $summary->charge;
 			$reserve_tax = $summary->tax;
 			$reserve_net = $summary->net;
-			$reserve_comment = $info->comment;
-			$adults = $info->adults;
-			$children = $info->children;
-			$children_2 = $info->children_2;
-			$code = $info->code;
-			$night = $info->night;
+			$reserve_comment = $info["comment"];
+			$adults = $info["adults"];
+			$children = $info["children"];
+			$children_2 = $info["children_2"];
+			$code = $info["code"];
+			$night = $info["night"];
 			
 			$email = $customer["email"];
 			$title_name = $customer["title"];
@@ -124,21 +124,22 @@ class Reserve_Manager{
 			$mobile = $customer["mobile"];
 			$birthdate = $customer["birthdate"];
 			//cancel enter credit card 
+			/* 
 			$payment_type = $payment["card_type"];
 			$payment_number = $payment["card_number"];
 			$payment_holder = $payment["card_holder"];
 			$payment_expire = $payment["card_expire_month"]."/".$payment["card_expire_year"];
-			$payment_secure = $payment["card_validate"];
+			$payment_secure = $payment["card_validate"]; */
 			
 			$create_date = "now()";
 			
 			$sql = "insert into reserve_info(unique_key,reserve_startdate,reserve_enddate,reserve_status,reserve_amount,reserve_charge,reserve_tax,reserve_net,reserve_comment,adults,children,children_2,night,acc_code ";
-			$sql .= " ,email ,title_name,first_name,last_name,prefix,mobile,birthdate";
-			$sql .= " ,payment_type,payment_number,payment_holder,payment_expire,payment_secure,create_date ) ";
+			$sql .= " ,email ,title_name,first_name,last_name,prefix,mobile,birthdate,create_date) ";
+			//$sql .= " ,payment_type,payment_number,payment_holder,payment_expire,payment_secure,create_date ) ";
 			$sql .= "values('$unique_key','$reserve_startdate','$reserve_enddate','$reserve_status','$reserve_amount','$reserve_charge','$reserve_tax'  ";
 			$sql .= " ,'$reserve_net','$reserve_comment',$adults,$children,$children_2,$night,'$code'  ";
-			$sql .= " ,'$email','$title_name','$first_name','$last_name','$prefix','$mobile','$birthdate' ";
-			$sql .= " ,'$payment_type','$payment_number','$payment_holder','$payment_expire','$payment_secure',$create_date); ";
+			$sql .= " ,'$email','$title_name','$first_name','$last_name','$prefix','$mobile','$birthdate',$create_date); ";
+			//$sql .= " ,'$payment_type','$payment_number','$payment_holder','$payment_expire','$payment_secure',$create_date); ";
 			
 			log_warning("insert_reserve > " . $sql);
 			

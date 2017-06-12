@@ -219,24 +219,29 @@ utility.get_templete = function(src){
 
 utility.load_prefix = function(obj){
 
-	//http://country.io/phone.json
-
 	$.getJSON('js/prefix_mobile.json',function(resp){
-		console.warn(resp);
-		var items = sortResults(resp,0,true);
-		console.warn(items);
 		
-		/*
+		var items = resp.sort(function(a,b){
+			return a.name - b.name;
+		});
+		
+		console.log(items);
+		
 		$.each(resp,function(name,prefix){
+			
+			
 			var lang = (navigator.language) ? navigator.language : navigator.userLanguage
 			var list = $('#'+obj);
+			
 			list.append($('<option>', { 
         		value: prefix,
         		text : "( "+name+" ) "+prefix
     		}));
+			
+			
 			//console.warn('('+ name + ') +'+prefix);
 		});
-*/
+
 		
 	});
 }

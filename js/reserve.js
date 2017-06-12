@@ -16,8 +16,8 @@ reserve.get_confirmation = function(){
 		var summary_price = 0;
 		if(result.data.customer==null){
 			alert('Sorry!! Not Found Information Reserve.');
-			window.location="cancel_confirm.html";
-			return false;
+			//window.location="quick_reservation.html";
+			//return false;
 		}
 
 		$('#customer_email').html(result.data.customer.email);

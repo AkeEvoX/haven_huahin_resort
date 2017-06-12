@@ -107,14 +107,6 @@ reserve.get_info = function(){
 			$('#comment').html(info.comment);
 		}
 		
-		//console.log(result.data.reserve);
-		/*
-		if(items !== null){
-			
-			reserve.rooms = items.reserve.rooms ? items.reserve.rooms : {};
-			reserve.summary =  items.reserve.summary;
-		}
-		*/
 		if(items.reserve !==null && items.reserve.summary !==null){
 			//assign summery
 			reserve.summary = items.reserve.summary;
@@ -128,11 +120,10 @@ reserve.get_info = function(){
 			$('#total_room').html(reserve.rooms.length); 
 			$.each(reserve.rooms,function(i,val){
 				
-				//console.warn(val);
 				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
 				
 				var item = "<span id='"+val.key+"' href='#' class='list-group-item'>";
-				item += "<h4 class='list-group-item-heading'>ห้องพัก "+(i+1)+"<span class='`pull-right'>฿ "+money+"</span></h4>";
+				item += "<h4 class='list-group-item-heading'>ห้องพัก "+(i+1)+"<span class='pull-right'>฿ "+money+"</span></h4>";
 				item += "<h4 class='list-group-item-text '>";
 				item += val.room +" <small class='pull-right' style='cursor:pointer;' onclick=del_room("+val.key+") >นำออก</small> ";
 				item += val.type + "</h4></span>";
@@ -140,21 +131,27 @@ reserve.get_info = function(){
 				$('#list_reserve').append(item);
 				
 			});
+			
+			
 		}
 		
 		if(items.reserve!=null && items.reserve.options!=null){
 			
 			reserve.options = items.reserve.options;
-			//console.warn(reserve.options);
 			
 			$.each(reserve.options,function(i,val){
 				var item_option = 'option_'+val.key;
-				//console.log('trigger item = ' + item_option);
-				$('input[name="'+item_option+'"]:checked').trigger('click');
+				
+				console.log(item_option);
+				
+				$('input[name="'+item_option+'"]').prop('checked',true);
+				
+				reserve.add_option(val);
+				
 			});
 			
 		}
-		
+		console.log("load information complete.");
 	});
 }
 
@@ -299,7 +296,7 @@ reserve.get_roomofweek = function(){
 reserve.add_option = function(val){
 	
 	//var val = JSON.parse(data);
-
+	
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
 	var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
 	
@@ -325,6 +322,7 @@ reserve.add_option = function(val){
 	
 	//reserve.calucate_option();
 }
+
 reserve.del_option = function(key,money){
 
 	//var val = JSON.parse(data);
@@ -342,6 +340,7 @@ reserve.del_option = function(key,money){
 	$('#total_price').html("฿ " + total);
 	//reserve.calucate_option();
 }
+
 reserve.modal = function(title,detail,image){
 	
 	var view = '<div class="media">';
@@ -357,6 +356,7 @@ reserve.modal = function(title,detail,image){
 	$('#modaldialog').modal();
 	
 }
+
 reserve.modal_nochange = function(){
 	
 	var title = 'ไม่สามารถยกเลิกได้และเปลี่ยนแปลงได้';
@@ -382,6 +382,7 @@ reserve.modal_nochange = function(){
 	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
 }
+
 reserve.modal_change = function(){
 	
 	var title = 'ยกเลิกได้และเปลี่ยนแปลงได้';
