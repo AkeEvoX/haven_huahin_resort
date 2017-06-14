@@ -9,15 +9,7 @@ include("../lib/common.php");
 	//echo json_encode(array("data"=>$reserve));
 //}
 
-//$_SESSION["query"] = $data;
-//"info"=>$_SESSION["info"]
-
-
-//var_dump($_SESSION["reserve"]);
-
-//echo print_r($_SESSION["reserve"]->reserve->rooms);
-//echo "<p>";
-
+//echo date('Y-m-d', strtotime('03-06-2017'))."<br>";
 
 if(isset($_SESSION["reserve"])){
 	

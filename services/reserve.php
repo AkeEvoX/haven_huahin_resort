@@ -75,6 +75,7 @@ if(isset($option_data)){
 						"key"=>$row->id
 						,"title"=>$row->title
 						,"price"=>$row->option_price
+						,"desc"=>$row->option_desc
 						);
 	}
 }

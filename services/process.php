@@ -150,7 +150,7 @@ function step_four($data){
 	,"fname"=>$data["fname"]
 	,"lname"=>$data["lname"]
 	,"prefix_mobile"=>$data["prefix_mobile"]
-	,"birthdate"=>$data["birth_date"] //$data["birth_year"].'-'.$data["birth_month"].'-'.$data["birth_date"]
+	,"birthdate"=>$data["birth_date"]
 	,"mobile"=>$data["mobile"]);
 
 	$_SESSION["customer"] = $customer;
@@ -177,19 +177,19 @@ function step_four($data){
 
 	/*insert rooms*/
 	foreach($_SESSION["reserve"]->rooms as $val){
-		$base->insert_rooms($unique_key,$val->id,$val->price,$val->bed);
+		$base->insert_rooms($unique_key,$val->package,$val->price,$val->bed);
 	}
 	
 	/*insert options*/
 	foreach($_SESSION["reserve"]->options as $val){
-		$base->insert_options($unique_key,$val->key,$val->price);
+		$base->insert_options($unique_key,$val->key,$val->price,$val->desc);
 	}
 
 	$receive = array($customer["email"]=>"customer");
 	$sender = "contact@baankunnan.com";
 	$sender_name = "system haven huahin resort";
 	$subject = "Thank You Reservation";
-	echo $message = "Your ID is ".$unique_key;
+	$message = "Your ID is ".$unique_key;
 	SendMail($receive,$sender,$subject,$message,$sender_name);
 	
 	//header("Location: ../confirmation.html?reserve_id=".$unique_key);

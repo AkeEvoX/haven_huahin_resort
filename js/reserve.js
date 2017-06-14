@@ -70,7 +70,7 @@ reserve.get_confirmation = function(){
 
 				item += "<div class='row'>";
 				item += "<div class='col-md-2'>&nbsp;</div>";
-				item += "<div class='col-md-7'>"+val.title+"</div>";
+				item += "<div class='col-md-7'>"+val.title+"<br>"+val.desc+"</div>";
 				item += "<div class='col-md-3 text-right'>฿ "+money+"</div>";
 				item += "</div>";
 			});
@@ -228,7 +228,7 @@ reserve.get_summary = function(){
 
 				item += "<div class='row'>";
 				item += "<div class='col-md-2'>&nbsp;</div>";
-				item += "<div class='col-md-7'>"+val.title+"</div>";
+				item += "<div class='col-md-7'>"+val.title+"<br/>"+val.desc+"</div>";
 				item += "<div class='col-md-3 text-right'>฿ "+money+"</div>";
 				item += "</div>";
 			})

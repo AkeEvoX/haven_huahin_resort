@@ -40,7 +40,7 @@ class Reserve_Manager{
 		
 		try{
 
-			$sql = "select r.unique_key,r.option_price,o.title_".$lang." as title,o.price ";
+			$sql = "select r.unique_key,r.option_key as id ,r.option_price,r.option_desc,o.title_".$lang." as title,o.price,o.detail_".$lang." as detail ";
 			$sql .= "from reserve_options r inner join room_options o on r.option_key = o.id where unique_key='".$unique_key."' ";
 			$result = $this->mysql->execute($sql);
 
@@ -58,7 +58,7 @@ class Reserve_Manager{
 		
 		try{
 
-			$sql = " select rr.unique_key,r.id,r.title_".$lang." as title ,rt.title_".$lang." as room_type ";
+			$sql = " select rr.unique_key,r.id,r.title_".$lang." as title ,rt.title_".$lang." as room_type,rr.room_price";
 			$sql .= " from reserve_rooms rr inner join room_packages r on rr.room_key = r.id ";
 			$sql .= " left join room_types rt on r.room_type = rt.id ";
 			$sql .= " where rr.unique_key='".$unique_key."'  ";
@@ -94,10 +94,10 @@ class Reserve_Manager{
 		
 		try{
 			
-			$start_date = $date = str_replace('/', '-', $info->date);
+			$start_date = $date = str_replace('/', '-', $info["start_date"]);
 			$start_date = date('Y-m-d', strtotime($start_date));
 			
-			$end_date = $date = str_replace('/', '-', $info->date);
+			$end_date = $date = str_replace('/', '-', $info["end_date"]);
 			$end_date = date('Y-m-d', strtotime($end_date));
 
 			$unique_key = self::generateRandomString();
@@ -122,7 +122,7 @@ class Reserve_Manager{
 			$last_name = $customer["lname"];
 			$prefix = $customer["prefix_mobile"];
 			$mobile = $customer["mobile"];
-			$birthdate = $customer["birthdate"];
+			$birthdate = date('Y-m-d', strtotime($customer["birthdate"]));
 			//cancel enter credit card 
 			/* 
 			$payment_type = $payment["card_type"];
@@ -163,10 +163,10 @@ class Reserve_Manager{
 		}
 	}
 
-	function insert_options($unique_key,$option_key,$price){
+	function insert_options($unique_key,$option_key,$price,$option_desc){
 		try{
-			$sql = "insert into reserve_options(unique_key,option_key,option_price)";
-			$sql .= "values('$unique_key','$option_key','$price'); ";
+			$sql = "insert into reserve_options(unique_key,option_key,option_price,option_desc)";
+			$sql .= "values('$unique_key','$option_key','$price','$option_desc'); ";
 			
 			log_warning("insert_options > " . $sql);
 			

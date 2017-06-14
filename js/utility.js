@@ -221,11 +221,13 @@ utility.load_prefix = function(obj){
 
 	$.getJSON('js/prefix_mobile.json',function(resp){
 		
+		
+		/* 
 		var items = resp.sort(function(a,b){
 			return a.name - b.name;
 		});
-		
-		console.log(items);
+		 */
+		//console.log(items);
 		
 		$.each(resp,function(name,prefix){
 			
@@ -234,13 +236,13 @@ utility.load_prefix = function(obj){
 			var list = $('#'+obj);
 			
 			list.append($('<option>', { 
-        		value: prefix,
+        		value : prefix,
         		text : "( "+name+" ) "+prefix
     		}));
 			
-			
-			//console.warn('('+ name + ') +'+prefix);
 		});
+		
+		//assing local prefix
 
 		
 	});
