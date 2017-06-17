@@ -22,7 +22,7 @@
 			<h3>Payment Success . </h3>
 				<h5>Thank you and have a nice day.</h5>
 				<h5>automatic redirect to quick reservation page in <span id='timer'>10</span> sec </h5>
-				<a class='btn btn-warning' href='../quick_reservation.html' >Home</a>
+				<a class='btn btn-warning' onclick='redirect()' href='javascript:void(0);' >Home</a>
 			</div>
 		</div>
 	</div>
@@ -35,13 +35,18 @@ $(document).ready(function(){
 	setInterval(function(){ 
 
 		if(timeout==0)
-			window.location ='../quick_reservation.html'; 
+			//window.location ='../quick_reservation.html?ref=' + utility.querystr("Ref"); 
+			redirect();
 		else{
 			timeout-=1;
 			$('#timer').html(timeout); 
 			console.log('timeout = '+timeout);
 		}
 	},1000);
+	
+	function redirect(){
+		window.location = '../services/payment_success.php?ref='+utility.querystr("Ref");
+	}
 
 });
 

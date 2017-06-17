@@ -94,17 +94,19 @@ class Reserve_Manager{
 		
 		try{
 			
-			$start_date = $date = str_replace('/', '-', $info["start_date"]);
+		/* 	$start_date = $date = str_replace('/', '-', $info["start_date"]);
 			$start_date = date('Y-m-d', strtotime($start_date));
 			
 			$end_date = $date = str_replace('/', '-', $info["end_date"]);
-			$end_date = date('Y-m-d', strtotime($end_date));
-
+			
+			$end_date = $info["end_date"]; */
+			
 			$unique_key = self::generateRandomString();
 
-			$reserve_startdate = $start_date;
-			$reserve_enddate = $end_date;
-			$reserve_status= "1"; /*0=delete,1=complete,2=cancel*/
+			$reserve_startdate = $info["start_date"];
+			$reserve_enddate = $info["end_date"];
+			$reserve_expire = $info["expire_date"];
+			$reserve_status= "0"; /*0=reserve,1=complete,2=cancel*/
 			$reserve_amount = $summary->total_amount;
 			$reserve_charge = $summary->charge;
 			$reserve_tax = $summary->tax;
@@ -122,8 +124,10 @@ class Reserve_Manager{
 			$last_name = $customer["lname"];
 			$prefix = $customer["prefix_mobile"];
 			$mobile = $customer["mobile"];
-			$birthdate = date('Y-m-d', strtotime($customer["birthdate"]));
+			$birthdate = $customer["birthdate"];
+			
 			//cancel enter credit card 
+			
 			/* 
 			$payment_type = $payment["card_type"];
 			$payment_number = $payment["card_number"];
@@ -133,10 +137,10 @@ class Reserve_Manager{
 			
 			$create_date = "now()";
 			
-			$sql = "insert into reserve_info(unique_key,reserve_startdate,reserve_enddate,reserve_status,reserve_amount,reserve_charge,reserve_tax,reserve_net,reserve_comment,adults,children,children_2,night,acc_code ";
+			$sql = "insert into reserve_info(unique_key,reserve_startdate,reserve_enddate,reserve_expire,reserve_status,reserve_amount,reserve_charge,reserve_tax,reserve_net,reserve_comment,adults,children,children_2,night,acc_code ";
 			$sql .= " ,email ,title_name,first_name,last_name,prefix,mobile,birthdate,create_date) ";
 			//$sql .= " ,payment_type,payment_number,payment_holder,payment_expire,payment_secure,create_date ) ";
-			$sql .= "values('$unique_key','$reserve_startdate','$reserve_enddate','$reserve_status','$reserve_amount','$reserve_charge','$reserve_tax'  ";
+			$sql .= "values('$unique_key','$reserve_startdate','$reserve_enddate','$reserve_expire','$reserve_status','$reserve_amount','$reserve_charge','$reserve_tax'  ";
 			$sql .= " ,'$reserve_net','$reserve_comment',$adults,$children,$children_2,$night,'$code'  ";
 			$sql .= " ,'$email','$title_name','$first_name','$last_name','$prefix','$mobile','$birthdate',$create_date); ";
 			//$sql .= " ,'$payment_type','$payment_number','$payment_holder','$payment_expire','$payment_secure',$create_date); ";
@@ -246,10 +250,11 @@ class Reserve_Manager{
 			$payment_amount = $data["payment_amount"];
 			$payment_remark = $data["remark"];
 			$payment_evident = $data["payment_evident"];
+			$reserve_status=1;//complete
 			
-			$sql = "update reserve_info set payment_type='$payment_type',payment_bank='$payment_bank',payment_holder='$payment_holder',payment_branch='$payment_branch' ";
-			$sql .= ",payment_date='$payment_date',payment_amount='$payment_amount',payment_evident='$payment_evident',payment_remark='$payment_remark' ,update_date=current_timestamp";
-			$sql .= "where unique_key='$reserve_id' ";
+			$sql = "update reserve_info set reserve_status='$reserve_status', payment_type='$payment_type',payment_bank='$payment_bank',payment_holder='$payment_holder',payment_branch='$payment_branch' ";
+			$sql .= ",payment_date='$payment_date',payment_amount='$payment_amount',payment_evident='$payment_evident',payment_remark='$payment_remark' ,update_date=current_timestamp ";
+			$sql .= " where unique_key='$reserve_id' ";
 			
 			log_warning("update payment > " . $sql);
 			
@@ -262,5 +267,22 @@ class Reserve_Manager{
 		}
 
 	}
-}
+
+		function payment_status($unique_key,$status){
+			try{
+			$update_date = 'now()';
+			$sql = "update reserve_info set reserve_status='".$status."', update_date=$update_date ";
+			$sql .= " where unique_key='".$unique_key."' ";
+			
+			log_warning("payment update > " . $sql);
+			
+			$result = $this->mysql->execute($sql);
+			
+			return $result;
+
+			}catch(Exception $e){
+				echo "Cannot Update Payment ".$unique_key." : ".$e->getMessage();
+			}
+		}
+	}
 ?>

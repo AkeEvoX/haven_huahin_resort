@@ -162,7 +162,16 @@ utility.date_format_th = function (date){
 
 utility.date_format = function (date,lang){
 	
-	var dates = date.split("/");
+	var dates = null;
+	if(date.indexOf('-')!=0){
+		dates = moment(date,'YYYY-MM-DD').format('DD-MM-YYYY').split("-");
+		//moment(date,'YYYY-MM-DD').format('DD/MM/YYYY')
+	}
+	else if(date.indexOf('/')!=0){
+		dates = moment(date,'YYYY/MM/DD').format('DD-MM-YYYY').split("-")//date.split("/");
+	}
+	
+	//var dates = date.split("/");
 	var months = Array();
 	var day = dates[0];
 	var month = parseInt(dates[1].replace("0",""))-1;

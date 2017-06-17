@@ -26,15 +26,20 @@ $data = $reserve_data->fetch_object();
 $info = null;
 $customer=null;
 $payment=null;
+
 if(isset($data)){
+
 	$info = array(
 				"date_start"=>$data->reserve_startdate
 				,"date_end"=>$data->reserve_enddate
+				,"date_expire"=>$data->reserve_expire
 				,"night"=>$data->night
 				,"adults"=>$data->adults
 				,"children"=>$data->children
 				,"children_2"=>$data->children_2
-				,"code"=>$data->acc_code);
+				,"code"=>$data->acc_code
+				,"comment"=>$data->reserve_comment
+				);
 
 	$customer = array(
 				"email"=>$data->email
@@ -45,8 +50,13 @@ if(isset($data)){
 				,"mobile"=>$data->mobile
 				,"birthdate"=>$data->birthdate
 				);
-				
-	/* $payment = array(
+	$summary = array(
+		"amount"=>$data->reserve_amount
+		,"charge"=>$data->reserve_charge
+		,"tax"=>$data->reserve_tax
+		,"net"=>$data->reserve_net
+	);
+		/* $payment = array(
 				"card_type"=>$data->payment_type
 				,"card_number"=>substr($data->payment_number,0,8)."xxxxxxxx"
 				,"card_holder"=>$data->payment_holder
@@ -84,7 +94,9 @@ $reserve = array("info"=>$info
 		,"rooms"=>$rooms
 		,"options"=>$options
 		,"customer"=>$customer
-		,"payment"=>$payment);
+		,"payment"=>$payment
+		,"summary"=>$summary
+		);
 
 echo json_encode(array("data"=>$reserve));
 

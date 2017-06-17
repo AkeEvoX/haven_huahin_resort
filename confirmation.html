@@ -8,6 +8,7 @@
 	<link href="plugin/bootstraps/css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="css/default.css" rel="stylesheet" type="text/css" />
 	<link href="plugin/jquery/ui/pepper_grinder/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="plugin/bootstraps/css/bootstrap-datetimepicker.css" />
 	<style>
 	div.ui-datepicker{
 		font-size:10px;
@@ -35,7 +36,7 @@
 		<!-- </div> -->
 		</div>
 		<div class='row rowspan' >
-			<form id='payFormCcard' action='https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp' method='post' >
+			<!-- <form id='payFormCcard' action='https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp' method='post' > -->
 			<table class='table table-bordered'  >
 				<tr>
 					<td class='col-md-12 bg-black' style='color:white;' colspan='2'>การจองของท่าน</td>
@@ -101,10 +102,115 @@
 				</tr>
 				<tr>
 					<td class='col-md-12 text-center' colspan='2'>
-						<a href='' class='btn btn-primary' onclick='payment_manual();' >ชำระธนาคาร</a>&nbsp;<button class='btn btn-success'>ชำระเงิน online</button> <a href='quick_reservation.html' class='btn btn-warning'>จองใหม่</a>
+						<a href='javascript:void(0);' class='btn btn-primary ' data-toggle="collapse" data-target="#payment_panel" aria-expanded="true" aria-controls="payment_panel">ชำระธนาคาร</a>&nbsp;<button class='btn btn-success' id='btn_payment_online'>ชำระเงิน online</button> <a href='quick_reservation.html' class='btn btn-warning'>จองใหม่</a>
+					</td>
+				</tr>
+				<tr id='payment_panel' class='collapse'>
+					<td class='col-md-12' colspan='2' >
+						<table class='table table-bordered bg-heading'  >
+							<tr>
+								<td class='col-md-12 bg-black' style='color:white;' colspan='2'>ข้อมูลการโอนเงินผ่านธนาคาร</td>
+							</tr>
+							<tr>
+								<td class='col-md-4 text-center'>
+									<h5 >
+										<span id='condition_info' style='color:red;'>หลังจากทำการจองกรุณาโอนเงินภายใน 24 ชั่วโมง</p> มิเช่นนั้นระบบจะทำการยกเลิกการจอง</span>
+									</h5>
+										<div class='well well-sm' style='background-color:white;'>
+											<img id='bank_payment' src='images/common/bk_bank.png' />
+											<h4 style='color:blue'>
+											<span id='bank_info'></p>
+												<span id='bank_account'>เลขที่บัญชี 3540804444</span></p>
+												<span id='bank_name'>ชื่อบัญชี บจก.เดอะ ฮาเว่น รีสอร์ท</span></p>
+												<span id='bank_branch'>สาขา บางกะปิ</span></p>
+												</p>
+											</span>
+											</h4>
+										</div>
+										<h5 >
+										<span id='evidence_transfer' style='color:red;'>หลังจากโอนเงินแล้วกรุณา</p>ส่งหลักฐานการชำระเงินด้วยค่ะ</span>
+									</h5>
+								</td>
+								<td class='col-md-8 text-center'>
+									<h3 style='color:blue;'><span id='paymen_info'>แจ้งการชำระเงิน</span></h3>
+									<form id='payment_form'  action='' method='post' enctype="multipart/form-data">
+									<div class="form-horizontal">
+										<div class="form-group">
+											<label for="payment_reserve_id" class="col-sm-3 control-label">หมายเลขการจอง : </label>
+											<div class="col-sm-7">
+												<input type='text' class='form-control' id="payment_reserve_id" name='payment_reserve_id' readonly>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="customer_name" class="col-sm-3 control-label">ชื่อผู้โอน : </label>
+											<div class="col-sm-7">
+												<input type='text' class='form-control' id="customer_name" name='customer_name' >
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="bank_name" class="col-sm-3 control-label">ธนาคารที่แจ้งโอน : </label>
+											<div class="col-sm-7">
+												<select class='form-control' id="bank_name" name='bank_name' >
+													<option value='bbl'>Bangkok Bank</option>
+													<option value='kbank'>Kasikorn Bank</option>
+													<option value='scb'>Siam Comecial Bank</option>
+													<option value='bay'>Krungsri Bank</option>
+													<option value='tmb'>TMB Bank</option>
+													<option value='tbank'>Thanachart Bank</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="branch_name" class="col-sm-3 control-label">สาขา : </label>
+											<div class="col-sm-7">
+												<input type='text' class='form-control' id="branch_name" name='branch_name' >
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="payment_amount" class="col-sm-3 control-label">ยอดเงิน : </label>
+											<div class="col-sm-7">
+												<input type='text' class='form-control' id="payment_amount" name='payment_amount' >
+											</div>
+										</div>
+											<div class="form-group">
+											<label for="file_evident" class="col-sm-3 control-label">หลักฐานการโอนเงิน : </label>
+											<div class="col-sm-7">
+												<input type='file' class='form-control' id="file_evident" name='file_evident' >
+												<span id='file_condition' style='color:green;'>ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประเภท PDF หรือ JPG, JPEG, PNG เท่านั้น</span>
+												<span id='file_warning' style='color:red;'>การใช้หลักฐานปลอม มีความผิดตาม พรบ. คอมพิวเตอร์</span>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="paymen_date" class="col-sm-3 control-label">วันที่โอน : </label>
+											<div class="col-sm-4">
+												<div class='input-group date' id='payment_date_ctrl'>
+													<input type='text' class='form-control' id='paymen_date'  name='payment_date'/><span class="input-group-addon">
+														<span class="glyphicon glyphicon-calendar"></span>
+													</span>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="remark" class="col-sm-3 control-label">หมายเหตุ : </label>
+											<div class="col-sm-7">
+												<input type='text' class='form-control' id="remark" name='remark' >
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="remark" class="col-sm-3 control-label">&nbsp;</label>
+											<div class="col-sm-7 text-center">
+												<input type='submit' class='btn btn-success' id="btn_payment" name='btn_payment' value='แจ้งโอนเงิน' >&nbsp;<input type='reset' class='btn btn-danger' id="btn_reset" name='btn_resert' value='ล้างข้อมูล' >
+											</div>
+										</div>
+									</div>
+									</form>
+								</td>
+							</tr>
+						</table>
 					</td>
 				</tr>
 			</table>
+			<form id='payFormCcard' action='https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp' method='post' >
 			<input type='hidden' name='merchantId' value="4796" />
 			<input type='hidden' name='amount' value="" />
 			<input type='hidden' name='orderRef' value="" />
@@ -116,16 +222,21 @@
 			<input type='hidden' name='payMethod' value="ALL" />
 			<input type='hidden' name='lang' value="E" />
 			<input type='hidden' name='remark' value="-" />
+			<input type='submit' id='btn_online' style='display:none;'/>
 			</form>
+			<!-- <form id='payment_form'  action='' method='post' enctype="multipart/form-data"> -->
+			<!-- </form> -->
 		</div>
 </div>
 
 <script src='plugin/jquery/jquery.min.js' ></script>
+
 <script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
-<script src='plugin/jquery/datepicker-th.js' ></script>
+<!-- <script src='plugin/jquery/datepicker-th.js' ></script> -->
 <script src='plugin/jquery/holder.js' ></script>
 <script src='plugin/jquery/moment.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
+<script src='plugin/bootstraps/js/bootstrap-datetimepicker.js' ></script>
 <script src='js/utility.js' ></script>
 <script src='js/reserve.js' ></script>
 
@@ -135,18 +246,32 @@
 
 	   reserve.get_confirmation();
 	   
+	   	$('#payment_date_ctrl').datetimepicker({
+			format:'DD/MM/YYYY'
+		});
+	   
 		$('#btn_print').click(function(){
 			var id = $('#reserve_id').html();
 			window.open('receipt.html?reserve_id='+id,'_blank');
 		});
+		
+		$('#payment_form').on('submit',function(e){
 
+				e.preventDefault();
+				//alert("Please wait....");
+				var args = new FormData(this);
+				args.append('type', 'manual');
+				//console.log(args);
+				reserve.payment_manual(args);
+		});
+		
+		$('#btn_payment_online').on('click',function(e){
+			$('#payFormCcard').submit();
+		});
 
-		function payment_manual(){
-			var id = $('#reserve_id').html();
-			window.open('payment_manual.html?reserve_id='+id,'_blank');
-		}
-	   
+   
    });
+      
   </script>
 </body>
 </html>

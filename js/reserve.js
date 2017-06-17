@@ -296,6 +296,156 @@ reserve.get_summary = function(){
 	});
 }
 
+
+reserve.get_receipt = function(val){
+	
+	var reserve_id = utility.querystr("reserve_id");
+	$('#reserve_id').html(reserve_id);
+	$('#title_reserve_id').html(reserve_id);
+	
+	//expire_date
+	var endpoint = "services/reserve.php";
+	var method="get";
+	//var args = {"_":new Date().getMilliseconds()};
+	var args = {"key":reserve_id,"_":new Date().getMilliseconds()};
+	utility.service(endpoint,method,args,function(result){
+		console.log(result);
+		var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
+		var info = result.data.info;
+		
+		var cust = result.data.customer;
+		var payment = result.data.payment;
+		var rooms = {};
+		var options = {};
+		var summary = {};
+		var summary_price = 0;
+		
+		var lang = 'en';
+		
+		$('#expire_date').html(utility.date_format(info.date_expire,lang));
+		$('#start_date').html(utility.date_format(info.date_start,lang));
+		$('#end_date').html(utility.date_format(info.date_end,lang));
+		
+		//customer information
+		$('#cust_name').html(cust.title+" "+cust.fname+ " "+cust.lname);
+		$('#cust_mobile').html(cust.prefix_mobile+""+cust.mobile);
+		$('#cust_email').html(cust.email);
+		/* 
+		$('#card_type').html(payment.card_type);
+		$('#card_holder').html(payment.card_holder);
+		$('#card_number').html(payment.card_number);
+		$('#card_expire').html(payment.card_expire);
+		$('#card_validate').html(payment.card_validate); */
+		
+			//define information
+		if(result.data !== undefined){
+			
+			rooms = result.data.rooms;
+			options = result.data.options;
+			summary = result.data.summary;
+			console.log(summary);
+		}
+		
+		
+		if(rooms!==null){
+			
+			$.each(rooms,function(i,val){
+				console.log("price="+val.price);
+				summary_price += parseFloat(val.price);
+				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");	
+				var item = "<div class='row rowspan'>";
+				 item += "<div class='col-md-3'><b>Room "+(i+1)+"</b><br/></div>";
+				 item += "<div class='col-md-7'>"+val.room+"<br/>"+val.type+ "</div>";
+				 item += "<div class='col-md-2 text-right'>"+money+"</div>";
+				 item += "</div>";
+				
+				$('#list_reserve').append(item);
+			});
+			
+			if(options !== null){
+				var item = "";
+				var price_option = 0;
+				
+				$.each(options,function(i,val){
+					//summary.total_amount += parseFloat(val.price);
+					summary_price += parseFloat(val.price);
+					price_option += parseFloat(val.price);
+
+					var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");	
+
+					item += "<div class='row'>";
+					item += "<div class='col-md-2'>&nbsp;</div>";
+					item += "<div class='col-md-7'>"+val.title+"</div>";
+					item += "<div class='col-md-3 text-right'>฿ "+money+"</div>";
+					item += "</div>";
+				});
+				
+				//summary options
+			var money = parseFloat(price_option).toFixed(2).replace(money_pattern,"$1,");	
+			var summary_tag = "<div class='row'>";
+			summary_tag += "<div class='col-md-2'><b>ทางเลือก</b></div>";
+		  	summary_tag += "<div class='col-md-7'>&nbsp;</div>";
+		   	summary_tag += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
+			summary_tag += "</div>";
+			item = summary_tag + item + "<hr/>";
+
+			$('#list_reserve').append(item);
+			
+			}
+			
+		}
+	
+		if(summary!=null){
+			
+			
+			var total = parseFloat(summary.amount).toFixed(2).replace(money_pattern,"$1,");	
+			var charge = parseFloat(summary.charge) ;
+			var tax_price = parseFloat(summary.tax);
+			var net_price = parseFloat(summary.net) + tax_price + charge;
+			var service = parseFloat(charge).toFixed(2).replace(money_pattern,"$1,");
+			var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");
+			var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");
+			
+			//console.log("service="+service_price);
+			
+			var item = "<div class='row rowspan'>";
+			item += "<div class='col-md-3'><b>Total</b><br/></div>";
+			item += "<div class='col-md-7'><br/>";
+			item += "<p>Not included : Service Charge</p>";
+			item += "<p>Not included : VAT</p>";
+			item += "<p>The taxes which are not included are to be paid to the hotel. The total amount is:</p>";
+			item += "</div>";
+			item += "<div class='col-md-2 text-right'>"+total+"<br/>";
+			item += "<p>"+service+"</p>";
+			item += "<p>"+tax+"</p>";
+			item += "<p>"+net+"</p>";
+			item += "</div>";
+			
+			$('#list_reserve').append(item);
+		}
+		
+	
+		
+		/*
+		<div class='row rowspan'>
+			<div class='col-md-3'><b>Total</b><br/></div>
+			<div class='col-md-7'><br/>
+				<p>Not included : Service Charge</p><br/>
+				<p>Not included : VAT</p><br/>
+				<p>The taxes which are not included are to be paid to the hotel. The total amount is:</p>
+			</div>
+			<div class='col-md-2 text-right'>
+				4,248.00
+			</div>
+		</div>
+		*/
+		
+		
+		
+	});
+}
+
+
 reserve.payment_manual = function(args){
 	
 	var endpoint = "services/payment.php";

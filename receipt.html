@@ -27,18 +27,18 @@
 				</tr>
 				<tr >
 					<td class='col-md-12' colspan='2' >
-						<p><b>Reservation : </b><span>tesT9a0pfa95ThHa</span></p>
-						<p><b>Rate Plan : </b><span>Internet-Rate </span></p>
+						<p><b>Reservation : </b><span id='title_reserve_id'>tesT9a0pfa95ThHa</span></p>
+						<p><b>Rate Plan : </b><span id='title_rate_plan'>Internet-Rate </span></p>
 					</td>
 				</tr>
 				<tr>
-					<td class='col-md-4' >
+					<td class='col-md-12' >
 						<b>Guest Information</b><br/><br/>
 						<span id='cust_name'>Mr. test testt</span><br/>
 						<span id='cust_mobile'>66875591895</span><br/>
 						<span id='cust_email'>gmassist@haven-huahin.com </span><br/>
 					</td>
-					<td class='col-md-8'>
+					<!-- <td class='col-md-8'>
 						<b>Reservation guarantee</b><br/>
 						<i><div class='pull-right'>Credit card type: <span id='card_type'>xxxx</span></div><br/>
 						Name of card : <span id="card_holder"></span><br/>
@@ -46,14 +46,14 @@
 						Expration date : <span id="card_expire"></span><br/>
 						Security code : <span id="card_validate"></span>
 						</i>
-					</td>
+					</td> -->
 				</tr>
 				<tr>
 					<td class='col-md-12' colspan='2' >
 						<div class='container'>
 							<div class='row'>
 								<div class='col-md-12'>
-									Reservation details, from Saturday, 18 March 2017 to Sunday, 19 March 2017 
+									Reservation details, from  <span id='start_date'>18 March 2017</span> to <span id='end_date'>Sunday, 19 March 2017 </span>
 								</div>
 							</div>
 							<div id='list_reserve'></div>
@@ -65,7 +65,7 @@
 					<b>Cancellation Policy </b><br/>
 					<span>
 					<small>
-					This offer can be canceled or modified free of charge until 2017-03-04, 00:00 (UTC).<br/>
+					This offer can be canceled or modified free of charge until <span id='expire_date'>2017-03-04</span>, 00:00 (UTC).<br/>
 					In case of cancellation after this date, a penalty of 100% of full stay will apply.<br/>
 					In case of no-show, a penalty of 100% of full stay will apply.<br/>
 					</small>
@@ -117,10 +117,11 @@ will be charge.<br/>
 <script src='plugin/jquery/jquery.min.js' ></script>
 <script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
 <script src='plugin/jquery/datepicker-th.js' ></script>
+<script src='plugin/jquery/moment.js' ></script>
 <script src='plugin/jquery/holder.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
 <script src='js/utility.js' ></script>
-<script src='js/selection.js' ></script>
+<script src='js/reserve.js' ></script>
 
 <script type="text/javascript">
 
