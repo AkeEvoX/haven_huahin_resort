@@ -18,9 +18,10 @@ reserve.get_confirmation = function(){
 		var summary;
 		var customer;
 		if(result.data.customer==null){
-			alert('Sorry!! Not Found Information Reserve.');
-			//window.location="quick_reservation.html";
-			//return false;
+			
+			alert(pages.message.reserve_not_found);
+			//'Sorry!! Not Found Information Reserve.'
+			
 		}
 		if(result.data.customer!=null){
 			
@@ -35,9 +36,9 @@ reserve.get_confirmation = function(){
 			var item = "<div class='row'>";
 			 item += "<div class='col-md-2'><label>ผู้เข้าพัก</label></div>";
 			 item += "<div class='col-md-7'>";
-			 item += "ผู้ใหญ่ : "+info.adults+" คน</br>";
-			 item += "เด็กอายุ 5-11 : "+info.children_2+" คน</br>";
-			 item += "เด็กอายุ 0 : 4 : "+info.children+" คน</br>";
+			 item += pages.message.adults + " : "+info.adults+" "+pages.message.person+"</br>";
+			 item += pages.message.children_2 + " : "+info.children_2+" "+pages.message.person+"</br>";
+			 item += pages.message.children + " : "+info.children+" "+pages.message.person+"</br>";
 			 item += "</div >";
 			 item += "<div class='col-md-3 text-right'><h4>&nbsp;</h4></div>";
 			 item += "</div ><hr/>";

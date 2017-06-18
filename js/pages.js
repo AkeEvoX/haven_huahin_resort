@@ -6,13 +6,18 @@ pages.init = function(name){
 	var path = "js/pages/"+lang+"/"+name+".json";
 	
 	$.getJSON(path,function (resp){
-		//console.log(resp);
 		$.each(resp,function(title,val){
 			console.log(title+"="+val);
 			$('#'+title).html(val);
 		});
 	});
 	
+	//get common language
+	path = "js/pages/"+lang+"/common.json";
+	$.getJSON(path,function(resp){
+			console.log(resp);
+			pages.message = resp;
+	});
 	
 }
 
@@ -32,6 +37,7 @@ pages.lang  = function(lang){
 			return localStorage.lang;
 		}
 	} else {
+			console.log("Sorry! No Web Storage support..");
     // Sorry! No Web Storage support..
 	}
 }

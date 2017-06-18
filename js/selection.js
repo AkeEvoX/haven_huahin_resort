@@ -85,8 +85,12 @@ reserve.get_info = function(){
 		var info = result.info;
 		var items = result.data;
 		if(info==null) { 
-			alert('Sorry!! Not Found Information Reserve.');
+			
+			
+			alert(pages.message.reserve_not_found);//'Sorry!! Not Found Information Reserve.'
+			
 			window.location="quick_reservation.html";
+			
 		}
 		
 		$('#data_reserve').val(JSON.stringify(result.data.reserve));

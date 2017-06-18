@@ -45,7 +45,7 @@ function set_view_options(resp){
 			items+="<div class='col-md-3'><img src='"+val.image+"' class='img-responsive' /></div>";
 			items+="<div class='col-md-7'>";
 			items+="<p><h4>"+val.title+"</h4></p>";
-			items+= "<p><a href='javascript:void(0);' data-toggle='collapse' data-target='#detail_"+val.id+"'>รายละเอียด ></a></p>";
+			items+= "<p><a href='javascript:void(0);' data-toggle='collapse' data-target='#detail_"+val.id+"'>"+pages.message.detail+" ></a></p>";
 			items+= "<div id='detail_"+val.id+"' class='collapse' ><i>"+val.detail+"</i></div>";
 			items+= val.remark+"</div>";
 			items+="<div class='col-md-2 text-right'><span>เลือก</span> <input type='checkbox' name='option_"+val.id+"' id='option_"+val.id+"' title='"+val.title+"' key='"+val.id+"' price='"+val.price+"' value='"+val.id+"' onchange=room_option_change('"+val.id+"') /></div>";
@@ -106,11 +106,11 @@ function calculate_diner(){
 		console.error(err);
 	}
 	//Thai Set Diner
-	var desc = '<i><small>';
-	desc+= '<div class=col-md-8 >adults = '+adult+' x '+adult_unit+ ' </div><div classcol-md-4> '+adult_total  + '</div>';
-	desc+= '<div class=col-md-8 >children age 5-11 = '+child+' x '+child_unit+ ' </div><div classcol-md-4> '+child_total  +'</div>';
-	desc+= '<div class=col-md-8 >children age 0-4 = 0 x '+baby_unit+ ' </div><div classcol-md-4> 0</div>';
-	desc+= '</small></i>';
+	var desc = "<i><small>";
+	desc+= "<div class=col-md-8 >"+pages.message.adults+" = "+adult+" x "+adult_unit+ " </div><div classcol-md-4> "+adult_total  + "</div>";
+	desc+= "<div class=col-md-8 >"+pages.message.children_2+" = "+child+" x "+child_unit+ " </div><div classcol-md-4> "+child_total  +	"</div>";
+	desc+= "<div class=col-md-8 >"+pages.message.children+" = 0 x "+baby_unit+ "</div><div classcol-md-4> 0</div>";
+	desc+= "</small></i>";
 
 	var result = JSON.parse('{"key":"1","title":"Thai Set Diner","desc":"'+desc+'","price":"'+net+'","adults":"'+adult+'","children":"'+baby_unit+'","children_1":"'+child_total+'"}');
 
@@ -132,6 +132,7 @@ function view_list_room(resp){
 			var templete = templete_master;
 			templete = templete.replace("{room_name}",room.title);
 			templete = templete.replace("{link_pop_detail}",set_room_detail(room.id));
+			templete = templete.replace("{message.detail}",pages.message.detail);
 			templete = templete.replace("{bed_list}",set_bed_list(room.beds,room.id));
 			templete = templete.replace("{gallery_list}",set_gallery_list(room.gallerys,room.id));
 			templete = templete.replace("{package_list}",set_package_list(room.packages,room.title,room.id));
@@ -290,34 +291,34 @@ function set_package_list(items,room_name,room_id){
 			result+= "<small class='list-group-item-text'>";
 			
 			if(package.food_service==1){
-				result+= "<div class='col-sm-3' onclick='reserve.modal_breakfast();' style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> รวมอาหารเช้า</div>";
+				result+= "<div class='col-sm-3' onclick='reserve.modal_breakfast();' style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> "+pages.message.breakfast +"</div>";
 			}
 			else{
-				result+= "<div class='col-sm-3' ><span class='glyphicon glyphicon-remove'></span> ไม่รวมอาหารเช้า</div>";
+				result+= "<div class='col-sm-3' ><span class='glyphicon glyphicon-remove'></span> "+pages.message.breakfast +"</div>";
 			}
 			
 			if(package.cancel_room==1){
-				result+= "<div class='col-sm-3' onclick='reserve.modal_change()'; style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>";
+				result+= "<div class='col-sm-3' onclick='reserve.modal_change()'; style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> "+pages.message.change_reserve +"</div>";
 			}
 			else{
-				result+= "<div class='col-sm-3' style='cursor:pointer;'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถเปลี่ยนแปลงหรือยกเลิกได้</div>";
+				result+= "<div class='col-sm-3' style='cursor:pointer;'><span class='glyphicon glyphicon-remove'></span> "+pages.message.no_change_reserve +"</div>";
 			}
 			
 			if(package.payment_online==1){
-				result+= "<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> ชำระเงินทางอินเตอร์เน็ต</div>";
+				result+= "<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> "+pages.message.internet +"</div>";
 			}
 			else{
-				result+= "<div class='col-sm-3' style='cursor:pointer;'><span class='glyphicon glyphicon-remove'></span> ไม่สามารถชำระเงินทางอินเตอร์เน็ต</div>";
+				result+= "<div class='col-sm-3' style='cursor:pointer;'><span class='glyphicon glyphicon-remove'></span> "+pages.message.no_internet +"</div>";
 			}
 			
-			result+= "<button onclick=add_room('"+package.id+"','"+encodeURIComponent(room_name)+"','"+encodeURIComponent(package.title)+"','"+package.price+"','"+room_id+"'); type='button' class='btn btn-default brown btn-sm col-sm-3'>เลือก</button>&nbsp;";
+			result+= "<button onclick=add_room('"+package.id+"','"+encodeURIComponent(room_name)+"','"+encodeURIComponent(package.title)+"','"+package.price+"','"+room_id+"'); type='button' class='btn btn-default brown btn-sm col-sm-3'>"+pages.message.choice +"</button>&nbsp;";
 			result+= "</small></span>";
 			
 		});
 	}
 	else{  //show room not available.
 		console.log( room_name +" :: package not found");
-		result="<span href='#' class='list-group-item text-center'> <h4>Room not available.</h4>";
+		result="<span href='#' class='list-group-item text-center'> <h4>"+pages.message.room_unavailabel+".</h4>";
 		result+="</span>";
 	}
 	
