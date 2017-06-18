@@ -266,7 +266,7 @@ function set_gallery_list(items,room_id){
 }
 
 function set_bed_list(items,room_id){
-	console.warn(items);
+	
 	var result = "<select class='form-control' id='type_bed_"+room_id+"' name='type_bed_"+room_id+"' >";
 	$.each(items,function(index){
 		var bed = items[index];
@@ -315,5 +315,11 @@ function set_package_list(items,room_name,room_id){
 			
 		});
 	}
+	else{  //show room not available.
+		console.log( room_name +" :: package not found");
+		result="<span href='#' class='list-group-item text-center'> <h4>Room not available.</h4>";
+		result+="</span>";
+	}
+	
 	return result;
 }

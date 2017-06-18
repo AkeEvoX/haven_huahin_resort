@@ -335,7 +335,7 @@
 								<label for="check_confirm">การดำเนินการเลือกจองห้องพัก ท่านอ่านและยอมรับ <a href='#'>เงื่อนไขการขาย</a> และ <a href='#'>นโยบายความเป็นส่วนตัว</a> เรียบร้อยแล้ว</label>
 						 </div><!--confirm reserve-->
 						 <div class="row form-group">
-								<button type='submit' class='btn btn-default brown col-sm-offset-4 col-sm-4' style='min-height:50px;'>ยืนยันการจอง</button>
+								<button type='submit' id='btn_confirm' class='btn btn-default brown col-sm-offset-4 col-sm-4' style='min-height:50px;' disabled>ยืนยันการจอง</button>
 						 </div><!--submit confirm-->
 						 <div class="row rowspan text-center">
 						 <p >ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมดาเนียมจนถึงวันที่  <span id='cancel_date'>4 มีนาคม 2560</span>, 00:00 (UTC+07:00)</p>
@@ -370,18 +370,22 @@
 
 		$('#btn_birthdate').datetimepicker({"format":"DD/MM/YYYY"});
 		utility.load_prefix('prefix_mobile');
+		
 	   $('#summary_form').on('submit',function(e){
 
 	   		//keep data to redirect complete
 			$('#data_reserve').val(JSON.stringify(reserve));
 			alert('บันทึกข้อมูลการจองเรียบร้อยแล้ว \r\n ขอบคุณที่ใช้บริการ.');
 
-			//e.preventDefault();
-			//window.location='quick_reservation.html';
-			//window.open("receipt.html");
+	   });
+	   
+	   $('#check_confirm').on('change',function(){
+	   
+			var check = !$(this).is(':checked');
+			$('#btn_confirm').prop('disabled',check);
+			
 	   });
 
-	   //reserve.get_info();
 	   reserve.get_summary();
    });
   </script>

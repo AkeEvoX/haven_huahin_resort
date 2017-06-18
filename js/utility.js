@@ -230,14 +230,6 @@ utility.load_prefix = function(obj){
 
 	$.getJSON('js/prefix_mobile.json',function(resp){
 		
-		
-		/* 
-		var items = resp.sort(function(a,b){
-			return a.name - b.name;
-		});
-		 */
-		//console.log(items);
-		
 		$.each(resp,function(name,prefix){
 			
 			
@@ -250,9 +242,6 @@ utility.load_prefix = function(obj){
     		}));
 			
 		});
-		
-		//assing local prefix
-
 		
 	});
 }

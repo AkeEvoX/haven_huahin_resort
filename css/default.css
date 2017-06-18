@@ -9,10 +9,15 @@
     background:#a18b12;
 	color:white;
 }
+
 .brown:hover {
     border-color:#cfb317;
 	background-color:#8a770f;
 	color:white;
+}
+
+.brown:disabled,.brown:hover:disabled{
+	background-color:gray;
 }
 
 a { color:#cfb317; }

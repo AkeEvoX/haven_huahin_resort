@@ -22,7 +22,7 @@
 			<h3>Cancel Payment. </h3>
 				<h5>A Reservation has been canceled, Thank you for your interest.</h5>
 				<h5>automatic redirect to back page in <span id='timer'>15</span> sec </h5>
-				<a class='btn btn-warning' id='backpage' onclick=redirect() href='javascript:void(0);' >Back</a>
+				<a class='btn btn-warning' id='backpage' onclick='redirect()' href='javascript:void(0);' >Back</a>
 			</div>
 		</div>
 	</div>
@@ -30,6 +30,7 @@
 <script src='../plugin/jquery/jquery.min.js'></script>
 <script src='../plugin/bootstraps/js/bootstrap.js' ></script>
 <script src='../js/utility.js' ></script>
+
 <script>
 $(document).ready(function(){
 
@@ -46,12 +47,12 @@ $(document).ready(function(){
 	},1000);
 	
 	
+
+
+});
 	function redirect(){
 		window.location ='../confirmation.html?reserve_id='+utility.querystr("Ref"); 
 	}
-
-});
-
 </script>
 </body>
 </html>

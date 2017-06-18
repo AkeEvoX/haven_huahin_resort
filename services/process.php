@@ -32,19 +32,6 @@ function step_one($args){
 	//detroy session
 	session_destroy();
 	session_start();
-	/*
-	##variable list
-	check_in_date 	date				14/04/2017
-	nights 			dropdown
-	adults 			dropdown
-	childern 			text
-	code 				text
-	*/
-	/*
-	#mysql  date_add
-	DATE_ADD(now(), INTERVAL 2 day) 
-
-	*/
 
 	$date = $args["check_in_date"];
 	$night = $args["nights"];
@@ -54,7 +41,7 @@ function step_one($args){
 	$code = $args["code"];
 	$start_date = $date;//str_replace('/','-',$date);
 	$end_date = date('d/m/Y',strtotime(str_replace('/','-',$start_date). "+ ". $night ."days")) ;
-	//$expire_date 
+	$expire_date = date('d/m/Y',strtotime(date('d-mY').'+ 14days'));
 	$data = array("date"=>$date
 		,"night"=>$night
 		,"adults"=>$adults
@@ -86,14 +73,10 @@ function step_two($data){
 	$_SESSION["info"]["children"] = $data["child_amount"];
 	$_SESSION["info"]["children_2"] = $data["child_2_amount"];
 	$_SESSION["info"]["code"] = $data["promo_code"];
-	$_SESSION["info"]["expire_date"] = date('d/m/Y',strtotime(str_replace('/','-',$data["checkpoint_date"]). "+ 14days")) ;
-	
-	//$_SESSION["reserve"]->summary = $data["promo_code"];
+	//$_SESSION["info"]["expire_date"] = date('d/m/Y',strtotime(str_replace('/','-',$data["checkpoint_date"]). "+ 14days")) ;
 	
 	//summary
 	//$reserve = json_decode($data["data_reserve"]);
-	
-	//var_dump($_SESSION["reserve"]);
 	
 	/*
 	//print value room reserve
@@ -186,8 +169,7 @@ function step_four($data){
 	// $_SESSION["payment"] = $payment;
 	// $_SESSION["payment"]["card_number"] =substr($data["card_number"],0,8)."xxxxxxxx";
 	
-	/*insert to database*/
-	
+	/*insert to database*/	
 	$base = new Reserve_Manager();
 	//$unique_key = generateRandomString();
 	$unique_key = $base->insert_reserve($info,$customer,$payment,$_SESSION["reserve"]->summary);

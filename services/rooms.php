@@ -91,22 +91,6 @@ function call_rooms_available($startdate,$enddate,$lange){
 			"gallerys"=>call_room_gallery($row->id,$lang)
 		);
 
-		/*
-		room name
-			->gallerys
-			->beds
-			->service
-				->thai Set Dinner , price
-				->Airport Transfer , price
-			->packates
-				->package_name
-				->price
-				->food_service on/off
-				->cancel_reserve on/off
-				->payment_online on/off
-
-		*/
-
 	}
 
 	return $result;

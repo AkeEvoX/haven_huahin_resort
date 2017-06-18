@@ -46,7 +46,7 @@
 						<div class='row'>
 							<div class='col-md-12'>
 							<h3 >หมายเลขการจอง : <span id='reserve_id'></span></h3>
-							<small>ทำโดย <span id='create_by'>test test</span></small>
+							<small>ทำโดย <span id='custome_name'>blank</span></small>
 							</div>
 						</div>
 						<div class='row rowspan'>
@@ -258,10 +258,8 @@
 		$('#payment_form').on('submit',function(e){
 
 				e.preventDefault();
-				//alert("Please wait....");
 				var args = new FormData(this);
 				args.append('type', 'manual');
-				//console.log(args);
 				reserve.payment_manual(args);
 		});
 		

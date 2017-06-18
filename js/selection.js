@@ -90,11 +90,10 @@ reserve.get_info = function(){
 		}
 		
 		$('#data_reserve').val(JSON.stringify(result.data.reserve));
-		console.warn($('#data_reserve').val());
+		//console.warn($('#data_reserve').val());
 		
 		//set rooms info;
-		//reserve.info = result.data.info;
-
+		
 		if(info!==null){
 			$('#checkpoint_date').val(info.start_date);
 			$('#travel_date').val(info.end_date);
@@ -113,9 +112,9 @@ reserve.get_info = function(){
 			var total =parseFloat(reserve.summary.total_amount).toFixed(2).replace(money_pattern,"$1,");
 			$('#total_price').html("฿ " + total);
 		}
-		
+		//set item room
 		if(items.reserve !==null && items.reserve.rooms !== null ){
-			//assign rooms list
+			//assign rooms to object
 			reserve.rooms = items.reserve.rooms;
 			$('#total_room').html(reserve.rooms.length); 
 			$.each(reserve.rooms,function(i,val){
@@ -134,9 +133,9 @@ reserve.get_info = function(){
 			
 			
 		}
-		
+		//set item options
 		if(items.reserve!=null && items.reserve.options!=null){
-			
+			//assing option to object
 			reserve.options = items.reserve.options;
 			
 			$.each(reserve.options,function(i,val){
@@ -151,10 +150,11 @@ reserve.get_info = function(){
 			});
 			
 		}
+		
+		
 		console.log("load information complete.");
 	});
 }
-
 
 reserve.get_roomofweek = function(){
 	var endpoint = "services/daysofweek.php";
@@ -279,6 +279,7 @@ reserve.modal_change = function(){
 	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
 }
+
 reserve.modal_internet = function(){
 	
 	var title = 'ชำระเงินจองทางอินเทอร์เน็ต';
@@ -303,6 +304,7 @@ reserve.modal_internet = function(){
 	$('#modal_condition').html(condition);
 	$('#modaldialog').modal();
 }
+
 reserve.modal_breakfast = function(){
 	
 	var title = 'อาหารเช้า';

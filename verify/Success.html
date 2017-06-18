@@ -28,6 +28,8 @@
 	</div>
 </div>
 <script src='../plugin/jquery/jquery.min.js'></script>
+<script src='../plugin/bootstraps/js/bootstrap.js' ></script>
+<script src='../js/utility.js' ></script>
 <script>
 $(document).ready(function(){
 
@@ -44,11 +46,11 @@ $(document).ready(function(){
 		}
 	},1000);
 	
+
+});
 	function redirect(){
 		window.location = '../services/payment_success.php?ref='+utility.querystr("Ref");
 	}
-
-});
 
 </script>
 </body>

@@ -56,13 +56,7 @@ if(isset($data)){
 		,"tax"=>$data->reserve_tax
 		,"net"=>$data->reserve_net
 	);
-		/* $payment = array(
-				"card_type"=>$data->payment_type
-				,"card_number"=>substr($data->payment_number,0,8)."xxxxxxxx"
-				,"card_holder"=>$data->payment_holder
-				,"card_expire"=>$data->payment_expire
-				,"card_validate"=>"xxx"
-				); */
+
 }
 			
 $room_data = $base->get_reserve_rooms($key,$lang);

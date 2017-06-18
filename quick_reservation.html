@@ -5,6 +5,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<meta name="lang" content="en">
 	<link href="plugin/bootstraps/css/bootstrap.css" rel="stylesheet" type="text/css" />
 	<link href="plugin/bootstraps/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
 	<!-- <link href="plugin/jquery/ui/pepper_grinder/jquery-ui.css" rel="stylesheet" type="text/css" /> -->
@@ -13,6 +14,7 @@
 			font-size:10px;
 		}
 	</style>
+	
 </head>
 <body>
 <div class='container'>
@@ -20,12 +22,12 @@
 		<div class='col-md-6'>
 			<div class="panel panel-warning">
 			  <div class="panel-heading">
-				<h3 class="panel-title">Quick Reservation</h3>
+				<h3 class="panel-title" id='lb_header'>Quick Reservation</h3>
 			  </div>
 			  <div class="panel-body">
 				<form class="form-horizontal" action='services/process.php?step=1' method='post'>
 					<div class="form-group">
-						<label for="check_in_date" class="col-md-4 control-label">Check In Date : </label>
+						<label for="check_in_date" class="col-md-4 control-label" id='lb_checkin'>Check In Date : </label>
 						<div class="col-sm-5">
 						  	<div class="input-group date" id='btn_calendar' >
 							  <input type="text" class="form-control" id='check_in_date' name='check_in_date' placeholder="" />
@@ -36,7 +38,7 @@
 						</div>
 					</div>
 					  <div class="form-group">
-						<label for="inputEmail3" class="col-sm-4 control-label">Nights : </label>
+						<label for="nights" class="col-sm-4 control-label" id='lb_night'>Nights : </label>
 						<div class="col-sm-3">
 						  <select class="form-control input-sm" id='nights'  name="nights" placeholder="Email">
 							<option value='1'>1</option>
@@ -53,7 +55,7 @@
 						</div>
 					  </div>
 					   <div class="form-group">
-						<label for="inputEmail3" class="col-sm-4 control-label">Adults : </label>
+						<label for="adults" class="col-sm-4 control-label" id='lb_adults'>Adults : </label>
 						<div class="col-sm-3">
 						  <select class="form-control input-sm" id='adults'  name="adults" placeholder="Email">
 							<option value='1'>1</option>
@@ -66,7 +68,7 @@
 						</div>
 					  </div>
 					   <div class="form-group">
-						<label for="inputEmail3" class="col-sm-4 control-label">Children 5-11 Year : </label>
+						<label for="children_2" class="col-sm-4 control-label" id='lb_children_2'>Children 5-11 Year : </label>
 						<div class="col-sm-3">
 						  <select class="form-control input-sm" id='children_2'  name="children_2" placeholder="children">
 						  	<option value='0'>0</option>
@@ -76,7 +78,7 @@
 						</div>
 					  </div>
 					  <div class="form-group">
-						<label for="inputEmail3" class="col-sm-4 control-label">Children 0-4 Year: </label>
+						<label for="children" class="col-sm-4 control-label" id='lb_children'>Children 0-4 Year : </label>
 						<div class="col-sm-3">
 						  <select class="form-control input-sm" id='children'  name="children" placeholder="children">
 						  	<option value='0'>0</option>
@@ -86,7 +88,7 @@
 						</div>
 					  </div>
 					  <div class="form-group">
-						<label for="inputEmail3" class="col-sm-4 control-label">Access Code /<br/> IATA Code : </label>
+						<label for="code" class="col-sm-4 control-label" id='lb_code'>Access Code /<br/> IATA Code : </label>
 						<div class="col-sm-3">
 						  <input type="text" class="form-control" id="code" name='code' maxlength='10' >
 						</div>
@@ -98,7 +100,7 @@
 					  </div>
 					  <div class="form-group">
 						<div class="col-sm-12">
-						  <h5 style='color:orange;'><a href='cancel_confirm.html'>Cancel Reservation</a> | <a href='#'>Option / Languages</a></h5>
+						  <h5 style='color:orange;'><a href='cancel_confirm.html' id='lb_cancel'>Cancel Reservation</a> | <a href='#' id='lb_language' data-toggle="modal" data-target="#modaldialog">Option / Languages</a></h5>
 						</div>
 					  </div>
 				</form>
@@ -107,24 +109,67 @@
 		</div>
 	</div>
 </div>
-
+<!--show modal-->
+<!-- Modal -->
+<div class="modal fade bs-example-modal-md" id="modaldialog" tabindex="-1" role="dialog" aria-labelledby="modaltitle">
+  <div class="modal-dialog modal-lg"  role="document">
+    <div class="modal-content" >
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="modaltitle">&nbsp;</h4>
+			</div>
+			<div class="modal-body"  >
+				<div id="modalcontent" >
+					<div class='row'>
+						<div class="form-group">
+							<label for="branch_name" class="col-sm-3 control-label">Language / ภาษา : </label>
+							<div class="col-sm-7">
+								<select id='lang_list' class='form-control'>
+									<option value='en'>English</option>
+									<option value='th'>Thailand</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<div class='modal-footer'>
+		<!-- data-dismiss="modal" -->
+		 <button type="button" class="btn btn-success"  id='btn_language'>OK</button> 
+		 <button type="button" class="btn btn-danger"  data-dismiss="modal">Cancel</button> 
+		</div>
+    </div>
+  </div>
+</div>
+	<!--show modal-->
 <script src='plugin/jquery/jquery.min.js' ></script>
-<!-- <script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script> -->
-<!-- <script src='plugin/jquery/datepicker-th.js' ></script> -->
-
 <script src='plugin/jquery/holder.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
 <script src='plugin/jquery/moment.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap-datetimepicker.js' ></script>
+<script src='js/utility.js' ></script>
+<script src='js/pages.js' ></script>
+
 <script type="text/javascript">
 
+	
 	$(document).ready(function(){
+	
+		pages.init('quick_reservation');
+		
 	   // $("#check_in_date").datepicker({ numberOfMonths:2}); 
 	   $('#btn_calendar').datetimepicker({"format":"DD/MM/YYYY"});
 
 	  //  $('#carlendar').on('click',function(e){
 			// $("#check_in_date").datepicker('show');
 	  //  });
+	  
+	  $('#btn_language').click(function(e){
+			var val = $('#lang_list').val();
+			pages.lang(val);
+			window.location.reload();
+	  });
+	  
    });
   </script>
 </body>

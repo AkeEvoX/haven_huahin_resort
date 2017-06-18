@@ -2,14 +2,8 @@
 session_start();
 include("../lib/common.php");
 
-//if(isset($_SESSION["query"])){
-	//$info = $_SESSION["query"];
-	//$reserve = array("info"=>$_SESSION["query"],"reserve"=>$_SESSION["reserve"]);
-	//"info"=> $info ,
-	//echo json_encode(array("data"=>$reserve));
-//}
-
-//echo date('Y-m-d', strtotime('03-06-2017'))."<br>";
+//$date = date('d/m/Y',strtotime(date('d-mY').'+ 14days'));
+//echo $date ."<br>";
 
 if(isset($_SESSION["reserve"])){
 	
