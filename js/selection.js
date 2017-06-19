@@ -234,12 +234,8 @@ reserve.modal = function(title,detail,image){
 }
 
 reserve.modal_nochange = function(){
-	
-	var title = 'ไม่สามารถยกเลิกได้และเปลี่ยนแปลงได้';
-	var view = '<div class="media">';
-	view += '<div class="media-body">ในกรณีที่ท่านไม่มาแสดงตัว จะมีค่าปรับ 100%<br/>';
-	//view += '<button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#modal_condition">เงื่อนไข</button></div>';
-	view += '</div>';
+	var title = pages.message.dialog_nochange_title; //"ไม่สามารถยกเลิกได้และเปลี่ยนแปลงได้";
+	var detail = pages.message.dialog_nochange_detail;
 	
 	var expireDate = new Date();
 	var numberOfDaysToAdd = 14;
@@ -249,6 +245,11 @@ reserve.modal_nochange = function(){
 	expireDate = utility.date_format(expireDate,lang);
 	var condition = utility.get_templete("templete_nochange_detail.html");
 	condition = condition.replace("{reserve_expire}",expireDate);
+	//detail = detail.replace("{reserve_expire}",expireDate);
+	var view = "<div class='media'>";
+	view += "<div class='media-body'>"+detail+"<br/>";
+	//view += '<button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#modal_condition">เงื่อนไข</button></div>';
+	view += "</div>";
 	
 	
 	$('#modaltitle').text(title);
@@ -261,17 +262,20 @@ reserve.modal_nochange = function(){
 
 reserve.modal_change = function(){
 	
-	var title = 'ยกเลิกได้และเปลี่ยนแปลงได้';
+	var title = pages.message.dialog_change_title ;
+	var detail = pages.message.dialog_change_detail; 
+	//'ยกเลิกได้และเปลี่ยนแปลงได้';
 	var expireDate = new Date();
 	var numberOfDaysToAdd = 14;
 	var lang = 'th';
 	expireDate.setDate(expireDate.getDate() + numberOfDaysToAdd); 
 	expireDate = moment(expireDate).format("DD/MM/YYYY");
 	expireDate = utility.date_format(expireDate,lang);
+	detail = detail.replace("{reserve_expire}",expireDate);
 	
-	var view = '<div class="media">';
-	view += '<div class="media-body">ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ '+expireDate+',00:00 (UTC+07:00) หลังจากวันที่ดังกล่าวอาจมีค่าธรรมเนียมในการยกเลิกหรือแก้ไข ในกรณีทีท่านไม่มาแสดงตัว จะมีค่าปรับ 100%</div>';
-	view += '</div>';
+	var view = "<div class='media'>";
+	view += "<div class='media-body'>"+detail+"</div>";
+	view += "</div>";
 
 	var condition = utility.get_templete("templete_change_detail.html");
 	condition = condition.replace("{reserve_expire}",expireDate);
@@ -286,11 +290,11 @@ reserve.modal_change = function(){
 
 reserve.modal_internet = function(){
 	
-	var title = 'ชำระเงินจองทางอินเทอร์เน็ต';
-	var view = '<div class="media">';
-	
-	view += '<div class="media-body">ชำระค่ามัดจำ 100% of 1 คืน เดี๋ยวนี้เพื่อรับรองการจองของท่าน ยอดเงินส่วนที่เหลือจะถูกเรียกเก็บที่โรงแรม</div>';
-	view += '</div>';
+	var title =   pages.message.dialog_internet_title;//'ชำระเงินจองทางอินเทอร์เน็ต';
+	var detail =  pages.message.dialog_internet_detail;
+	var view = "<div class='media'>";
+	view += "<div class='media-body'>"+detail+"</div>";
+	view += "</div>";
 	
 	var expireDate = new Date();
 	var numberOfDaysToAdd = 14;
@@ -311,10 +315,11 @@ reserve.modal_internet = function(){
 
 reserve.modal_breakfast = function(){
 	
-	var title = 'อาหารเช้า';
+	var title = pages.message_dialog_breakfast_title;//'อาหารเช้า';
+	var detail = pages.message_dialog_breakfast_detail;
 	var view = '<div class="media">';
 	
-	view += '<div class="media-body">เราให้บริการอาหารไทย และอาหารนานาชาติ คัดสรรคุณภาพดี รสชาติอร่อย และพิธีพิถันในการปรุงอาหาร <br/> เปิดบริการตั้งแต่เวลา 7.00 - 10.00 น.</div>';
+	view += "<div class='media-body'>"+detail+"</div>";
 	view += '</div>';
 	
 	var expireDate = new Date();
@@ -431,8 +436,6 @@ function call_room_detail_modal(title,room_name,room_type){
 //remove
 function add_default_condition(){
 	var condition= "";
-	
-	
 	
 	condition += "<p>Terms & Conditions</p>";
 	condition += "<p>* Full payment in advance required. Yur credit card will be charged at the time of reservation.<br/>";
