@@ -1,7 +1,7 @@
 <?php
 require_once("../../lib/database.php");
 require_once("../../lib/logger.php");
-class Room_Manager{
+class Bed_Manager{
 	
 	protected $mysql;
 	function __construct(){
@@ -14,7 +14,7 @@ class Room_Manager{
 		}
 		catch(Exception $e)
 		{
-			die("initial room manager error : ". $e->getMessage());
+			die("initial bed manager error : ". $e->getMessage());
 		}
 	}
 
@@ -22,14 +22,14 @@ class Room_Manager{
 		$this->mysql->disconnect();
 	}
 	
-	function insert_room_type($title_th,$title_en,$unit){
+	function insert_bed_type($title_th,$title_en){
 		
 		try{
 			
-			$sql = "insert into room_types(title_th,title_en,unit) ";
-			$sql .= "values('$title_th','$title_en',$unit) ";
+			$sql = "insert into bed_type (title_th,title_en) ";
+			$sql .= "values('$title_th','$title_en') ";
 			
-			log_warning("insert_room_type > " . $sql);
+			log_warning("insert_bed_type > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
 			
@@ -47,15 +47,15 @@ class Room_Manager{
 		
 	}
 	
-	function edit_room_type($id,$title_th,$title_en,$unit){
+	function edit_bed_type($id,$title_th,$title_en){
 		
 		try{
 			
-			$sql = "update room_types set ";
-			$sql .= " title_th='$title_th',title_en='$title_en',unit='$unit' ";
+			$sql = "update bed_type set ";
+			$sql .= " title_th='$title_th',title_en='$title_en' ";
 			$sql .= " where id='".$id."';";
 			
-			log_warning("edit_room_type > " . $sql);
+			log_warning("edit_bed_type > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
 			
@@ -73,14 +73,14 @@ class Room_Manager{
 	}
 	
 	
-	function delete_room_type($id){
+	function delete_bed_type($id){
 		
 		try{
 			
-			$sql = "delete from room_types ";
+			$sql = "delete from bed_type ";
 			$sql .= " where id='".$id."' ";
 			
-			log_warning("delete_room_type > " . $sql);
+			log_warning("delete_bed_type > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
 			
@@ -98,10 +98,10 @@ class Room_Manager{
 		
 	}
 	
-	function get_room_type($id){
+	function get_bed_type($id){
 		try{
 			
-			$sql = "select * from  room_types where id='".$id."' ";
+			$sql = "select * from  bed_type where id='".$id."' ";
 			log_warning("get_room_type > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
@@ -113,11 +113,11 @@ class Room_Manager{
 		}
 	}
 
-	function list_room_type(){
+	function list_bed_type(){
 		try{
 			
-			$sql = "select * from  room_types";
-			log_warning("list_room_type > " . $sql);
+			$sql = "select * from  bed_type";
+			log_warning("list_bed_type > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
 			

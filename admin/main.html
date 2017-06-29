@@ -68,9 +68,9 @@
 		  <label data-toggle="collapse" data-target="#menu_item">Item Manager</label>
 		  <ul id='menu_item' class="nav nav-sidebar">
 			<li><a href="javascript:void(0);" onclick=page.redirect('item_room.html')><span class='glyphicon glyphicon-chevron-right'></span> Room</a></li>
-            <li><a href=""><span class='glyphicon glyphicon-chevron-right'></span> Bed</a></li>
-            <li><a href=""><span class='glyphicon glyphicon-chevron-right'></span> Option</a></li>
-			<li><a href=""><span class='glyphicon glyphicon-chevron-right'></span> Package</a></li>
+            <li><a href="javascript:void(0);" onclick=page.redirect('item_bed.html') ><span class='glyphicon glyphicon-chevron-right'></span> Bed</a></li>
+            <li><a href="javascript:void(0);" onclick=page.redirect('item_option.html') ><span class='glyphicon glyphicon-chevron-right'></span> Option</a></li>
+			<li><a href="javascript:void(0);" onclick=page.redirect('item_package.html') ><span class='glyphicon glyphicon-chevron-right'></span> Package</a></li>
           </ul>
         </div>
         <div id='panel_page' class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -240,6 +240,7 @@
     <script src="../plugin/jquery/holder.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
+	<script src="../js/utility.js"></script>
 	<script src="js/page_manager.js"></script>
   </body>
 </html>
