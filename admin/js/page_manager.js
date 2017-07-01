@@ -4,6 +4,13 @@ var modal_control = '#modaldialog';
 var modal_content = '#modalcontent';
 var modal_title = '#modaltitle';
 
+$.ajaxSetup({
+		global: false,
+		processData: false,
+		contentType:false,
+		cache: false
+});
+
 page.redirect = function(url,callback){
 	$(page_console).load(url,function(){
 		
@@ -25,16 +32,16 @@ page.hide_modal = function(){
 	$(modal_control).modal('hide');
 }
 
-page.save = function(source,datas){
+page.save = function(source,form){
 	
-	$.post(source,$('#'+datas).serialize(),function(resp){
+	var data = new FormData($('#'+form)[0]);
+	$.post(source,data,function(resp){
+		
 		console.log("Save Success");
 		console.log(resp);
-		
 		alert("save complete");
 		page.data_reload();
 		page.hide_modal();
-		
 	});	
 }
 
@@ -45,13 +52,15 @@ page.modify = function(obj){
 	var _title = $(obj).attr("data-title");
 	//var dialog = $(obj).attr("");
 	//"services/room_service.php?type=item"
-	$.getJSON(_item,{"id":id},function(resp){
+	var data = new FormData($(this)[0]);
+	data.append("id",id);
+	$.post(_item,data,function(resp){
 		page.show_modal(_page,_title,function(){
 			$.each(resp.result,function(name,data){
 				$('#'+name).val(data);
 			});
 		});
-	});
+	},"JSON");
 	
 }
 
@@ -62,15 +71,17 @@ page.remove = function(obj){
 	var _page = $(obj).attr("data-page");
 	var _title = $(obj).attr("data-title");
 	
-	//console.log("delete id ="+id + ",source="+source);
-	
-	$.getJSON(_item,{"id":id},function(resp){
+	var data = new FormData($(this)[0]);
+	data.append("id",id);
+	//getJSON
+	$.post(_item,data,function(resp){
+		console.warn(resp);
 		page.show_modal(_page,_title,function(){
 			$.each(resp.result,function(name,data){
 				$('#'+name).val(data);
 			});
 		});
-	});
+	},"JSON");
 }
 
 page.data_reload = function(){

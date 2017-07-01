@@ -1,0 +1,31 @@
+.rowspan { padding-top:10px;}
+.stepflow_active { padding:3px 5px 3px 5px;background-color:gray; color:white}
+.stepflow {padding:3px 5px 3px 5px;border:1px solid; }
+.bg-black { background-color: #454545; }
+.bg-heading {  background-color:#f5f5f5; }
+.border-line { border-color:#ddd; }
+
+.brown {
+    background:#a18b12;
+	color:white;
+}
+
+.brown:hover {
+    border-color:#cfb317;
+	background-color:#8a770f;
+	color:white;
+}
+
+.brown:disabled,.brown:hover:disabled{
+	background-color:gray;
+}
+
+a { color:#0099ff; }
+
+#filter_bar {
+	background-color:#454545;
+}
+
+#filter_bar label{
+	color:white;
+}

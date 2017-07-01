@@ -1,0 +1,69 @@
+<form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
+	<ul id='menutab' class="nav nav-tabs nav-default">
+		<li role="presentation" class='active'>
+			<a class='menutab' href="#th" data-toggle="tab">TH</a>
+		</li>
+		<li role="presentation">
+			<a class='menutab' href="#en" data-toggle="tab">EN</a>
+		</li>
+	</ul>
+	<div class='tab-content' style='margin-top:10px;'>
+			<div id='th' class="tab-pane fade in active">
+				<div class="form-group">
+					<label for="title_th" class='col-md-3 control-label'>ชื่อบริการเสริม</label>
+					<div class='col-md-9'>
+						<input type="text" class="form-control" id="title_th" name='title_th' placeholder="" value='' />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="title_th" class='col-md-3 control-label'>รายละเอียด</label>
+					<div class='col-md-9'>
+						<textarea id='detail_th' name='detail_th' class='form-control' rows='5'></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="remark_th" class='col-md-3 control-label'>รายละเอียดราคา</label>
+					<div class='col-md-9'>
+						<textarea id='remark_th' name='remark_th' class='form-control' rows='5'></textarea>
+					</div>
+				</div>
+			</div>
+			<div id='en' class="tab-pane fade">
+				<div class="form-group rowspan">
+					<label for="title_en" class='col-md-3 control-label'>Name English</label>
+					<div class='col-md-9'>
+						<input type="text" class="form-control" id="title_en" name='title_en' placeholder="" value='' />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="title_en" class='col-md-3 control-label'>Detail</label>
+					<div class='col-md-9'>
+						<textarea id='detail_en' name='detail_en' class='form-control' rows='5'></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="remark_en" class='col-md-3 control-label'>Remark  Price</label>
+					<div class='col-md-9'>
+						<textarea id='remark_en' name='remark_en' class='form-control' rows='5'></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+		<label for="price" class='col-md-3 control-label'>ราคา / Price</label>
+		<div class='col-md-2'>
+			<input type="text" class="form-control" id="price" name='price' placeholder="" value='' />
+		</div>
+		</div>
+		<div class="form-group">
+			<label for="file_image" class='col-md-3 control-label'>รูป / Image</label>
+			<div class='col-md-9'>
+				<input type="file" class="form-control" id="file_image" name='file_image'  />
+			</div>
+		</div>
+</form>
+<div class="row">
+	<div class="col-sm-offset-3 col-sm-9">
+		<button class='btn btn-success' onclick=page.save('services/option_service.php?type=create','form_save') ><span class='glyphicon glyphicon-ok'></span>save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+	</div>
+  </div>
