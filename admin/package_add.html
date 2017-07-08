@@ -1,0 +1,75 @@
+<form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
+		<div class="form-group">
+				<label for="title_th" class='col-md-3 control-label'>ชื่อแพ็คเกจ</label>
+				<div class='col-md-9'>
+					<input type="text" class="form-control" id="title_th" name='title_th' placeholder="Room Name Thai" value='' />
+				</div>
+			</div>
+		<div class="form-group">
+			<label for="title_en" class='col-md-3 control-label'>Package Name</label>
+			<div class='col-md-9'>
+				<input type="text" class="form-control" id="title_en" name='title_en' placeholder="Room Name English" value='' />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="title_en" class='col-md-3 control-label'>ประเภทห้อง / Room Type</label>
+			<div class='col-md-9'>
+				<select class='form-control' id='room_type' name='room_type' ></select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="package_price" class='col-md-3 control-label'>ราคา / Price</label>
+			<div class='col-md-3'>
+				<input type="text" class="form-control" id="package_price" name='package_price' placeholder="Price" value='' />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="rent_unit" class='col-md-3 control-label'>จำนวนห้องพัก / Unit</label>
+			<div class='col-md-3'>
+				<input type="text" class="form-control" id="rent_unit" name='rent_unit' placeholder='Unit'  value='' />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="food_service" class='col-md-3 control-label'>Food Service</label>
+			<div class='col-md-1'>
+				<div class="material-switch pull-left">
+					<input id="food_service" name="food_service" type="checkbox"/>
+					<label for="food_service" class="label-success"></label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="cancel_room" class='col-md-3 control-label'>Cancel Room</label>
+			<div class='col-md-3'>
+				<div class="material-switch pull-left">
+					<input id="cancel_room" name="cancel_room" type="checkbox"/>
+					<label for="cancel_room" class="label-success"></label>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="payment_online" class='col-md-3 control-label'>Payment Online</label>
+			<div class='col-md-3'>
+				<div class="material-switch pull-left">
+					<input id="payment_online" name="payment_online" type="checkbox"/>
+					<label for="payment_online" class="label-success"></label>
+				</div>
+			</div>
+		</div>
+</form>
+<div class='row'>
+	<div class="col-sm-offset-3 col-sm-9">
+		<button class='btn btn-success' onclick=page.save('services/package_service.php?type=create','form_save') ><span class='glyphicon glyphicon-ok'></span>save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+	</div>
+</div>
+<script>
+$(document).ready(function(){
+
+	$.getJSON("services/room_service.php?type=listobject",function(resp){
+		$.each(resp.result,function(id,data){
+			var opt = new Option(data.title, data.id);
+			$("#room_type").append(opt);
+		});
+	});	
+});
+</script>

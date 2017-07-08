@@ -50,18 +50,16 @@ page.modify = function(obj){
 	var _item = $(obj).attr("data-item");
 	var _page = $(obj).attr("data-page");
 	var _title = $(obj).attr("data-title");
-	//var dialog = $(obj).attr("");
-	//"services/room_service.php?type=item"
 	var data = new FormData($(this)[0]);
+
 	data.append("id",id);
-	$.post(_item,data,function(resp){
-		page.show_modal(_page,_title,function(){
+	page.show_modal(_page,_title,function(){
+		$.post(_item,data,function(resp){
 			$.each(resp.result,function(name,data){
-				$('#'+name).val(data);
+				assign_value(name,data);
 			});
-		});
-	},"JSON");
-	
+		},"JSON");
+	});
 }
 
 page.remove = function(obj){
@@ -93,4 +91,23 @@ page.data_reload = function(){
 	$.getJSON(datasource,function(resp){
 		data.html(resp.result);
 	});
+}
+
+function assign_value(objName,value){
+
+	var obj = $('#'+objName);
+
+	switch (obj.prop("type")) {
+		case "text" :
+			obj.val(value);
+		break;
+		case "checkbox" :
+		case "radio" :
+			obj.prop("checked", value==1 ? true : false )
+		break;
+		case "select-one" : 
+			obj.val(value).change();
+		break;
+	}
+
 }

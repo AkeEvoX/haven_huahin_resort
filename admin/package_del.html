@@ -1,0 +1,19 @@
+<form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
+<div class="form-group">
+				<label for="id" class='col-md-3 control-label'>Remove Item No</label>
+				<div class='col-md-9'>
+					<input type="text" class="form-control" id="id" name='id' value='' readonly />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="title_en" class='col-md-3 control-label'>Name English</label>
+				<div class='col-md-9'>
+					<input type="text" class="form-control" id="title_en" name='title_en' placeholder="Room Name English" value='' />
+				</div>
+			</div>
+</form>
+<div class='row'>
+	<div class="col-sm-offset-3 col-sm-9">
+		<button class='btn btn-success' onclick=page.save('services/package_service.php?type=remove','form_save') ><span class='glyphicon glyphicon-ok'></span>save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+	</div>
+</div>

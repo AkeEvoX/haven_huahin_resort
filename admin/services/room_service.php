@@ -12,6 +12,9 @@ switch($type){
 	case "list": 
 		$result =  ListRoom();
 	break;
+	case "listobject": 
+		$result =  Listobject();
+	break;
 	case "item": 
 		$result =  GetRoomType();
 	break;
@@ -65,6 +68,22 @@ function DeleteRoom(){
 	$result = "delete success";
 	global $result_code; //call global variable
 	$result_code="0";
+	return $result;
+}
+
+function Listobject(){
+
+	$base = new Room_Manager();
+	$dataset = $base->list_room_type();
+	if($dataset){
+		
+		while($row = $dataset->fetch_object()){
+			$result[] = array("id"=>$row->id,"title"=>$row->title_en);
+		}
+	}
+
+	global $result_code; //call global variable
+	$result_code = "0";
 	return $result;
 }
 
