@@ -25,8 +25,8 @@
 					<table class='table table-bordered text-center'>
 					<tr >
 						<td class='col-md-10' style='background-color:#4EB022;color:#fff'>
-							<h4>ขอขอบคุณ การจองของท่านได้รับการยืนยันแล้ว !</h4>
-							อีเมลล์ยืนยันถูกส่งไปยัง <span id='customer_email' >..</span> แล้ว
+							<h4><span id='lb_thankyou'>ขอขอบคุณ การจองของท่านได้รับการยืนยันแล้ว !</span></h4>
+							<span id='lb_send_email'>อีเมลล์ยืนยันถูกส่งไปยัง </span><span id='customer_email' >..</span>
 						</td>
 						<td class='col-md-2 text-center' style='background-color:#333333;'><a href='javascript:void(0);' id='btn_print'><span class='glyphicon glyphicon-print' style='font-size:32px;'></span><br/>พิมพ์</a></td>
 					</tr>
@@ -36,38 +36,37 @@
 		<!-- </div> -->
 		</div>
 		<div class='row rowspan' >
-			<!-- <form id='payFormCcard' action='https://ipay.bangkokbank.com/b2c/eng/payment/payForm.jsp' method='post' > -->
 			<table class='table table-bordered'  >
 				<tr>
-					<td class='col-md-12 bg-black' style='color:white;' colspan='2'>การจองของท่าน</td>
+					<td class='col-md-12 bg-black' style='color:white;' colspan='2'><span id='lb_your_reserve'> การจองของท่าน</span></td>
 				</tr>
 				<tr class='bg-heading'>
 					<td class='col-md-12 ' colspan='2'>
 						<div class='row'>
 							<div class='col-md-12'>
-							<h3 >หมายเลขการจอง : <span id='reserve_id'></span></h3>
-							<small>ทำโดย <span id='custome_name'>blank</span></small>
+							<h3 ><span id='lb_reserve_number'> หมายเลขการจอง : </span> : <span id='reserve_id'></span></h3>
+							<small><span id='lb_reserve_by'>ทำโดย</span> <span id='custome_name'>blank</span></small>
 							</div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'>ที่อยู่</div>
-							<div class='col-md-9'><span id='customer_address'></span>1449  Chala samut Rd., Cha-am, Petchaburi 76120, Hua Hin, TH</div>
+							<div class='col-md-2'><span id='lb_title_address'>ที่อยู่</span></div>
+							<div class='col-md-9'><span id='lb_detail_address'>1449  Chala samut Rd., Cha-am, Petchaburi 76120, Hua Hin, TH</span></div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'>แผนกต้อนรับ</div>
-							<div class='col-md-9'>24 ชม./24</div>
+							<div class='col-md-2'><span id='lb_reception'>แผนกต้อนรับ<span></div>
+							<div class='col-md-9'><span id='lb_reception_time'>24 ชม./24</span></div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'>เช็คอิน</div>
-							<div class='col-md-9'><span id='checkin_date'>14:00</span></div>
+							<div class='col-md-2'><span id='lb_checkin'>เช็คอิน</span></div>
+							<div class='col-md-9'><span id='lb_checkin_time'>14:00</span></div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'>เช็คเอาท์</div>
-							<div class='col-md-9'><span id='checkout_date'>12:00</span></div>
+							<div class='col-md-2'><span id='lb_checkout'>เช็คเอาท์</span></div>
+							<div class='col-md-9'><span id='lb_checkout_time'>12:00</span></div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'>ภาษาพูด</div>
-							<div class='col-md-9'>อังกฤษ , ไทย</div>
+							<div class='col-md-2'><span id='lb_lang'>ภาษาพูด</span></div>
+							<div class='col-md-9'><span id='lb_lang_detail'>อังกฤษ , ไทย</span></div>
 						</div>
 					</td>
 				</tr>
@@ -78,24 +77,25 @@
 					<td class='col-md-4 text-center'>
 						<div class='row rowspan'>
 							<span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span></br>
-							<label>ราคาดีที่สุด</label>
+							<label><span id='lb_best_price'>ราคาดีที่สุด</span></label>
 							<p>
-								ท่านกำลังอยู่ที่เว็บไซต์ของโรงแรม ท่านจะได้รับ <br/>ราคาที่ดีที่สุดเนื่องจากไม่มีการผ่านคนกลาง
+								<span id='lb_info_1'>ท่านกำลังอยู่ที่เว็บไซต์ของโรงแรม ท่านจะได้รับ <br/>ราคาที่ดีที่สุดเนื่องจากไม่มีการผ่านคนกลาง</span>
 							</p>
 						</div>
 						<div class='row rowspan'>
 							<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span></br>
-							<label>ชำระเฉพาะเงินจอง</label>
+							<label><span id='lb_amount_reserve'>ชำระเฉพาะเงินจอง</span></label>
 							<p>
-								ใบสำคัญแสดงสิทธิฝากแจ้งให้ทราบล่วงหน้า 
+								<span id='lb_evident'>ใบสำคัญแสดงสิทธิฝากแจ้งให้ทราบล่วงหน้า </span>
 							</p>
 						</div>
 						<div class='row rowspan'>
 							<span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span></br>
-							<label>สามารถเปลี่ยนแปลงและยกเลิกได้</label><br/>
+							<label><span id='lb_cancel_info'>สามารถเปลี่ยนแปลงและยกเลิกได้</span></label><br/>
 							<div class='col-md-12'>
-							ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ <span id='cancel_date'> 4 มีนาคม 2560, 00:00 (UTC+07:00) </span>  (คำนวณจาก 14 วันก่อนการเข้าพัก)
-รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น
+							<span id='lb_condition_1'>
+							ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ </span><span id='cancel_date'> 4 มีนาคม 2560, 00:00 (UTC+07:00) </span><span id='lb_condition_2'>(คำนวณจาก 14 วันก่อนการเข้าพัก)
+รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น</span>
 	</div>
 						</div>
 					</td>
@@ -224,8 +224,6 @@
 			<input type='hidden' name='remark' value="-" />
 			<input type='submit' id='btn_online' style='display:none;'/>
 			</form>
-			<!-- <form id='payment_form'  action='' method='post' enctype="multipart/form-data"> -->
-			<!-- </form> -->
 		</div>
 </div>
 
@@ -238,12 +236,14 @@
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap-datetimepicker.js' ></script>
 <script src='js/utility.js' ></script>
+<script src='js/pages.js' ></script>
 <script src='js/reserve.js' ></script>
 
 <script type="text/javascript">
 
 	$(document).ready(function(){
 
+	   pages.init("confirmation");
 	   reserve.get_confirmation();
 	   
 	   	$('#payment_date_ctrl').datetimepicker({

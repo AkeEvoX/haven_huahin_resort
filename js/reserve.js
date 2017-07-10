@@ -69,7 +69,7 @@ reserve.get_confirmation = function(){
 					var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
 					var item = "<div class='row'>";
 					 item += "<div class='col-md-2'><label>ห้องพัก "+(i+1)+"</label></div>";
-					 item += "<div class='col-md-7'>";
+					 item += "<div class='col-md-7 col-xs-7 '>";
 					 item += val.room+"</br>";
 					 item += val.type+"</br>";
 					 item += "</div >";
@@ -111,33 +111,33 @@ reserve.get_confirmation = function(){
 		//summary price
 		if(summary!=null){
 			
-			var total = parseFloat(summary.amount).toFixed(2).replace(money_pattern,"$1,");	
+			var total_price = parseFloat(summary.amount);	
 			var charge = parseFloat(summary.charge) ;
 			var tax_price = parseFloat(summary.tax);
-			var net_price = parseFloat(summary.net) + tax_price + charge;
+			var net_price = parseFloat(total_price) + tax_price + charge;
+			var total = parseFloat(total_price).toFixed(2).replace(money_pattern,"$1,");
 			var service = parseFloat(charge).toFixed(2).replace(money_pattern,"$1,");
 			var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");
 			var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");
 			
 				var	item = "<div class='row'>";
-			item += "<div class='col-md-3 '><h4>รวม</h4></div>";
-			item += "<div class='col-md-offset-6 col-md-3 text-right'><span><h4>$ "+total+"</h4></span></div>";
-			item += "</div>";
-			
-				
-			item += "<div class='row'>";
-			item += "<div class='col-md-offset-2 col-md-3 '><h4>ค่าบริการ</h4></div>";
-			item += "<div class='col-md-offset-4 col-md-3 text-right'><span><h4>$ "+service+"</h4></span></div>";
+			item += "<div class='col-md-3 col-xs-3'><h4>รวม</h4></div>";
+			item += "<div class='col-md-offset-6 col-xs-offset-6 col-md-3 text-right'><b><h4>$ "+total+"</h4></b></div>";
 			item += "</div>";
 			
 			item += "<div class='row'>";
-			item += "<div class='col-md-offset-2 col-md-3 '><h4>ภาษีของรัฐ</h4></div>";
-			item += "<div class='col-md-offset-3 col-md-4 text-right'><span><h4>$ "+tax+"</h4></span></div>";
+			item += "<div class='col-md-offset-2 col-md-4 col-xs-7'>Not included: Service Charge</div>";
+			item += "<div class='col-md-offset-3 col-md-3 text-right'><span>$ "+service+"</h4></div>";
+			item += "</div>";
+			
+			item += "<div class='row'>";
+			item += "<div class='col-md-offset-2 col-md-4 col-xs-7'>Not included: VAT </div>";
+			item += "<div class='col-md-offset-3 col-md-3 text-right'><span>$ "+tax+"</span></div>";
 			item += "</div>";
 			
 			item += "<div class='row rowspan'>";
-			item += "<div class='col-md-offset-2 col-md-7'><pre><h4>รวมเป็นเงินที่ต้องชำระทั้งสิ้น</h4></pre></div>";
-			item += "<div class='col-md-3 text-right'><pre><h4>฿ "+net+"</h4></pre></div>";
+			item += "<div class='col-md-offset-2 col-md-7 col-xs-7'>The taxes which are not included are to be paid to the hotel. The total amount is: </div>";
+			item += "<div class='col-md-3 text-right'><b><h4>฿ "+net+"</h4></b></div>";
 			item += "</div>";
 
 			
@@ -198,13 +198,15 @@ reserve.get_summary = function(){
 			$('#travle_date').html(info.end_date);
 			
 			
-			
-			$('#date_start').html(utility.date_format(info.start_date,lang));
-			$('#date_end').html(utility.date_format(info.end_date,lang));
+			var start_date = moment(info.start_date,'DD-MM-YYYY').format('YYYY-MM-DD') ;
+			var end_date =  moment(info.end_date,'DD-MM-YYYY').format('YYYY-MM-DD') ;
+			var expire_date = moment(info.expire_date,'DD-MM-YYYY').format('YYYY-MM-DD') ;
+			$('#date_start').html(utility.date_format(start_date,lang));
+			$('#date_end').html(utility.date_format(end_date,lang));
 			
 			//var date = moment(info.start_date,'DD/MM/YYYY').add('days',14).format('DD/MM/YYYY');
 			//console.log("exp : " + date + " || start :" + info.start_date);
-			var expire_date = utility.date_format(info.expire_date,lang);// utility.date_format_th(date);
+			var expire_date = utility.date_format(expire_date,lang);// utility.date_format_th(date);
 			$('#cancel_date').html(expire_date);
 			$('#reserve_expire').html(expire_date);
 
@@ -433,10 +435,11 @@ reserve.get_receipt = function(val){
 		if(summary!=null){
 			
 			
-			var total = parseFloat(summary.amount).toFixed(2).replace(money_pattern,"$1,");	
+			var total_price = parseFloat(summary.amount);	
 			var charge = parseFloat(summary.charge) ;
 			var tax_price = parseFloat(summary.tax);
-			var net_price = parseFloat(summary.net) + tax_price + charge;
+			var net_price = parseFloat(total_price) + tax_price + charge;
+			var total = parseFloat(total_price).toFixed(2).replace(money_pattern,"$1,");
 			var service = parseFloat(charge).toFixed(2).replace(money_pattern,"$1,");
 			var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");
 			var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");
@@ -479,7 +482,6 @@ reserve.get_receipt = function(val){
 		
 	});
 }
-
 
 reserve.payment_manual = function(args){
 	

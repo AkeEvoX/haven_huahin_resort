@@ -27,10 +27,10 @@ function SendMail($receive,$sender,$subject,$message,$sender_name)
 		$mail->Username = "contact@baankunnan.com"; 
 		$mail->Password = "hmcKxJfCj"; 
 		$mail->SetFrom($sender, $sender_name);
-		$mail->AddCC('rsvn@haven-huahin.com', 'rsvn@haven-huahin.com');
-		$mail->AddCC('fo@haven-huahin.com', 'fo@haven-huahin.com');
-		$mail->AddCC('sales@haven-huahin.con', 'sales@haven-huahin.con');
-		$mail->AddCC('gmassist@haven-huahin.com', 'gmassist@haven-huahin.com');
+		//$mail->AddCC('rsvn@haven-huahin.com', 'rsvn@haven-huahin.com');
+		//$mail->AddCC('fo@haven-huahin.com', 'fo@haven-huahin.com');
+		//$mail->AddCC('sales@haven-huahin.con', 'sales@haven-huahin.con');
+		//$mail->AddCC('gmassist@haven-huahin.com', 'gmassist@haven-huahin.com');
 
 		//$mail->AddBcc("contact@baankunnan.com", "contact :: admin@haven-huahin-resort.com");
 		//$mail->AddReplyTo("mail@andamantaxis.com", "admin");
@@ -101,6 +101,34 @@ function upload_image($source,$distination){
 	else{
 		log_debug('upload image Failed. >'.$distination);
 	}
+}
+
+function full_date_format($date,$lang){
+
+
+	switch($lang){
+	case "en":
+
+		$month = date("m",strtotime($date));
+		$day =  date("d",strtotime($date));
+		$year = date("Y",strtotime($date));
+		$month_str = array("01"=>"January","02"=>"Faburary","03"=>"March","04"=>"May","05"=>"June","06"=>"June","07"=>"July","08"=>"August","09"=>"Sebtember","10"=>"Octuber","11"=>"November","12"=>"December");
+		$month = $month_str[$month];
+		$result = $month." ".$day." ".$year;
+
+	break;
+	case "th":
+		$month = date("m",strtotime($date));
+		$day =  date("d",strtotime($date));
+		$year = date("Y",strtotime($date)) + 543;
+		$month_str = array("01"=>"มกราคม","02"=>"กุมภาพันธ์","03"=>"มีนาคม","04"=>"เมษายน","05"=>"พฤษภาคม","06"=>"มิถุนายน","07"=>"กรกฏาคม","08"=>"สิงหาคม","09"=>"กันยายน","10"=>"ตุลาคม","11"=>"พฤศจิกายน","12"=>"ธันวาคม");
+		$month = $month_str[$month];
+		$result = $month." ".$day." ".$year;
+	break;
+	}
+
+	return $result;
+
 }
 
 ?>

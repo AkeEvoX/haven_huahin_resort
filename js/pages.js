@@ -7,7 +7,7 @@ pages.init = function(name){
 	
 	$.getJSON(path,function (resp){
 		$.each(resp,function(title,val){
-			console.log(title+"="+val);
+			//console.log(title+"="+val);
 			$('#'+title).html(val);
 		});
 	});
@@ -15,7 +15,7 @@ pages.init = function(name){
 	//get common language
 	path = "js/pages/"+lang+"/common.json";
 	$.getJSON(path,function(resp){
-			console.log(resp);
+			//console.log(resp);
 			pages.message = resp;
 	});
 	

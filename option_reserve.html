@@ -239,13 +239,14 @@
 <script src='plugin/jquery/holder.js' ></script>
 <script src='plugin/bootstraps/js/bootstrap.js' ></script>
 <script src='js/utility.js' ></script>
+<script src='js/pages.js' ></script>
 <script src='js/selection.js' ></script>
 <script src='js/rooms.js' ></script>
 <script src='js/common.js' ></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
-
+		pages.init("");
 		rooms.call_view_options(function(resp){
 			reserve.get_info();
 		});

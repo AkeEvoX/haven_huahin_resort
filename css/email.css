@@ -1,0 +1,39 @@
+body{
+	font-family : tahoma;
+}
+
+table{
+	border-collapse: collapse;
+	width:728px;
+}
+
+table tr td {
+	padding:10px;
+}
+
+.table_small {
+	font-size:8px;
+	color:gray;
+}
+
+.table_border{
+	border-collapse: collapse;
+	border:1px solid #999999;
+}
+.text-center{
+	 text-align: center;
+}
+.text-right{
+	text-align:right;
+}
+
+.text-top{
+	vertical-align:top;
+}
+.cus_title{
+	width:200px;
+}
+small {
+font-size:8px;
+color:gray;
+}

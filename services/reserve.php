@@ -3,19 +3,8 @@ session_start();
 include("../lib/common.php");
 include("../managers/reserve_manager.php");
 
-//if(isset($_SESSION["query"])){
-	//$info = $_SESSION["query"];
-	//$reserve = array("info"=>$_SESSION["query"],"reserve"=>$_SESSION["reserve"]);
-	//"info"=> $info ,
-	//echo json_encode(array("data"=>$reserve));
-//}
-//$_SESSION["query"] = $data;
-
-//var_dump($_SESSION);
-
 $key = GetParameter("key");
 if(!isset($key)) return;
-
 
 $lang = 'en';
 
@@ -58,33 +47,35 @@ if(isset($data)){
 	);
 
 }
-			
-$room_data = $base->get_reserve_rooms($key,$lang);
 
-if(isset($room_data)){
-	while($row = $room_data->fetch_object()){
-		$rooms[] = array(
-						"key"=>$row->id
-						,"room"=>$row->title
-						,"type"=>$row->room_type
-						,"price"=>$row->room_price
-						);
+
+	$room_data = $base->get_reserve_rooms($key,$lang);
+	
+	if(isset($room_data)){
+		while($row = $room_data->fetch_object()){
+			$rooms[] = array(
+			"key"=>$row->id
+			,"room"=>$row->title
+			,"type"=>$row->room_type
+			,"price"=>$row->room_price
+			,"bed_name"=>$row->bed_name
+			);
+		}
 	}
-}
 
-$option_data = $base->get_reserve_options($key,$lang);
-if(isset($option_data)){
-	while($row = $option_data->fetch_object()){
-		$options[] = array(
-						"key"=>$row->id
-						,"title"=>$row->title
-						,"price"=>$row->option_price
-						,"desc"=>$row->option_desc
-						);
+	$option_data = $base->get_reserve_options($key,$lang);
+	if(isset($option_data)){
+		while($row = $option_data->fetch_object()){
+			$options[] = array(
+							"key"=>$row->id
+							,"title"=>$row->title
+							,"price"=>$row->option_price
+							,"desc"=>$row->option_desc
+							);
+		}
 	}
-}
 
-$reserve = array("info"=>$info
+	$reserve = array("info"=>$info
 		,"rooms"=>$rooms
 		,"options"=>$options
 		,"customer"=>$customer

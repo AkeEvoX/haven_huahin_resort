@@ -58,9 +58,10 @@ class Reserve_Manager{
 		
 		try{
 
-			$sql = " select rr.unique_key,r.id,r.title_".$lang." as title ,rt.title_".$lang." as room_type,rr.room_price";
+			$sql = " select rr.unique_key,r.id,r.title_".$lang." as title ,rt.title_".$lang." as room_type,rr.room_price,bt.title_".$lang." as bed_name";
 			$sql .= " from reserve_rooms rr inner join room_packages r on rr.room_key = r.id ";
 			$sql .= " left join room_types rt on r.room_type = rt.id ";
+			$sql .= " left join bed_type bt on rr.bed_key = bt.id ";
 			$sql .= " where rr.unique_key='".$unique_key."'  ";
 			$result = $this->mysql->execute($sql);
 			
