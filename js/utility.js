@@ -245,6 +245,26 @@ utility.load_prefix = function(obj){
 		
 	});
 }
+//require moment.js  !!!
+utility.print_log = function(msg){
+	
+	if(window.console){
+		window.console.log(moment(new Date()).format("YYYY-MM-DD HH:mm:ss")+ " > " + JSON.stringify(msg));
+	}
+}
+
+utility.print_error = function(msg){
+	if(window.console){
+		window.console.error( moment(new Date()).format("YYYY-MM-DD HH:mm:ss")+ " > " + JSON.stringify(msg));
+	}
+}
+
+utility.print_warn = function(msg){
+	if(window.console){
+		window.console.warn(moment(new Date()).format("YYYY-MM-DD HH:mm:ss")+ " > " + msg);
+	}
+}
+
 
 
 function centerModal() {
@@ -273,4 +293,6 @@ function sortResults(obj,prop, asc) {
     return result;
     //showResults();
 }
+
+
 

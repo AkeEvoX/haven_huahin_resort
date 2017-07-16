@@ -48,16 +48,21 @@ reserve.get_confirmation = function(){
 		
 
 		var date = moment(result.data.info.date_start).add('days',14).format('DD/MM/YYYY');
-		console.log(date + " || " + result.data.info.date_start);
+		//console.log(date + " || " + result.data.info.date_start);
 		var cancel_date = utility.date_format_th(date);
 		$('#cancel_date').html(cancel_date);
 		
 		
 		//define information
 		if(result.data != undefined){
+
 			rooms = result.data.rooms;
 			options = result.data.options;
 			summary = result.data.summary;
+			reserve.rooms = result.data.rooms;	
+			//reserve.rooms = result.data.reserve.rooms;
+			//reserve.options = result.data.reserve.options;
+			//reserve.summary = result.data.reserve.summary;
 		}
 		
 		//list room
@@ -120,19 +125,19 @@ reserve.get_confirmation = function(){
 			var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");
 			var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");
 			
-				var	item = "<div class='row'>";
+			var	item = "<div class='row'>";
 			item += "<div class='col-md-3 col-xs-3'><h4>รวม</h4></div>";
 			item += "<div class='col-md-offset-6 col-xs-offset-6 col-md-3 text-right'><b><h4>$ "+total+"</h4></b></div>";
 			item += "</div>";
 			
 			item += "<div class='row'>";
-			item += "<div class='col-md-offset-2 col-md-4 col-xs-7'>Not included: Service Charge</div>";
-			item += "<div class='col-md-offset-3 col-md-3 text-right'><span>$ "+service+"</h4></div>";
+			item += "<div class='col-md-offset-2 col-md-6 col-xs-7'>Not included: Service Charge</div>";
+			item += "<div class='col-md-offset-1 col-md-3 text-right'><span>$ "+service+"</h4></div>";
 			item += "</div>";
 			
 			item += "<div class='row'>";
-			item += "<div class='col-md-offset-2 col-md-4 col-xs-7'>Not included: VAT </div>";
-			item += "<div class='col-md-offset-3 col-md-3 text-right'><span>$ "+tax+"</span></div>";
+			item += "<div class='col-md-offset-2 col-md-6 col-xs-7'>Not included: VAT </div>";
+			item += "<div class='col-md-offset-1 col-md-3 text-right'><span>$ "+tax+"</span></div>";
 			item += "</div>";
 			
 			item += "<div class='row rowspan'>";
@@ -156,17 +161,7 @@ reserve.get_confirmation = function(){
 			$('#list_reserve').append(item);
 		
 		}
-		// var total = parseFloat(summary_price).toFixed(2).replace(money_pattern,"$1,");
-		// var service_price = parseFloat(summary_price) * .10;
-		// var tax_price = parseFloat(summary_price) * .07 ;
-		// var net_price = parseFloat(summary_price) + tax_price + service_price;
-		// console.log(net_price);
-		// var service = parseFloat(service_price).toFixed(2).replace(money_pattern,"$1,");
-		// var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");
-		// var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");
-		
 	
-
 	});
 
 };

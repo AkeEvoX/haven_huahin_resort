@@ -2,14 +2,15 @@ var pages = {};
 pages.init = function(name){
 	
 	var lang = pages.lang();
-	console.log("language : "+lang);
+	console.log("language init: "+lang);
 	var path = "js/pages/"+lang+"/"+name+".json";
-	
 	$.getJSON(path,function (resp){
 		$.each(resp,function(title,val){
-			//console.log(title+"="+val);
+			//utility.print_log(title+ "|"+val);
 			$('#'+title).html(val);
 		});
+	}).fail(function(xhr,status,err){
+		utility.print_error("status:"+status + " <br/> Error : "+err);
 	});
 	
 	//get common language

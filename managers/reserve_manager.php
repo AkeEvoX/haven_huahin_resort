@@ -63,6 +63,9 @@ class Reserve_Manager{
 			$sql .= " left join room_types rt on r.room_type = rt.id ";
 			$sql .= " left join bed_type bt on rr.bed_key = bt.id ";
 			$sql .= " where rr.unique_key='".$unique_key."'  ";
+
+			//$sql = "call get_reserve_rooms('$unique_key','$lang')";
+
 			$result = $this->mysql->execute($sql);
 			
 			log_warning("get_reserve_rooms > " . $sql);
@@ -94,14 +97,7 @@ class Reserve_Manager{
 	function insert_reserve($info,$customer,$payment,$summary){
 		
 		try{
-			
-		/* 	$start_date = $date = str_replace('/', '-', $info["start_date"]);
-			$start_date = date('Y-m-d', strtotime($start_date));
-			
-			$end_date = $date = str_replace('/', '-', $info["end_date"]);
-			
-			$end_date = $info["end_date"]; */
-			
+		
 			$unique_key = self::generateRandomString();
 
 			$reserve_startdate = $info["start_date"];
@@ -127,24 +123,14 @@ class Reserve_Manager{
 			$mobile = $customer["mobile"];
 			$birthdate = $customer["birthdate"];
 			
-			//cancel enter credit card 
-			
-			/* 
-			$payment_type = $payment["card_type"];
-			$payment_number = $payment["card_number"];
-			$payment_holder = $payment["card_holder"];
-			$payment_expire = $payment["card_expire_month"]."/".$payment["card_expire_year"];
-			$payment_secure = $payment["card_validate"]; */
-			
 			$create_date = "now()";
 			
 			$sql = "insert into reserve_info(unique_key,reserve_startdate,reserve_enddate,reserve_expire,reserve_status,reserve_amount,reserve_charge,reserve_tax,reserve_net,reserve_comment,adults,children,children_2,night,acc_code ";
 			$sql .= " ,email ,title_name,first_name,last_name,prefix,mobile,birthdate,create_date) ";
-			//$sql .= " ,payment_type,payment_number,payment_holder,payment_expire,payment_secure,create_date ) ";
 			$sql .= "values('$unique_key','$reserve_startdate','$reserve_enddate','$reserve_expire','$reserve_status','$reserve_amount','$reserve_charge','$reserve_tax'  ";
 			$sql .= " ,'$reserve_net','$reserve_comment',$adults,$children,$children_2,$night,'$code'  ";
 			$sql .= " ,'$email','$title_name','$first_name','$last_name','$prefix','$mobile','$birthdate',$create_date); ";
-			//$sql .= " ,'$payment_type','$payment_number','$payment_holder','$payment_expire','$payment_secure',$create_date); ";
+
 			
 			log_warning("insert_reserve > " . $sql);
 			
@@ -246,14 +232,14 @@ class Reserve_Manager{
 			$payment_type = 'banking';
 			$payment_bank = $data["bank_name"];
 			$payment_holder =  $data["customer_name"];
-			$payment_branch = $data["branch_name"];
+			//$payment_time = $data["payment_time"];
 			$payment_date = $data["payment_date"];
 			$payment_amount = $data["payment_amount"];
 			$payment_remark = $data["remark"];
 			$payment_evident = $data["payment_evident"];
 			$reserve_status=1;//complete
 			
-			$sql = "update reserve_info set reserve_status='$reserve_status', payment_type='$payment_type',payment_bank='$payment_bank',payment_holder='$payment_holder',payment_branch='$payment_branch' ";
+			$sql = "update reserve_info set reserve_status='$reserve_status', payment_type='$payment_type',payment_bank='$payment_bank',payment_holder='$payment_holder' ";
 			$sql .= ",payment_date='$payment_date',payment_amount='$payment_amount',payment_evident='$payment_evident',payment_remark='$payment_remark' ,update_date=current_timestamp ";
 			$sql .= " where unique_key='$reserve_id' ";
 			

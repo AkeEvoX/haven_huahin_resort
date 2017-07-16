@@ -1,5 +1,6 @@
 <?php 
 require_once('class.phpmailer.php');
+require_once('logger.php');
 date_default_timezone_set('Asia/Bangkok');
 
 ini_set('display_errors', 1);
@@ -36,8 +37,14 @@ function SendMail($receive,$sender,$subject,$message,$sender_name)
 		//$mail->AddReplyTo("mail@andamantaxis.com", "admin");
 		
 		/*list receive email */
+		/*
 		foreach($receive as $email=>$name){
 			$mail->AddAddress($email,$item->$name); 
+		}
+		*/
+		//send email list
+		foreach($receive as $to){
+			$mail->AddAddress($to["email"],$to["alias"]);
 		}
 		
 		//$mail->AddAddress("sales@starsanitaryware.com"); 
@@ -50,8 +57,12 @@ function SendMail($receive,$sender,$subject,$message,$sender_name)
 			else 
 				echo "<script>alert('Sorry !! Can't Send email .');</script>";
 		} else {
-			if($_SESSION["lang"]!="en")
-				echo "<script>alert('ข้อมูลของคุณส่งเรียบร้อยแล้วค่ะ');</script>";
+			if($_SESSION["lang"]!="en"){
+				foreach($receive as $to){
+					log_info("Complete Send Email : " . $to["email"]);
+				}
+			}
+				//echo "<script>alert('ข้อมูลของคุณส่งเรียบร้อยแล้วค่ะ');</script>";
 			else 
 				echo "<script>alert('Send email complete, Thankyou.');</script>";
 		}

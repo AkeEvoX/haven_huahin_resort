@@ -33,8 +33,8 @@ function send_mail_complete($key){
 	$message = str_replace("{adults}",$reserve["info"]->adults,$message);
 	$message = str_replace("{children_2}",$reserve["info"]->children_2,$message);
 	$message = str_replace("{children_1}",$reserve["info"]->children,$message);
-
-	$message = str_replace("{customer_name}",$reserve["customer"]->fname,$message);
+	$cust_fullname = $reserve["customer"]->title_name . " " . $reserve["customer"]->fname . " ". $reserve["customer"]->lname;
+	$message = str_replace("{customer_name}",$cust_fullname,$message);
 	$message = str_replace("{customer_mobile}",$reserve["customer"]->mobile,$message);
 	$message = str_replace("{customer_email}",$reserve["customer"]->email,$message);
 	$message = str_replace("{list_reserve}",set_email_list_reserve($reserve),$message);

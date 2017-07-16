@@ -25,7 +25,7 @@ function payment_manual($items){
 	
 	if($_FILES['file_evident']['name']!=""){
 		
-					$filename = "images/evident/".  date("His") ."_".$_FILES['file_evident']['name'];
+					$filename = "images/evident/". date("His") ."_".$_FILES['file_evident']['name'];
 					$distination =  "../".$filename;
 					$source = $_FILES['file_evident']['tmp_name'];  
 					$items["payment_evident"] = $filename;

@@ -174,6 +174,8 @@ function step_four($data){
 	//$message = "Your ID is ".$unique_key;
 	$message = file_get_contents("../templete_email_booking.html");
 	$message = str_replace("{reserve_id}",$unique_key,$message);
+	$message = str_replace("{start_date}",full_date_format($info["start_date"],"en"),$message);
+	$message = str_replace("{end_date}",full_date_format($info["end_date"],"en"),$message);
 	$message = str_replace("{expire_date}",full_date_format($info["expire_date"],"en"),$message);
 	$message = str_replace("{adults}",$info["adults"],$message);
 	$message = str_replace("{children_2}",$info["children_2"],$message);

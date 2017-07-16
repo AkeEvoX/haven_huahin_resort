@@ -4,8 +4,12 @@ include("../lib/logger.php");
 include("../lib/common.php");
 include("../managers/reserve_manager.php");
 
-	$receive = array("werawat.limprasert@gmail.com"=>"customer");
-	//$receive[] = array("email"=>"neosvargalok@hotmail.com.com","alias"=>"support");
+	//$receive = array("neosvargalok@hotmail.com"=>"customer");
+	//$receive = array("werawat.limprasert@gmail.com"=>"customer");
+
+	$receive[] = array("email"=>"neosvargalok@hotmail.com.com","alias"=>"customer hotmail");
+	$receive[] = array("email"=>"werawat.limprasert@gmail.com","alias"=>"customer gmail");
+
 	//$receive="svargalok@gmail.com";
 	$sender = "contact@baankunnan.com";
 	$sender_name = "system haven huahin resort=".date("His");
@@ -27,9 +31,12 @@ include("../managers/reserve_manager.php");
 	$message = str_replace("{customer_mobile}",$reserve["customer"]->mobile,$message);
 	$message = str_replace("{customer_email}",$reserve["customer"]->email,$message);
 	$message = str_replace("{list_reserve}",set_email_list_reserve($reserve),$message);
-	echo $message;
 	
-	//SendMail($receive,$sender,$subject,$message,$sender_name);
+	SendMail($receive,$sender,$subject,$message,$sender_name);
+	foreach($receive as $to){
+		echo "send email complete." . $to['email']."</br>";
+	}
+
 
 function set_email_list_reserve($reserve){
 

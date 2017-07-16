@@ -1,8 +1,8 @@
 {
-"lb_title":"Your booking has been completed.",
-"lb_title_desc":"A completed email has been sent to",
+"lb_title":"Your booking has been canceled.",
+"lb_title_desc":"A cancellation email has been sent to",
 "lb_bt_new":"New Reservation.",
-"lb_cancel":"Your booking has been completed",
+"lb_cancel":"Your canceled booking",
 "lb_reserve_number":"Reserve Number",
 "lb_cust_name":"Customer Name : ",
 "lb_address":"Address",
@@ -22,12 +22,5 @@
 "lb_cancel_info":"You Can Change or Cancel Reserveation",
 "lb_condition_1":"ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ ",
 "lb_condition_2":"(คำนวณจาก 14 วันก่อนการเข้าพัก) รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น",
-"lb_alert":"your reservation has been completed \r\n Thanks for Interesting",
-"bank_bbl_name":"Account Name : The Haven Resort Co.,Ltd.  ",
-"bank_bbl_account":"Account No. : 354-0-80444-4   ",
-"bank_bbl_branch":"Branch : Hua Hin",
-"bank_tbank_name":"Account Name : Thanachart Bank PCL.",
-"bank_tbank_account":"Account No. : 069-2-04092-9 ",
-"bank_tbank_branch":"Branch : Union Mall Lat Phrao",
-"":""
+"lb_alert":"your reservation has been cancelled \r\n Thanks for interesting"
 }

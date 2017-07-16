@@ -68,7 +68,7 @@ class Room_Manager{
 			$sql .= "where info.create_date between '".$startdate." 00:00:00' and '".$enddate." 00:00:00' ";
 			$sql .= "group by b.room_key ";
 			$sql .= ") r on a.id = r.room_key ";
-			$sql .= "where COALESCE(r.reserve_unit, 0)  <= unit ";
+			$sql .= "where COALESCE(r.reserve_unit, 0)  <= unit order by a.seq ";
 			$result = $this->mysql->execute($sql);
 
 			log_warning("get_room_available > " . $sql);

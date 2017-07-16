@@ -20,7 +20,7 @@ if($verify->found=="0"){
 else{
 	$result = $base->cancel_reserve($key,$email);	
 	send_mail_cancel($key);
-	echo "<script>alert('Cancel reserve success. \\n Thank you.');window.location='../cancellation.html?reserve_id=".$key."';</script>";
+	echo "<script>alert('Your cancellation was successful. \\n Thank you.');window.location='../cancellation.html?reserve_id=".$key."';</script>";
 	//header("Location: ../cancellation.html?reserve_id=".$key);
 	exit();
 }
@@ -38,8 +38,8 @@ function send_mail_cancel($key){
 	$message = str_replace("{adults}",$reserve["info"]->adults,$message);
 	$message = str_replace("{children_2}",$reserve["info"]->children_2,$message);
 	$message = str_replace("{children_1}",$reserve["info"]->children,$message);
-
-	$message = str_replace("{customer_name}",$reserve["customer"]->fname,$message);
+	$cust_fullname = $reserve["customer"]->title_name . " " . $reserve["customer"]->fname . " ". $reserve["customer"]->lname;
+	$message = str_replace("{customer_name}",$cust_fullname,$message);
 	$message = str_replace("{customer_mobile}",$reserve["customer"]->mobile,$message);
 	$message = str_replace("{customer_email}",$reserve["customer"]->email,$message);
 	$message = str_replace("{list_reserve}",set_email_list_reserve($reserve),$message);
