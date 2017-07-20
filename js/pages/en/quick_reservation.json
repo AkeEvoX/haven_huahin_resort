@@ -1,8 +1,7 @@
 {
 "lb_header":"Quick Reservation",
-"lb_checkin":"Check In Date :",
+"lb_checkin":"Check In Date : ",
 "lb_night":"Nights",
-"lb_adults":"Adults",
 "lb_adults":"Adults",
 "lb_children_2":"Children 5-11 Year : ",
 "lb_children":"Children 0-4 Year : ",

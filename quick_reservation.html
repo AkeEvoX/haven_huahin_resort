@@ -27,7 +27,7 @@
 			  <div class="panel-body">
 				<form class="form-horizontal" action='services/process.php?step=1' method='post'>
 					<div class="form-group">
-						<label for="check_in_date" class="col-md-4 control-label" id='lb_checkin'>Check In Date : </label>
+						<label for="check_in_date" class="col-md-4 control-label lb_checkin" >Check In Date : </label>
 						<div class="col-sm-5">
 						  	<div class="input-group date" id='btn_calendar' >
 							  <input type="text" class="form-control" id='check_in_date' name='check_in_date' placeholder="" />
@@ -38,7 +38,7 @@
 						</div>
 					</div>
 					  <div class="form-group">
-						<label for="nights" class="col-sm-4 control-label" id='lb_night'>Nights : </label>
+						<label for="nights" class="col-sm-4 control-label lb_night" >Nights : </label>
 						<div class="col-sm-3">
 						  <select class="form-control input-sm" id='nights'  name="nights" placeholder="Email">
 							<option value='1'>1</option>
@@ -55,7 +55,7 @@
 						</div>
 					  </div>
 					   <div class="form-group">
-						<label for="adults" class="col-sm-4 control-label" id='lb_adults'>Adults : </label>
+						<label for="adults" class="col-sm-4 control-label lb_adults" >Adults : </label>
 						<div class="col-sm-3">
 						  <select class="form-control input-sm" id='adults'  name="adults" placeholder="Email">
 							<option value='1'>1</option>
@@ -68,7 +68,7 @@
 						</div>
 					  </div>
 					   <div class="form-group">
-						<label for="children_2" class="col-sm-4 control-label" id='lb_children_2'>Children 5-11 Year : </label>
+						<label for="children_2" class="col-sm-4 control-label lb_children_2" >Children 5-11 Year : </label>
 						<div class="col-sm-3">
 						  <select class="form-control input-sm" id='children_2'  name="children_2" placeholder="children">
 						  	<option value='0'>0</option>
@@ -78,7 +78,7 @@
 						</div>
 					  </div>
 					  <div class="form-group">
-						<label for="children" class="col-sm-4 control-label" id='lb_children'>Children 0-4 Year : </label>
+						<label for="children" class="col-sm-4 control-label lb_children">Children 0-4 Year : </label>
 						<div class="col-sm-3">
 						  <select class="form-control input-sm" id='children'  name="children" placeholder="children">
 						  	<option value='0'>0</option>
@@ -88,7 +88,7 @@
 						</div>
 					  </div>
 					  <div class="form-group">
-						<label for="code" class="col-sm-4 control-label" id='lb_code'>Access Code /<br/> IATA Code : </label>
+						<label for="code" class="col-sm-4 control-label lb_code">Access Code /<br/> IATA Code : </label>
 						<div class="col-sm-3">
 						  <input type="text" class="form-control" id="code" name='code' maxlength='10' >
 						</div>
@@ -100,7 +100,7 @@
 					  </div>
 					  <div class="form-group">
 						<div class="col-sm-12">
-						  <h5 style='color:orange;'><a href='cancel_confirm.html' id='lb_cancel'>Cancel Reservation</a> | <a href='#' id='lb_language' data-toggle="modal" data-target="#modaldialog">Option / Languages</a></h5>
+						  <h5 style='color:orange;'><a href='cancel_confirm.html' class='lb_cancel' >Cancel Reservation</a> | <a href='#'  class='lb_language' data-toggle="modal" data-target="#modaldialog">Option / Languages</a></h5>
 						</div>
 					  </div>
 				</form>
@@ -160,9 +160,6 @@
 	   // $("#check_in_date").datepicker({ numberOfMonths:2}); 
 	   $('#btn_calendar').datetimepicker({"format":"DD/MM/YYYY"});
 
-	  //  $('#carlendar').on('click',function(e){
-			// $("#check_in_date").datepicker('show');
-	  //  });
 	  
 	  $('#btn_language').click(function(e){
 			var val = $('#lang_list').val();

@@ -124,11 +124,10 @@ reserve.get_info = function(){
 			$.each(reserve.rooms,function(i,val){
 				
 				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
-				
 				var item = "<span id='"+val.key+"' href='#' class='list-group-item'>";
-				item += "<h4 class='list-group-item-heading'>ห้องพัก "+(i+1)+"<span class='pull-right'>฿ "+money+"</span></h4>";
+				item += "<h4 class='list-group-item-heading'>"+pages.message.room+" "+(i+1)+"<span class='pull-right'>฿ "+money+"</span></h4>";
 				item += "<h4 class='list-group-item-text '>";
-				item += val.room +" <small class='pull-right' style='cursor:pointer;' onclick=del_room("+val.key+") >นำออก</small> ";
+				item += val.room +" <small class='pull-right' style='cursor:pointer;' onclick=del_room("+val.key+") >"+pages.message.remove+"</small> ";
 				item += val.type + "</h4></span>";
 
 				$('#list_reserve').append(item);
@@ -349,7 +348,6 @@ reserve.modal_view_deluxe = function(){
 reserve.modal_view_superior = function(){
 	call_room_detail_modal("Superior","superior","2");
 }
-
 
 reserve.modal_room_detail =function (id){
 	

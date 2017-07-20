@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("../../lib/common.php");
-include("../../lib/logger.php");
 include("../managers/package_manager.php");
 
 #get parameter

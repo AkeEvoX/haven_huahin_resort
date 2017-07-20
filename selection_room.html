@@ -38,7 +38,7 @@
 					<div class='row'>
 						<div class='col-sm-3'>
 							 <div class="form-group">
-							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span><span id='lb_checkin'> Check In</span></label>
+							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span><span class='lb_checkin'> Check In</span></label>
 							<div class="input-group date" id='btn_checkin' >
 							  <input type="text" class="form-control" id='checkpoint_date' name='checkpoint_date' placeholder="" />
 							   <span class="input-group-addon">
@@ -50,7 +50,7 @@
 						</div>
 						<div class='col-sm-3'>
 							<div class="form-group">
-							<label for="travel_date"><span class='glyphicon glyphicon-calendar'></span><span id='lb_checkout'> Check Out</span></label>
+							<label for="travel_date"><span class='glyphicon glyphicon-calendar'></span><span class='lb_checkout'> Check Out</span></label>
 							<!-- <input type="text" class="form-control" id="travel_date" name="travel_date" placeholder="" > -->
 							<div class="input-group date" id='btn_checkout' >
 							  <input type="text" class="form-control" id='travel_date' name='travel_date' placeholder="" />
@@ -62,7 +62,7 @@
 						</div>
 						<div class='col-sm-3'>
 							<div class="form-group">
-							<label for="night_unit"><span class='glyphicon glyphicon-time'></span>&nbsp;<span id='lb_night'>Night</span></label>
+							<label for="night_unit"><span class='glyphicon glyphicon-time'></span>&nbsp;<span class='lb_night'>Night</span></label>
 							<input type='text' id="night_unit" name='night_unit' class='form-control' placeholder="" value='' readonly>
 						  </div>
 						 </div>
@@ -73,7 +73,7 @@
 					<div class='row'>
 						<div class='col-sm-3'>
 							<div class="form-group">
-							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span>&nbsp;<span id='lb_adults'>Adults</span></label>
+							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span>&nbsp;<span class='lb_adults'>Adults</span></label>
 							<div class="input-group" style='z-index: 0;'>
 								  <div class="input-group-btn">
 									<button type='button' onclick='adult_decrease()' class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-minus'></span></button>
@@ -87,7 +87,7 @@
 						</div>
 						<div class='col-sm-3'>
 							<div class="form-group">
-							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span>&nbsp;<span id='lb_children_2'>Children 5 - 11 Year</span></label>
+							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span>&nbsp;<span class='lb_children_2'>Children 5 - 11 Year</span></label>
 							<div class="input-group" style='z-index: 0;'>
 								  <div class="input-group-btn">
 									<button type='button' onclick="child_decrease('child_2_amount')" class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-minus'></span></button>
@@ -101,7 +101,7 @@
 						  </div>
 						  <div class='col-sm-3'>
 							<div class="form-group">
-							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span>&nbsp;<span id='lb_children'>Children 0 - 4 Year</span></label>
+							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span>&nbsp;<span class='lb_children'>Children 0 - 4 Year</span></label>
 							<div class="input-group" style='z-index: 0;'>
 								  <div class="input-group-btn">
 									<button type='button' onclick="child_decrease('child_amount')"  class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-minus'></span></button>
@@ -117,7 +117,7 @@
 					<div class='row'>
 						<div class='col-sm-3'>
 							 <div class="form-group">
-							<label for="promo_code"><span class='glyphicon glyphicon-tasks'></span><span id='lb_code'> Access Code</span></label>
+							<label for="promo_code"><span class='glyphicon glyphicon-tasks'></span><span class='lb_code'> Access Code</span></label>
 							  <input type="text" class="form-control" id='promo_code' name='promo_code' placeholder="Package Code" />
 						  </div>
 						</div>
@@ -131,8 +131,8 @@
 	<div class='row rowspan' >
 		<div class='col-md-7'>
 			<div class='row'>
-				<h3 style='color:#996600;font-weight:bold;'><span id='lb_select_room'>เลือกห้องพักของท่าน</span></h3>
-				<span style='color:#ff9900;font-weight:bold;' ><span id='lb_best_room'>เลือกห้องพักจากราคาที่ดีที่สุดจากเรา</span></span>
+				<h3 style='color:#996600;font-weight:bold;'><span class='lb_select_room'>เลือกห้องพักของท่าน</span></h3>
+				<span style='color:#ff9900;font-weight:bold;' ><span class='lb_best_room'>เลือกห้องพักจากราคาที่ดีที่สุดจากเรา</span></span>
 			</div>
 			<div id="list_room"></div>
 		</div>
@@ -143,16 +143,16 @@
 			<div class='row'>
 				<div id='list_reserve' class="list-group rowspan" style='margin:10px;'>
 					<span href="#" class="list-group-item">
-						<h4 class="list-group-item-heading"><span id='lb_summary'>summary </span><span id='total_price' name='total_price' class='pull-right'>฿ 0</span></h4>
+						<h4 class="list-group-item-heading"><span class='lb_summary'>summary </span><span id='total_price' name='total_price' class='pull-right'>฿ 0</span></h4>
 						<p class="list-group-item-text ">
-						<span id='lb_total_detail'>รายละเอียด</span>  <span class='pull-right'><span id='total_room'>0</span> <span id='lb_room_unit'>ห้องพัก</span>, <span id='total_night'>0</span> <span id='lb_night_unit'>Night</span></span>
+						<span class='lb_total_detail'>รายละเอียด</span>  <span class='pull-right'><span id='total_room'>0</span> <span class='lb_room_unit'>ห้องพัก</span>, <span id='total_night'>0</span> <span class='lb_night_unit'>Night</span></span>
 						</p>
 					 </span>
 				</div>
 				<hr/>
 			</div>
 			<div class='row'>
-				<button type='submit' class='btn btn-default brown col-sm-offset-1 col-sm-10' style='min-height:50px;'><span id='lb_submit'>ตรวจสอบความถูกต้อง</span></button>
+				<button type='submit' class='btn btn-default brown col-sm-offset-1 col-sm-10' style='min-height:50px;'><span class='lb_submit'>ตรวจสอบความถูกต้อง</span></button>
 			</div>
 			<input type='hidden' id='data_reserve' name='data_reserve' />
 			

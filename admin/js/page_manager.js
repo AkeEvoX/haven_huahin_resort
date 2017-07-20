@@ -96,8 +96,9 @@ page.data_reload = function(){
 function assign_value(objName,value){
 
 	var obj = $('#'+objName);
-
+	
 	switch (obj.prop("type")) {
+		case "textarea":
 		case "text" :
 			obj.val(value);
 		break;

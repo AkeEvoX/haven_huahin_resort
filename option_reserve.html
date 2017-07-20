@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/home.dwt.php" codeOutsideHTMLIsLocked="false" -->
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <title>Welcome to Thai Haven Resort</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -20,13 +20,13 @@
 	<form id='option_form' action='services/process.php?step=3' method='post' >
 		<div class='row rowspan' >
 			<div class='col-md-4 text-center'>
-				<span class="stepflow">1</span><a href='selection_room.html'> เลือกห้องพัก</a>
+				<span class="stepflow"><a href='selection_room.html'> <span class='lb_step_1'></span></a> </span>
 			</div>
 			<div class='col-md-4 text-center'>
-				<span class="stepflow_active" >2</span> เลือกบริการเสริม
+				<span class="stepflow_active" ><span class='lb_step_2'></span></span>  
 			</div>
 			<div class='col-md-4 text-center'>
-				<span class="stepflow">3</span>การจอง
+				<span class="stepflow"><span class='lb_step_3'></span></span>
 			</div>
 		</div>
 		<div class='row rowspan' >
@@ -35,7 +35,7 @@
 					<div class='row'>
 						<div class='col-sm-3'>
 							 <div class="form-group">
-							<label for="checkpoint_date"><span class='glyphicon glyphicon-calendar'></span> Check In</label>
+							<label for="checkpoint_date" ><span class='glyphicon glyphicon-calendar'></span> <span class='lb_checkin'></span></label>
 							<div class="input-group date" id='btn_checkin' >
 							  <input type="text" class="form-control" id='checkpoint_date' name='checkpoint_date' placeholder="" readonly/>
 							   <span class="input-group-addon">
@@ -47,7 +47,7 @@
 						</div>
 						<div class='col-sm-3'>
 							<div class="form-group">
-							<label for="travel_date"><span class='glyphicon glyphicon-calendar'></span> Check Out</label>
+							<label for="travel_date"><span class='glyphicon glyphicon-calendar'></span> <span class='lb_checkout'></span></label>
 							<!-- <input type="text" class="form-control" id="travel_date" name="travel_date" placeholder="" > -->
 							<div class="input-group date" id='btn_checkout' >
 							  <input type="text" class="form-control" id='travel_date' name='travel_date' placeholder="" readonly />
@@ -59,7 +59,7 @@
 						</div>
 						<div class='col-sm-3'>
 							<div class="form-group">
-							<label for="night_unit"><span class='glyphicon glyphicon-time'></span>&nbsp;Nights</label>
+							<label for="night_unit"><span class='glyphicon glyphicon-time'></span> <span class='lb_night'></span><span class='lb_night'></span></label>
 							<input type='text' id="night_unit" name='night_unit' class='form-control' placeholder="" value='' readonly>
 						  </div>
 						 </div>
@@ -70,7 +70,7 @@
 					<div class='row'>
 						<div class='col-sm-3'>
 							<div class="form-group">
-							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span>&nbsp;Adults</label>
+							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span> <span class='lb_adults'></span></label>
 							<div class="input-group" style='z-index: 0;'>
 								  <div class="input-group-btn">
 									<button type='button' onclick='adult_decrease()' class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-minus'></span></button>
@@ -84,7 +84,7 @@
 						</div>
 						<div class='col-sm-3'>
 							<div class="form-group">
-							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span>&nbsp;Children 5 - 11 Year</label>
+							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span> <span class='lb_children_2'></span></label>
 							<div class="input-group" style='z-index: 0;'>
 								  <div class="input-group-btn">
 									<button type='button' onclick="child_decrease('child_2_amount')" class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-minus'></span></button>
@@ -98,7 +98,7 @@
 						  </div>
 						  <div class='col-sm-3'>
 							<div class="form-group">
-							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span>&nbsp;Children 0 - 4 Year</label>
+							<label for="adults_unit"><span class='glyphicon glyphicon-user'></span> <span class='lb_children'></span></label>
 							<div class="input-group" style='z-index: 0;'>
 								  <div class="input-group-btn">
 									<button type='button' onclick="child_decrease('child_amount')"  class='btn btn-warning brown' >&nbsp;<span class='glyphicon glyphicon-minus'></span></button>
@@ -114,7 +114,7 @@
 					<div class='row'>
 						<div class='col-sm-3'>
 							 <div class="form-group">
-							<label for="promo_code"><span class='glyphicon glyphicon-tasks'></span> Access Code</label>
+							<label for="promo_code"><span class='glyphicon glyphicon-tasks'></span> <span class='lb_code'></span></label>
 							  <input type="text" class="form-control" id='promo_code' name='promo_code' placeholder="Package Code" readonly />
 						  </div>
 						</div>
@@ -128,81 +128,31 @@
 		<div class='row rowspan' >
 			<div class='col-md-7'>
 				<div class='row'>
-					<h3 style='color:#996600;font-weight:bold;'>เลือกบริการเสริม</h3>
+					<h3 style='color:#996600;font-weight:bold;'><span class='lb_option_title'></span></h3>
 				</div>
 				<div class='row'>
 					<div class="panel panel-default">
 					  <div class="panel-heading" style='background-color:#454545;'>
-						<h3 class="panel-title" style='color:white;margin:10px 5px 10px 1px;'>บริการเสริมดังนี้</h3>
+						<h3 class="panel-title" style='color:white;margin:10px 5px 10px 1px;'><span class='lb_option_addition'></span></h3>
 					  </div>
 					  <div class="panel-body" style='background-color:white;color:black;' id='list_options' >
-							<div class='row'>
-								<div class='col-md-3'>
-									<img src='images/dinner.png' class='img-responsive' />
-								</div>
-								<div class='col-md-7'>
-									<p><h4>Thai Set Dinner</h4></p>
-									<p><a href='javascript:void(0);' data-toggle="collapse" data-target="#dinner">รายละเอียด ></a></p>
-									<div id='dinner' class='collapse'>
-									<p>ปลาอินทรีแดดเดียวซอสมะม่วง</p>
-									<p>หรือ ปลาอินทรีแดดเดียวซอสมะขาม</p>
-									<p>ปลาหมึกย่างซอสเทริยากิ</p>
-									<p>หรือปลาหมึกทอดกระเทียม</p>
-									<p>ต้มยำกุ้งแซบ๊วยน้ำข้น</p>
-									<p>หรือต้มปลาทรายกับซอสเต้าเจี้ยว</p>
-									<p>หอยตลับผัดน้ำพริกเผา</p>
-									<p>หรือ หอยตลัดผัดขี้เมา</p>
-									<p>ไก่ย่างผัดพริกไทยดำ</p>
-									<p>ข้าวผัดกระเทียมและข้าวหอมมะลิ</p>
-									<p>ผลไม้ตามฤดูกาล</p>
-									<p>฿ 525 ผู้ใหญ่ 1 ท่าน</p>
-									<p>฿ 262 เด็กอายุ 5-11 ปีต่อ 1 ท่าน</p>
-									<p>฿ 0 เด็กอายุ 0- 4 ปีต่อ 1 ท่าน</p>
-									</div>
-								</div>
-								<div class='col-md-2 text-right'>
-									<span>เลือก</span> <input type='checkbox' name='option_diner' value='{"key":"1","title":"Thai Set Diner","price":"525" }'  />
-								</div>
-								
-							</div>
-							<hr/>
-							<div class='row'>
-								<div class='col-md-3'>
-									<img src='images/van.png' class='img-responsive' />
-								</div>
-								<div class='col-md-7'>
-									<p><h4>Airport Transfer</h4></p>
-									<p><a href='javascript:void(0);' data-toggle="collapse" data-target="#transfer">รายละเอียด ></a></p>
-									<div id='transfer' class='collapse'>
-									<p>Suwannaphum airport - Haven Resort</p>
-									<p>or </p>
-									<p>Haven Resort - Suwannaphum airport</p>
-									</div>
-									<p>฿ 3,700</p>
-								</div>
-								<div class='col-md-2 text-right'>
-									<span>เลือก</span> <input type='checkbox' name='option_reserve' value='{"key":"2","title":"Airport Transfer","desc":"&nbsp;","price":"3700"}'  />
-								</div>
-								
-							</div>
-							
 					  </div>
 					</div>
 				</div>
 				<div class='row'>
 					<div class="panel panel-default">
 					  <div class="panel-heading" style='background-color:#454545;'>
-						<h3 class="panel-title" style='color:white;margin:10px 5px 10px 1px;'>คำขอพิเศษ</h3>
+						<h3 class="panel-title" style='color:white;margin:10px 5px 10px 1px;'><span class='lb_special_request'></span></h3>
 					  </div>
 					  <div class="panel-body" style='background-color:white;color:black;'>
 							<div class='row'>
 								<div class='col-md-12'>
-									<textarea id='comment' name='comment' class='form-control' rows='5' placeholder='โปรดอธิบายคำขอของท่าน เวลาที่เดินทางมาถึง การแพ้อาหาร'></textarea>
+									<textarea id='comment' name='comment' class='form-control' rows='5' placeholder=''></textarea>
 								</div>
 							</div>
 							<div class='row rowspan'>
 								<div class='col-md-12'>
-									<span style='color:gray;'>ทางเราไม่รับประกันว่าคำขอของท่านจะได้รับการพิจารณา แต่เราจะตอบสนองความต้องการของท่านให้ดีที่สุด</span>
+									<span style='color:gray;' id='lb_request_condition'></span>
 								</div>
 							</div>
 					  </div>
@@ -213,9 +163,9 @@
 				<div class='row'>
 					<div id='list_reserve' class="list-group rowspan" style='margin:10px;'>
 						<span href="#" class="list-group-item" style="border-top:3px solid;">
-							<h4 class="list-group-item-heading">รวม <span id='total_price' class='pull-right'>฿ Error !!</span></h4>
+							<h4 class="list-group-item-heading"><span class='lb_summary'></span><span id='total_price' class='pull-right'>฿ Error !!</span></h4>
 							<p class="list-group-item-text ">
-							<a href='#' >รายละเอียด >  </a><span class='pull-right'><span id='total_room'>0</span> ห้องพัก, <span id='total_night'>0</span> คืน</span>
+							<a href='#' ><span class='lb_detail'></span> ></a><span class='pull-right'><span id='total_room'>0</span> <span class='lb_room'></span>, <span id='total_night'>0</span> <span class='lb_night'></span></span>
 							</p>
 						 </span>
 						
@@ -224,7 +174,7 @@
 				<div class='row'>
 					<div class='col-md-12'>
 					<input type='hidden' id='data_reserve' name='data_reserve' />
-					<button type='submit' class='btn btn-large brown btn-block btn-warning' style='min-height:50px;'>จอง</button>
+					<button type='submit' class='btn btn-large brown btn-block btn-warning' style='min-height:50px;'><span class='lb_submit'></span></button>
 					</div>
 				</div>
 			</div>
@@ -244,9 +194,9 @@
 <script src='js/rooms.js' ></script>
 <script src='js/common.js' ></script>
 <script type="text/javascript">
-
+	
 	$(document).ready(function(){
-		pages.init("");
+		pages.init("option_reserve");
 		rooms.call_view_options(function(resp){
 			reserve.get_info();
 		});

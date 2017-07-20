@@ -1,6 +1,5 @@
 <?php
 session_start();
-include("../lib/logger.php");
 include("../lib/common.php");
 include("../managers/reserve_manager.php");
 
@@ -110,7 +109,7 @@ function step_three($data){
 	$_SESSION["reserve"]->summary->charge=$charge;
 	$_SESSION["reserve"]->summary->net=$net;
 
-	header("Location: ../summery.html");
+	header("Location: ../summary.html");
 	exit();
 }
 //confirm trasection

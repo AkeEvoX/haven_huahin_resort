@@ -34,7 +34,7 @@ reserve.get_confirmation = function(){
 		if(result.data.info!=null){
 			var info = result.data.info;
 			var item = "<div class='row'>";
-			 item += "<div class='col-md-2'><label>ผู้เข้าพัก</label></div>";
+			 item += "<div class='col-md-2'><label>"+pages.message.guest+"</label></div>";
 			 item += "<div class='col-md-7'>";
 			 item += pages.message.adults + " : "+info.adults+" "+pages.message.person+"</br>";
 			 item += pages.message.children_2 + " : "+info.children_2+" "+pages.message.person+"</br>";
@@ -60,9 +60,6 @@ reserve.get_confirmation = function(){
 			options = result.data.options;
 			summary = result.data.summary;
 			reserve.rooms = result.data.rooms;	
-			//reserve.rooms = result.data.reserve.rooms;
-			//reserve.options = result.data.reserve.options;
-			//reserve.summary = result.data.reserve.summary;
 		}
 		
 		//list room
@@ -73,12 +70,12 @@ reserve.get_confirmation = function(){
 					
 					var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
 					var item = "<div class='row'>";
-					 item += "<div class='col-md-2'><label>ห้องพัก "+(i+1)+"</label></div>";
+					 item += "<div class='col-md-2'><label>"+pages.message.room+" "+(i+1)+"</label></div>";
 					 item += "<div class='col-md-7 col-xs-7 '>";
 					 item += val.room+"</br>";
 					 item += val.type+"</br>";
 					 item += "</div >";
-					 item += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
+					 item += "<div class='col-md-3 text-right'><h4> "+money+"</h4></div>";
 					 item += "</div ><hr/>";
 					 
 					$('#list_reserve').append(item);
@@ -98,7 +95,7 @@ reserve.get_confirmation = function(){
 				item += "<div class='row'>";
 				item += "<div class='col-md-2'>&nbsp;</div>";
 				item += "<div class='col-md-7'>"+val.title+"<br>"+val.desc+"</div>";
-				item += "<div class='col-md-3 text-right'>฿ "+money+"</div>";
+				item += "<div class='col-md-3 text-right'> "+money+"</div>";
 				item += "</div>";
 			});
 			//summary options
@@ -106,7 +103,7 @@ reserve.get_confirmation = function(){
 			var summary_tag = "<div class='row'>";
 			summary_tag += "<div class='col-md-2'>ทางเลือก</div>";
 		  	summary_tag += "<div class='col-md-7'>&nbsp;</div>";
-		   	summary_tag += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
+		   	summary_tag += "<div class='col-md-3 text-right'><h4> "+money+"</h4></div>";
 			summary_tag += "</div>";
 			item = summary_tag + item + "<hr/>";
 
@@ -127,22 +124,22 @@ reserve.get_confirmation = function(){
 			
 			var	item = "<div class='row'>";
 			item += "<div class='col-md-3 col-xs-3'><h4>รวม</h4></div>";
-			item += "<div class='col-md-offset-6 col-xs-offset-6 col-md-3 text-right'><b><h4>$ "+total+"</h4></b></div>";
+			item += "<div class='col-md-offset-6 col-xs-offset-6 col-md-3 text-right'><b><h4> "+total+"</h4></b></div>";
 			item += "</div>";
 			
 			item += "<div class='row'>";
 			item += "<div class='col-md-offset-2 col-md-6 col-xs-7'>Not included: Service Charge</div>";
-			item += "<div class='col-md-offset-1 col-md-3 text-right'><span>$ "+service+"</h4></div>";
+			item += "<div class='col-md-offset-1 col-md-3 text-right'><span> "+service+"</h4></div>";
 			item += "</div>";
 			
 			item += "<div class='row'>";
 			item += "<div class='col-md-offset-2 col-md-6 col-xs-7'>Not included: VAT </div>";
-			item += "<div class='col-md-offset-1 col-md-3 text-right'><span>$ "+tax+"</span></div>";
+			item += "<div class='col-md-offset-1 col-md-3 text-right'><span> "+tax+"</span></div>";
 			item += "</div>";
 			
 			item += "<div class='row rowspan'>";
 			item += "<div class='col-md-offset-2 col-md-7 col-xs-7'>The taxes which are not included are to be paid to the hotel. The total amount is: </div>";
-			item += "<div class='col-md-3 text-right'><b><h4>฿ "+net+"</h4></b></div>";
+			item += "<div class='col-md-3 text-right'><b><h4> "+net+"</h4></b></div>";
 			item += "</div>";
 
 			
@@ -206,9 +203,9 @@ reserve.get_summary = function(){
 			$('#reserve_expire').html(expire_date);
 
 			var rent ="";
-			rent = "ผู้ใหญ่ "+ info.adults + " ท่าน ";
-			rent += "เด็ก 5-11 "+ info.children_2 +" ท่าน"
-			rent += "เด็ก 0-4 "+ info.children +" ท่าน"
+			rent = pages.message.adults +" "+ info.adults + " "+pages.message.person;
+			rent += pages.message.children_2 +" "+ info.children_2 + " " + pages.message.person;
+			rent += pages.message.children +" "+ info.children +" "+pages.message.person;
 			$('#rent_amount').html(rent);
 
 			$('#night_unit').html(info.night);
@@ -231,18 +228,20 @@ reserve.get_summary = function(){
 		if(reserve.rooms != undefined ){
 			console.warn("found cancel rooms.");
 				$.each(reserve.rooms,function(i,val){
-					summary_price += parseFloat(val.price);
+					//summary_price += parseFloat(val.price);
+
+					console.warn("room price : "+val.price);
 					var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
 					
 					var item = "<div class='row'>";
-					 item += "<div class='col-md-2'><label>ห้องพัก "+(i+1)+"</label><br><small>ผู้ใหญ่ 1</small></div>";
+					 item += "<div class='col-md-2'><label>"+pages.message.room+" "+(i+1)+"</label><br><small>"+ pages.message.adults+" "+info.adults+"</small></div>";
 					 item += "<div class='col-md-7'>";
 					 item += val.room+"</br>";
 					 item += val.type+"</br>";
 					 item += "</div >";
 					 item += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
 					 item += "</div ><hr/>";
-					 
+					 //฿
 					$('#list_reserve').append(item);
 					
 				});
@@ -261,13 +260,13 @@ reserve.get_summary = function(){
 				item += "<div class='row'>";
 				item += "<div class='col-md-2'>&nbsp;</div>";
 				item += "<div class='col-md-7'>"+val.title+"<br/>"+val.desc+"</div>";
-				item += "<div class='col-md-3 text-right'>฿ "+money+"</div>";
+				item += "<div class='col-md-3 text-right'>"+money+"</div>";
 				item += "</div>";
 			})
 			//summary options
 			var money = parseFloat(price_option).toFixed(2).replace(money_pattern,"$1,");	
 			var summary_tag = "<div class='row'>";
-			summary_tag += "<div class='col-md-2'>ทางเลือก</div>";
+			summary_tag += "<div class='col-md-2'>"+pages.message.option+"</div>";
 		  	summary_tag += "<div class='col-md-7'>&nbsp;</div>";
 		   	summary_tag += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
 			summary_tag += "</div>";
@@ -278,7 +277,7 @@ reserve.get_summary = function(){
 
 		//summary price
 		if(reserve.summary!=undefined){
-
+			console.warn(reserve.summary);
 			/*
 			charge
 			tax
@@ -303,23 +302,23 @@ reserve.get_summary = function(){
 		*/
 		
 		var	item = "<div class='row'>";
-		item += "<div class='col-md-2 '><h4>รวม</h4></div>";
-		item += "<div class='col-md-offset-7 col-md-3 text-right'><span><h4>$ "+total+"</h4></span></div>";
+		item += "<div class='col-md-2 '><h4>"+pages.message.summary+"</h4></div>";
+		item += "<div class='col-md-offset-7 col-md-3 text-right'><span><h4>฿ "+total+"</h4></span></div>";
 		item += "</div>";
 	
 
 		item += "<div class='row'>";
-		item += "<div class='col-md-offset-2 col-md-3 '><h4>ค่าบริการ</h4></div>";
-		item += "<div class='col-md-offset-4 col-md-3 text-right'><span><h4>$ "+service+"</h4></span></div>";
+		item += "<div class='col-md-offset-2 col-md-3 '><h4>"+pages.message.service+"</h4></div>";
+		item += "<div class='col-md-offset-4 col-md-3 text-right'><span><h4>฿ "+service+"</h4></span></div>";
 		item += "</div>";
 		
 		item += "<div class='row'>";
-		item += "<div class='col-md-offset-2 col-md-3 '><h4>ภาษีของรัฐ</h4></div>";
-		item += "<div class='col-md-offset-3 col-md-4 text-right'><span><h4>$ "+tax+"</h4></span></div>";
+		item += "<div class='col-md-offset-2 col-md-3 '><h4>"+pages.message.tax+"</h4></div>";
+		item += "<div class='col-md-offset-3 col-md-4 text-right'><span><h4>฿ "+tax+"</h4></span></div>";
 		item += "</div>";
 		
 		item += "<div class='row rowspan'>";
-		item += "<div class='col-md-offset-2 col-md-7'><pre><h4>รวมเป็นเงินที่ต้องชำระทั้งสิ้น</h4></pre></div>";
+		item += "<div class='col-md-offset-2 col-md-7'><pre><h4>"+pages.message.total_payment+"</h4></pre></div>";
 		item += "<div class='col-md-3 text-right'><pre><h4>฿ "+net+"</h4></pre></div>";
 		item += "</div>";
 
@@ -362,12 +361,6 @@ reserve.get_receipt = function(val){
 		$('#cust_name').html(cust.title+" "+cust.fname+ " "+cust.lname);
 		$('#cust_mobile').html(cust.prefix_mobile+""+cust.mobile);
 		$('#cust_email').html(cust.email);
-		/* 
-		$('#card_type').html(payment.card_type);
-		$('#card_holder').html(payment.card_holder);
-		$('#card_number').html(payment.card_number);
-		$('#card_expire').html(payment.card_expire);
-		$('#card_validate').html(payment.card_validate); */
 		
 			//define information
 		if(result.data !== undefined){
@@ -388,7 +381,7 @@ reserve.get_receipt = function(val){
 				var item = "<div class='row rowspan'>";
 				 item += "<div class='col-md-3'><b>Room "+(i+1)+"</b><br/></div>";
 				 item += "<div class='col-md-7'>"+val.room+"<br/>"+val.type+ "</div>";
-				 item += "<div class='col-md-2 text-right'>"+money+"</div>";
+				 item += "<div class='col-md-2 text-right'>฿ "+money+"</div>";
 				 item += "</div>";
 				
 				$('#list_reserve').append(item);
@@ -448,32 +441,14 @@ reserve.get_receipt = function(val){
 			item += "<p>Not included : VAT</p>";
 			item += "<p>The taxes which are not included are to be paid to the hotel. The total amount is:</p>";
 			item += "</div>";
-			item += "<div class='col-md-2 text-right'>"+total+"<br/>";
-			item += "<p>"+service+"</p>";
-			item += "<p>"+tax+"</p>";
-			item += "<p>"+net+"</p>";
+			item += "<div class='col-md-2 text-right'>฿ "+total+"<br/>";
+			item += "<p>฿ "+service+"</p>";
+			item += "<p>฿ "+tax+"</p>";
+			item += "<p>฿ "+net+"</p>";
 			item += "</div>";
 			
 			$('#list_reserve').append(item);
 		}
-		
-	
-		
-		/*
-		<div class='row rowspan'>
-			<div class='col-md-3'><b>Total</b><br/></div>
-			<div class='col-md-7'><br/>
-				<p>Not included : Service Charge</p><br/>
-				<p>Not included : VAT</p><br/>
-				<p>The taxes which are not included are to be paid to the hotel. The total amount is:</p>
-			</div>
-			<div class='col-md-2 text-right'>
-				4,248.00
-			</div>
-		</div>
-		*/
-		
-		
 		
 	});
 }

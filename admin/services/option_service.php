@@ -1,7 +1,6 @@
 <?php
 session_start();
 include("../../lib/common.php");
-include("../../lib/logger.php");
 include("../managers/option_manager.php");
 
 #get parameter

@@ -39,16 +39,16 @@ function set_view_options(resp){
 	if(resp.data!=null){
 		
 		var items = "";
-		console.warn(resp.data);
+		//console.warn(resp.data);
 		$.each(resp.data,function(i,val){
 			items+="<div class='row' >";
 			items+="<div class='col-md-3'><img src='"+val.image+"' class='img-responsive' /></div>";
 			items+="<div class='col-md-7'>";
 			items+="<p><h4>"+val.title+"</h4></p>";
-			items+= "<p><a href='javascript:void(0);' data-toggle='collapse' data-target='#detail_"+val.id+"'>"+pages.message.detail+" ></a></p>";
+			items+= "<p><a href='javascript:void(0);' data-toggle='collapse' data-target='#detail_"+val.id+"'>"+pages.message.detail+" </a></p>";
 			items+= "<div id='detail_"+val.id+"' class='collapse' ><i>"+val.detail+"</i></div>";
 			items+= val.remark+"</div>";
-			items+="<div class='col-md-2 text-right'><span>เลือก</span> <input type='checkbox' name='option_"+val.id+"' id='option_"+val.id+"' title='"+val.title+"' key='"+val.id+"' price='"+val.price+"' value='"+val.id+"' onchange=room_option_change('"+val.id+"') /></div>";
+			items+="<div class='col-md-2 text-right'>"+pages.message.choice +" <input type='checkbox' name='option_"+val.id+"' id='option_"+val.id+"' title='"+val.title+"' key='"+val.id+"' price='"+val.price+"' value='"+val.id+"' onchange=room_option_change('"+val.id+"') /></div>";
 			items+="</div><hr/>";
 		});
 		

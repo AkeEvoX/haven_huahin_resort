@@ -36,30 +36,21 @@ function SendMail($receive,$sender,$subject,$message,$sender_name)
 		//$mail->AddBcc("contact@baankunnan.com", "contact :: admin@haven-huahin-resort.com");
 		//$mail->AddReplyTo("mail@andamantaxis.com", "admin");
 		
-		/*list receive email */
-		/*
-		foreach($receive as $email=>$name){
-			$mail->AddAddress($email,$item->$name); 
-		}
-		*/
-		//send email list
+		//list send email 
 		foreach($receive as $to){
 			$mail->AddAddress($to["email"],$to["alias"]);
 		}
 		
-		//$mail->AddAddress("sales@starsanitaryware.com"); 
-		//$mail->AddAddress($receive); 
-		
 		if(!$mail->Send()) {
 			//echo "Mailer Error: " . $mail->ErrorInfo;
 			if($_SESSION["lang"]!="en")
-				echo "<script>alert('ขออภัยการส่งเมลล์ ขัดข้อง');</script>";
+				echo "<script>alert('Sorry!! Email Communication has interrupt');</script>";
 			else 
 				echo "<script>alert('Sorry !! Can't Send email .');</script>";
 		} else {
 			if($_SESSION["lang"]!="en"){
 				foreach($receive as $to){
-					log_info("Complete Send Email : " . $to["email"]);
+					log_info("Send Email is complete: " . $to["email"]);
 				}
 			}
 				//echo "<script>alert('ข้อมูลของคุณส่งเรียบร้อยแล้วค่ะ');</script>";

@@ -5,9 +5,12 @@ pages.init = function(name){
 	console.log("language init: "+lang);
 	var path = "js/pages/"+lang+"/"+name+".json";
 	$.getJSON(path,function (resp){
+		//console.warn(resp);
 		$.each(resp,function(title,val){
+			
 			//utility.print_log(title+ "|"+val);
-			$('#'+title).html(val);
+			$('.'+title).html(val);
+			//$('#'+title).html(val);
 		});
 	}).fail(function(xhr,status,err){
 		utility.print_error("status:"+status + " <br/> Error : "+err);
@@ -16,7 +19,7 @@ pages.init = function(name){
 	//get common language
 	path = "js/pages/"+lang+"/common.json";
 	$.getJSON(path,function(resp){
-			//console.log(resp);
+			console.log("get common message.");
 			pages.message = resp;
 	});
 	
@@ -29,8 +32,8 @@ pages.lang  = function(lang){
 			localStorage.lang = lang;
 			console.log("set lang ="+localStorage.lang);
 		}else{
-
-			if(localStorage.lang=="undefined") {
+		
+			if(localStorage.lang==undefined) {
 				localStorage.lang='en' ;//defautl language
 				console.log("set default language");
 			}
