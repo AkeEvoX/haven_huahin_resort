@@ -190,6 +190,26 @@ utility.date_format = function (date,lang){
 
 }
 
+utility.datetime_format = function(date,lang){
+
+	var result = "";
+	var time = "";
+
+	result = utility.date_format(date,lang);
+	
+	if(date.indexOf('-')!=0){
+		time = moment(date,'YYYY-MM-DD HH:mm:ss').format('HH:mm:ss');
+		//moment(date,'YYYY-MM-DD').format('DD/MM/YYYY')
+	}
+	else if(date.indexOf('/')!=0){
+		time = moment(date,'YYYY/MM/DD HH:mm:ss').format('HH:mm:ss');//date.split("/");
+	}
+
+	result += " " + time;
+
+	return result;
+}
+
 utility.createCookie = function (name,value,days) {
     var expires = "";
     if (days) {

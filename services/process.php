@@ -96,18 +96,24 @@ function step_three($data){
 	$_SESSION["info"]["children_2"] = $data["child_2_amount"];//5 - 11 year
 	$_SESSION["info"]["comment"] = $data["comment"];
 
+	$night = $data["night"];
+
 	$summary = $_SESSION["reserve"]->summary;
+	$total_room_price = $summary->room_price;
+	$total_option_price = $summary->option_price;
 	$total = $summary->total_amount;
+	
 	//tax 7%
-	$tax=($total*7)/100;
-	//charge 10%
-	$charge=($total*10)/100;
+	$tax=($total_room_price*7)/100;
+	//service charge 10%
+	$charge=($total_room_price*10)/100;
 	//net
-	$net = $total+$tax+$charge;
+	$net = $total_room_price+$tax+$charge+$total_option_price;
 
 	$_SESSION["reserve"]->summary->tax=$tax;
 	$_SESSION["reserve"]->summary->charge=$charge;
 	$_SESSION["reserve"]->summary->net=$net;
+	
 
 	header("Location: ../summary.html");
 	exit();

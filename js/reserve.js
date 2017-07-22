@@ -34,14 +34,18 @@ reserve.get_confirmation = function(){
 		if(result.data.info!=null){
 			var info = result.data.info;
 			var item = "<div class='row'>";
-			 item += "<div class='col-md-2'><label>"+pages.message.guest+"</label></div>";
-			 item += "<div class='col-md-7'>";
-			 item += pages.message.adults + " : "+info.adults+" "+pages.message.person+"</br>";
-			 item += pages.message.children_2 + " : "+info.children_2+" "+pages.message.person+"</br>";
-			 item += pages.message.children + " : "+info.children+" "+pages.message.person+"</br>";
-			 item += "</div >";
-			 item += "<div class='col-md-3 text-right'><h4>&nbsp;</h4></div>";
-			 item += "</div ><hr/>";
+			item += "<div class='col-md-2'><label>"+pages.message.guest+"</label></div>";
+			item += "<div class='col-md-5'>";
+			item += pages.message.adults + " : "+info.adults+" "+pages.message.person+"</br>";
+			item += pages.message.children_2 + " : "+info.children_2+" "+pages.message.person+"</br>";
+			item += pages.message.children + " : "+info.children+" "+pages.message.person+"</br>";
+			item += "</div >";
+			item += "<div class='col-md-5'>";
+			item += pages.message.reserve +" : "+ utility.datetime_format(info.date_reserve,pages.lang)+"<br/>";
+			item += pages.message.checkin +" : "+utility.date_format(info.date_start,pages.lang)  +"<br/>";
+			item += pages.message.checkout +" : "+utility.date_format(info.date_end,pages.lang) +"<br/>";
+			item += "</div>";
+			item += "</div ><hr/>";
 			 
 			$('#list_reserve').append(item);
 		}
@@ -67,13 +71,15 @@ reserve.get_confirmation = function(){
 			
 			console.warn("found cancel rooms.");
 				$.each(rooms,function(i,val){
+
+					var room_price = parseFloat(val.price) * parseFloat(result.data.info.night);
+					var money = parseFloat(room_price).toFixed(2).replace(money_pattern,"$1,");
 					
-					var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
 					var item = "<div class='row'>";
 					 item += "<div class='col-md-2'><label>"+pages.message.room+" "+(i+1)+"</label></div>";
 					 item += "<div class='col-md-7 col-xs-7 '>";
-					 item += val.room+"</br>";
 					 item += val.type+"</br>";
+					 item += val.room+" ( "+val.price+" x "+ result.data.info.night +" "+pages.message.night+")</br>";
 					 item += "</div >";
 					 item += "<div class='col-md-3 text-right'><h4> "+money+"</h4></div>";
 					 item += "</div ><hr/>";
@@ -101,7 +107,7 @@ reserve.get_confirmation = function(){
 			//summary options
 			var money = parseFloat(price_option).toFixed(2).replace(money_pattern,"$1,");	
 			var summary_tag = "<div class='row'>";
-			summary_tag += "<div class='col-md-2'>ทางเลือก</div>";
+			summary_tag += "<div class='col-md-2'>"+pages.message.option+"</div>";
 		  	summary_tag += "<div class='col-md-7'>&nbsp;</div>";
 		   	summary_tag += "<div class='col-md-3 text-right'><h4> "+money+"</h4></div>";
 			summary_tag += "</div>";
@@ -231,13 +237,14 @@ reserve.get_summary = function(){
 					//summary_price += parseFloat(val.price);
 
 					console.warn("room price : "+val.price);
-					var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
+					var room_price = parseFloat(val.price) * parseFloat(result.info.night);
+					var money = parseFloat(room_price).toFixed(2).replace(money_pattern,"$1,");
 					
 					var item = "<div class='row'>";
-					 item += "<div class='col-md-2'><label>"+pages.message.room+" "+(i+1)+"</label><br><small>"+ pages.message.adults+" "+info.adults+"</small></div>";
+					 item += "<div class='col-md-2'><label>"+pages.message.room+" "+(i+1)+"</label></div>";//<br><small>"+ pages.message.adults+" "+info.adults+"</small>
 					 item += "<div class='col-md-7'>";
 					 item += val.room+"</br>";
-					 item += val.type+"</br>";
+					 item += val.type+" ( "+val.price+" x "+ result.info.night+" "+pages.message.night+")</br>";
 					 item += "</div >";
 					 item += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
 					 item += "</div ><hr/>";
@@ -252,7 +259,7 @@ reserve.get_summary = function(){
 			var item = "";
 			var price_option = 0;
 			$.each(reserve.options,function(i,val){
-				summary_price += parseFloat(val.price);
+				//summary_price += parseFloat(val.price);
 				price_option += parseFloat(val.price);
 
 				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");	

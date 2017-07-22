@@ -317,7 +317,7 @@ function set_package_list(items,room_name,room_id){
 		});
 	}
 	else{  //show room not available.
-		console.log( room_name +" :: package not found");
+		//console.log( room_name +" :: package not found");
 		result="<span href='#' class='list-group-item text-center'> <h4>"+pages.message.room_unavailabel+".</h4>";
 		result+="</span>";
 	}

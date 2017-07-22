@@ -5,7 +5,6 @@ reserve.rooms = [];
 reserve.summary = null;
 reserve.customer = [];
 reserve.payment = [];
-//genaral.get_info();
 
 
 //list_reserve
@@ -28,32 +27,32 @@ function add_room(id,name,type,price,room_id){
 	item += "<span id='"+key+"'  href='#' class='list-group-item'>";
 	item += "<h4 class='list-group-item-heading'>"+ name +" <span class='pull-right'>฿ "+money+"</span></h4>";
 	item += "<p class='list-group-item-text'>" + type;
-	item += "<span class='pull-right' style='cursor:pointer;' onclick=del_room("+key+")>นำออก</span></p>";
+	item += "<span class='pull-right' style='cursor:pointer;' onclick=del_room("+key+")>"+pages.message.remove+"</span></p>";
 	item += "</span>";
 	list.append(item);
-	recalculate();
+	//recalculate();
+	reserve.calculate();
 }
 
 function del_room(key){
 	
 	$('#'+key).remove();
 	reserve.rooms = jQuery.grep(reserve.rooms,function(item,index){ return item.key != key });
-	recalculate();
-}
+	//recalculate();
 
+	reserve.calculate();
+}
+/*
 function recalculate() {
 	var view_total = $('#total_price');
 	var total = 0.0;
 	var money = 0.0;
 
-	//var total_pattern = /[^0-9.-]+/g; //format calculate
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //formoney
 	$.each(reserve.rooms,function(i,val){
 		
 		if(val.price != "")
 			total += parseFloat(val.price);
-		//total += parseFloat(val.price.replace(total_pattern,''));
-		console.debug("price : " + total);
 		
 	});
 	money = total.toFixed(2).replace(money_pattern,"$1,");
@@ -64,9 +63,10 @@ function recalculate() {
 	//$('#data_reserve').val(JSON.stringify(reserve.source));
 	
 	$('#total_room').html(reserve.rooms.length); 
-	$('#data_reserve').val(JSON.stringify(reserve));
+	//$('#data_reserve').val(JSON.stringify(reserve));
 	
 }
+*/
 
 reserve.get_info = function(){
 	
@@ -83,14 +83,11 @@ reserve.get_info = function(){
 		var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
 		
 		var info = result.info;
+		reserve.info = info;
 		var items = result.data;
 		if(info==null) { 
-			
-			
 			alert(pages.message.reserve_not_found);//'Sorry!! Not Found Information Reserve.'
-			
 			window.location="quick_reservation.html";
-			
 		}
 		
 		$('#data_reserve').val(JSON.stringify(result.data.reserve));
@@ -129,31 +126,22 @@ reserve.get_info = function(){
 				item += "<h4 class='list-group-item-text '>";
 				item += val.room +" <small class='pull-right' style='cursor:pointer;' onclick=del_room("+val.key+") >"+pages.message.remove+"</small> ";
 				item += val.type + "</h4></span>";
-
 				$('#list_reserve').append(item);
 				
 			});
-			
-			
 		}
 		//set item options
 		if(items.reserve!=null && items.reserve.options!=null){
-			//assing option to object
-			reserve.options = items.reserve.options;
 			
-			$.each(reserve.options,function(i,val){
+			$.each(items.reserve.options,function(i,val){
+
 				var item_option = 'option_'+val.key;
-				
-				console.log(item_option);
-				
 				$('input[name="'+item_option+'"]').prop('checked',true);
-				
 				reserve.add_option(val);
 				
 			});
 			
 		}
-		
 		
 		console.log("load information complete.");
 	});
@@ -168,9 +156,40 @@ reserve.get_roomofweek = function(){
 	utility.service(endpoint,method,args,view_dayofweek);
 }
 
-reserve.add_option = function(val){
+reserve.calculate = function(){
+
+	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;  
+	var total = 0.0;
+	//room
+	if(reserve.rooms!=undefined){
+		
+		$.each(reserve.rooms,function(i,val){
+			
+			total += parseFloat(val.price);
+		});
+	}
 	
-	//var val = JSON.parse(data);
+	//calculate night
+	total = total * parseFloat(reserve.info.night);
+	reserve.summary.room_price = total;
+	//option
+	if(reserve.options!=undefined){
+		var option_price = 0;
+		$.each(reserve.options,function(i,val){
+			option_price = parseFloat(val.price);
+		});
+		reserve.summary.option_price = option_price;	
+		total += option_price;
+	}
+	
+	var money = parseFloat(total).toFixed(2).replace(money_pattern,"$1,");
+	reserve.summary.total_amount = total;
+	console.log("total_amount :" + money);
+	$('#total_price').html("฿ " + money);
+	
+}
+
+reserve.add_option = function(val){
 	
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
 	var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");
@@ -185,35 +204,18 @@ reserve.add_option = function(val){
 	if(reserve.options === undefined){
 		reserve.options = [];
 	}
+
 	reserve.options.push(val);
-	
-	var price = parseFloat(val.price);
-	var total = parseFloat(reserve.summary.total_amount) + price;
-	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
-	
-	reserve.summary.total_amount = total;
-	total = parseFloat(total).toFixed(2).replace(money_pattern,"$1,");
-	$('#total_price').html("฿ " + total);
-	
-	//reserve.calucate_option();
+	reserve.calculate();
+
 }
 
 reserve.del_option = function(key,money){
 
-	//var val = JSON.parse(data);
 	$('#'+key).remove();
 	
 	reserve.options = jQuery.grep(reserve.options,function(item,index){ return item.key != key });
-	
-	var price = parseFloat(money);
-	console.log('remove option price :' + price);
-	var total = parseFloat(reserve.summary.total_amount) - price;
-	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
-	
-	reserve.summary.total_amount = total;
-	total = parseFloat(total).toFixed(2).replace(money_pattern,"$1,");
-	$('#total_price').html("฿ " + total);
-	//reserve.calucate_option();
+	reserve.calculate();
 }
 
 reserve.modal = function(title,detail,image){
@@ -395,7 +397,7 @@ function call_room_detail_modal(title,room_name,room_type){
 		var data ={"service":"gallery","room_type":room_type};
 		$('#gallery').html("");
 		utility.service(endpoint,method,data,function(resp){
-			console.debug(resp);
+			//console.debug(resp);
 			//inital image
 			if(resp.data!=undefined){
 				var item = "";
@@ -458,7 +460,7 @@ function add_default_condition(){
 }
 
 function view_dayofweek(resp){
-	console.log(resp);
+	//console.log(resp);
 
 	var view = $('#view_dayofweek');
 	view.html('');

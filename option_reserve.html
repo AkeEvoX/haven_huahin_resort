@@ -202,7 +202,8 @@
 		});
 		
 		$('#option_form').on('submit',function(e){		
-				$('#data_reserve').val(JSON.stringify(reserve));
+			reserve.summary();
+			$('#data_reserve').val(JSON.stringify(reserve));
 		});
 		
    });

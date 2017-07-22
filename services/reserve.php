@@ -22,6 +22,7 @@ if(isset($data)){
 				"date_start"=>$data->reserve_startdate
 				,"date_end"=>$data->reserve_enddate
 				,"date_expire"=>$data->reserve_expire
+				,"date_reserve"=>$data->create_date
 				,"night"=>$data->night
 				,"adults"=>$data->adults
 				,"children"=>$data->children

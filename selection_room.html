@@ -20,7 +20,7 @@
 <body>
 <div class='container'>
 	<!-- form request -->
-	<form id='validate' action='services/process.php?step=2' method='post' >
+	<form id='room_form' action='services/process.php?step=2' method='post' >
 	<div class='row rowspan' >
 		<div class='col-md-4 text-center'>
 			<span class="stepflow_active" id='lb_step_1'>1 Select Room</span>
@@ -213,9 +213,11 @@
 			var e_date = moment($('#btn_checkout').find("input").val(), "DD/MM/YYYY");
 			var days = e_date.diff(s_date,'days');
 
-			if(days>-1){
+			if(days>0){
 				$('#night_unit').val(days);
 				$('#total_night').html(days);
+				reserve.info.night = days;
+				reserve.calculate();
 			}
 			else{
 				$('#night_unit').val('error');
@@ -228,9 +230,12 @@
 			var s_date = moment($('#btn_checkin').find("input").val(), "DD/MM/YYYY");
 			var days = e_date.diff(s_date,'days');
 
-			if(days>-1){
+			if(days>0){
+			
 				$('#night_unit').val(days);
 				$('#total_night').html(days);
+				reserve.info.night = days;
+				reserve.calculate();
 			}else{
 				alert('Sorry !! Date Invalid . / เลือกวันที่ไม่ถูกต้อง');
 				$('#night_unit').val('error');
@@ -243,6 +248,9 @@
 		pages.init("selection_room");
 		reserve.get_info();
 	
+		$('#room_form').submit(function(){
+			$('#data_reserve').val(JSON.stringify(reserve));
+		});
 
    });
 

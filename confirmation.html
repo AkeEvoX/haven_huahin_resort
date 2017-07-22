@@ -28,7 +28,7 @@
 							<h4><span class='lb_thankyou'>ขอขอบคุณ การจองของท่านได้รับการยืนยันแล้ว !</span></h4>
 							<span class='lb_send_email'>อีเมลล์ยืนยันถูกส่งไปยัง </span><span id='customer_email' >..</span>
 						</td>
-						<td class='col-md-2 text-center' style='background-color:#333333;'><a href='javascript:void(0);' id='btn_print'><span class='glyphicon glyphicon-print' style='font-size:32px;'></span><br/>พิมพ์</a></td>
+						<td class='col-md-2 text-center' style='background-color:#333333;'><a href='javascript:void(0);' id='btn_print'><span class='glyphicon glyphicon-print' style='font-size:32px;'></span><br/>Print</a></td>
 					</tr>
 					</table>
 				<!-- </div> -->
@@ -38,35 +38,35 @@
 		<div class='row rowspan' >
 			<table class='table table-bordered'  >
 				<tr>
-					<td class='col-md-12 bg-black' style='color:white;' colspan='2'><span class='lb_your_reserve'> การจองของท่าน</span></td>
+					<td class='col-md-12 bg-black' style='color:white;' colspan='2'><span class='lb_your_reserve'> Your Reservation</span></td>
 				</tr>
 				<tr class='bg-heading'>
 					<td class='col-md-12 ' colspan='2'>
 						<div class='row'>
 							<div class='col-md-12'>
-							<h3 ><span class='lb_reserve_number'> หมายเลขการจอง : </span> : <span id='reserve_id'></span></h3>
-							<small><span class='lb_reserve_by'>ทำโดย</span> <span id='custome_name'>blank</span></small>
+							<h3 ><span class='lb_reserve_number'> reservation number : </span> : <span id='reserve_id'></span></h3>
+							<small><span class='lb_reserve_by'>provide by</span> <span id='custome_name'>blank</span></small>
 							</div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'><span class='lb_title_address'>ที่อยู่</span></div>
+							<div class='col-md-2'><span class='lb_title_address'>Address</span></div>
 							<div class='col-md-9'><span class='lb_detail_address'>1449  Chala samut Rd., Cha-am, Petchaburi 76120, Hua Hin, TH</span></div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'><span class='lb_reception'>แผนกต้อนรับ<span></div>
+							<div class='col-md-2'><span class='lb_reception'>Recepiton<span></div>
 							<div class='col-md-9'><span class='lb_reception_time'>24 ชม./24</span></div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'><span class='lb_checkin'>เช็คอิน</span></div>
+							<div class='col-md-2'><span class='lb_checkin'>Check IN</span></div>
 							<div class='col-md-9'><span class='lb_checkin_time'>14:00</span></div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'><span class='lb_checkout'>เช็คเอาท์</span></div>
+							<div class='col-md-2'><span class='lb_checkout'>Check Out</span></div>
 							<div class='col-md-9'><span class='lb_checkout_time'>12:00</span></div>
 						</div>
 						<div class='row rowspan'>
-							<div class='col-md-2'><span class='lb_lang'>ภาษาพูด</span></div>
-							<div class='col-md-9'><span class='lb_lang_detail'>อังกฤษ , ไทย</span></div>
+							<div class='col-md-2'><span class='lb_lang'>Language</span></div>
+							<div class='col-md-9'><span class='lb_lang_detail'>English ,Thailand</span></div>
 						</div>
 					</td>
 				</tr>
@@ -77,7 +77,7 @@
 					<td class='col-md-4 text-center'>
 						<div class='row rowspan'>
 							<span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span></br>
-							<label><span class='lb_best_price'>ราคาดีที่สุด</span></label>
+							<label><span class='lb_best_price'>Best Price</span></label>
 							<p>
 								<span class='lb_info_1'>ท่านกำลังอยู่ที่เว็บไซต์ของโรงแรม ท่านจะได้รับ <br/>ราคาที่ดีที่สุดเนื่องจากไม่มีการผ่านคนกลาง</span>
 							</p>
@@ -102,60 +102,60 @@
 				</tr>
 				<tr>
 					<td class='col-md-12 text-center' colspan='2'>
-						<a href='javascript:void(0);' class='btn btn-primary ' data-toggle="collapse" data-target="#payment_panel" aria-expanded="true" aria-controls="payment_panel">ชำระธนาคาร</a>&nbsp;<button class='btn btn-success' id='btn_payment_online'>ชำระเงิน online</button> <a href='quick_reservation.html' class='btn btn-warning'>จองใหม่</a>
+						<a href='javascript:void(0);' class='btn btn-primary ' data-toggle="collapse" data-target="#payment_panel" aria-expanded="true" aria-controls="payment_panel">Bank Transfer</a>&nbsp;<button class='btn btn-success' id='btn_payment_online'>Payment online</button> <a href='quick_reservation.html' class='btn btn-warning'>New Reserve</a>
 					</td>
 				</tr>
 				<tr id='payment_panel' class='collapse'>
 					<td class='col-md-12' colspan='2' >
 						<table class='table table-bordered bg-heading'  >
 							<tr>
-								<td class='col-md-12 bg-black' style='color:white;' colspan='2'>ข้อมูลการโอนเงินผ่านธนาคาร</td>
+								<td class='col-md-12 bg-black' style='color:white;' colspan='2'><span class='lb_bank_transfer_titl'>ข้อมูลการโอนเงินผ่านธนาคาร</td>
 							</tr>
 							<tr>
 								<td class='col-md-4 text-center'>
 									<h5 >
-										<span id='condition_info' style='color:red;'>หลังจากทำการจองกรุณาโอนเงินภายใน 24 ชั่วโมง</p> มิเช่นนั้นระบบจะทำการยกเลิกการจอง</span>
+										<span class='condition_info' style='color:red;'>หลังจากทำการจองกรุณาโอนเงินภายใน 24 ชั่วโมง</p> มิเช่นนั้นระบบจะทำการยกเลิกการจอง</span>
 									</h5>
 										<div class='well well-sm' style='background-color:white;'>
 											<img id='bank_payment' src='images/common/bk_bank.png' />
 											<span id='bank_info'  style='color:blue'></p>
-												<span class='bank_bbl_account'>เลขที่บัญชี xx</span></p>
-												<span class='bank_bbl_name'>ชื่อบัญชี xx</span></p>
-												<span class='bank_bbl_branch'>สาขา xx</span></p>
+												<span class='bank_bbl_account'>Account No: xx</span></p>
+												<span class='bank_bbl_name'>Account Name :  xx</span></p>
+												<span class='bank_bbl_branch'>Branch :xx</span></p>
 												</p>
 											</span>
 										</div>
 										<div class='well well-sm' style='background-color:white;'>
 											<img id='bank_payment' src='images/common/logo_tbank.jpg' />
 											<span id='bank_info' style='color:blue;'></p>
-												<span class='bank_tbank_account'>เลขที่บัญชี xxx</span></p>
-												<span class='bank_tbank_name'>ชื่อบัญชี xx</span></p>
-												<span class='bank_tbank_branch'>สาขา xx</span></p>
+												<span class='bank_tbank_account'>Account No : xxx</span></p>
+												<span class='bank_tbank_name'>Account Name : xx</span></p>
+												<span class='bank_tbank_branch'>Branch : xx</span></p>
 												</p>
 											</span>
 										</div>
 										<h5 >
-										<span id='evidence_transfer' style='color:red;'>หลังจากโอนเงินแล้วกรุณา</p>ส่งหลักฐานการชำระเงินด้วยค่ะ</span>
+										<span class='lb_evidence_transfer' style='color:red;'>หลังจากโอนเงินแล้วกรุณา</p>ส่งหลักฐานการชำระเงินด้วยค่ะ</span>
 									</h5>
 								</td>
 								<td class='col-md-8 text-center'>
-									<h3 style='color:blue;'><span id='paymen_info'>แจ้งการชำระเงิน</span></h3>
+									<h3 style='color:blue;'><span class='lb_payment_noti'>แจ้งการชำระเงิน</span></h3>
 									<form id='payment_form'  action='' method='post' enctype="multipart/form-data">
 									<div class="form-horizontal">
 										<div class="form-group">
-											<label for="payment_reserve_id" class="col-sm-3 control-label">หมายเลขการจอง : </label>
+											<label for="payment_reserve_id" class="col-sm-3 control-label lb_reserve_no">หมายเลขการจอง : </label>
 											<div class="col-sm-7">
 												<input type='text' class='form-control' id="payment_reserve_id" name='payment_reserve_id' readonly>
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="customer_name" class="col-sm-3 control-label">ชื่อผู้โอน : </label>
+											<label for="customer_name" class="col-sm-3 control-label lb_transfer_name">ชื่อผู้โอน : </label>
 											<div class="col-sm-7">
 												<input type='text' class='form-control' id="customer_name" name='customer_name' >
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="bank_name" class="col-sm-3 control-label">ธนาคารที่แจ้งโอน : </label>
+											<label for="bank_name" class="col-sm-3 control-label lb_bank_transfer">ธนาคารที่แจ้งโอน : </label>
 											<div class="col-sm-7">
 												<select class='form-control' id="bank_name" name='bank_name' >
 													<option value='bbl'>Bangkok Bank</option>
@@ -164,21 +164,21 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="payment_amount" class="col-sm-3 control-label">ยอดเงิน : </label>
+											<label for="payment_amount" class="col-sm-3 control-label lb_total_payment">ยอดเงิน : </label>
 											<div class="col-sm-7">
 												<input type='text' class='form-control' id="payment_amount" name='payment_amount' >
 											</div>
 										</div>
 											<div class="form-group">
-											<label for="file_evident" class="col-sm-3 control-label">หลักฐานการโอนเงิน : </label>
+											<label for="file_evident" class="col-sm-3 control-label lb_trx_slip">หลักฐานการโอนเงิน : </label>
 											<div class="col-sm-7">
 												<input type='file' class='form-control' id="file_evident" name='file_evident' >
-												<span id='file_condition' style='color:green;'>ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประเภท PDF หรือ JPG, JPEG, PNG เท่านั้น</span>
-												<span id='file_warning' style='color:red;'>การใช้หลักฐานปลอม มีความผิดตาม พรบ. คอมพิวเตอร์</span>
+												<span class='lb_slip_condition' style='color:green;'>ขนาดไฟล์ไม่เกิน 3 Mb และไฟล์ประเภท PDF หรือ JPG, JPEG, PNG เท่านั้น</span>
+												<span class='lb_slip_warning' style='color:red;'>การใช้หลักฐานปลอม มีความผิดตาม พรบ. คอมพิวเตอร์</span>
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="payment_date" class="col-sm-3 control-label">วันเวลาที่โอน : </label>
+											<label for="payment_date" class="col-sm-3 control-label lb_transfer_date">วันเวลาที่โอน : </label>
 											<div class="col-sm-4">
 												<div class='input-group date' id='payment_date_ctrl'>
 													<input type='text' class='form-control' id='payment_date'  name='payment_date'/>
@@ -188,7 +188,7 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label for="remark" class="col-sm-3 control-label">หมายเหตุ : </label>
+											<label for="remark" class="col-sm-3 control-label lb_note">หมายเหตุ : </label>
 											<div class="col-sm-7">
 												<input type='text' class='form-control' id="remark" name='remark' >
 											</div>
@@ -196,7 +196,7 @@
 										<div class="form-group">
 											<label for="remark" class="col-sm-3 control-label">&nbsp;</label>
 											<div class="col-sm-7 text-center">
-												<input type='submit' class='btn btn-success' id="btn_payment" name='btn_payment' value='แจ้งโอนเงิน' >&nbsp;<input type='reset' class='btn btn-danger' id="btn_reset" name='btn_resert' value='ล้างข้อมูล' >
+												<input type='submit' class='btn btn-success' id="btn_payment" name='btn_payment' value='Send' >
 											</div>
 										</div>
 									</div>
