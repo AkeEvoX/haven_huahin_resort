@@ -8,7 +8,7 @@ function adult_increase(){
 	console.log('adult increase :'+value);
 	if(value!=''){
 		value = parseInt(value)+1;
-		if(value>15) return false;
+		if(value>5) return false;
 		$('#adult_amount').val(value);
 	}
 	$('input[name="'+key_option_diner+'"]:checked').trigger('click');

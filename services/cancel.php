@@ -77,6 +77,10 @@ function set_email_list_reserve($reserve){
 		}
 	}
 
+	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: Service Charge </td><td class='text-right'>฿ ".number_format($summary->serivce,2)."</td></tr>";
+	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: VAT  </td><td class='text-right'>฿ ".number_format($summary->vat,2)."</td></tr>";
+	$result .= "<tr><td><b>Total<b/></td><td></td><td class='text-right'>฿ ".number_format($summary->sum,2)."</td></tr>";
+
 	//options
 	if(isset($options)){
 		$result ."<tr><td colspan='3'><hr/></td></tr>";
@@ -89,9 +93,6 @@ function set_email_list_reserve($reserve){
 		}
 	}
 
-	$result .= "<tr><td><b>Total<b/></td><td></td><td class='text-right'>฿ ".number_format($summary->amount,2)."</td></tr>";
-	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: Service Charge </td><td class='text-right'>฿ ".number_format($summary->charge,2)."</td></tr>";
-	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: VAT  </td><td class='text-right'>฿ ".number_format($summary->tax,2)."</td></tr>";
 	$result .= "<tr><td>&nbsp;</td><td  class='table_small' >The taxes which are not included are to be paid to the hotel. The total amount is: </td><td class='text-right'>฿ ".number_format($summary->net,2)."</td></tr>";
 	$result .= "</table>";
 

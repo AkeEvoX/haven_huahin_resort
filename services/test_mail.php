@@ -17,7 +17,7 @@ include("../managers/reserve_manager.php");
 
 	//$message = file_get_contents("../templete_email_booking.html");
 	$message = file_get_contents("../templete_email_booking.html");
-	$unique_key= "BFQpmFJx7WYXDegJqLFK";
+	$unique_key= "qzFqCOKHdpDkTIOoUzev";
 	$reserve = get_reserve($unique_key,"en");
 	$message = str_replace("{reserve_id}",$unique_key,$message);
 	$message = str_replace("{start_date}",full_date_format($reserve["info"]->date_start,"en"),$message);
@@ -62,6 +62,10 @@ function set_email_list_reserve($reserve){
 		}
 	}
 
+	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: Service Charge </td><td class='text-right'>฿ ".number_format($summary->service,2)."</td></tr>";
+	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: VAT  </td><td class='text-right'>฿ ".number_format($summary->vat,2)."</td></tr>";
+	$result .= "<tr><td><b>Total<b/></td><td></td><td class='text-right'>฿ ".number_format($summary->sum,2)."</td></tr>";
+
 	//options
 	if(isset($options)){
 		$result ."<tr><td colspan='3'><hr/></td></tr>";
@@ -74,9 +78,7 @@ function set_email_list_reserve($reserve){
 		}
 	}
 
-	$result .= "<tr><td><b>Total<b/></td><td></td><td class='text-right'>฿ ".number_format($summary->amount,2)."</td></tr>";
-	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: Service Charge </td><td class='text-right'>฿ ".number_format($summary->charge,2)."</td></tr>";
-	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: VAT  </td><td class='text-right'>฿ ".number_format($summary->tax,2)."</td></tr>";
+		
 	$result .= "<tr><td>&nbsp;</td><td  class='table_small' >The taxes which are not included are to be paid to the hotel. The total amount is: </td><td class='text-right'>฿ ".number_format($summary->net,2)."</td></tr>";
 	$result .= "</table>";
 
@@ -116,10 +118,12 @@ $payment=null;
 		,"birthdate"=>$data->birthdate
 		);
 	$summary = array(
-		"amount"=>$data->reserve_amount
-		,"charge"=>$data->reserve_charge
-		,"tax"=>$data->reserve_tax
-		,"net"=>$data->reserve_net
+		"room"=>$data->price_room
+		,"option"=>$data->price_option
+		,"sum"=>$data->price_sum
+		,"service"=>$data->price_service
+		,"vat"=>$data->price_vat
+		,"net"=>$data->price_net
 	);
 
 //## ger reserve room  ##

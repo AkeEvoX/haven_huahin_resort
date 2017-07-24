@@ -282,12 +282,23 @@ function set_package_list(items,room_name,room_id){
 	var result = "";
 
 	if(items!=null){
+
+/*
+	var adult_unit = parseFloat($('#adult_amount').val());
+	var child_unit = parseFloat($('#child_2_amount').val()); //5-11
+	var baby_unit =  parseFloat($('#child_amount').val()); //0-4
+*/
 		
 		$.each(items,function(index){
 			var package = items[index];
+			var price = package.price;
+			var person = parseFloat($('#adult_amount').val()) +  parseFloat($('#child_2_amount').val()) ;
+			var night = $('#night_unit').val();
+			
 
 			result+= "<span href='#' class='list-group-item'>";			
-			result+= "<h4 class='list-group-item-heading'>"+package.title+"<span class='pull-right'>฿ "+package.price+"</span></h4>";		
+			result+= "<h4 class='list-group-item-heading'>"+package.title+"<span class='pull-right'>฿ "+package.price+" / "+pages.message.night+"</span></h4>";		
+			//result+= "<p><small class='pull-right'>"+person+" Person  "+night+" Night</small></p>";
 			result+= "<small class='list-group-item-text'>";
 			
 			if(package.food_service==1){

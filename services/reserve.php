@@ -40,12 +40,18 @@ if(isset($data)){
 				,"mobile"=>$data->mobile
 				,"birthdate"=>$data->birthdate
 				);
+
 	$summary = array(
-		"amount"=>$data->reserve_amount
-		,"charge"=>$data->reserve_charge
-		,"tax"=>$data->reserve_tax
-		,"net"=>$data->reserve_net
+		"room"=>$data->price_room
+		,"option"=>$data->price_option
+		,"sum"=>$data->price_sum
+		,"service"=>$data->price_service
+		,"vat"=>$data->price_vat
+		,"net"=>$data->price_net
 	);
+
+//reserve_room_price
+//reserve_options_price
 
 }
 

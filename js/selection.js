@@ -1,13 +1,9 @@
 var reserve = {};
-//reserve.info = null;
 reserve.rooms = [];
 //reserve.options =  [];
-reserve.summary = null;
+//reserve.summary = [];
 reserve.customer = [];
 reserve.payment = [];
-
-
-//list_reserve
 
 function add_room(id,name,type,price,room_id){
 	
@@ -15,22 +11,32 @@ function add_room(id,name,type,price,room_id){
 	var item = "";
 	var key = moment().format("YYYYMMDDHHMMSS");
 	var bed = $('#type_bed_'+room_id).val();
+	var adults = $('#adult_amount').val();
+	var older_children = $('#child_2_amount').val();
+	var young_children = $('#child_amount').val();
+	var person = parseFloat(adults) + parseFloat(older_children);
+	var night = $("#night_unit").val();
 	name = decodeURIComponent(name);
 	type = decodeURIComponent(type);
-	console.warn("add room >  " + key +"|"+ id + "|" + name + "|"+type+"|"+price+"|"+bed);
-	var room = { "key" : key ,"package":id, "room":name , "type" : type , "price" : price ,"bed":bed}; 	
+	//console.warn("add room >  " + key +"|"+ id + "|" + name + "|"+type+"|"+price+"|"+bed+"|"+adults+"|"+older_children+"|"+young_children);
+	var room = { "key" : key ,"package":id, "room":name , "type" : type , "price" : price 
+	,"bed":bed,"adults":adults,"older_children":older_children,"young_children":young_children ,"person":person
+	}; 	
+
 	reserve.rooms.push(room); 
-	
+
+	price = price * parseFloat(night);
+
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //formoney
 	var money = parseFloat(price).toFixed(2).replace(money_pattern,"$1,");
 	
 	item += "<span id='"+key+"'  href='#' class='list-group-item'>";
 	item += "<h4 class='list-group-item-heading'>"+ name +" <span class='pull-right'>฿ "+money+"</span></h4>";
+	item += "<p><span class='pull-right'>"+person+" "+ pages.message.person+"</span></p><br/>";
 	item += "<p class='list-group-item-text'>" + type;
 	item += "<span class='pull-right' style='cursor:pointer;' onclick=del_room("+key+")>"+pages.message.remove+"</span></p>";
 	item += "</span>";
 	list.append(item);
-	//recalculate();
 	reserve.calculate();
 }
 
@@ -38,35 +44,12 @@ function del_room(key){
 	
 	$('#'+key).remove();
 	reserve.rooms = jQuery.grep(reserve.rooms,function(item,index){ return item.key != key });
-	//recalculate();
-
 	reserve.calculate();
 }
-/*
-function recalculate() {
-	var view_total = $('#total_price');
-	var total = 0.0;
-	var money = 0.0;
 
-	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //formoney
-	$.each(reserve.rooms,function(i,val){
-		
-		if(val.price != "")
-			total += parseFloat(val.price);
-		
-	});
-	money = total.toFixed(2).replace(money_pattern,"$1,");
-	view_total.html("฿ "+money);
-
-	reserve.summary = {"total_amount":total.toFixed(2)};
-	
-	//$('#data_reserve').val(JSON.stringify(reserve.source));
-	
-	$('#total_room').html(reserve.rooms.length); 
-	//$('#data_reserve').val(JSON.stringify(reserve));
-	
+reserve.reset_room = function(){
+	reserve.rooms = [];
 }
-*/
 
 reserve.get_info = function(){
 	
@@ -94,7 +77,6 @@ reserve.get_info = function(){
 		//console.warn($('#data_reserve').val());
 		
 		//set rooms info;
-		
 		if(info!==null){
 			$('#checkpoint_date').val(info.start_date);
 			$('#travel_date').val(info.end_date);
@@ -110,7 +92,7 @@ reserve.get_info = function(){
 		if(items.reserve !==null && items.reserve.summary !==null){
 			//assign summery
 			reserve.summary = items.reserve.summary;
-			var total =parseFloat(reserve.summary.total_amount).toFixed(2).replace(money_pattern,"$1,");
+			var total =parseFloat(reserve.summary.total).toFixed(2).replace(money_pattern,"$1,");
 			$('#total_price').html("฿ " + total);
 		}
 		//set item room
@@ -160,32 +142,35 @@ reserve.calculate = function(){
 
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;  
 	var total = 0.0;
+	if(reserve.summary == undefined) {
+		reserve.summary = {"room":0,"option":0,"total":0};
+	}
 	//room
 	if(reserve.rooms!=undefined){
-		
 		$.each(reserve.rooms,function(i,val){
-			
 			total += parseFloat(val.price);
 		});
+	//calculate room * night
+		total = total * parseFloat(reserve.info.night);
+		reserve.summary.room=total;
 	}
 	
-	//calculate night
-	total = total * parseFloat(reserve.info.night);
-	reserve.summary.room_price = total;
-	//option
+
+	
+	var sum_option = 0;
 	if(reserve.options!=undefined){
-		var option_price = 0;
 		$.each(reserve.options,function(i,val){
-			option_price = parseFloat(val.price);
+			sum_option += parseFloat(val.price);
 		});
-		reserve.summary.option_price = option_price;	
-		total += option_price;
+		reserve.summary.option = sum_option;
+		total += sum_option;
 	}
 	
+	reserve.summary.total = total;
 	var money = parseFloat(total).toFixed(2).replace(money_pattern,"$1,");
-	reserve.summary.total_amount = total;
 	console.log("total_amount :" + money);
 	$('#total_price').html("฿ " + money);
+	$('#total_room').html(reserve.rooms.length); 
 	
 }
 

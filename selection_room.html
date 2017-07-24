@@ -204,6 +204,8 @@
 <script src='js/common.js' ></script>
 <script type="text/javascript" >
 
+pages.init("selection_room");
+
 	$(document).ready(function(){
 		
 		
@@ -214,10 +216,18 @@
 			var days = e_date.diff(s_date,'days');
 
 			if(days>0){
-				$('#night_unit').val(days);
-				$('#total_night').html(days);
-				reserve.info.night = days;
-				reserve.calculate();
+				
+				if(confirm(pages.message.confirm_reset_room)){
+					reserve.reset_room();
+				}else{
+					$('#night_unit').val(days);
+					$('#total_night').html(days);
+					reserve.info.night = days;
+					reserve.calculate();
+				}
+					
+
+				
 			}
 			else{
 				$('#night_unit').val('error');
@@ -245,10 +255,11 @@
 		$('#btn_apply').click(function(e){
 			apply_room();
 		});
-		pages.init("selection_room");
+
 		reserve.get_info();
 	
 		$('#room_form').submit(function(){
+			reserve.calculate();
 			$('#data_reserve').val(JSON.stringify(reserve));
 		});
 

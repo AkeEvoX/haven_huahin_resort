@@ -99,22 +99,24 @@ function step_three($data){
 	$night = $data["night"];
 
 	$summary = $_SESSION["reserve"]->summary;
-	$total_room_price = $summary->room_price;
-	$total_option_price = $summary->option_price;
-	$total = $summary->total_amount;
+	$price_room = $summary->room;
+	$price_option = $summary->option;
 	
-	//tax 7%
-	$tax=($total_room_price*7)/100;
+	
+	//vat 7%
+	$vat=($price_room*7)/100;
 	//service charge 10%
-	$charge=($total_room_price*10)/100;
+	$service=($price_room*10)/100;
+	//sum price
+	$sum = $price_room + $vat + $service;
 	//net
-	$net = $total_room_price+$tax+$charge+$total_option_price;
+	$net = $sum+$price_option;
 
-	$_SESSION["reserve"]->summary->tax=$tax;
-	$_SESSION["reserve"]->summary->charge=$charge;
+	$_SESSION["reserve"]->summary->vat=$vat;
+	$_SESSION["reserve"]->summary->service=$service;
+	$_SESSION["reserve"]->summary->sum = $sum;
 	$_SESSION["reserve"]->summary->net=$net;
 	
-
 	header("Location: ../summary.html");
 	exit();
 }
@@ -172,7 +174,9 @@ function step_four($data){
 		}
 	}
 
-	$receive = array($customer["email"]=>"customer");
+	/*notify mail for reserve complete.*/
+	$cust_name = $customer["title"]." ".$customer["fname"]." ".$customer["lname"];
+	$receive[] = array("email"=>$customer["email"],"alias"=>$cust_name);
 	$sender = "contact@baankunnan.com";
 	$sender_name = "system haven huahin resort";
 	$subject = "Thank You Reservation";
@@ -224,6 +228,10 @@ function set_email_list_reserve($reserve){
 		}
 	}
 
+	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: Service Charge </td><td class='text-right'>฿ ".number_format($summary->service,2)."</td></tr>";
+	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: VAT  </td><td class='text-right'>฿ ".number_format($summary->vat,2)."</td></tr>";
+	$result .= "<tr><td><b>Total<b/></td><td></td><td class='text-right'>฿ ".number_format($summary->sum,2)."</td></tr>";
+
 	//##options##
 	if(isset($options)){
 		$result ."<tr><td colspan='3'><hr/></td></tr>";
@@ -236,9 +244,8 @@ function set_email_list_reserve($reserve){
 		}
 	}
 
-	$result .= "<tr><td><b>Total<b/></td><td></td><td class='text-right'>฿ ".number_format($summary->total_amount,2)."</td></tr>";
-	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: Service Charge </td><td class='text-right'>฿ ".number_format($summary->charge,2)."</td></tr>";
-	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: VAT  </td><td class='text-right'>฿ ".number_format($summary->tax,2)."</td></tr>";
+	
+	
 	$result .= "<tr><td>&nbsp;</td><td  class='table_small' >The taxes which are not included are to be paid to the hotel. The total amount is: </td><td class='text-right'>฿ ".number_format($summary->net,2)."</td></tr>";
 	$result .= "</table>";
 

@@ -104,17 +104,27 @@ class Reserve_Manager{
 			$reserve_enddate = $info["end_date"];
 			$reserve_expire = $info["expire_date"];
 			$reserve_status= "0"; /*0=reserve,1=complete,2=cancel*/
+
+			//detail price
 			$reserve_amount = $summary->total_amount;
 			$reserve_charge = $summary->charge;
 			$reserve_tax = $summary->tax;
 			$reserve_net = $summary->net;
+			
+			$price_room = $summary->room;
+			$price_option = $summary->option;
+			$price_sum = $summary->sum; /*  room + service + vat */
+			$price_service = $summary->service; /* 10 %*/
+			$price_vat = $summary->vat; /* 7 %*/
+			$price_net=$summary->net; /* sum + option */
+			//reserve info
 			$reserve_comment = $info["comment"];
 			$adults = $info["adults"];
 			$children = $info["children"];
 			$children_2 = $info["children_2"];
 			$code = $info["code"];
 			$night = $info["night"];
-			
+			//customer info
 			$email = $customer["email"];
 			$title_name = $customer["title"];
 			$first_name = $customer["fname"];
@@ -125,10 +135,13 @@ class Reserve_Manager{
 			
 			$create_date = "now()";
 			
-			$sql = "insert into reserve_info(unique_key,reserve_startdate,reserve_enddate,reserve_expire,reserve_status,reserve_amount,reserve_charge,reserve_tax,reserve_net,reserve_comment,adults,children,children_2,night,acc_code ";
+			$sql = "insert into reserve_info(unique_key,reserve_startdate,reserve_enddate,reserve_expire,reserve_status";
+			$sql .= " ,reserve_comment,adults,children,children_2,night,acc_code ";
+			$sql .= " ,price_room,price_option,price_sum,price_service,price_vat,price_net";			
 			$sql .= " ,email ,title_name,first_name,last_name,prefix,mobile,birthdate,create_date) ";
-			$sql .= "values('$unique_key','$reserve_startdate','$reserve_enddate','$reserve_expire','$reserve_status','$reserve_amount','$reserve_charge','$reserve_tax'  ";
-			$sql .= " ,'$reserve_net','$reserve_comment',$adults,$children,$children_2,$night,'$code'  ";
+			$sql .= " values('$unique_key','$reserve_startdate','$reserve_enddate','$reserve_expire','$reserve_status' ";
+			$sql .= " ,'$reserve_comment',$adults,$children,$children_2,$night,'$code'  ";
+			$sql .= " ,$price_room,$price_option,$price_sum,$price_service,$price_vat,$price_net ";
 			$sql .= " ,'$email','$title_name','$first_name','$last_name','$prefix','$mobile','$birthdate',$create_date); ";
 
 			
