@@ -30,6 +30,9 @@ switch($service){
 		$startdate = GetParameter("startdate");
 		$enddate = GetParameter("enddate");
 		$lang = 'en';
+
+		
+
 		$result = call_rooms_available($startdate,$enddate,$lang);
 
 	break;
@@ -75,7 +78,7 @@ function call_room_options($lang){
 	return $result;
 }
 
-function call_rooms_available($startdate,$enddate,$lange){
+function call_rooms_available($startdate,$enddate,$lang){
 
 	$base = new Room_Manager();
 	$lang='en';
@@ -87,7 +90,7 @@ function call_rooms_available($startdate,$enddate,$lange){
 			"title"=>$row->title,
 			"unit"=>$row->unit,
 			"beds"=>call_room_bed($row->id,$lang),
-			"packages"=>call_room_package($row->id,$lang),
+			"packages"=>call_room_package($row->id,2,$lang),
 			"gallerys"=>call_room_gallery($row->id,$lang)
 		);
 
@@ -97,9 +100,9 @@ function call_rooms_available($startdate,$enddate,$lange){
 
 }
 
-function call_room_package($room_id,$lang){
+function call_room_package($room_id,$range_date,$lang){
 	$base = new Room_Manager();
-	$data = $base->get_room_package($room_id,$lang);
+	$data = $base->get_room_package($room_id,$range_date,$lang);
 	while($row = $data->fetch_object()){
 		$result[] = array(
 			"id"=>$row->id,
@@ -107,7 +110,9 @@ function call_room_package($room_id,$lang){
 			"price"=>$row->package_price,
 			"food_service"=>$row->food_service,
 			"cancel_room"=>$row->cancel_room,
-			"payment_online"=>$row->payment_online
+			"payment_online"=>$row->payment_online,
+			"max_person"=>$row->max_person,
+			"extra_bed"=>$row->extra_bed
 		);
 	}
 

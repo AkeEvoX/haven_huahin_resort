@@ -210,24 +210,27 @@ pages.init("selection_room");
 		
 		
 
-		$('#btn_checkin').datetimepicker({"format":"DD/MM/YYYY"}).on('dp.change',function(e){
+		$('#btn_checkin').datetimepicker({"format":"DD/MM/YYYY", minDate:new Date()}).on('dp.change',function(e){
 			var s_date = moment(e.date.format('YYYY-MM-DD'));
 			var e_date = moment($('#btn_checkout').find("input").val(), "DD/MM/YYYY");
 			var days = e_date.diff(s_date,'days');
 
-			if(days>0){
-				
-				if(confirm(pages.message.confirm_reset_room)){
-					reserve.reset_room();
-				}else{
-					$('#night_unit').val(days);
-					$('#total_night').html(days);
-					reserve.info.night = days;
-					reserve.calculate();
-				}
-					
+			//check previus date
 
-				
+			if(days>0){
+				if(reserve.rooms!=undefined && reserve.rooms.length >0){
+					if(confirm(pages.message.confirm_reset_room)){
+						reserve.reset_room();
+					}else{
+						$(this).datepicker('hide');
+					}
+
+				}
+
+				$('#night_unit').val(days);
+				$('#total_night').html(days);
+				reserve.info.night = days;
+				reserve.calculate();
 			}
 			else{
 				$('#night_unit').val('error');
@@ -235,13 +238,24 @@ pages.init("selection_room");
 			}
 		});
 
-		$('#btn_checkout').datetimepicker({"format":"DD/MM/YYYY"}).on('dp.change',function(e){
+		$('#btn_checkout').datetimepicker({"format":"DD/MM/YYYY", minDate:new Date()}).on('dp.change',function(e){
 			var e_date = moment(e.date.format('YYYY-MM-DD'));
 			var s_date = moment($('#btn_checkin').find("input").val(), "DD/MM/YYYY");
 			var days = e_date.diff(s_date,'days');
 
 			if(days>0){
-			
+
+				if(reserve.rooms!=undefined && reserve.rooms.length >0){
+					if(confirm(pages.message.confirm_reset_room)){
+						reserve.reset_room();
+					}else{ 
+						utility.print_log("cancel checkout date");
+
+						return e;
+						//$(this).datepicker('hide');
+					}
+				}
+
 				$('#night_unit').val(days);
 				$('#total_night').html(days);
 				reserve.info.night = days;
@@ -250,6 +264,9 @@ pages.init("selection_room");
 				alert('Sorry !! Date Invalid . / เลือกวันที่ไม่ถูกต้อง');
 				$('#night_unit').val('error');
 			}
+
+		}).on('select', function (e) {
+			console.log('on select event');
 		});
 
 		$('#btn_apply').click(function(e){

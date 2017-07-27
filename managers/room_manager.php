@@ -68,7 +68,9 @@ class Room_Manager{
 			$sql .= "where info.create_date between '".$startdate." 00:00:00' and '".$enddate." 00:00:00' ";
 			$sql .= "group by b.room_key ";
 			$sql .= ") r on a.id = r.room_key ";
-			$sql .= "where COALESCE(r.reserve_unit, 0)  <= unit order by a.seq ";
+			$sql .= "where COALESCE(r.reserve_unit, 0)  <= unit  ";
+			//$sql .= " and";
+			$sql .= "order by a.seq";
 			$result = $this->mysql->execute($sql);
 
 			log_warning("get_room_available > " . $sql);
@@ -80,11 +82,15 @@ class Room_Manager{
 		}
 	}
 
-	function get_room_package($room_id,$lang){
+	function get_room_package($room_id,$range_date,$lang){
 		try{
 
-			$sql = "select id,title_".$lang." as title,package_price,food_service,cancel_room,payment_online ";
-			$sql .= " from room_packages where room_type='".$room_id."' ";
+			$sql = " select id,title_".$lang." as title,package_price,food_service,cancel_room,payment_online,extra_bed,max_person ";
+			$sql .= " from room_packages where room_type='".$room_id."'  and status=1 and special_date=0 ";
+			$sql .= " or ((special_date = ".$range_date.") and ( special_date > 0 and special_date <=".$range_date." and room_type=".$room_id." )) ";
+//#exsample
+//select id,title_en as title,package_price,food_service,cancel_room,payment_online,special_date,room_type
+//from room_packages where room_type=1  and status=1 and special_date=0 or ((special_date = 2) and ( special_date > 0 and special_date <=2 and room_type=1 ))
 			$result = $this->mysql->execute($sql);
 
 			log_warning("get_room_package > " . $sql);

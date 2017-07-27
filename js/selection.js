@@ -48,7 +48,14 @@ function del_room(key){
 }
 
 reserve.reset_room = function(){
-	reserve.rooms = [];
+
+	if(reserve.rooms!=undefined){
+		$.each(reserve.rooms,function(i,val){
+			del_room(val.key);
+		});
+	}
+
+	//reserve.rooms = [];
 }
 
 reserve.get_info = function(){

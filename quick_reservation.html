@@ -28,7 +28,7 @@
 				<form class="form-horizontal" action='services/process.php?step=1' method='post'>
 					<div class="form-group">
 						<label for="check_in_date" class="col-sm-4 control-label lb_checkin" >Check In Date : </label>
-						<div class="col-sm-3">
+						<div class="col-sm-5">
 						  	<div class="input-group date" id='btn_calendar' >
 							  <input type="text" class="form-control" id='check_in_date' name='check_in_date' placeholder="" />
 							   <span class="input-group-addon">
@@ -156,7 +156,7 @@
 		pages.init('quick_reservation');
 		
 	   // $("#check_in_date").datepicker({ numberOfMonths:2}); 
-	   $('#btn_calendar').datetimepicker({"format":"DD/MM/YYYY"});
+	   $('#btn_calendar').datetimepicker({"format":"DD/MM/YYYY",minDate:new Date()});
 
 	  
 	  $('#btn_language').click(function(e){
