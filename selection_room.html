@@ -238,7 +238,7 @@ pages.init("selection_room");
 			}
 		});
 
-		$('#btn_checkout').datetimepicker({"format":"DD/MM/YYYY", minDate:new Date()}).on('dp.change',function(e){
+		$('#btn_checkout').datetimepicker({"format":"DD/MM/YYYY", minDate: new Date().setDate(new Date().getDate() +1) }).on('dp.change',function(e){
 			var e_date = moment(e.date.format('YYYY-MM-DD'));
 			var s_date = moment($('#btn_checkin').find("input").val(), "DD/MM/YYYY");
 			var days = e_date.diff(s_date,'days');
@@ -250,6 +250,7 @@ pages.init("selection_room");
 						reserve.reset_room();
 					}else{ 
 						utility.print_log("cancel checkout date");
+						
 
 						return e;
 						//$(this).datepicker('hide');
@@ -273,8 +274,10 @@ pages.init("selection_room");
 			apply_room();
 		});
 
-		reserve.get_info();
-	
+		reserve.get_info(function(){
+			apply_room();
+		});
+		
 		$('#room_form').submit(function(){
 			reserve.calculate();
 			$('#data_reserve').val(JSON.stringify(reserve));
@@ -282,9 +285,12 @@ pages.init("selection_room");
 
    });
 
-		apply_room();
+		
 		
 		function apply_room(){
+
+			console.log('raw startdate : ' + $('#checkpoint_date').val());
+
 			var startdate = moment($('#btn_checkin').find("input").val(),"DD/MM/YYYY").format("YYYY-MM-DD");
 			var enddate = moment($('#btn_checkout').find("input").val(),"DD/MM/YYYY").format("YYYY-MM-DD");
 			console.log("fillter room "+startdate + " to "+ enddate);

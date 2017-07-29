@@ -71,7 +71,7 @@ function step_two($data){
 	$_SESSION["info"]["expire_date"] = date('d/m/Y',strtotime(str_replace('/','-',$data["checkpoint_date"]). "+ 14days")) ;
 	
 	//summary
-	//$reserve = json_decode($data["data_reserve"]);
+	//$reserve = json_decode($data["data_reserve"]); 
 	
 	/*
 	//print value room reserve

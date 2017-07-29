@@ -58,6 +58,8 @@ class Room_Manager{
 		
 	}
 
+
+
 	function get_room_available($startdate,$enddate,$lang){
 		try{
 
@@ -87,10 +89,15 @@ class Room_Manager{
 
 			$sql = " select id,title_".$lang." as title,package_price,food_service,cancel_room,payment_online,extra_bed,max_person ";
 			$sql .= " from room_packages where room_type='".$room_id."'  and status=1 and special_date=0 ";
-			$sql .= " or ((special_date = ".$range_date.") and ( special_date > 0 and special_date <=".$range_date." and room_type=".$room_id." )) ";
+			$sql .= " or (special_date=".$range_date." and room_type=".$room_id." and status=1 )  ";//same day
+			$sql .= " or (special_date <= ".$range_date." and special_date > 30 and room_type=".$room_id." and status=1 ) "; //over month
+		
 //#exsample
-//select id,title_en as title,package_price,food_service,cancel_room,payment_online,special_date,room_type
-//from room_packages where room_type=1  and status=1 and special_date=0 or ((special_date = 2) and ( special_date > 0 and special_date <=2 and room_type=1 ))
+/*
+select id,title_en as title,package_price,food_service,cancel_room,payment_online,special_date,room_type,extra_bed,max_person
+from room_packages where room_type=2  and status=1 and special_date=0 or (special_date=33 and room_type=1)
+or (special_date <= 33 and special_date > 30)
+*/
 			$result = $this->mysql->execute($sql);
 
 			log_warning("get_room_package > " . $sql);

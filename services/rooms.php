@@ -31,8 +31,6 @@ switch($service){
 		$enddate = GetParameter("enddate");
 		$lang = 'en';
 
-		
-
 		$result = call_rooms_available($startdate,$enddate,$lang);
 
 	break;
@@ -83,6 +81,10 @@ function call_rooms_available($startdate,$enddate,$lang){
 	$base = new Room_Manager();
 	$lang='en';
 	$data = $base->get_room_available($startdate,$enddate,$lang);
+	$range_date =  datediff(date('Y-m-d'),$startdate);
+
+	if($range_date <=0) $range_date=1;
+	
 	while($row = $data->fetch_object()){
 
 		$result[] = array(
@@ -90,7 +92,7 @@ function call_rooms_available($startdate,$enddate,$lang){
 			"title"=>$row->title,
 			"unit"=>$row->unit,
 			"beds"=>call_room_bed($row->id,$lang),
-			"packages"=>call_room_package($row->id,2,$lang),
+			"packages"=>call_room_package($row->id,$range_date,$lang),
 			"gallerys"=>call_room_gallery($row->id,$lang)
 		);
 

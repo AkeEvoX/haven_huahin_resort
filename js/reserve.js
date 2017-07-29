@@ -180,7 +180,6 @@ reserve.get_confirmation = function(){
 
 };
 
-
 reserve.get_summary = function(){
 
 	var endpoint = "services/info.php";
@@ -331,7 +330,6 @@ reserve.get_summary = function(){
 
 	});
 }
-
 
 reserve.get_receipt = function(val){
 	

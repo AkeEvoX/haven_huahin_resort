@@ -294,11 +294,11 @@ function set_package_list(items,room_name,room_id){
 			var price = package.price;
 			var person = parseFloat($('#adult_amount').val()) +  parseFloat($('#child_2_amount').val()) ;
 			var night = $('#night_unit').val();
-			
+			var limit_people = parseFloat(package.extra_bed)+ parseFloat(package.max_person);
 
 			result+= "<span href='#' class='list-group-item'>";			
 			result+= "<h4 class='list-group-item-heading'>"+package.title+"<span class='pull-right'>฿ "+package.price+" / "+pages.message.night+"</span></h4>";		
-			//result+= "<p><small class='pull-right'>"+person+" Person  "+night+" Night</small></p>";
+			//result+= "<p><small class='pull-right'>"+person+" Person </small></p><br/>";
 			result+= "<small class='list-group-item-text'>";
 			
 			if(package.food_service==1){
@@ -322,7 +322,7 @@ function set_package_list(items,room_name,room_id){
 				result+= "<div class='col-sm-3' style='cursor:pointer;'><span class='glyphicon glyphicon-remove'></span> "+pages.message.no_internet +"</div>";
 			}
 			
-			result+= "<button onclick=add_room('"+package.id+"','"+encodeURIComponent(room_name)+"','"+encodeURIComponent(package.title)+"','"+package.price+"','"+room_id+"'); type='button' class='btn btn-default brown btn-sm col-sm-3'>"+pages.message.choice +"</button>&nbsp;";
+			result+= "<button onclick=add_room('"+package.id+"','"+encodeURIComponent(room_name)+"','"+encodeURIComponent(package.title)+"','"+package.price+"','"+room_id+"',"+limit_people+"); type='button' class='btn btn-default brown btn-sm col-sm-3'>"+pages.message.choice +"</button>&nbsp;";
 			result+= "</small></span>";
 			
 		});

@@ -5,7 +5,7 @@ reserve.rooms = [];
 reserve.customer = [];
 reserve.payment = [];
 
-function add_room(id,name,type,price,room_id){
+function add_room(id,name,type,price,room_id,limit_people){
 	
 	var list = $('#list_reserve');
 	var item = "";
@@ -16,11 +16,19 @@ function add_room(id,name,type,price,room_id){
 	var young_children = $('#child_amount').val();
 	var person = parseFloat(adults) + parseFloat(older_children);
 	var night = $("#night_unit").val();
+
+	if(person > limit_people)
+	{
+		alert(pages.message.warning_limit_people);
+		return false;
+	}
+
 	name = decodeURIComponent(name);
 	type = decodeURIComponent(type);
 	//console.warn("add room >  " + key +"|"+ id + "|" + name + "|"+type+"|"+price+"|"+bed+"|"+adults+"|"+older_children+"|"+young_children);
 	var room = { "key" : key ,"package":id, "room":name , "type" : type , "price" : price 
-	,"bed":bed,"adults":adults,"older_children":older_children,"young_children":young_children ,"person":person
+	,"bed":bed,"adults":adults,"older_children":older_children
+	,"young_children":young_children ,"person":person
 	}; 	
 
 	reserve.rooms.push(room); 
@@ -58,7 +66,7 @@ reserve.reset_room = function(){
 	//reserve.rooms = [];
 }
 
-reserve.get_info = function(){
+reserve.get_info = function(callback_complete){
 	
 	var endpoint = "services/info.php";
 	var method = "get";
@@ -133,7 +141,7 @@ reserve.get_info = function(){
 		}
 		
 		console.log("load information complete.");
-	});
+	},callback_complete);
 }
 
 reserve.get_roomofweek = function(){

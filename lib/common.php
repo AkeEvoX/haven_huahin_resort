@@ -133,4 +133,8 @@ function full_date_format($date,$lang){
 
 }
 
+function datediff($startdate,$enddate){
+	return (strtotime($enddate) - strtotime($startdate))/  ( 60 * 60 * 24 );
+}
+
 ?>

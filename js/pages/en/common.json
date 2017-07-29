@@ -36,6 +36,7 @@
 ,"payment_online":"Payment Online"
 ,"new_reserve":"New Reserve"
 ,"condition":"Condition"
+,"warning_limit_people":"Sorry! a person is over maximum person ."
 ,"confirm_reset_room":"if you change date, system reset your room."
 ,"dialog_change_title":"(EN) ยกเลิกได้และเปลี่ยนแปลงได้"
 ,"dialog_change_detail":"(EN) ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ {reserve_expire} ,00:00 (UTC+07:00) หลังจากวันที่ดังกล่าวอาจมีค่าธรรมเนียมในการยกเลิกหรือแก้ไข ในกรณีทีท่านไม่มาแสดงตัว จะมีค่าปรับ 100%"
