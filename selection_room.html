@@ -188,6 +188,27 @@
   </div>
 </div>
 	<!--show modal-->
+	<!--show modal-->
+<!-- Modal -->
+<div class="modal fade bs-example-modal-md" id="modal_default" tabindex="-1" role="dialog" aria-labelledby="modaltitle">
+  <div class="modal-dialog modal-lg" style='width:98%;' role="document">
+    <div class="modal-content" >
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="modal_title">&nbsp;</h4>
+			</div>
+			<div class="modal-body"  >
+				<div id="modal_content" style='height:auto;width:100%;'>
+					loading...
+				</div>
+			</div>
+		<div class='modal-footer'>
+		 <button type="button" class="btn btn-warning" data-toggle="collapse" data-dismiss="modal" >Close</button> 
+		</div>
+    </div>
+  </div>
+</div>
+	<!--show modal-->
 <script src='plugin/jquery/jquery.min.js' ></script>
 <script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>
 <!-- <script src='plugin/jquery/datepicker-th.js' ></script> -->
@@ -250,8 +271,6 @@ pages.init("selection_room");
 						reserve.reset_room();
 					}else{ 
 						utility.print_log("cancel checkout date");
-						
-
 						return e;
 						//$(this).datepicker('hide');
 					}

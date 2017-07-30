@@ -20,8 +20,8 @@
 			<div class='col-md-12'>
 				<div class="panel panel-default">
 					<div class="panel-heading" >
-						<h3 class="panel-title" style='margin:10px 5px 10px 1px;'>Cancel your reservation</h3>
-						<small>To cancel a reservation, please enter you reservation number and the e-mail address used for the reservation</small>
+						<h3 class="panel-title" style='margin:10px 5px 10px 1px;'><span class='lb_cancel_title'>Cancel your reservation</span></h3>
+						<small><span class='lb_cancel_detail'>To cancel a reservation, please enter your reservation number and the e-mail address used for the reservation</span></small>
 					</div>
 					<div class='panel-body'>						
 						<form id='cancel_form' class="form-horizontal" action='services/cancel.php' method='post'>
@@ -80,6 +80,8 @@
 <script src='js/utility.js' ></script>
 <script>
 $(document).ready(function(){
+
+	page.init('cancellation');
 
 	$('#btn_cancel').click(function(){
 		$('#modaldialog').modal();

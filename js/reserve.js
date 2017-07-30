@@ -98,12 +98,12 @@ reserve.get_confirmation = function(){
 			var service = parseFloat(summary.service) ;
 			var vat = parseFloat(summary.vat);
 			var sum = parseFloat(summary.sum) ;	//summary.amount
-			net = parseFloat(summary.net);
+			var net_parse = parseFloat(summary.net);
 
 			sum = parseFloat(sum).toFixed(2).replace(money_pattern,"$1,");
 			service = parseFloat(service).toFixed(2).replace(money_pattern,"$1,");
 			vat = parseFloat(vat).toFixed(2).replace(money_pattern,"$1,");
-			net = parseFloat(net).toFixed(2).replace(money_pattern,"$1,");
+			net = parseFloat(net_parse).toFixed(2).replace(money_pattern,"$1,");
 
 			var item = "<div class='row'>";
 			item += "<div class='col-md-3'>"+pages.message.service+"</div>";
@@ -128,13 +128,13 @@ reserve.get_confirmation = function(){
 				$("input[name='orderRef']").val(reserve_id);
 			
 			if($("input[name='amount']").length!=0) 
-				$("input[name='amount']").val(net);
+				$("input[name='amount']").val(net_parse);
 			
 			if($("input[name='payment_reserve_id']").length!=0) 
 				$("input[name='payment_reserve_id']").val(reserve_id);
 			
 			if($("input[name='payment_amount']").length!=0) 
-				$("input[name='payment_amount']").val(net);
+				$("input[name='payment_amount']").val(net_parse);
 			
 			$('#list_reserve').append(item);
 		

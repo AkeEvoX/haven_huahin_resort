@@ -4,7 +4,7 @@ rooms.filter_room = function(startdate,enddate){
 
 	var start_date = "";
 	var end_date = "";
-
+	
 	var endpoint = "services/rooms.php";
 	var method="get";
 	var args = {
@@ -13,6 +13,7 @@ rooms.filter_room = function(startdate,enddate){
 		,"startdate":startdate
 		,"enddate":enddate
 	};
+	$('#list_room').html("<img src='images/loader.gif' /><br/>Loading....");
 	utility.service(endpoint,method,args,view_list_room);
 
 
@@ -119,10 +120,9 @@ function calculate_diner(){
 
 function view_list_room(resp){
 	var rooms = "";
-	$('#list_room').html("");
+	console.log("view list room");
 	if(resp.data!=null){
-		
-		//console.log(resp.data);
+		$('#list_room').html("");
 
 		var templete_master = "";
 		templete_master = utility.get_templete("templete_room.html");
@@ -280,25 +280,21 @@ function set_bed_list(items,room_id){
 
 function set_package_list(items,room_name,room_id){
 	var result = "";
-
+	//console.log(items);
 	if(items!=null){
-
-/*
-	var adult_unit = parseFloat($('#adult_amount').val());
-	var child_unit = parseFloat($('#child_2_amount').val()); //5-11
-	var baby_unit =  parseFloat($('#child_amount').val()); //0-4
-*/
 		
 		$.each(items,function(index){
 			var package = items[index];
 			var price = package.price;
 			var person = parseFloat($('#adult_amount').val()) +  parseFloat($('#child_2_amount').val()) ;
 			var night = $('#night_unit').val();
+			var extra_price_adults = package.extra_price_adults;
+			var extra_price_children = package.extra_price_children;
 			var limit_people = parseFloat(package.extra_bed)+ parseFloat(package.max_person);
 
 			result+= "<span href='#' class='list-group-item'>";			
-			result+= "<h4 class='list-group-item-heading'>"+package.title+"<span class='pull-right'>฿ "+package.price+" / "+pages.message.night+"</span></h4>";		
-			//result+= "<p><small class='pull-right'>"+person+" Person </small></p><br/>";
+			result+= "<h4 class='list-group-item-heading'><a href='javascript:void(0);' data-toggle='collapse' data-target='#package_"+package.id+"' >"+package.title+"</a>";		
+			result+= "<span class='pull-right'>฿ "+package.price+" / "+pages.message.night+"</span></h4>";
 			result+= "<small class='list-group-item-text'>";
 			
 			if(package.food_service==1){
@@ -322,16 +318,30 @@ function set_package_list(items,room_name,room_id){
 				result+= "<div class='col-sm-3' style='cursor:pointer;'><span class='glyphicon glyphicon-remove'></span> "+pages.message.no_internet +"</div>";
 			}
 			
-			result+= "<button onclick=add_room('"+package.id+"','"+encodeURIComponent(room_name)+"','"+encodeURIComponent(package.title)+"','"+package.price+"','"+room_id+"',"+limit_people+"); type='button' class='btn btn-default brown btn-sm col-sm-3'>"+pages.message.choice +"</button>&nbsp;";
+			result+= "<button onclick=add_room('"+package.id+"','"+encodeURIComponent(room_name)+"','"+encodeURIComponent(package.title)+"','"+package.price+"','"+room_id+"',"+limit_people+","+extra_price_adults+","+extra_price_children+"); type='button' class='btn btn-default brown btn-sm col-sm-3'>"+pages.message.choice +"</button>&nbsp;";
 			result+= "</small></span>";
+			result+= "<div id='package_"+package.id+"' class='collapse' ><span class='list-group-item'>"+package.detail+"";
+			result+= "<a href='javascript:void(0)' class='pull-right' onclick='pop_pack_condition("+package.id+")'>"+pages.message.condition_package_btn+"</a><br></span>";
+			result+= "</div></span>";
+
 			
 		});
 	}
 	else{  //show room not available.
-		//console.log( room_name +" :: package not found");
 		result="<span href='#' class='list-group-item text-center'> <h4>"+pages.message.room_unavailabel+".</h4>";
 		result+="</span>";
 	}
 	
 	return result;
+}
+
+function pop_pack_condition(id){
+
+	var endpoint = "services/rooms.php";
+	var method ="get";
+	var data ={"service":"package","id":id,"lang":pages.lang};
+	utility.service(endpoint,method,data,function(resp){
+		utility.modal_default(pages.message.condition_package_btn,resp.data.conditions);
+	});
+
 }

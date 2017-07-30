@@ -41,7 +41,7 @@ class Reserve_Manager{
 		try{
 
 			$sql = "select r.unique_key,r.option_key as id ,r.option_price,r.option_desc,o.title_".$lang." as title,o.price,o.detail_".$lang." as detail ";
-			$sql .= "from reserve_options r inner join room_options o on r.option_key = o.id where unique_key='".$unique_key."' ";
+			$sql .= "from reserve_options r inner join options_type o on r.option_key = o.id where unique_key='".$unique_key."' ";
 			$result = $this->mysql->execute($sql);
 
 			log_warning("get_reserve_options > " . $sql);
@@ -205,7 +205,7 @@ class Reserve_Manager{
 
 		try{
 
-			$sql = "select count(0) as found ";
+			$sql = "select count(0) as found,reserve_expire ";
 			$sql .= "from reserve_info where unique_key='".$unique_key."' and email='".$email."' ";
 			$result = $this->mysql->execute($sql);
 

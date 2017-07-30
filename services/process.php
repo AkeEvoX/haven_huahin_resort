@@ -103,10 +103,10 @@ function step_three($data){
 	$price_option = $summary->option;
 	
 	
-	//vat 7%
-	$vat=($price_room*7)/100;
 	//service charge 10%
 	$service=($price_room*10)/100;
+	//vat 7%
+	$vat=(($price_room+$service)*7)/100;
 	//sum price
 	$sum = $price_room + $vat + $service;
 	//net

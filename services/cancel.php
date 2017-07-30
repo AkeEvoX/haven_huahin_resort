@@ -18,10 +18,20 @@ if($verify->found=="0"){
 	exit();
 }
 else{
+
+
+	//check cancel date is over?
+	$date_range = datediff(date('Y-m-d'),$verify->reserve_expire);
+	if($date_range < 0)
+	{
+		$redirect = "<script>alert('Sorry!!! you can\'t cancelling a reservation.');";
+		$redirect .= "window.location='../cancel_confirm.html';</script>";
+		echo $redirect;
+		exit();
+	}
 	$result = $base->cancel_reserve($key,$email);	
 	send_mail_cancel($key);
 	echo "<script>alert('Your cancellation was successful. \\n Thank you.');window.location='../cancellation.html?reserve_id=".$key."';</script>";
-	//header("Location: ../cancellation.html?reserve_id=".$key);
 	exit();
 }
 
@@ -101,14 +111,14 @@ function set_email_list_reserve($reserve){
 
 function get_reserve($uniqueKey,$lang){
 	
-$base = new Reserve_Manager();
+	$base = new Reserve_Manager();
 
-//## get reserve info ##
-$reserve_data = $base->get_reserve_info($uniqueKey);
-$data = $reserve_data->fetch_object();
-$info = null;
-$customer=null;
-$payment=null;
+	//## get reserve info ##
+	$reserve_data = $base->get_reserve_info($uniqueKey);
+	$data = $reserve_data->fetch_object();
+	$info = null;
+	$customer=null;
+	$payment=null;
 
 	$info = array(
 		"date_start"=>$data->reserve_startdate
@@ -138,7 +148,7 @@ $payment=null;
 		,"net"=>$data->reserve_net
 	);
 
-//## ger reserve room  ##
+ //## ger reserve room  ##
 				
 	$room_data = $base->get_reserve_rooms($uniqueKey,$lang);
 	
@@ -154,7 +164,7 @@ $payment=null;
 			);
 		}
 	}
-//## ger reserve option  ##
+ //## ger reserve option  ##
 	$option_data = $base->get_reserve_options($uniqueKey,$lang);
 	if(isset($option_data)){
 		while($row = $option_data->fetch_object()){
@@ -167,7 +177,7 @@ $payment=null;
 		}
 	}
 
-//## consolidate reservation ##
+ 	//## consolidate reservation ##
 
 	$reserve = array("info"=>(object) $info
 		,"rooms"=>(object) $rooms

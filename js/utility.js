@@ -110,6 +110,14 @@ utility.modalpage = function(title,url,event){
 
 }
 
+utility.modal_default = function(title,content){
+	if(title!=null)
+		$('#modal_title').html(title);
+
+	$('#modal_content').html(content);
+	$('#modal_default').modal('show');
+}
+
 utility.modalimage = function(title,url){
 
 	if(title!=null)

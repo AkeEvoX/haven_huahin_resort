@@ -5,7 +5,7 @@ reserve.rooms = [];
 reserve.customer = [];
 reserve.payment = [];
 
-function add_room(id,name,type,price,room_id,limit_people){
+function add_room(id,name,type,price,room_id,limit_people,extra_adults,extra_children){
 	
 	var list = $('#list_reserve');
 	var item = "";
@@ -22,6 +22,17 @@ function add_room(id,name,type,price,room_id,limit_people){
 		alert(pages.message.warning_limit_people);
 		return false;
 	}
+	
+	//calculate extra people
+	if(adults==limit_people){
+		price = parseFloat(price) +  parseFloat(extra_adults);
+	}
+	else if(person==limit_people){ 
+		price = parseFloat(price) + parseFloat(extra_children;
+	}
+
+	console.warn("adult="+extra_adults);
+	console.warn("children="+extra_children);
 
 	name = decodeURIComponent(name);
 	type = decodeURIComponent(type);

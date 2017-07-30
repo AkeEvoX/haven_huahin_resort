@@ -26,6 +26,11 @@ switch($service){
 		$lang = "en";
 		$result = call_room_options($lang);
 	break;
+	case "package":
+		$lang = GetParameter('lang');
+		$pack_id = GetParameter('id');
+		$result = call_item_package($pack_id,$lang);
+	break;
 	case "filter":
 		$startdate = GetParameter("startdate");
 		$enddate = GetParameter("enddate");
@@ -76,6 +81,28 @@ function call_room_options($lang){
 	return $result;
 }
 
+function call_item_package($id,$lang){
+	
+	$base = new Room_Manager();
+	$data = $base->get_item_package($id,$lang);
+	$row = $data->fetch_object();
+		$result = array(
+			"id"=>$row->id,
+			"title"=>$row->title,
+			"price"=>$row->package_price,
+			"food_service"=>$row->food_service,
+			"cancel_room"=>$row->cancel_room,
+			"payment_online"=>$row->payment_online,
+			"max_person"=>$row->max_person,
+			"extra_bed"=>$row->extra_bed,
+			"detail"=>$row->detail,
+			"conditions"=>$row->conditions);
+	
+	return $result;
+}
+
+
+
 function call_rooms_available($startdate,$enddate,$lang){
 
 	$base = new Room_Manager();
@@ -97,14 +124,12 @@ function call_rooms_available($startdate,$enddate,$lang){
 		);
 
 	}
-
 	return $result;
-
 }
 
 function call_room_package($room_id,$range_date,$lang){
 	$base = new Room_Manager();
-	$data = $base->get_room_package($room_id,$range_date,$lang);
+	$data = $base->get_room_packages($room_id,$range_date,$lang);
 	while($row = $data->fetch_object()){
 		$result[] = array(
 			"id"=>$row->id,
@@ -114,7 +139,11 @@ function call_room_package($room_id,$range_date,$lang){
 			"cancel_room"=>$row->cancel_room,
 			"payment_online"=>$row->payment_online,
 			"max_person"=>$row->max_person,
-			"extra_bed"=>$row->extra_bed
+			"extra_bed"=>$row->extra_bed,
+			"extra_price_children"=>$row->extra_price_children,
+			"extra_price_adults"=>$row->extra_price_adults,
+			"detail"=>$row->detail,
+			"conditions"=>$row->conditions
 		);
 	}
 
