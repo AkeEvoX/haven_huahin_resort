@@ -28,7 +28,7 @@ function add_room(id,name,type,price,room_id,limit_people,extra_adults,extra_chi
 		price = parseFloat(price) +  parseFloat(extra_adults);
 	}
 	else if(person==limit_people){ 
-		price = parseFloat(price) + parseFloat(extra_children;
+		price = parseFloat(price) + parseFloat(extra_children);
 	}
 
 	console.warn("adult="+extra_adults);

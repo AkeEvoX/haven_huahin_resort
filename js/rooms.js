@@ -297,11 +297,18 @@ function set_package_list(items,room_name,room_id){
 			result+= "<span class='pull-right'>฿ "+package.price+" / "+pages.message.night+"</span></h4>";
 			result+= "<small class='list-group-item-text'>";
 			
+			//check package internet rate.
+			//console.log("check package internet = "+ package.title + " is " +package.title.toLowerCase().indexOf("internet"));
+			if(package.title.toLowerCase().indexOf("internet")!=-1){
+				console.log("found internet rate. >" + package.title);
+				
+			}
+			
 			if(package.food_service==1){
 				result+= "<div class='col-sm-3' onclick='reserve.modal_breakfast();' style='cursor:pointer;'><span class='glyphicon glyphicon-ok'></span> "+pages.message.breakfast +"</div>";
 			}
 			else{
-				result+= "<div class='col-sm-3' ><span class='glyphicon glyphicon-remove'></span> "+pages.message.breakfast +"</div>";
+				result+= "<div class='col-sm-3' ><span class='glyphicon glyphicon-remove'></span> "+pages.message.no_breakfast +"</div>";
 			}
 			
 			if(package.cancel_room==1){
