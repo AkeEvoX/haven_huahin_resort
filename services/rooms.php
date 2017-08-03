@@ -114,6 +114,13 @@ function call_rooms_available($startdate,$enddate,$lang){
 	
 	while($row = $data->fetch_object()){
 
+		//check room exist
+		
+		$exist_room = check_duplicate_room($result[]);
+		
+		//if()
+	
+		/*
 		$result[] = array(
 			"id"=>$row->id,
 			"title"=>$row->title,
@@ -122,9 +129,28 @@ function call_rooms_available($startdate,$enddate,$lang){
 			"packages"=>call_room_package($row->id,$range_date,$lang),
 			"gallerys"=>call_room_gallery($row->id,$lang)
 		);
+		*/
 
 	}
 	return $result;
+}
+
+
+function check_duplicate_room($source , $room_id){
+	
+	if(isset($source)){
+		
+		while($room = $source){
+			
+			if($room->id == $room_id){
+				return true;
+				break;
+			}
+			
+		}
+		return false;
+	}
+	
 }
 
 function call_room_package($room_id,$range_date,$lang){
