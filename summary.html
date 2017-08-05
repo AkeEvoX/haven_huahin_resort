@@ -86,7 +86,7 @@
 		<div class='row rowspan' >
 			<table class='table table-bordered'  >
 				<tr>
-					<td class='col-md-12 bg-black' style='color:white;' colspan='2'><span class='lb_reserve_date'></span><span id='date_start'></span> - <span id='date_end'></span></td>
+					<td class='col-md-12 bg-black' style='color:white;' colspan='2'><span class='lb_reserve_date'></span><span id='date_start'></span> to <span id='date_end'></span></td>
 				</tr>
 				<tr class='bg-heading'>
 					<td class='col-md-12 ' colspan='2'>
@@ -145,14 +145,14 @@
 				<tr class='bg-heading'>
 					<td class='col-md-12' colspan='2' style='padding:0px;'>
 							<div class='col-md-6' >
-								<h3><span class='lb_cust_info'>ข้อมูลแขกผู้เข้าพัก</span></h3>
+								<h3><span class='lb_cust_info'>Guest Information</span></h3>
 								<p style='color:green'><label class='lb_info_en'>โปรดกรอกข้อมูลส่วนบุคคลเป็นภาษาอังกฤษ</label></p>
 								<div class="form-group">
-									<label for="email" id='lb_email'> ที่อยู่อีเมล</label>
+									<label for="email" id='lb_email'> Email</label>
 									<input type="email" class="form-control" id="email" name="email" placeholder=""  />
 								</div><!--email-->
 								<div class="form-group">
-									<label for="title_group" id='lb_prefix_name'>คำนำหน้า</label><br/>
+									<label for="title_group" class='lb_prefix_name'>prefix</label><br/>
 									<div class="btn-group" id='title_group' data-toggle="buttons">
 									  <label class="btn btn-default">
 										<input type="radio" name="title" id="title" value='Mr.'><span class='lb_prefix_1'> Mr.</span>
@@ -166,11 +166,11 @@
 									</div>
 								</div><!--title-->
 								<div class="form-group">
-									<label for="fname" id='lb_fname'></label>
+									<label for="fname" class='lb_fname'></label>
 									<input type="text" class="form-control" id="fname" name="fname" placeholder="" maxlength="50"  />
 								</div><!--firstname-->
 								<div class="form-group">
-									<label for="lname" id='lb_lname'> </label>
+									<label for="lname" class='lb_lname'> </label>
 									<input type="text" class="form-control" id="lname" name="lname" placeholder="" maxlength="50"  />
 								</div><!--lastname-->
 								<label ><span class='lb_dateofbirth'></span></label>
@@ -225,7 +225,32 @@
 			</table>
 		</div>
 	</form>
+	
+		<!--show modal-->
+<!-- Modal -->
+<div class="modal fade bs-example-modal-md" id="modal_default" tabindex="-1" role="dialog" aria-labelledby="modaltitle">
+  <div class="modal-dialog modal-lg" style='width:98%;' role="document">
+    <div class="modal-content" >
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="modal_title">&nbsp;</h4>
+			</div>
+			<div class="modal-body"  >
+				<div id="modal_content" style='height:auto;width:100%;'>
+					loading...
+				</div>
+			</div>
+		<div class='modal-footer'>
+		 <button type="button" class="btn btn-warning" data-toggle="collapse" data-dismiss="modal" >Close</button> 
+		</div>
+    </div>
+  </div>
 </div>
+	<!--show modal-->
+	
+</div>
+
+
 
 <script src='plugin/jquery/jquery.min.js' ></script>
 <script src='plugin/jquery/ui/pepper_grinder/jquery-ui.min.js' ></script>

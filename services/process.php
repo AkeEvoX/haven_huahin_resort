@@ -164,7 +164,7 @@ function step_four($data){
 	$_SESSION["reserve"]->info = $info;
 	/*insert rooms*/
 	foreach($_SESSION["reserve"]->rooms as $val){
-		$base->insert_rooms($unique_key,$val->package,$val->price,$val->bed);
+		$base->insert_rooms($unique_key,$val->package,$val->price,$val->bed,$val->adults,$val->older_children,$val->young_children);
 	}
 	
 	/*insert options*/

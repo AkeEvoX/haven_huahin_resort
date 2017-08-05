@@ -95,6 +95,8 @@ function call_item_package($id,$lang){
 			"payment_online"=>$row->payment_online,
 			"max_person"=>$row->max_person,
 			"extra_bed"=>$row->extra_bed,
+			"extra_price_children"=>$row->extra_price_children,
+			"extra_price_adults"=>$row->extra_price_adults,
 			"detail"=>$row->detail,
 			"conditions"=>$row->conditions);
 	
@@ -106,31 +108,28 @@ function call_item_package($id,$lang){
 function call_rooms_available($startdate,$enddate,$lang){
 
 	$base = new Room_Manager();
-	$lang='en';
-	$data = $base->get_room_available($startdate,$enddate,$lang);
+	//$lang='en';
 	$range_date =  datediff(date('Y-m-d'),$startdate);
-
 	if($range_date <=0) $range_date=1;
+	
+	
+	$data = $base->get_room_available($startdate,$enddate,$range_date,$lang);
+	
 	
 	while($row = $data->fetch_object()){
 
-		//check room exist
+		$find_room = check_duplicate_room($result ,$row->room_id);
 		
-		$exist_room = check_duplicate_room($result[]);
-		
-		//if()
-	
-		/*
-		$result[] = array(
-			"id"=>$row->id,
-			"title"=>$row->title,
-			"unit"=>$row->unit,
-			"beds"=>call_room_bed($row->id,$lang),
-			"packages"=>call_room_package($row->id,$range_date,$lang),
-			"gallerys"=>call_room_gallery($row->id,$lang)
-		);
-		*/
-
+		if($find_room=="false"){ // new room 
+			$result["rooms"][$row->room_id] = array(
+				"room_id"=>$row->room_id
+				,"room_type"=>$row->room_type
+				,"beds"=>call_room_bed($row->room_id,$lang)
+				,"gallerys"=>call_room_gallery($row->room_id,$lang)
+			);
+		}
+		 // exist room
+		$result["rooms"][$row->room_id]["packages"][] = call_item_package($row->pack_id,$lang);
 	}
 	return $result;
 }
@@ -138,19 +137,17 @@ function call_rooms_available($startdate,$enddate,$lang){
 
 function check_duplicate_room($source , $room_id){
 	
+	$result = "false";
 	if(isset($source)){
-		
-		while($room = $source){
-			
-			if($room->id == $room_id){
-				return true;
+		foreach($room = $source as $room){
+			if($room->room_id == $room_id){
+				$result  =  "true";
 				break;
 			}
 			
 		}
-		return false;
 	}
-	
+	return $result ;
 }
 
 function call_room_package($room_id,$range_date,$lang){

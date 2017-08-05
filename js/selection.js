@@ -5,17 +5,38 @@ reserve.rooms = [];
 reserve.customer = [];
 reserve.payment = [];
 
+function check_room_match(room_id){
+	
+	if(reserve.rooms!=undefined && reserve.rooms.length !=0)
+	{
+		//if(reserve.rooms.length==0) return true;
+		console.warn(reserve.rooms[0]);
+		if(reserve.rooms[0].room_id  != room_id){
+			console.warn("room type not match.");
+			return false;
+		}
+	}
+	return true;
+}
+
 function add_room(id,name,type,price,room_id,limit_people,extra_adults,extra_children){
 	
 	var list = $('#list_reserve');
 	var item = "";
 	var key = moment().format("YYYYMMDDHHMMSS");
 	var bed = $('#type_bed_'+room_id).val();
+	var bed_name = $('#type_bed_'+room_id+ " option:selected").text();
 	var adults = $('#adult_amount').val();
 	var older_children = $('#child_2_amount').val();
 	var young_children = $('#child_amount').val();
 	var person = parseFloat(adults) + parseFloat(older_children);
 	var night = $("#night_unit").val();
+	
+	if(check_room_match(room_id)==false)
+	{
+		alert(pages.message.room_not_match);
+		return false;
+	}
 
 	if(person > limit_people)
 	{
@@ -30,6 +51,8 @@ function add_room(id,name,type,price,room_id,limit_people,extra_adults,extra_chi
 	else if(person==limit_people){ 
 		price = parseFloat(price) + parseFloat(extra_children);
 	}
+	
+	price = price * parseFloat(night);
 
 	console.warn("adult="+extra_adults);
 	console.warn("children="+extra_children);
@@ -37,14 +60,14 @@ function add_room(id,name,type,price,room_id,limit_people,extra_adults,extra_chi
 	name = decodeURIComponent(name);
 	type = decodeURIComponent(type);
 	//console.warn("add room >  " + key +"|"+ id + "|" + name + "|"+type+"|"+price+"|"+bed+"|"+adults+"|"+older_children+"|"+young_children);
-	var room = { "key" : key ,"package":id, "room":name , "type" : type , "price" : price 
-	,"bed":bed,"adults":adults,"older_children":older_children
+	var room = { "key" : key ,"package":id, "room":name , "type" : type ,"room_id":room_id, "price" : price 
+	,"bed":bed,"bed_name":bed_name,"adults":adults,"older_children":older_children
 	,"young_children":young_children ,"person":person
-	}; 	
+	};
 
 	reserve.rooms.push(room); 
 
-	price = price * parseFloat(night);
+	//price = price * parseFloat(night);
 
 	var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //formoney
 	var money = parseFloat(price).toFixed(2).replace(money_pattern,"$1,");
@@ -171,17 +194,20 @@ reserve.calculate = function(){
 	if(reserve.summary == undefined) {
 		reserve.summary = {"room":0,"option":0,"total":0};
 	}
-	//room
-	if(reserve.rooms!=undefined){
+		//room
+		if(reserve.rooms!=undefined){
 		$.each(reserve.rooms,function(i,val){
 			total += parseFloat(val.price);
 		});
-	//calculate room * night
-		total = total * parseFloat(reserve.info.night);
+		//calculate room * night
+		//total = total * parseFloat(reserve.info.night);
 		reserve.summary.room=total;
+		
+		$('#btn_submit').attr('disabled',reserve.rooms.length<=0);
 	}
-	
-
+	else{
+		$('#btn_submit').attr('disabled',true);
+	}
 	
 	var sum_option = 0;
 	if(reserve.options!=undefined){

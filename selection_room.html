@@ -145,14 +145,15 @@
 					<span href="#" class="list-group-item">
 						<h4 class="list-group-item-heading"><span class='lb_summary'>summary </span><span id='total_price' name='total_price' class='pull-right'>฿ 0</span></h4>
 						<p class="list-group-item-text ">
-						<span class='lb_total_detail'>รายละเอียด</span>  <span class='pull-right'><span id='total_room'>0</span> <span class='lb_room_unit'>ห้องพัก</span>, <span id='total_night'>0</span> <span class='lb_night_unit'>Night</span></span>
+						<a href='javascript:void(0)' data-toggle="collapse" data-target="#total_detail" ><span class='lb_total_detail'>รายละเอียด</span></a>  <span class='pull-right'><span id='total_room'>0</span> <span class='lb_room_unit'>ห้องพัก</span>, <span id='total_night'>0</span> <span class='lb_night_unit'>Night</span></span>
+							<div id='total_detail' class='collapse'>detail</div>
 						</p>
 					 </span>
 				</div>
 				<hr/>
 			</div>
 			<div class='row'>
-				<button type='submit' class='btn btn-default brown col-sm-offset-1 col-sm-10' style='min-height:50px;'><span class='lb_submit'>ตรวจสอบความถูกต้อง</span></button>
+				<button id='btn_submit' type='submit' class='btn btn-default brown col-sm-offset-1 col-sm-10' style='min-height:50px;' disabled><span class='lb_submit'>ตรวจสอบความถูกต้อง</span></button>
 			</div>
 			<input type='hidden' id='data_reserve' name='data_reserve' />
 			
@@ -295,6 +296,7 @@ pages.init("selection_room");
 
 		reserve.get_info(function(){
 			apply_room();
+			reserve.calculate();
 		});
 		
 		$('#room_form').submit(function(){
@@ -304,7 +306,6 @@ pages.init("selection_room");
 
    });
 
-		
 		
 		function apply_room(){
 

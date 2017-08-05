@@ -122,25 +122,28 @@ function view_list_room(resp){
 	var rooms = "";
 	console.log("view list room");
 	if(resp.data!=null){
+		
+		console.log(resp.data);
+		
 		$('#list_room').html("");
-
 		var templete_master = "";
 		templete_master = utility.get_templete("templete_room.html");
-		$.each(resp.data,function(index){
-			//console.log(resp.data[index]);
-			var room = resp.data[index];
+		$.each(resp.data.rooms,function(index,room){
+			
+			//console.log(item);
+			//var room =  item;//resp.data.rooms[index];
 			var templete = templete_master;
-			templete = templete.replace("{room_name}",room.title);
-			templete = templete.replace("{link_pop_detail}",set_room_detail(room.id));
-			templete = templete.replace("{message.detail}",pages.message.detail);
-			templete = templete.replace("{bed_list}",set_bed_list(room.beds,room.id));
-			templete = templete.replace("{gallery_list}",set_gallery_list(room.gallerys,room.id));
-			templete = templete.replace("{package_list}",set_package_list(room.packages,room.title,room.id));
+			templete = templete.replace("{room_name}",room.room_type);
+			templete = templete.replace("{link_pop_detail}",set_room_detail(room.room_id));
+			templete = templete.replace("{message.detail}",pages.message.btn_room_detail);
+			templete = templete.replace("{bed_list}",set_bed_list(room.beds,room.room_id));
+			templete = templete.replace("{gallery_list}",set_gallery_list(room.gallerys,room.room_id));
+			templete = templete.replace("{package_list}",set_package_list(room.packages,room.room_type,room.room_id));
 			
 			$('#list_room').append(templete);
 			
 			//apply gallery
-			$('#gallery_'+room.id).unitegallery({
+			$('#gallery_'+room.room_id).unitegallery({
 				theme_panel_position: "bottom"
 				,gallery_height:600
 				,gallery_theme: "grid"
@@ -157,7 +160,7 @@ function view_list_room(resp){
 		
 
 	}else{
-		$('#list_room').html("Sorry !!! Room Unavailable.");
+		$('#list_room').html("<div class='well'><span class='glyphicon glyphicon-exclamation-sign'></span> Sorry !!! Room Unavailable.</div>");
 	}
 }
 
@@ -301,7 +304,6 @@ function set_package_list(items,room_name,room_id){
 			//console.log("check package internet = "+ package.title + " is " +package.title.toLowerCase().indexOf("internet"));
 			if(package.title.toLowerCase().indexOf("internet")!=-1){
 				console.log("found internet rate. >" + package.title);
-				
 			}
 			
 			if(package.food_service==1){

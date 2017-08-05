@@ -183,12 +183,12 @@ class Reserve_Manager{
 		}
 	}
 	
-	function insert_rooms($unique_key,$room_key,$price,$bed_key){
+	function insert_rooms($unique_key,$room_key,$price,$bed_key,$adults,$older_children,$young_children){
 		
 		try{
 			
-			$sql = "insert into reserve_rooms(unique_key,room_key,room_price,bed_key) ";
-			$sql .= "values('$unique_key','$room_key','$price','$bed_key'); ";
+			$sql = "insert into reserve_rooms(unique_key,room_key,room_price,bed_key,adults,older_children,young_children) ";
+			$sql .= "values('$unique_key','$room_key','$price','$bed_key','$adults','$older_children','$young_children'); ";
 			
 			log_warning("insert_rooms > " . $sql);
 			

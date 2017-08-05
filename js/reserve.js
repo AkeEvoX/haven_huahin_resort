@@ -65,22 +65,23 @@ reserve.get_confirmation = function(){
 			summary = result.data.summary;
 			reserve.rooms = result.data.rooms;	
 		}
-		var sum_room_price = 0;
-		//list room
+		//var sum_room_price = 0;
+		//List room
 		if(rooms != undefined ){
 			
 			console.warn("found cancel rooms.");
 				$.each(rooms,function(i,val){
 
-					var room_price = parseFloat(val.price) * parseFloat(result.data.info.night);
-					sum_room_price += room_price;
+					var room_price = parseFloat(val.price); //* parseFloat(result.data.info.night) 
+					//sum_room_price += room_price;
 					var money = parseFloat(room_price).toFixed(2).replace(money_pattern,"$1,");
 					
 					var item = "<div class='row'>";
 					 item += "<div class='col-md-3'><label>"+pages.message.room+" "+(i+1)+"</label></div>";
 					 item += "<div class='col-md-6 col-xs-6 '>";
 					 item += val.type+"</br>";
-					 item += val.room+" ( "+val.price+" x "+ result.data.info.night +" "+pages.message.night+")</br>";
+					 item += pages.message.bedding+val.bed_name+"</br>";
+					 item += val.room+" ( "+ result.data.info.night +" "+pages.message.night+")</br>";
 					 item += "</div >";
 					 item += "<div class='col-md-3 text-right'><h4> "+money+"</h4></div>";
 					 item += "</div ><hr/>";
@@ -123,6 +124,7 @@ reserve.get_confirmation = function(){
 			item += "<div class='col-md-6 col-xs-6'>&nbsp;</div>";
 			item += "<div class='col-md-3 text-right'><h4> "+sum+"</h4></div>";
 			item += "</div>";
+			item += "<hr/>";
 		
 			if($("input[name='orderRef']").length!=0) 
 				$("input[name='orderRef']").val(reserve_id);
@@ -245,20 +247,23 @@ reserve.get_summary = function(){
 			console.warn("found cancel rooms.");
 				$.each(reserve.rooms,function(i,val){
 					//summary_price += parseFloat(val.price);
-
+					
+					console.warn(val);
+					
 					console.warn("room price : "+val.price);
-					var room_price = parseFloat(val.price) * parseFloat(result.info.night);
+					var room_price = parseFloat(val.price) ;//* parseFloat(result.info.night)
 					var money = parseFloat(room_price).toFixed(2).replace(money_pattern,"$1,");
 					
 					var item = "<div class='row'>";
 					 item += "<div class='col-md-2'><label>"+pages.message.room+" "+(i+1)+"</label></div>";//<br><small>"+ pages.message.adults+" "+info.adults+"</small>
 					 item += "<div class='col-md-7'>";
 					 item += val.room+"</br>";
-					 item += val.type+" ( "+val.price+" x "+ result.info.night+" "+pages.message.night+")</br>";
+					 item += pages.message.bedding+val.bed_name+"</br>";
+					 item += val.type+" ( "+ result.info.night+" "+pages.message.night+")</br>";
 					 item += "</div >";
 					 item += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
 					 item += "</div ><hr/>";
-					 //฿
+
 					$('#list_reserve').append(item);
 					
 				});
@@ -286,7 +291,7 @@ reserve.get_summary = function(){
 			item += "<div class='row'>";
 			item += "<div class='col-md-3 '><h4>"+pages.message.summary+"</h4></div>";
 			item += "<div class='col-md-offset-6 col-md-3 text-right'><span><h4>฿ "+sum+"</h4></span></div>";
-			item += "</div>";
+			item += "</div><hr>";
 			$('#list_reserve').append(item);
 		}
 		
@@ -310,7 +315,7 @@ reserve.get_summary = function(){
 			//summary options
 			var money = parseFloat(price_option).toFixed(2).replace(money_pattern,"$1,");	
 			var summary_tag = "<div class='row'>";
-			summary_tag += "<div class='col-md-2'>"+pages.message.option+"</div>";
+			summary_tag += "<div class='col-md-2'>"+pages.message.extra+"</div>";
 		  	summary_tag += "<div class='col-md-7'>&nbsp;</div>";
 		   	summary_tag += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
 			summary_tag += "</div>";
@@ -409,15 +414,15 @@ reserve.get_receipt = function(val){
 				});
 				
 				//summary options
-			var money = parseFloat(price_option).toFixed(2).replace(money_pattern,"$1,");	
-			var summary_tag = "<div class='row'>";
-			summary_tag += "<div class='col-md-2'><b>ทางเลือก</b></div>";
-		  	summary_tag += "<div class='col-md-7'>&nbsp;</div>";
-		   	summary_tag += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
-			summary_tag += "</div>";
-			item = summary_tag + item + "<hr/>";
+				var money = parseFloat(price_option).toFixed(2).replace(money_pattern,"$1,");	
+				var summary_tag = "<div class='row'>";
+				summary_tag += "<div class='col-md-2'><b>ทางเลือก</b></div>";
+				summary_tag += "<div class='col-md-7'>&nbsp;</div>";
+				summary_tag += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
+				summary_tag += "</div>";
+				item = summary_tag + item + "<hr/>";
 
-			$('#list_reserve').append(item);
+				$('#list_reserve').append(item);
 			
 			}
 			
