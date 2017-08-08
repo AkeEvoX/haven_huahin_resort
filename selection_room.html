@@ -230,7 +230,7 @@ pages.init("selection_room");
 
 	$(document).ready(function(){
 		
-		
+		pages.init("selection_room");
 
 		$('#btn_checkin').datetimepicker({"format":"DD/MM/YYYY", minDate:new Date()}).on('dp.change',function(e){
 			var s_date = moment(e.date.format('YYYY-MM-DD'));
@@ -291,6 +291,7 @@ pages.init("selection_room");
 		});
 
 		$('#btn_apply').click(function(e){
+			console.log("clikc apply filter");
 			apply_room();
 		});
 

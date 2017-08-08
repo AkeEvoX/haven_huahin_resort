@@ -61,7 +61,40 @@ class Room_Manager{
 	function get_room_available($startdate,$enddate,$range,$lang){
 		try{
 
-			$sql = "select t.id as room_id,t.title_".$lang." as room_type,p.id as pack_id,p.title_".$lang." as package_name,p.package_price,p.package_start,p.package_end,p.room_unit ";
+			$sql = "select t.id as room_id,t.title_".$lang." as room_type,p.id as pack_id,p.title_".$lang." as package_name,p.package_price,rp.package_start,rp.package_end,p.room_unit ";
+			$sql .= ",COALESCE(reserve.reserve_unit,0) as reserve_unit ";
+			$sql .= "from packages p ";
+			$sql .= "inner join room_packages as rp on rp.pack_id = p.id ";
+			$sql .= "inner join room_types t on p.room_type = t.id ";
+			$sql .= "left join ( ";
+			$sql .= "select b.room_key as pack_id,count(b.room_key) as reserve_unit from reserve_info as info ";
+			$sql .= "left join reserve_rooms b on info.unique_key = b.unique_key ";
+			$sql .= "where info.reserve_startdate >= '".$startdate." 00:00:00' and info.reserve_enddate <='".$enddate." 00:00:00' ";
+			$sql .="and info.reserve_status<>2 ";//exclude cancel booking
+			$sql .= "group by b.room_key ";
+			$sql .= ") reserve on reserve.pack_id = rp.id ";
+			$sql .= "where  rp.package_start <='".$startdate." 00:00:00' and rp.package_end >='".$enddate." 00:00:00' ";
+			// $sql .= " and COALESCE(reserve.reserve_unit, 0) <= p.room_unit ";
+			$sql .= "and rp.status=1 and p.special_date=0 ";
+			$sql .= "or (p.special_date=".$range." and rp.status=1 and rp.package_start <='".$startdate." 00:00:00' and rp.package_end >='".$enddate." 00:00:00' and COALESCE(reserve.reserve_unit, 0) < p.room_unit)  ";
+			$sql .= "or (p.special_date <= ".$range." and p.special_date > 30 and rp.status=1 and rp.package_start <='".$startdate." 00:00:00' and rp.package_end >='".$enddate." 00:00:00' and COALESCE(reserve.reserve_unit, 0) < p.room_unit ) ";
+			$sql .= "or (p.special_date = datediff('".$enddate."','".$startdate."') and rp.status=1 and rp.package_start <='".$startdate." 00:00:00' and rp.package_end >='".$enddate." 00:00:00' and COALESCE(reserve.reserve_unit, 0) < p.room_unit) ";
+			$sql .= " order by t.seq  ;";
+			
+			$result = $this->mysql->execute($sql);
+
+			log_warning("get_room_available > " . $sql);
+
+			return  $result;
+		}
+		catch(Exception $e){
+			echo "Cannot Get get room available : ".$e->getMessage();
+		}
+	}
+
+/*
+code backup room available
+$sql = "select t.id as room_id,t.title_".$lang." as room_type,p.id as pack_id,p.title_".$lang." as package_name,p.package_price,p.package_start,p.package_end,p.room_unit ";
 			$sql .= ",COALESCE(reserve.reserve_unit,0) as reserve_unit ";
 			$sql .= "from room_packages p ";
 			$sql .= "inner join room_types t on p.room_type = t.id ";
@@ -79,18 +112,7 @@ class Room_Manager{
 			$sql .= "or (special_date <= ".$range." and special_date > 30 and status=1 and package_start <='".$startdate." 00:00:00' and package_end >='".$enddate." 00:00:00' and COALESCE(reserve.reserve_unit, 0) < p.room_unit ) ";
 			$sql .= "or (special_date = datediff('".$enddate."','".$startdate."') and status=1 and package_start <='".$startdate." 00:00:00' and package_end >='".$enddate." 00:00:00' and COALESCE(reserve.reserve_unit, 0) < p.room_unit) ";
 			$sql .= " order by t.seq  ;";
-			
-			$result = $this->mysql->execute($sql);
-
-			log_warning("get_room_available > " . $sql);
-
-			return  $result;
-		}
-		catch(Exception $e){
-			echo "Cannot Get get room available : ".$e->getMessage();
-		}
-	}
-	
+*/	
 
 //code backup
 /*
@@ -125,7 +147,7 @@ class Room_Manager{
 			$sql = " select id,title_".$lang." as title,package_price,food_service,cancel_room,payment_online ";
 			$sql .= ",extra_bed,max_person ,extra_price_children,extra_price_adults ";
 			$sql .= ",detail_".$lang." as detail ,condition_".$lang." as conditions ";
-			$sql .= " from room_packages where id='".$pack_id."'  and status=1 ";
+			$sql .= " from packages where id='".$pack_id."'  and status=1 ";
 
 			$result = $this->mysql->execute($sql);
 

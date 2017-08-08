@@ -109,6 +109,7 @@ function ListItem(){
 			
 			$result .= "<tr>";
 			$result .="<td>".$row->id."</td>";
+			$result .="<td>".$row->room_name."</td>";
 			$result .="<td>".$row->title_en."</td>";
 			$result .="<td>".$row->package_price."</td>";
 			$result .="<td><button class='btn btn-warning' data-id='".$row->id."' data-item='services/package_service.php?type=item' data-page='package_edit.html' data-title='Modify' onclick='page.modify(this);' ><span class='glyphicon glyphicon-pencil'></span> Edit</button> ";
@@ -149,9 +150,10 @@ function GetItem(){
 function initial_column(){
 	$column = "<tr>";
 	$column .= "<th class='col-md-1'>No</th>";
+	$column .= "<th class='col-md-3'>Room Type</th>";
 	$column .= "<th class='col-md-4'>Package Name</th>";
 	$column .= "<th class='col-md-2'>Price</th>";
-	$column .= "<th></th>";
+	$column .= "<th class='col-md-2'></th>";
 	$column .= "</tr>";
 	return $column;
 }

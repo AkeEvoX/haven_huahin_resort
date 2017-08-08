@@ -336,7 +336,7 @@ reserve.get_summary = function(){
 	});
 }
 
-reserve.get_receipt = function(val){
+reserve.get_receipt = function(){
 	
 	var reserve_id = utility.querystr("reserve_id");
 	$('#reserve_id').html(reserve_id);
@@ -376,7 +376,7 @@ reserve.get_receipt = function(val){
 			rooms = result.data.rooms;
 			options = result.data.options;
 			summary = result.data.summary;
-			console.log(summary);
+			//console.log(summary);
 		}
 		
 		
@@ -387,76 +387,99 @@ reserve.get_receipt = function(val){
 				summary_price += parseFloat(val.price);
 				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");	
 				var item = "<div class='row rowspan'>";
-				 item += "<div class='col-md-3'><b>Room "+(i+1)+"</b><br/></div>";
-				 item += "<div class='col-md-7'>"+val.room+"<br/>"+val.type+ "</div>";
-				 item += "<div class='col-md-2 text-right'>฿ "+money+"</div>";
+				 item += "<div class='col-md-2'><b>Room "+(i+1)+"</b><br/></div>";
+				 item += "<div class='col-md-7'>"+val.type+"<br/>"+pages.message.bedding+"  "+val.bed_name+"  <br/>"+val.room + "</div>";
+				 item += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
 				 item += "</div>";
 				
 				$('#list_reserve').append(item);
 			});
-			
-			if(options !== null){
-				var item = "";
-				var price_option = 0;
-				
-				$.each(options,function(i,val){
-					//summary.total_amount += parseFloat(val.price);
-					summary_price += parseFloat(val.price);
-					price_option += parseFloat(val.price);
-
-					var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");	
-
-					item += "<div class='row'>";
-					item += "<div class='col-md-2'>&nbsp;</div>";
-					item += "<div class='col-md-7'>"+val.title+"</div>";
-					item += "<div class='col-md-3 text-right'>฿ "+money+"</div>";
-					item += "</div>";
-				});
-				
-				//summary options
-				var money = parseFloat(price_option).toFixed(2).replace(money_pattern,"$1,");	
-				var summary_tag = "<div class='row'>";
-				summary_tag += "<div class='col-md-2'><b>ทางเลือก</b></div>";
-				summary_tag += "<div class='col-md-7'>&nbsp;</div>";
-				summary_tag += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
-				summary_tag += "</div>";
-				item = summary_tag + item + "<hr/>";
-
-				$('#list_reserve').append(item);
-			
-			}
-			
 		}
-	
+			
 		if(summary!=null){
 			
 			
-			var total_price = parseFloat(summary.amount);	
-			var charge = parseFloat(summary.charge) ;
-			var tax_price = parseFloat(summary.tax);
-			var net_price = parseFloat(total_price) + tax_price + charge;
-			var total = parseFloat(total_price).toFixed(2).replace(money_pattern,"$1,");
-			var service = parseFloat(charge).toFixed(2).replace(money_pattern,"$1,");
-			var tax = parseFloat(tax_price).toFixed(2).replace(money_pattern,"$1,");
-			var net = parseFloat(net_price).toFixed(2).replace(money_pattern,"$1,");
+			var sum = parseFloat(summary.sum);	
+			var service = parseFloat(summary.service) ;
+			var vat = parseFloat(summary.vat);
+			var net = parseFloat(summary.net);
+			sum = parseFloat(sum).toFixed(2).replace(money_pattern,"$1,");
+			service = parseFloat(service).toFixed(2).replace(money_pattern,"$1,");
+			vat = parseFloat(vat).toFixed(2).replace(money_pattern,"$1,");
+			net = parseFloat(net).toFixed(2).replace(money_pattern,"$1,");
 			
 			//console.log("service="+service_price);
 			
 			var item = "<div class='row rowspan'>";
-			item += "<div class='col-md-3'><b>Total</b><br/></div>";
+			item += "<div class='col-md-2'><b>&nbsp;</b><br/></div>";
 			item += "<div class='col-md-7'><br/>";
-			item += "<p>Not included : Service Charge</p>";
-			item += "<p>Not included : VAT</p>";
-			item += "<p>The taxes which are not included are to be paid to the hotel. The total amount is:</p>";
+			item += "<p>"+pages.message.service_no_include+"</p>";
+			item += "<p>"+pages.message.tax_no_include+"</p>";
+			item += "<p>"+pages.message.summary+":</p>";
 			item += "</div>";
-			item += "<div class='col-md-2 text-right'>฿ "+total+"<br/>";
-			item += "<p>฿ "+service+"</p>";
-			item += "<p>฿ "+tax+"</p>";
-			item += "<p>฿ "+net+"</p>";
+			item += "<div class='col-md-3 text-right'><br/>";
+			item += "<p><h4>฿ "+service+"</h4></p>";
+			item += "<p><h4>฿ "+vat+"</h4></p>";
+			item += "<p><h4>฿ "+sum+"</h4></p>";
+			//item += "<p>฿ "+net+"</p>";
 			item += "</div>";
+			item += "<hr>";
 			
 			$('#list_reserve').append(item);
 		}
+			
+		if(options !== null){
+			var item = "";
+			var price_option = 0;
+			
+			$.each(options,function(i,val){
+				//summary.total_amount += parseFloat(val.price);
+				summary_price += parseFloat(val.price);
+				price_option += parseFloat(val.price);
+
+				var money = parseFloat(val.price).toFixed(2).replace(money_pattern,"$1,");	
+
+				item += "<div class='row'>";
+				item += "<div class='col-md-2'>&nbsp;</div>";
+				item += "<div class='col-md-7'>"+val.title+"</div>";
+				item += "<div class='col-md-3 text-right'><i>฿ "+money+"</i></div>";
+				item += "</div>";
+			});
+			
+			//summary options
+			var money = parseFloat(price_option).toFixed(2).replace(money_pattern,"$1,");	
+			var summary_tag = "<div class='row'>";
+			summary_tag += "<div class='col-md-2'><b>"+pages.message.extra+"</b></div>";
+			summary_tag += "<div class='col-md-7'>&nbsp;</div>";
+			summary_tag += "<div class='col-md-3 text-right'><h4>฿ "+money+"</h4></div>";
+			summary_tag += "</div>";
+			item = summary_tag + item + "<hr>";
+
+			$('#list_reserve').append(item);
+		}
+		
+		if(summary!=null){
+			
+			var net = parseFloat(summary.net);
+			net = parseFloat(net).toFixed(2).replace(money_pattern,"$1,");
+			
+			var item = "<div class='row rowspan'>";
+			item += "<div class='col-md-2'><b>&nbsp;</b><br/></div>";
+			item += "<div class='col-md-7'><br/>";
+			item += "<p>"+pages.message.total_payment+"</p>";
+			item += "</div>";
+			item += "<div class='col-md-3 text-right'><br/>";
+			item += "<p><h4>฿ "+net+"</h4></p>";
+			item += "</div>";
+			item += "<hr>";
+			
+			$('#list_reserve').append(item);
+		}
+			
+			
+		
+	
+		
 		
 	});
 }

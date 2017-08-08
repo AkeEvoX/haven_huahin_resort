@@ -22,14 +22,18 @@ class Package_Manager{
 		$this->mysql->disconnect();
 	}
 	
-	function insert_item($title_th,$title_en,$room_type,$package_price,$isFoodService,$isCancelRoom,$isPaymenOnline,$room_unit){
+	function insert_item($title_th,$title_en,$detail_th,$detail_en,$conditon_th,$condition_en,$room_type,$package_price,$isFoodService,$isCancelRoom
+	,$isPaymenOnline,$room_unit,$max_person,$extra_bed,$extra_price_adults,$extra_price_children,$special_date){
 		
 		try{
 			
 			$create_by = "0";
 			$create_date = "now()";
-			$sql = "insert into room_packages (title_th,title_en,room_type,package_price,food_service,cancel_room,payment_online,rent_unit,create_by,create_date) ";
-			$sql .= "values('$title_th','$title_en','$room_type','$package_price','$isFoodService','$isCancelRoom','$isPaymenOnline','$room_unit',$create_by,$create_date) ";
+			$sql = "insert into packages (title_th,title_en,detail_th,detail_en,condition_th,condition_en,room_type,package_price,food_service,cancel_room,payment_online,room_unit ";
+			$sql = "max_person,extra_bed,extra_price_adults,extra_price_children,special_date,create_by,create_date) ";
+			$sql .= "values('$title_th','$title_en','$detail_en','$condition_th','$condition_en','$room_type','$package_price','$isFoodService','$isCancelRoom','$isPaymenOnline','$room_unit' ";
+			$sql .= " ,'$max_person','$extra_bed','$extra_price_adults','$extra_price_children','$special_date' ";
+			$sql .= " $status,$create_by,$create_date)  ";
 			
 			log_warning("package > insert item > " . $sql);
 			
@@ -56,7 +60,7 @@ class Package_Manager{
 			$update_by = "0";
 			$update_date = "now()";
 
-			$sql = "update room_packages set ";
+			$sql = "update packages set ";
 			$sql .= " title_th='$title_th' ";
 			$sql .= ",title_en='$title_en' ";
 			$sql .= ",room_type='$room_type' ";
@@ -115,7 +119,7 @@ class Package_Manager{
 	function get_item($id){
 		try{
 			
-			$sql = "select * from  room_packages where id='".$id."' ";
+			$sql = "select * from  packages where id='".$id."' ";
 			log_warning("package > get item > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
@@ -130,7 +134,8 @@ class Package_Manager{
 	function list_item(){
 		try{
 			
-			$sql = "select * from  room_packages";
+			$sql = "select p.*,r.title_en as room_name from  packages p ";
+			$sql .= " inner join room_types r on p.room_type = r.id";
 			log_warning("package > get list > " . $sql);
 			
 			$result = $this->mysql->execute($sql);

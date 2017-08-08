@@ -353,8 +353,8 @@ reserve.modal_internet = function(){
 
 reserve.modal_breakfast = function(){
 	
-	var title = pages.message_dialog_breakfast_title;//'อาหารเช้า';
-	var detail = pages.message_dialog_breakfast_detail;
+	var title = pages.message.dialog_breakfast_title; 
+	var detail = pages.message.dialog_breakfast_detail;
 	var view = '<div class="media">';
 	
 	view += "<div class='media-body'>"+detail+"</div>";

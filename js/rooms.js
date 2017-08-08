@@ -286,8 +286,13 @@ function set_package_list(items,room_name,room_id){
 	//console.log(items);
 	if(items!=null){
 		
-		$.each(items,function(index){
-			var package = items[index];
+		$.each(items,function(index,package){
+			
+			console.log(package);
+			
+			if(package.id==null) return true; //skip item when item is null
+			
+			//var package = items[index];
 			var price = package.price;
 			var person = parseFloat($('#adult_amount').val()) +  parseFloat($('#child_2_amount').val()) ;
 			var night = $('#night_unit').val();
