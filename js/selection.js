@@ -62,7 +62,7 @@ function add_room(id,name,type,price,room_id,limit_people,extra_adults,extra_chi
 	//console.warn("add room >  " + key +"|"+ id + "|" + name + "|"+type+"|"+price+"|"+bed+"|"+adults+"|"+older_children+"|"+young_children);
 	var room = { "key" : key ,"package":id, "room":name , "type" : type ,"room_id":room_id, "price" : price 
 	,"bed":bed,"bed_name":bed_name,"adults":adults,"older_children":older_children
-	,"young_children":young_children ,"person":person
+	,"young_children":young_children ,"person":person,"night":night
 	};
 
 	reserve.rooms.push(room); 

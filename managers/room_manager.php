@@ -92,6 +92,36 @@ class Room_Manager{
 		}
 	}
 
+	/* final room
+
+SELECT
+	room.id AS room_id,
+	room.title_en AS room_name,
+	pack.room_type,
+	pack.id pack_id,
+	pack.title_en AS pack_name,
+	pack_price.money,
+	pack_price.room_unit
+FROM
+	packages pack
+INNER JOIN (
+	SELECT
+		price.pack_id,
+		sum(price.price) AS money
+		,sum(period.room_unit) as room_unit
+	FROM
+		room_packages AS period
+	INNER JOIN room_prices price ON period.room_price_id = price.id
+	WHERE
+		period.pack_date BETWEEN '2017-08-04'
+	AND '2017-08-06'
+	GROUP BY
+		price.pack_id
+) pack_price ON pack.id = pack_price.pack_id
+LEFT JOIN room_types room ON pack.room_type = room.id;
+
+	*/
+
 /*
 code backup room available
 $sql = "select t.id as room_id,t.title_".$lang." as room_type,p.id as pack_id,p.title_".$lang." as package_name,p.package_price,p.package_start,p.package_end,p.room_unit ";
