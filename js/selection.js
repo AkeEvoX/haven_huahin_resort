@@ -1,9 +1,15 @@
 var reserve = {};
-reserve.rooms = [];
-//reserve.options =  [];
-//reserve.summary = [];
-reserve.customer = [];
-reserve.payment = [];
+
+//initial cache
+if(reserve.rooms == undefined){
+	reserve.rooms = [];	
+}
+if(reserve.customer == undefined){
+	reserve.customer = [];	
+}
+if(reserve.payment == undefined){
+	reserve.payment = [];	
+}
 
 function check_room_match(room_id){
 	
@@ -51,8 +57,8 @@ function add_room(id,name,type,price,room_id,limit_people,extra_adults,extra_chi
 	else if(person==limit_people){ 
 		price = parseFloat(price) + parseFloat(extra_children);
 	}
-	
-	price = price * parseFloat(night);
+	//is price include nice
+	//price = price * parseFloat(night);
 
 	console.warn("adult="+extra_adults);
 	console.warn("children="+extra_children);
@@ -62,7 +68,7 @@ function add_room(id,name,type,price,room_id,limit_people,extra_adults,extra_chi
 	//console.warn("add room >  " + key +"|"+ id + "|" + name + "|"+type+"|"+price+"|"+bed+"|"+adults+"|"+older_children+"|"+young_children);
 	var room = { "key" : key ,"package":id, "room":name , "type" : type ,"room_id":room_id, "price" : price 
 	,"bed":bed,"bed_name":bed_name,"adults":adults,"older_children":older_children
-	,"young_children":young_children ,"person":person,"night":night
+	,"young_children":young_children ,"person":person.toString()
 	};
 
 	reserve.rooms.push(room); 

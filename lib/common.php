@@ -15,27 +15,43 @@ $base_dir = "../";
 function SendMail($receive,$sender,$subject,$message,$sender_name)
 {
 		$mail = new PHPMailer();
-
+		$mail->SMTPOptions = array(
+		'ssl' => array(
+        'verify_peer' => false,
+        'verify_peer_name' => false,
+        'allow_self_signed' => true
+		));
 		$mail->IsSMTP();
 
 		$mail->Subject = $subject;
 		$mail->MsgHTML($message);//body mail
-	
 		$mail->CharSet = "utf-8";
-		$mail->Host="mail.baankunnan.com";
+		$mail->Host="mail.baankunnan.com"; //mail.haven-huahin.com
+		//$mail->Port = '25';
 		$mail->SMTPAuth = true;
 		$mail->IsHTML(true);
+		//$mail->SMTPSecure = 'tls';
+		//$mail->SMTPDebug = 2;
 		$mail->Username = "contact@baankunnan.com"; 
 		$mail->Password = "hmcKxJfCj"; 
-		$mail->SetFrom($sender, $sender_name);
-		//$mail->AddCC('rsvn@haven-huahin.com', 'rsvn@haven-huahin.com');
-		//$mail->AddCC('fo@haven-huahin.com', 'fo@haven-huahin.com');
-		//$mail->AddCC('sales@haven-huahin.con', 'sales@haven-huahin.con');
-		//$mail->AddCC('gmassist@haven-huahin.com', 'gmassist@haven-huahin.com');
-
-		//$mail->AddBcc("contact@baankunnan.com", "contact :: admin@haven-huahin-resort.com");
-		//$mail->AddReplyTo("mail@andamantaxis.com", "admin");
 		
+		
+		/*
+		$mail->Subject = $subject;
+		$mail->MsgHTML($message);//body mail
+		$mail->CharSet = "utf-8";
+		$mail->Host="mail.haven-huahin.com";
+		$mail->SMTPAuth = true;
+		$mail->SMTPDebug = 2;
+		$mail->SMTPSecure = 'tls';
+		$mail->IsHTML(true);
+		$mail->Username = "system@haven-huahin.com"; 
+		$mail->Password = "WvvolZ4v"; 
+		*/
+		//service@haven-huahin.com
+		//LT8ANWg9
+		$mail->SetFrom($sender, $sender_name);
+
 		//list send email 
 		foreach($receive as $to){
 			$mail->AddAddress($to["email"],$to["alias"]);

@@ -58,9 +58,9 @@ class Reserve_Manager{
 		
 		try{
 
-			$sql = " select rr.unique_key,r.id,r.title_".$lang." as title ,rt.title_".$lang." as room_type,rr.room_price,bt.title_".$lang." as bed_name";
-			$sql .= " from reserve_rooms rr inner join room_packages r on rr.room_key = r.id ";
-			$sql .= " left join room_types rt on r.room_type = rt.id ";
+			$sql = " select rr.unique_key,p.id,p.title_".$lang." as title ,rt.title_".$lang." as room_type,rr.room_price,bt.title_".$lang." as bed_name";
+			$sql .= " from reserve_rooms rr inner join packages p on rr.pack_id = p.id ";
+			$sql .= " left join room_types rt on p.room_type = rt.id ";
 			$sql .= " left join bed_type bt on rr.bed_key = bt.id ";
 			$sql .= " where rr.unique_key='".$unique_key."'  ";
 
@@ -183,12 +183,12 @@ class Reserve_Manager{
 		}
 	}
 	
-	function insert_rooms($unique_key,$room_key,$price,$bed_key,$adults,$older_children,$young_children){
+	function insert_rooms($unique_key,$pack_id,$price,$bed_key,$adults,$older_children,$young_children){
 		
 		try{
 			
-			$sql = "insert into reserve_rooms(unique_key,room_key,room_price,bed_key,adults,older_children,young_children) ";
-			$sql .= "values('$unique_key','$room_key','$price','$bed_key','$adults','$older_children','$young_children'); ";
+			$sql = "insert into reserve_rooms(unique_key,pack_id,room_price,bed_key,adults,older_children,young_children) ";
+			$sql .= "values('$unique_key','$pack_id','$price','$bed_key','$adults','$older_children','$young_children'); ";
 			
 			log_warning("insert_rooms > " . $sql);
 			

@@ -204,7 +204,7 @@
 					<td class='col-md-12 text-center' colspan='2'>
 						<div class="row form-group">
 								<input type="checkbox" id="check_confirm" placeholder="" maxlength="60"  />
-								<label for="check_confirm"><span class='lb_condition_1'>การดำเนินการเลือกจองห้องพัก ท่านอ่านและยอมรับ </span><a href='#'><span class='lb_condition_2'>เงื่อนไขการขาย</span></a> <span class='lb_condition_3'>และ </span><a href='#'><span class='lb_condition_4'>นโยบายความเป็นส่วนตัว</span></a><span class='lb_condition_5'> เรียบร้อยแล้ว</span></label>
+								<label for="check_confirm"><span class='lb_condition_1'>การดำเนินการเลือกจองห้องพัก ท่านอ่านและยอมรับ </span><a href='javascript:void(0);' onclick='popup_condition()'  ><span class='lb_condition_2'>เงื่อนไขการขาย</span></a> <span class='lb_condition_3'>และ </span><a href='javascript:void(0);' onclick='popup_privacy()'><span class='lb_condition_4'>นโยบายความเป็นส่วนตัว</span></a><span class='lb_condition_5'> เรียบร้อยแล้ว</span></label>
 						 </div><!--confirm reserve-->
 						 <div class="row form-group">
 								<button type='submit' id='btn_confirm' class='btn btn-default brown col-sm-offset-4 col-sm-4' style='min-height:50px;' disabled><span class='lb_btn_reserve'>ยืนยันการจอง</span></button>
@@ -279,15 +279,40 @@
 
 	   });
 	   
+	   
+	   
 	   $('#check_confirm').on('change',function(){
 	   
 			var check = !$(this).is(':checked');
 			$('#btn_confirm').prop('disabled',check);
 			
 	   });
+	   
+	   
 
 	   reserve.get_summary();
    });
+   
+   function popup_condition(){
+   
+		var pack_id = reserve.rooms[0].package;
+		var endpoint = "services/rooms.php";
+		var method ="get";
+		var data ={"service":"package","id":pack_id,"lang":pages.lang()};
+		utility.service(endpoint,method,data,function(resp){
+			utility.modal_default(pages.message.condition_package_btn,resp.data.conditions);
+		});
+		
+   }
+   function popup_privacy(){
+		var pack_id = reserve.rooms[0].package;
+		var endpoint = "services/rooms.php";
+		var method ="get";
+		var data ={"service":"package","id":pack_id,"lang":pages.lang()};
+		utility.service(endpoint,method,data,function(resp){
+			utility.modal_default(pages.message.condition_package_btn,resp.data.conditions);
+		});
+   }
   </script>
 </body>
 </html>

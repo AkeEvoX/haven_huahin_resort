@@ -29,7 +29,7 @@ switch($service){
 	case "package":
 		$lang = GetParameter('lang');
 		$pack_id = GetParameter('id');
-		$result = call_item_package($pack_id,$lang);
+		$result = call_item_package($pack_id,null,$lang);
 	break;
 	case "filter":
 		$startdate = GetParameter("startdate");
@@ -81,15 +81,20 @@ function call_room_options($lang){
 	return $result;
 }
 
-function call_item_package($id,$lang){
+function call_item_package($id,$money,$lang){
 	
 	$base = new Room_Manager();
 	$data = $base->get_item_package($id,$lang);
 	$row = $data->fetch_object();
+	
+	if($money==null){
+		$money = $row->package_price;
+	}
+	
 		$result = array(
 			"id"=>$row->id,
 			"title"=>$row->title,
-			"price"=>$row->package_price,
+			"price"=>$money,
 			"food_service"=>$row->food_service,
 			"cancel_room"=>$row->cancel_room,
 			"payment_online"=>$row->payment_online,
@@ -118,36 +123,19 @@ function call_rooms_available($startdate,$enddate,$lang){
 	
 	while($row = $data->fetch_object()){
 
-		$find_room = check_duplicate_room($result ,$row->room_id);
 		
-		if($find_room=="false"){ // new room 
+		if(!isset($result["rooms"][$row->room_id])){
 			$result["rooms"][$row->room_id] = array(
 				"room_id"=>$row->room_id
-				,"room_type"=>$row->room_type
+				,"room_name"=>$row->room_name
 				,"beds"=>call_room_bed($row->room_id,$lang)
 				,"gallerys"=>call_room_gallery($row->room_id,$lang)
 			);
 		}
 		 // exist room
-		$result["rooms"][$row->room_id]["packages"][] = call_item_package($row->pack_id,$lang);
+		$result["rooms"][$row->room_id]["packages"][] = call_item_package($row->pack_id,$row->money,$lang);
 	}
 	return $result;
-}
-
-
-function check_duplicate_room($source , $room_id){
-	
-	$result = "false";
-	if(isset($source)){
-		foreach($room = $source as $room){
-			if($room->room_id == $room_id){
-				$result  =  "true";
-				break;
-			}
-			
-		}
-	}
-	return $result ;
 }
 
 function call_room_package($room_id,$range_date,$lang){

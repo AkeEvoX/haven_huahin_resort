@@ -133,12 +133,12 @@ function view_list_room(resp){
 			//console.log(item);
 			//var room =  item;//resp.data.rooms[index];
 			var templete = templete_master;
-			templete = templete.replace("{room_name}",room.room_type);
+			templete = templete.replace("{room_name}",room.room_name);
 			templete = templete.replace("{link_pop_detail}",set_room_detail(room.room_id));
 			templete = templete.replace("{message.detail}",pages.message.btn_room_detail);
 			templete = templete.replace("{bed_list}",set_bed_list(room.beds,room.room_id));
 			templete = templete.replace("{gallery_list}",set_gallery_list(room.gallerys,room.room_id));
-			templete = templete.replace("{package_list}",set_package_list(room.packages,room.room_type,room.room_id));
+			templete = templete.replace("{package_list}",set_package_list(room.packages,room.room_name,room.room_id));
 			
 			$('#list_room').append(templete);
 			
@@ -288,7 +288,7 @@ function set_package_list(items,room_name,room_id){
 		
 		$.each(items,function(index,package){
 			
-			console.log(package);
+			//console.log(package);
 			
 			if(package.id==null) return true; //skip item when item is null
 			
@@ -353,7 +353,7 @@ function pop_pack_condition(id){
 
 	var endpoint = "services/rooms.php";
 	var method ="get";
-	var data ={"service":"package","id":id,"lang":pages.lang};
+	var data ={"service":"package","id":id,"lang":pages.lang()};
 	utility.service(endpoint,method,data,function(resp){
 		utility.modal_default(pages.message.condition_package_btn,resp.data.conditions);
 	});

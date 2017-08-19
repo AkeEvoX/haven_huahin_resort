@@ -7,17 +7,17 @@ include("../managers/reserve_manager.php");
 	//$receive = array("neosvargalok@hotmail.com"=>"customer");
 	//$receive = array("werawat.limprasert@gmail.com"=>"customer");
 
-	$receive[] = array("email"=>"neosvargalok@hotmail.com.com","alias"=>"customer hotmail");
+	$receive[] = array("email"=>"svargalok@gmail.com","alias"=>"customer gmail");
 	$receive[] = array("email"=>"werawat.limprasert@gmail.com","alias"=>"customer gmail");
 
 	//$receive="svargalok@gmail.com";
-	$sender = "contact@baankunnan.com";
+	$sender = "system@haven-huahin.com";
 	$sender_name = "system haven huahin resort=".date("His");
-	$subject = "Thank You Reservation(Testing) ".date("His");
+	$subject = "Thank You Reservation (Testing) ".date("His");
 
 	//$message = file_get_contents("../templete_email_booking.html");
 	$message = file_get_contents("../templete_email_booking.html");
-	$unique_key= "qzFqCOKHdpDkTIOoUzev";
+	$unique_key= "mSeaawcvFAhsnu6CJbpQ";
 	$reserve = get_reserve($unique_key,"en");
 	$message = str_replace("{reserve_id}",$unique_key,$message);
 	$message = str_replace("{start_date}",full_date_format($reserve["info"]->date_start,"en"),$message);

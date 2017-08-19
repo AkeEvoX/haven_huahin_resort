@@ -59,8 +59,8 @@ function step_one($args){
 }
 //booking room & price addion option
 function step_two($data){
-
-	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
+	$item = str_replace("\\","",$data["data_reserve"]);
+	$_SESSION["reserve"] = json_decode($item);
 	$_SESSION["info"]["start_date"] = $data["checkpoint_date"];
 	$_SESSION["info"]["end_date"] = $data["travel_date"];
 	$_SESSION["info"]["night"] = $data["night_unit"];
@@ -81,7 +81,12 @@ function step_two($data){
 		
 	}
 	*/
-	
+	//echo "reserve is > </br>";
+	//print_r($_SESSION["reserve"]);
+	//var_dump($_SESSION["reserve"]);
+	//echo "<br/>---------</br>";
+	//echo json_decode($item);
+	log_warning("step 2 get reserve object >" . $item);
 	//redirect to next page
 	header("Location: ../option_reserve.html");
 	
@@ -89,8 +94,8 @@ function step_two($data){
 }
 //booking add option
 function step_three($data){
-	
-	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
+	$item = str_replace("\\","",$data["data_reserve"]);
+	$_SESSION["reserve"] = json_decode($item);
 	$_SESSION["info"]["adults"] = $data["adult_amount"];
 	$_SESSION["info"]["children"] = $data["child_amount"]; // 0 - 4 year
 	$_SESSION["info"]["children_2"] = $data["child_2_amount"];//5 - 11 year
@@ -108,9 +113,9 @@ function step_three($data){
 	//vat 7%
 	$vat=(($price_room+$service)*7)/100;
 	//sum price
-	$sum = $price_room + $vat + $service;
+	$sum = round($price_room,2)+ round($vat,2) + round($service,2);
 	//net
-	$net = $sum+$price_option;
+	$net = $sum+round($price_option,2);
 
 	$_SESSION["reserve"]->summary->vat=$vat;
 	$_SESSION["reserve"]->summary->service=$service;
@@ -122,8 +127,9 @@ function step_three($data){
 }
 //confirm trasection
 function step_four($data){
-	
-	$_SESSION["reserve"] = json_decode($data["data_reserve"]);
+	$item = str_replace("\\","",$data["data_reserve"]);
+	$_SESSION["reserve"] = json_decode($item);
+	//$_SESSION["reserve"] = json_decode($data["data_reserve"]);
 
 	$info = $_SESSION["info"];
 	
