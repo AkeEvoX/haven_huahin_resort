@@ -186,7 +186,7 @@
 								
 								</div><!--card expire-->
 								<div class="row form-group">
-									<div class='col-md-5'><label for="prefix_mobile" id='lb_prefix_mobile'> หมายเลขโทรศัพท์</label>
+									<div class='col-md-5'><label for="prefix_mobile" class='lb_prefix_mobile'> หมายเลขโทรศัพท์</label>
 										<select class="form-control" id="prefix_mobile" name="prefix_mobile" >
 											<option value='66+'>TH (66+)</option>
 										</select>
@@ -288,11 +288,29 @@
 			
 	   });
 	   
-	   
-
 	   reserve.get_summary();
    });
    
+   //load service for package
+   /*
+   function load_package_info(){
+		var pack_id = reserve.rooms[0].package;
+		var endpoint = "services/rooms.php";
+		var method ="get";
+		var data ={"service":"package","id":pack_id,"lang":pages.lang()};
+		utility.service(endpoint,method,data,function(resp){
+		
+			//load food service is enable
+			//$('#').load();
+			//load cancel rooms
+			$('#').load();
+			//load payment online
+			$('#').load();
+			
+			//utility.modal_default(pages.message.condition_package_btn,resp.data.conditions);
+		});
+   }
+   */
    function popup_condition(){
    
 		var pack_id = reserve.rooms[0].package;
@@ -300,6 +318,7 @@
 		var method ="get";
 		var data ={"service":"package","id":pack_id,"lang":pages.lang()};
 		utility.service(endpoint,method,data,function(resp){
+		
 			utility.modal_default(pages.message.condition_package_btn,resp.data.conditions);
 		});
 		
