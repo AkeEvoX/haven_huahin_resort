@@ -18,12 +18,14 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="unit" class='col-md-3 control-label'>Unit</label>
-				<div class='col-md-9'>
-					<input type="text" class="form-control" id="unit" name='unit' placeholder="Room Name English" value='' />
+				<label for="unit" class='col-md-3 control-label'>Seq</label>
+				<div class='col-md-2'>
+					<input type="text" class="form-control" id="seq" name='seq' placeholder="Sequence" value='' maxlength='3' />
 				</div>
 			</div>
 </form>
 <div class='row'>
-	<button class='btn btn-success' onclick=page.save('services/room_service.php?type=modify','form_save') ><span class='glyphicon glyphicon-ok'></span>save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+	<div class='col-md-12 text-right'>
+		<button class='btn btn-success' onclick=page.save('services/room_service.php?type=modify','form_save') ><span class='glyphicon glyphicon-ok'></span>save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+	</div>
 </div>

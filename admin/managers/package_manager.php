@@ -135,7 +135,7 @@ class Package_Manager{
 		try{
 			
 			$sql = "select p.*,r.title_en as room_name from  packages p ";
-			$sql .= " inner join room_types r on p.room_type = r.id";
+			$sql .= " inner join room_types r on p.room_type = r.id  order by r.seq ";
 			log_warning("package > get list > " . $sql);
 			
 			$result = $this->mysql->execute($sql);

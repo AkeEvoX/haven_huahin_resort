@@ -22,12 +22,14 @@ class Room_Manager{
 		$this->mysql->disconnect();
 	}
 	
-	function insert_room_type($title_th,$title_en,$unit){
+	function insert_room_type($title_th,$title_en,$seq){
 		
 		try{
 			
-			$sql = "insert into room_types(title_th,title_en,unit) ";
-			$sql .= "values('$title_th','$title_en',$unit) ";
+			$create_by = 0; //system
+			
+			$sql = "insert into room_types(title_th,title_en,seq,create_by,create_date) ";
+			$sql .= "values('$title_th','$title_en',$seq,'$create_by',now()) ";
 			
 			log_warning("insert_room_type > " . $sql);
 			
@@ -42,17 +44,18 @@ class Room_Manager{
 			return $result;
 		}catch(Exception $e){
 			log_debug($e->getMessage());
-			//echo "Cannot insert_room_type : ".$e->getMessage();
 		}
 		
 	}
 	
-	function edit_room_type($id,$title_th,$title_en,$unit){
+	function edit_room_type($id,$title_th,$title_en,$seq){
 		
 		try{
 			
+			$update_by = 0;//system
+			
 			$sql = "update room_types set ";
-			$sql .= " title_th='$title_th',title_en='$title_en',unit='$unit' ";
+			$sql .= " title_th='$title_th',title_en='$title_en',seq='$seq' ,update_by='$update_by' ,update_date=now() ";
 			$sql .= " where id='".$id."';";
 			
 			log_warning("edit_room_type > " . $sql);
@@ -93,7 +96,6 @@ class Room_Manager{
 			return $result;
 		}catch(Exception $e){
 			log_debug($e->getMessage());
-			//echo "Cannot insert_room_type : ".$e->getMessage();
 		}
 		
 	}

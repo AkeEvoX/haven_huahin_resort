@@ -21,11 +21,6 @@
 "lb_checkout_time":"12:00",
 "lb_lang":"Spoken Languaes",
 "lb_lang_detail":"English, Thai",
-"lb_best_price":"Best price",
-"lb_hotel_title":"You are on the hotel website, you will receive <br/>The best price since there is no middleman",
-"lb_title_cancel":"Can be changed and discarded.",
-"lb_cancel_1":"This offer can be canceled or modified without charge up to date.",
-"lb_cancel_2":" (Calculated from 14 Days before stay) Included in the total payment to the hotel.",
 "lb_cust_info":"Guest information",
 "lb_info_en":"Please enter personal information in English",
 "lb_email":"E-mail",
@@ -41,12 +36,11 @@
 "lb_mobile":"Mobile",
 "lb_condition_1":"The booking operation you read and accept ",
 "lb_condition_2":" Terms of sale",
-"lb_condition_3":" And",
+"lb_condition_3":"",
 "lb_condition_4":" Privacy policy",
 "lb_condition_5":" Completely",
 "lb_btn_reserve":"Confirm reservation",
-"lb_payment_title":"Internet payment",
-"lb_evident_title":"Make full payment online In secure systems ",
+
 "lb_offer":"This offer can not be refunded. Change Or cancel",
 "lb_special_request":"Your special request"
 

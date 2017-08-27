@@ -169,15 +169,16 @@ utility.date_format_th = function (date){
 }
 
 utility.date_format = function (date,lang){
-	
+
 	var dates = null;
-	if(date.indexOf('-')!=0){
+	if(date.indexOf('-')>=0){
 		dates = moment(date,'YYYY-MM-DD').format('DD-MM-YYYY').split("-");
-		//moment(date,'YYYY-MM-DD').format('DD/MM/YYYY')
 	}
-	else if(date.indexOf('/')!=0){
-		dates = moment(date,'YYYY/MM/DD').format('DD-MM-YYYY').split("-")//date.split("/");
+	else if(date.indexOf('/')>=0){
+		//dates = moment(date,'YYYY/MM/DD').format('DD-MM-YYYY').split("-");
+		dates = moment(date,'DD/MM/YYYY').format('DD-MM-YYYY').split("-");
 	}
+	
 	
 	//var dates = date.split("/");
 	var months = Array();
@@ -192,6 +193,7 @@ utility.date_format = function (date,lang){
 	{
 		months = [" January "," Febuary "," March "," April "," May "," June "," July "," August "," September "," October "," November "," December "];	
 		year =parseInt(dates[2]);
+		
 	}
 	
 	return day + months[month] + year ; 

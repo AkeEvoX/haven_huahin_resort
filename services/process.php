@@ -39,8 +39,10 @@ function step_one($args){
 	$children_2 = $args["children_2"];
 	$code = $args["code"];
 	$start_date = $args["check_in_date"];//str_replace('/','-',$date);
-	$end_date = date('d/m/Y',strtotime(str_replace('/','-',$start_date). "+ ". $night ."days")) ;
-	$expire_date = date('d/m/Y',strtotime(date('d-m-Y').'+ 14days'));
+	$end_date = date('d/m/Y',strtotime(str_replace('/','-',$start_date). "+ ". $night ."days"));
+	
+	//expire on 14 day before check in 
+	$expire_date = date('d/m/Y',strtotime(str_replace('/','-',$start_date).'- 14days'));
 	$data = array("date"=>$date
 		,"night"=>$night
 		,"adults"=>$adults
@@ -68,8 +70,7 @@ function step_two($data){
 	$_SESSION["info"]["children"] = $data["child_amount"];
 	$_SESSION["info"]["children_2"] = $data["child_2_amount"];
 	$_SESSION["info"]["code"] = $data["promo_code"];
-	$_SESSION["info"]["expire_date"] = date('d/m/Y',strtotime(str_replace('/','-',$data["checkpoint_date"]). "+ 14days")) ;
-	
+	$_SESSION["info"]["expire_date"] = date('d/m/Y',strtotime(str_replace('/','-',$data["checkpoint_date"]). "- 14days")) ;
 	//summary
 	//$reserve = json_decode($data["data_reserve"]); 
 	

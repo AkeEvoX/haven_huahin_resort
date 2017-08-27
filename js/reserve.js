@@ -182,7 +182,7 @@ reserve.get_confirmation = function(){
 
 };
 
-reserve.get_summary = function(){
+reserve.get_summary = function(callback){
 
 	var endpoint = "services/info.php";
 	var method="get";
@@ -194,7 +194,7 @@ reserve.get_summary = function(){
 		var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
 		var summary_price = 0;
 		//set rooms info;
-		reserve.info = result.data.info;
+		reserve.info = result.info;
 		
 		if(result.info==null) { 
 			alert('Sorry!! Not Found Information Reserve.');
@@ -217,7 +217,7 @@ reserve.get_summary = function(){
 			//console.log("exp : " + date + " || start :" + info.start_date);
 			var expire_date = utility.date_format(expire_date,lang);// utility.date_format_th(date);
 			$('#cancel_date').html(expire_date);
-			$('#reserve_expire').html(expire_date);
+			//$('#reserve_expire').html(expire_date);
 
 			var rent ="";
 			rent = pages.message.adults +" "+ info.adults + " "+pages.message.person;
@@ -333,7 +333,7 @@ reserve.get_summary = function(){
 
 		$('#list_reserve').append(item);
 
-	});
+	},callback);
 }
 
 reserve.get_receipt = function(){

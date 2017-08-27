@@ -107,11 +107,20 @@ function ListItem(){
 		
 		while($row = $dataset->fetch_object()){
 			
+			$foodstatus_status = $row->food_service == 1? '<span class="glyphicon glyphicon-ok" ></span>' : '<span class="glyphicon glyphicon-remove" ></span>' ;
+			$cancelroom_status = $row->cancel_room == 1? '<span class="glyphicon glyphicon-ok" ></span>' : '<span class="glyphicon glyphicon-remove" ></span>' ;
+			$payment_status = $row->payment_online == 1? '<span class="glyphicon glyphicon-ok" ></span>' : '<span class="glyphicon glyphicon-remove" ></span>' ;
+			$item_status = $row->status == 1? '<span class="glyphicon glyphicon-ok" style="color:green;" ></span>' : '<span class="glyphicon glyphicon-remove" style="color:red;" ></span>' ;
+			
+			
 			$result .= "<tr>";
 			$result .="<td>".$row->id."</td>";
 			$result .="<td>".$row->room_name."</td>";
 			$result .="<td>".$row->title_en."</td>";
-			$result .="<td>".$row->package_price."</td>";
+			$result .="<td>".$foodstatus_status."</td>";
+			$result .="<td>".$cancelroom_status."</td>";
+			$result .="<td>".$payment_status."</td>";
+			$result .="<td>".$item_status."</td>";
 			$result .="<td><button class='btn btn-warning' data-id='".$row->id."' data-item='services/package_service.php?type=item' data-page='package_edit.html' data-title='Modify' onclick='page.modify(this);' ><span class='glyphicon glyphicon-pencil'></span> Edit</button> ";
 			$result .="<button class='btn btn-danger' data-id='".$row->id."' data-item='services/package_service.php?type=item' data-page='package_del.html' data-title='Remove' onclick='page.remove(this);'><span class='glyphicon glyphicon-trash'></span> Del</button></td>";
 			$result .= "</tr>";
@@ -139,7 +148,7 @@ function GetItem(){
 		"food_service"=>$row->food_service,
 		"cancel_room"=>$row->cancel_room,
 		"payment_online"=>$row->payment_online,
-		"rent_unit"=>$row->rent_unit
+		"status"=>$row->status
 	);
 
 	global $result_code; //call global variable
@@ -150,9 +159,12 @@ function GetItem(){
 function initial_column(){
 	$column = "<tr>";
 	$column .= "<th class='col-md-1'>No</th>";
-	$column .= "<th class='col-md-3'>Room Type</th>";
-	$column .= "<th class='col-md-4'>Package Name</th>";
-	$column .= "<th class='col-md-2'>Price</th>";
+	$column .= "<th class='col-md-1'>Room Type</th>";
+	$column .= "<th class='col-md-2'>Package Name</th>";
+	$column .= "<th class='col-md-1'>food<br/>service</th>";
+	$column .= "<th class='col-md-1'>cancel<br>room</th>";
+	$column .= "<th class='col-md-1'>pay<br>now</th>";
+	$column .= "<th class='col-md-1'>Status</th>";
 	$column .= "<th class='col-md-2'></th>";
 	$column .= "</tr>";
 	return $column;

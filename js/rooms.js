@@ -174,11 +174,12 @@ function set_room_detail(room_id){
 
 rooms.modal_room_detail =function (id){
 	
+
 	if(id==='1'){
-		call_room_detail_modal("Deluxe","deluxe","1");
+		call_room_detail_modal("Superior","superior","1");
 	}
 	else if(id==='2'){
-		call_room_detail_modal("Superior","superior","2");
+		call_room_detail_modal("Deluxe","deluxe","2");
 	}
 	else if(id==='3'){
 		call_room_detail_modal("Villa","villa","3");
