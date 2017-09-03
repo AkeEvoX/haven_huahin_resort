@@ -41,6 +41,18 @@ condition.cancel_room = function(enable,expiredate,callback){
 	var title = "";
 	var desc = "";
 	
+	//check date is over 14 day
+	var current_date = moment(new Date());
+	var expire_date = moment(moment(expiredate));
+	//var expire_date = moment(moment(expiredate,'DD/MM/YYYY'));
+	var daydiff = expire_date.diff(current_date,'days');
+	
+	console.log("reserve range days is " + daydiff);
+	if(daydiff < 0 ){
+		enable = "0"; //disable cancel room  when rent  a room is minimum 14 day .
+	}
+	//ex. expiredate = 21/08/2017
+	
 	var src = "js/rooms/"+ pages.lang()  + "/condition.json";
 	$.getJSON(src,function(resp){
 		
@@ -49,14 +61,15 @@ condition.cancel_room = function(enable,expiredate,callback){
 			result.title = resp.disable_cancelroom.title;
 			result.desc = resp.disable_cancelroom.desc;
 			
-			var date = utility.date_format(expiredate,pages.lang());
-			
-			result.desc = result.desc.replace("{0}",date);
-			
 		break;
-		case "1" : disable_cancelroom
+		
+		case "1" : 
+		
 			result.title = resp.enable_cancelroom.title;
 			result.desc = resp.enable_cancelroom.desc;
+			var date = utility.date_format(expiredate,pages.lang());
+			result.desc = result.desc.replace("{0}",date);
+			
 		break;
 		}
 		

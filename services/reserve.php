@@ -21,7 +21,7 @@ if(isset($data)){
 	$info = array(
 				"date_start"=>$data->reserve_startdate
 				,"date_end"=>$data->reserve_enddate
-				,"date_expire"=>$data->reserve_expire
+				,"expire_date"=>$data->reserve_expire
 				,"date_reserve"=>$data->create_date
 				,"night"=>$data->night
 				,"adults"=>$data->adults
@@ -66,6 +66,7 @@ if(isset($data)){
 			,"type"=>$row->room_type
 			,"price"=>$row->room_price
 			,"bed_name"=>$row->bed_name
+			,"package"=>$row->pack_id
 			);
 		}
 	}

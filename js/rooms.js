@@ -188,7 +188,7 @@ rooms.modal_room_detail =function (id){
 		call_room_detail_modal("Villa @ Sea","villa_sea","4");
 	}
 	else if(id==='5'){
-		call_room_detail_modal("Suite","Suite","5");
+		call_room_detail_modal("Suite","suite","5");
 	}
 	else if(id==='6'){
 		call_room_detail_modal("Suite @ Sea","suite_sea","6");

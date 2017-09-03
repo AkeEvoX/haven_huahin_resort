@@ -58,7 +58,7 @@ class Reserve_Manager{
 		
 		try{
 
-			$sql = " select rr.unique_key,p.id,p.title_".$lang." as title ,rt.title_".$lang." as room_type,rr.room_price,bt.title_".$lang." as bed_name";
+			$sql = " select rr.unique_key,p.id,p.title_".$lang." as title ,rt.title_".$lang." as room_type,rr.room_price,bt.title_".$lang." as bed_name,p. id as pack_id  ";
 			$sql .= " from reserve_rooms rr inner join packages p on rr.pack_id = p.id ";
 			$sql .= " left join room_types rt on p.room_type = rt.id ";
 			$sql .= " left join bed_type bt on rr.bed_key = bt.id ";
@@ -205,8 +205,15 @@ class Reserve_Manager{
 
 		try{
 
-			$sql = "select count(0) as found,reserve_expire ";
-			$sql .= "from reserve_info where unique_key='".$unique_key."' and email='".$email."' ";
+			$sql ="select count(0) as found,info.reserve_expire, ";
+			$sql .="( ";
+			$sql .="select pack.cancel_room from reserve_rooms room ";
+			$sql .="inner join packages pack on room.pack_id = pack.id ";
+			$sql .="where room.unique_key=info.unique_key limit 1 ";
+			$sql .=") as cancel_room ";
+			$sql .="from reserve_info info ";
+			$sql .="where unique_key='".$unique_key."' and email='".$email."' ";
+	
 			$result = $this->mysql->execute($sql);
 
 			log_warning("verify_cancel > " . $sql);

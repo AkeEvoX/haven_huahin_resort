@@ -1,6 +1,6 @@
 var reserve = {};
 
-reserve.get_confirmation = function(){
+reserve.get_confirmation = function(callback){
 
 	var reserve_id = utility.querystr("reserve_id");
 	$('#reserve_id').html(reserve_id);
@@ -21,7 +21,6 @@ reserve.get_confirmation = function(){
 			
 			alert(pages.message.reserve_not_found);
 			//'Sorry!! Not Found Information Reserve.'
-			
 		}
 		if(result.data.customer!=null){
 			
@@ -32,7 +31,9 @@ reserve.get_confirmation = function(){
 		
 		//reserve info
 		if(result.data.info!=null){
-			var info = result.data.info;
+			
+			reserve.info =result.data.info;
+			var info = reserve.info;
 			var item = "<div class='row'>";
 			item += "<div class='col-md-3'><label>"+pages.message.guest+"</label></div>";
 			item += "<div class='col-md-4'>";
@@ -56,6 +57,12 @@ reserve.get_confirmation = function(){
 		var cancel_date = utility.date_format_th(date);
 		$('#cancel_date').html(cancel_date);
 		
+		if(result.data.reserve != undefined){
+			
+			reserve.rooms = result.data.reserve.rooms;
+			reserve.options = result.data.reserve.options;
+			reserve.summary = result.data.reserve.summary;
+		}
 		
 		//define information
 		if(result.data != undefined){
@@ -178,7 +185,7 @@ reserve.get_confirmation = function(){
 
 		
 	
-	});
+	},callback);
 
 };
 
@@ -215,7 +222,7 @@ reserve.get_summary = function(callback){
 			
 			//var date = moment(info.start_date,'DD/MM/YYYY').add('days',14).format('DD/MM/YYYY');
 			//console.log("exp : " + date + " || start :" + info.start_date);
-			var expire_date = utility.date_format(expire_date,lang);// utility.date_format_th(date);
+			var expire_date = utility.date_format(expire_date,lang) + " , 00:00 (UTC+07:00) ";
 			$('#cancel_date').html(expire_date);
 			//$('#reserve_expire').html(expire_date);
 

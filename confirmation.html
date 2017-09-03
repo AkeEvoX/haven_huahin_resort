@@ -76,26 +76,23 @@
 					</td>
 					<td class='col-md-4 text-center'>
 						<div class='row rowspan'>
-							<span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span></br>
-							<label><span class='lb_best_price'>Best Price</span></label>
+							<!-- <span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span></br> -->
+							<label class='lb_condition_lv1'></label>
 							<p>
-								<span class='lb_info_1'></span>
+								<span class='lb_condition_lv1_desc'></span>
 							</p>
 						</div>
 						<div class='row rowspan'>
-							<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span></br>
-							<label><span class='lb_amount_reserve'></span></label>
-							<p>
-								<span class='lb_evident'></span>
-							</p>
+							<!-- <span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span></br> -->
+							<label class='lb_condition_lv2'></label>
+							<p class='lb_condition_lv2_desc'></p>
 						</div>
 						<div class='row rowspan'>
-							<span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span></br>
-							<label><span class='lb_cancel_info'></span></label><br/>
+							<!-- <span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span></br> -->
+							<label class='lb_condition_lv3'></label><br/>
 							<div class='col-md-12'>
-							<span class='lb_condition_1'>
-							</span><span id='cancel_date'></span><span class='lb_condition_2'></span>
-	</div>
+							<span class='lb_condition_lv3_desc_1'> </span><span class='lb_condition_lv3_desc_2'></span>
+							</div>
 						</div>
 					</td>
 				</tr>
@@ -234,13 +231,13 @@
 <script src='js/utility.js' ></script>
 <script src='js/pages.js' ></script>
 <script src='js/reserve.js' ></script>
-
+<script src='js/condition.js' ></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
 
 	   pages.init("confirmation");
-	   reserve.get_confirmation();
+	   reserve.get_confirmation(show_condition);
 	   
 	   	$('#payment_date_ctrl').datetimepicker({
 			format:'DD/MM/YYYY HH:mm',
@@ -266,6 +263,43 @@
 
    
    });
+   
+   
+   function show_condition(){
+   
+		var pack_id = reserve.rooms[0].package;
+		var endpoint = "services/rooms.php";
+		var method ="get";
+		var data ={"service":"package","id":pack_id,"lang":pages.lang()};
+		utility.service(endpoint,method,data,function(resp){
+		
+			console.warn('get condition for room.');
+			console.log(resp)
+		
+			//level 1
+			condition.food_service(resp.data.food_service,function(resp){
+
+				$('.lb_condition_lv1').html(resp.title);
+				$('.lb_condition_lv1_desc').html(resp.desc);
+			});
+			
+			//level 2
+			condition.pay_now(resp.data.payment_online,function(resp){
+			
+				$('.lb_condition_lv2').html(resp.title);
+				$('.lb_condition_lv2_desc').html(resp.desc);
+			});
+	
+			//level 3
+			condition.cancel_room(resp.data.cancel_room,reserve.info.expire_date,function(resp){
+			
+				$('.lb_condition_lv3').html(resp.title);
+				$('.lb_condition_lv3_desc_1').html(resp.desc);
+			});
+		
+		});
+		
+   }
       
   </script>
 </body>

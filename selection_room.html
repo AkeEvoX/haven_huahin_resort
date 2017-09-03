@@ -231,6 +231,20 @@ pages.init("selection_room");
 	$(document).ready(function(){
 		
 		pages.init("selection_room");
+		
+		/*
+		$('#datetimepicker6').datetimepicker();
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+		
+		*/
 
 		$('#btn_checkin').datetimepicker({"format":"DD/MM/YYYY", minDate:new Date()}).on('dp.change',function(e){
 			var s_date = moment(e.date.format('YYYY-MM-DD'));

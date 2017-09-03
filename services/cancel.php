@@ -13,12 +13,11 @@ $result_verify = $base->verify_cancel($key,$email);
 
 $verify = $result_verify->fetch_object();
 
-if($verify->found=="0"){
-	echo "<script>alert('Sorry !!! cannot cancel reservation. \\n information not match.');window.location='../cancel_confirm.html';</script>";
+if($verify->found=="0" or $verify->cancel_room == "0"){
+	echo "<script>alert('Sorry !!! cannot cancel reservation. \\n information not match or a room can't cancelleing is not found.');window.location='../cancel_confirm.html';</script>";
 	exit();
 }
 else{
-
 
 	//check cancel date is over?
 	$date_range = datediff(date('Y-m-d'),$verify->reserve_expire);
@@ -29,6 +28,7 @@ else{
 		echo $redirect;
 		exit();
 	}
+	
 	$result = $base->cancel_reserve($key,$email);	
 	send_mail_cancel($key);
 	echo "<script>alert('Your cancellation was successful. \\n Thank you.');window.location='../cancellation.html?reserve_id=".$key."';</script>";
