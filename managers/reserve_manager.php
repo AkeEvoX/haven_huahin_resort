@@ -78,7 +78,6 @@ class Reserve_Manager{
 		
 	}
 	
-	
 	function get_reserve_info($unique_key){
 		
 		try{
@@ -275,7 +274,7 @@ class Reserve_Manager{
 
 	}
 
-		function payment_status($unique_key,$payment_type,$status){
+	function payment_status($unique_key,$payment_type,$status){
 			try{
 			$update_date = 'now()';
 			$sql = "update reserve_info set reserve_status='".$status."',payment_type='$payment_type', update_date=$update_date ";

@@ -53,6 +53,8 @@ reserve.get_confirmation = function(callback){
 		
 
 		var date = moment(result.data.info.date_start).add('days',14).format('DD/MM/YYYY');
+		//set format expire date 
+		reserve.info.expire_date = moment(reserve.info.expire_date).format('DD/MM/YYYY');
 		//console.log(date + " || " + result.data.info.date_start);
 		var cancel_date = utility.date_format_th(date);
 		$('#cancel_date').html(cancel_date);

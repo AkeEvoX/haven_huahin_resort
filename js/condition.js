@@ -7,8 +7,8 @@ condition.food_service = function(enable,callback){
 	var result = {"title":"","desc":""};
 	var title = "";
 	var desc = "";
-	
-	var src = "js/rooms/"+ pages.lang()  + "/condition.json";
+	console.warn("food service is " + enable);
+	var src = "js/rooms/"+ pages.lang()  + "/condition.json?_="+new Date().getMilliseconds();
 	$.getJSON(src,function(resp){
 		
 		switch(enable){
@@ -43,8 +43,10 @@ condition.cancel_room = function(enable,expiredate,callback){
 	
 	//check date is over 14 day
 	var current_date = moment(new Date());
-	var expire_date = moment(moment(expiredate));
+	var expire_date = moment(moment(expiredate,"DD/MM/YYYY"));
 	//var expire_date = moment(moment(expiredate,'DD/MM/YYYY'));
+	console.log("current date is " + current_date);
+	console.log("expire date is " + expiredate);
 	var daydiff = expire_date.diff(current_date,'days');
 	
 	console.log("reserve range days is " + daydiff);
@@ -53,7 +55,9 @@ condition.cancel_room = function(enable,expiredate,callback){
 	}
 	//ex. expiredate = 21/08/2017
 	
-	var src = "js/rooms/"+ pages.lang()  + "/condition.json";
+	console.warn("cancel room is " + enable);
+	
+	var src = "js/rooms/"+ pages.lang()  + "/condition.json?_="+new Date().getMilliseconds();
 	$.getJSON(src,function(resp){
 		
 		switch(enable){
@@ -84,8 +88,8 @@ condition.pay_now = function(enable,callback){
 	var result = {"title":"","desc":""};
 	var title = "";
 	var desc = "";
-	
-	var src = "js/rooms/"+ pages.lang()  + "/condition.json";
+	console.warn("pay now is " + enable);
+	var src = "js/rooms/"+ pages.lang()  + "/condition.json?_="+new Date().getMilliseconds();
 	$.getJSON(src,function(resp){
 		
 		switch(enable){
