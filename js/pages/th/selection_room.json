@@ -9,11 +9,12 @@
 "lb_children_2":"Children 5 - 11 Year",
 "lb_children":"Children 0 - 4 Year",
 "lb_code":" Access Code",
-"lb_select_room":" Select your room.",
-"lb_best_room":"The Room is the better",
+"lb_select_room":"เลือกห้องพัก.",
+"lb_best_room":"คุณจะได้รับราคาที่ดีที่สุดบนเว็ปไซต์ของโรงแรม",
 "lb_summary":"summary",
 "lb_total_detail":"Detail",
 "lb_room_unit":"Room",
 "lb_night_unit":"Night",
-"lb_submit":"SUBMIT"
+"lb_submit":"ตรวจสอบความถูกต้อง",
+"lb_apply":"ค้นหา"
 }

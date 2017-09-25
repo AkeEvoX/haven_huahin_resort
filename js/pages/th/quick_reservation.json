@@ -1,11 +1,12 @@
 {
 "lb_header":"ค้นหาข้อมูลการจอง",
-"lb_checkin":"วันที่เข้าพัก :",
-"lb_night":"คืน",
-"lb_adults":"ผู้ใหญ่",
-"lb_children_2":"เด็กอายุ 5-11 ปี : ",
-"lb_children":"เด็กอายุ 0-4 ปี : ",
+"lb_checkin":"Check In Date :",
+"lb_night":"Nights",
+"lb_adults":"Adults",
+"lb_children_2":"Children 5-11 Year : ",
+"lb_children":"Children 0-4 Year : ",
 "lb_code":"Access Code /<br/> IATA Code :",
 "lb_cancel":"ยกเลิกการจอง",
-"lb_language":"เปลี่ยนภาษา"
+"lb_button":"ห้องว่าง",
+"lb_language":"ภาษา"
 }
