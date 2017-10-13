@@ -1,11 +1,11 @@
 {
 	"enable_foodservice": {
 		"title": "<span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span> <br>Best Price",
-		"desc": "You are on the hotel website, you will receive <br/>The best price since there is no middleman"
+		"desc": "You are on the hotel website, you will receive <br/>The best price "
 	},
 	"disable_foodeservice": {
 		"title": "<span class='glyphicon glyphicon-thumbs-up' style='color:red;font-size:28px;'></span> <br>Best Price",
-		"desc": "You are on the hotel website, you will receive <br/>The best price since there is no middleman"
+		"desc": "You are on the hotel website, you will receive <br/>The best price "
 	},
 	"enable_cancelroom": {
 		"title": "<span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span><br/>Can be changed and discarded.",
@@ -13,7 +13,7 @@
 	},
 	"disable_cancelroom": {
 		"title": "<span class='glyphicon glyphicon-remove' style='color:red;font-size:28px;'></span><br/>Can be changed and discarded.",
-		"desc": "This offer can't canceled or modified ."
+		"desc": "Non refundable and cannot be amended or modified ."
 	},
 	"enable_paynow": {
 		"title": "<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span><br/>Internet payment",

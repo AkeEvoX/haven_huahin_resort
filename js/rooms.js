@@ -130,12 +130,12 @@ function view_list_room(resp){
 		templete_master = utility.get_templete("templete_room.html");
 		$.each(resp.data.rooms,function(index,room){
 			
-			//console.log(item);
 			//var room =  item;//resp.data.rooms[index];
 			var templete = templete_master;
 			templete = templete.replace("{room_name}",room.room_name);
 			templete = templete.replace("{link_pop_detail}",set_room_detail(room.room_id));
 			templete = templete.replace("{message.detail}",pages.message.btn_room_detail);
+			templete = templete.replace("{note_bed}",pages.message.note_bed);
 			templete = templete.replace("{bed_list}",set_bed_list(room.beds,room.room_id));
 			templete = templete.replace("{gallery_list}",set_gallery_list(room.gallerys,room.room_id));
 			templete = templete.replace("{package_list}",set_package_list(room.packages,room.room_name,room.room_id));

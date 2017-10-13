@@ -1,10 +1,10 @@
 {
 	"enable_foodservice": {
-		"title": "<span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span> <br>Best Price",
-		"desc": "คุณอยู่ที่เว็ปไซต์ของโรงแรม คุณจะได้รับราคาที่ดีที่สุด เนื่องจากไม่ผ่านคนกลาง"
+		"title": "<span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span> <br>รับประกันราคาดีที่สุด",
+		"desc": "คุณอยู่ที่เว็ปไซต์ของโรงแรม คุณจะได้รับราคาที่ดีที่สุด"
 	},
 	"disable_foodeservice": {
-		"title": "<span class='glyphicon glyphicon-thumbs-up' style='color:red;font-size:28px;'></span> <br>Best Price",
+		"title": "<span class='glyphicon glyphicon-thumbs-up' style='color:red;font-size:28px;'></span> <br>รับประกันราคาดีที่สุด",
 		"desc": "คุณอยู่ที่เว็ปไซต์ของโรงแรม คุณจะได้รับราคาที่ดีที่สุด เนื่องจากไม่ผ่านคนกลาง"
 	},
 	"enable_cancelroom": {
@@ -16,8 +16,8 @@
 		"desc": "ไม่สามารถยกเลิกเปลี่ยนแปลงได้"
 	},
 	"enable_paynow": {
-		"title": "<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span><br/>Internet payment",
-		"desc": "ทำการจ่ายเงินเต็มจำนวน "
+		"title": "<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span><br/>=ชำระเงินทางอินเตอร์เน็ต",
+		"desc": "ชำระเงินเต็มจำนวนผ่านระบบออนไลน์ที่มีการรักษาความปลอดภัย"
 	},
 	"disable_paynow": {
 		"title": "<span class='glyphicon glyphicon-shopping-cart' style='color:red;font-size:28px;'></span><br/>Internet payment",

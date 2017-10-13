@@ -4,9 +4,11 @@ var reserve = {};
 if(reserve.rooms == undefined){
 	reserve.rooms = [];	
 }
+
 if(reserve.customer == undefined){
 	reserve.customer = [];	
 }
+
 if(reserve.payment == undefined){
 	reserve.payment = [];	
 }
