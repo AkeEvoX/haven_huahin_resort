@@ -37,13 +37,11 @@ $base = new Package_Manager();
 $title_th = GetParameter("title_th");
 $title_en = GetParameter("title_en");
 $room_type = GetParameter("room_type");
-$package_price = GetParameter("package_price");
 $food_service = (GetParameter("food_service")=="on") ? "1" : "0" ;
 $cancel_room = (GetParameter("cancel_room") == "on") ? "1" : "0";
 $payment_online = (GetParameter("payment_online") == "on") ? "1" : "0";
-$rent_unit = GetParameter("rent_unit");
 
-$result = $base->insert_item($title_th,$title_en,$room_type,$package_price,$food_service,$cancel_room,$payment_online,$rent_unit);
+$result = $base->insert_item($title_th,$title_en,$room_type,$food_service,$cancel_room,$payment_online);
 
 global $result_code; //call global variable
 $result_code="0";
@@ -58,13 +56,11 @@ $id = GetParameter("id");
 $title_th = GetParameter("title_th");
 $title_en = GetParameter("title_en");
 $room_type = GetParameter("room_type");
-$package_price = GetParameter("package_price");
 $food_service = (GetParameter("food_service")=="on") ? "1" : "0" ;
 $cancel_room = (GetParameter("cancel_room") == "on") ? "1" : "0";
 $payment_online = (GetParameter("payment_online") == "on") ? "1" : "0";
-$rent_unit = GetParameter("rent_unit");
 
-$result = $base->edit_item($id,$title_th,$title_en,$room_type,$package_price,$food_service,$cancel_room,$payment_online,$rent_unit);
+$result = $base->edit_item($id,$title_th,$title_en,$room_type,$food_service,$cancel_room,$payment_online);
 global $result_code; //call global variable
 $result_code="0";
 return $result;
@@ -81,9 +77,9 @@ function DeleteItem(){
 }
 
 function Listobject(){
-
+	$room_type=GetParameter("room_type");
 	$base = new Package_Manager();
-	$dataset = $base->list_item();
+	$dataset = $base->list_item($room_type);
 	if($dataset){
 		
 		while($row = $dataset->fetch_object()){
@@ -127,6 +123,7 @@ function ListItem(){
 			
 		}
 	}
+	$result .= "</tbody>";
 	global $result_code; //call global variable
 	$result_code = "0";
 	return $result;
@@ -144,20 +141,18 @@ function GetItem(){
 		"title_th"=>$row->title_th,
 		"title_en"=>$row->title_en,
 		"room_type"=>$row->room_type,
-		"package_price"=>$row->package_price,
 		"food_service"=>$row->food_service,
 		"cancel_room"=>$row->cancel_room,
 		"payment_online"=>$row->payment_online,
 		"status"=>$row->status
 	);
-
 	global $result_code; //call global variable
 	$result_code="0";
 	return $result ;
 }
 
 function initial_column(){
-	$column = "<tr>";
+	$column = "<thead><tr>";
 	$column .= "<th class='col-md-1'>No</th>";
 	$column .= "<th class='col-md-1'>Room Type</th>";
 	$column .= "<th class='col-md-2'>Package Name</th>";
@@ -166,7 +161,7 @@ function initial_column(){
 	$column .= "<th class='col-md-1'>pay<br>now</th>";
 	$column .= "<th class='col-md-1'>Status</th>";
 	$column .= "<th class='col-md-2'></th>";
-	$column .= "</tr>";
+	$column .= "</tr></thead><tbody>";
 	return $column;
 }
 

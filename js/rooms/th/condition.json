@@ -12,11 +12,11 @@
 		"desc": "สามารถเปลี่ยนแปลงและยกเลิก โดยไม่มีค่าธรรมดา ภายในวันที่ . {0} , 00:00 (UTC+07:00) (นับจาก 14 วันล่วงหน้าก่อนวันเข้าพัก) "
 	},
 	"disable_cancelroom": {
-		"title": "<span class='glyphicon glyphicon-remove' style='color:red;font-size:28px;'></span><br/>Can be changed and discarded.",
+		"title": "<span class='glyphicon glyphicon-remove' style='color:red;font-size:28px;'></span><br/>Cannot be changed and discarded.",
 		"desc": "ไม่สามารถยกเลิกเปลี่ยนแปลงได้"
 	},
 	"enable_paynow": {
-		"title": "<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span><br/>=ชำระเงินทางอินเตอร์เน็ต",
+		"title": "<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span><br/>ชำระเงินทางอินเตอร์เน็ต",
 		"desc": "ชำระเงินเต็มจำนวนผ่านระบบออนไลน์ที่มีการรักษาความปลอดภัย"
 	},
 	"disable_paynow": {

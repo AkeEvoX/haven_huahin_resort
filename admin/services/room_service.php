@@ -107,6 +107,7 @@ function ListRoom(){
 			
 		}
 	}
+	$result .= "</tbody>";
 	global $result_code; //call global variable
 	$result_code = "0";
 	return $result;
@@ -130,12 +131,12 @@ function GetRoomType(){
 }
 
 function initial_column(){
-	$column = "<tr>";
+	$column = "<thead><tr>";
 	$column .= "<th class='col-md-1'>No</th>";
 	$column .= "<th class='col-md-4'>Title</th>";
 	$column .= "<th class='col-md-1'>Seq</th>";
 	$column .= "<th></th>";
-	$column .= "</tr>";
+	$column .= "</tr></thead><tbody>";
 	return $column;
 }
 

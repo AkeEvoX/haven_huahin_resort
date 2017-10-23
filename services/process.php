@@ -8,16 +8,16 @@ $_step = GetParameter("step");
 
 switch($_step){
 	case "1":
-		step_one($_POST);
+		step_one($_POST);  //quick reservation
 	break;
 	case "2":
-		step_two($_POST);
+		step_two($_POST);//select room
 	break;
 	case "3":
-		step_three($_POST);
+		step_three($_POST);//select option
 	break;
 	case "4":
-		step_four($_POST);
+		step_four($_POST);//summary
 	break;
 	case "5":
 

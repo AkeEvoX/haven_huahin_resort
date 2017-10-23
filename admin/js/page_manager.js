@@ -3,6 +3,7 @@ var page_console = '#panel_page';
 var modal_control = '#modaldialog';
 var modal_content = '#modalcontent';
 var modal_title = '#modaltitle';
+var cache_callback = null;
 
 $.ajaxSetup({
 		global: false,
@@ -10,6 +11,25 @@ $.ajaxSetup({
 		contentType:false,
 		cache: false
 });
+
+page.complete = function(callback){
+	try{
+		if(callback==undefined && cache_callback != undefined){
+			if(cache_callback!=null){			
+				cache_callback();
+				cache_callback = null;
+			}
+		}
+		else{
+			cache_callback = callback;
+		}
+	}
+	catch(e){
+		cache_callback = null;
+		console.error("page complete is error.");
+	}
+
+}
 
 page.redirect = function(url,callback){
 	$(page_console).load(url,function(){
@@ -58,6 +78,7 @@ page.modify = function(obj){
 			$.each(resp.result,function(name,data){
 				assign_value(name,data);
 			});
+			page.complete();
 		},"JSON");
 	});
 }
@@ -90,6 +111,7 @@ page.data_reload = function(){
 	
 	$.getJSON(datasource,function(resp){
 		data.html(resp.result);
+		page.complete();
 	});
 }
 
@@ -102,12 +124,31 @@ function assign_value(objName,value){
 		case "text" :
 			obj.val(value);
 		break;
+		case "textarea":
+			obj.summernote('code',value);
 		case "checkbox" :
 		case "radio" :
 			obj.prop("checked", value==1 ? true : false )
 		break;
 		case "select-one" : 
 			obj.val(value).change();
+			obj.attr('data-selected',value);
+		break;
+		default:
+			//other input
+			var tag = obj.prop('tagName');
+			switch(tag){
+				case "TABLE":
+					//do strub
+					obj.html(value);
+				break;
+				case "A":
+					obj.prop('href',value);
+				break;
+				case "DIV":
+					obj.html(value);
+				break;
+			}
 		break;
 	}
 

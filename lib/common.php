@@ -15,14 +15,14 @@ $base_dir = "../";
 function SendMail($receive,$sender,$subject,$message,$sender_name)
 {
 		$mail = new PHPMailer();
-		$mail->SMTPOptions = array(
+		/* $mail->SMTPOptions = array(
 		'ssl' => array(
         'verify_peer' => false,
         'verify_peer_name' => false,
         'allow_self_signed' => true
-		));
-		$mail->IsSMTP();
-
+		)); */
+		//$mail->IsSMTP();
+		/*
 		$mail->Subject = $subject;
 		$mail->MsgHTML($message);//body mail
 		$mail->CharSet = "utf-8";
@@ -34,22 +34,21 @@ function SendMail($receive,$sender,$subject,$message,$sender_name)
 		//$mail->SMTPDebug = 2;
 		$mail->Username = "contact@baankunnan.com"; 
 		$mail->Password = "hmcKxJfCj"; 
+		*/
 		
-		
-		/*
 		$mail->Subject = $subject;
 		$mail->MsgHTML($message);//body mail
 		$mail->CharSet = "utf-8";
-		$mail->Host="mail.haven-huahin.com";
 		$mail->SMTPAuth = true;
-		$mail->SMTPDebug = 2;
-		$mail->SMTPSecure = 'tls';
-		$mail->IsHTML(true);
-		$mail->Username = "system@haven-huahin.com"; 
-		$mail->Password = "WvvolZ4v"; 
-		*/
-		//service@haven-huahin.com
-		//LT8ANWg9
+		$mail->IsSMTP();
+		$mail->SMTPDebug = 1;
+		$mail->SMTPSecure = "tls";
+		$mail->Host="smtp.gmail.com";//smtp.gmail.com
+		$mail->Port="587";//ssl :: 465 or tls :: 587
+		//$mail->IsHTML(true);
+		$mail->Username = "svargalok@gmail.com"; 
+		$mail->Password = "trinity@59"; 
+		
 		$mail->SetFrom($sender, $sender_name);
 
 		//list send email 
@@ -69,12 +68,10 @@ function SendMail($receive,$sender,$subject,$message,$sender_name)
 					log_info("Send Email is complete: " . $to["email"]);
 				}
 			}
-				//echo "<script>alert('ข้อมูลของคุณส่งเรียบร้อยแล้วค่ะ');</script>";
 			else 
 				echo "<script>alert('Send email complete, Thankyou.');</script>";
 		}
 		
-		//echo "<script>window.location.href='".$redirect."';</script>";
 }
 
 function replace_specialtext($message){

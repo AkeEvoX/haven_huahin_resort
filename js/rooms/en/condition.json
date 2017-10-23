@@ -12,7 +12,7 @@
 		"desc": "This offer can be canceled or modified without charge up to date. {0} , 00:00 (UTC+07:00) (Calculated from 14 Days before stay) Included in the total payment to the hotel."
 	},
 	"disable_cancelroom": {
-		"title": "<span class='glyphicon glyphicon-remove' style='color:red;font-size:28px;'></span><br/>Can be changed and discarded.",
+		"title": "<span class='glyphicon glyphicon-remove' style='color:red;font-size:28px;'></span><br/>Cannot be changed and discarded.",
 		"desc": "Non refundable and cannot be amended or modified ."
 	},
 	"enable_paynow": {

@@ -179,11 +179,9 @@ utility.date_format = function (date,lang){
 		dates = moment(date,'DD/MM/YYYY').format('DD-MM-YYYY').split("-");
 	}
 	
-	
-	//var dates = date.split("/");
 	var months = Array();
 	var day = dates[0];
-	var month = parseInt(dates[1].replace("0",""))-1;
+	var month = parseInt(dates[1])-1;
 	var year =0;
 	
 	if(lang=="th"){
@@ -218,6 +216,9 @@ utility.datetime_format = function(date,lang){
 	result += " " + time;
 
 	return result;
+}
+utility.daysInMonth = function(month,year) {
+    return new Date(year, month, 0).getDate();
 }
 
 utility.createCookie = function (name,value,days) {

@@ -1,0 +1,37 @@
+<form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
+	<div class="form-group">
+		<label for="id" class='col-md-3 control-label'>Remove Item No</label>
+		<div class='col-md-9'>
+			<input type="text" class="form-control" id="id" name='id' value='' readonly />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="room_name" class='col-md-3 control-label'>Room Name</label>
+		<div class='col-md-9'>
+			<input type="text" class="form-control" id="room_name" name='room_name' placeholder="" value='' readonly />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="pack_name" class='col-md-3 control-label'>Package Name</label>
+		<div class='col-md-9'>
+			<input type="text" class="form-control" id="pack_name" name='pack_name' placeholder="" value='' readonly />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="price_name" class='col-md-3 control-label'>Price Type</label>
+		<div class='col-md-9'>
+			<input type="text" class="form-control" id="price_name" name='price_name' placeholder="" value='' readonly />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="price" class='col-md-3 control-label'>Price</label>
+		<div class='col-md-9'>
+			<input type="text" class="form-control" id="price" name='price' placeholder="" value='' readonly />
+		</div>
+	</div>
+</form>
+<div class='row'>
+	<div class="col-sm-offset-3 col-sm-9">
+		<button class='btn btn-success' onclick=page.save('services/package_price_service.php?type=remove','form_save') ><span class='glyphicon glyphicon-ok'></span>save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+	</div>
+</div>

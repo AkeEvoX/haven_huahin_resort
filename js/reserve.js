@@ -8,7 +8,7 @@ reserve.get_confirmation = function(callback){
 	var endpoint = "services/reserve.php";
 	var method = "get";
 	var args = {"key":reserve_id,"_":new Date().getMilliseconds()};
-
+	var lang = pages.lang(); 
 	utility.service(endpoint,method,args,function(result){
 
 		console.log(result);
@@ -51,13 +51,19 @@ reserve.get_confirmation = function(callback){
 			$('#list_reserve').append(item);
 		}
 		
-
-		var date = moment(result.data.info.date_start).add('days',14).format('DD/MM/YYYY');
+		var current_date = moment(new Date());
+		var expire_date = moment(reserve.info.expire_date);
+		var diffdate = expire_date.diff(current_date,'days');
+		var expire_date = utility.date_format(expire_date.format('YYYY-MM-DD'),lang) + " , 00:00 (UTC+07:00) ";
+		//var date = moment(result.data.info.date_start).add('days',14).format('DD/MM/YYYY');
+		
 		//set format expire date 
-		reserve.info.expire_date = moment(reserve.info.expire_date).format('DD/MM/YYYY');
+		//reserve.info.expire_date = moment(reserve.info.expire_date).format('DD/MM/YYYY');
 		//console.log(date + " || " + result.data.info.date_start);
-		var cancel_date = utility.date_format_th(date);
-		$('#cancel_date').html(cancel_date);
+		//var cancel_date = utility.date_format_th(date);
+		
+		if(diffdate >= 0)  //check expire is over 14 days
+			$('#cancel_date').html(expire_date);
 		
 		if(result.data.reserve != undefined){
 			
@@ -196,7 +202,7 @@ reserve.get_summary = function(callback){
 	var endpoint = "services/info.php";
 	var method="get";
 	var args = {"_":new Date().getMilliseconds()};
-	var lang = 'en';
+	var lang = pages.lang(); 
 	utility.service(endpoint,method,args,function(result){
 		
 		console.log(result);
@@ -218,16 +224,19 @@ reserve.get_summary = function(callback){
 			
 			var start_date = moment(info.start_date,'DD-MM-YYYY').format('YYYY-MM-DD') ;
 			var end_date =  moment(info.end_date,'DD-MM-YYYY').format('YYYY-MM-DD') ;
-			var expire_date = moment(info.expire_date,'DD-MM-YYYY').format('YYYY-MM-DD') ;
+			var expire_date = moment(info.expire_date,'DD-MM-YYYY');
+			var current_date = moment(new Date());
+			var diffdate = expire_date.diff(current_date,'days');
+			var expire_date = utility.date_format(expire_date.format('YYYY-MM-DD'),lang) + " , 00:00 (UTC+07:00) ";
+			console.log('expire diff date = '+diffdate); 
+			
 			$('#date_start').html(utility.date_format(start_date,lang));
 			$('#date_end').html(utility.date_format(end_date,lang));
 			
-			//var date = moment(info.start_date,'DD/MM/YYYY').add('days',14).format('DD/MM/YYYY');
-			//console.log("exp : " + date + " || start :" + info.start_date);
-			var expire_date = utility.date_format(expire_date,lang) + " , 00:00 (UTC+07:00) ";
-			$('#cancel_date').html(expire_date);
-			//$('#reserve_expire').html(expire_date);
-
+			
+			if(diffdate >= 0) //check expire is over 14 days
+				$('#cancel_date').html(expire_date);
+			
 			var rent ="";
 			rent = pages.message.adults +" "+ info.adults + " "+pages.message.person;
 			rent += pages.message.children_2 +" "+ info.children_2 + " " + pages.message.person;
