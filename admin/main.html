@@ -12,6 +12,7 @@
     <!-- Bootstrap core CSS -->
     <link href="../plugin/bootstraps/css/bootstrap.min.css" rel="stylesheet">
 	<link href="../plugin/bootstraps/select/css/bootstrap-select.min.css" rel="stylesheet">
+	<link href="../plugin/bootstraps/css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" />
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -39,7 +40,12 @@
           </button>
           <a class="navbar-brand" href="#">Control Center</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
+		<div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="login.html"><span class='glyphicon glyphicon-off'></span> Logout</a></li>
+			</ul>
+		</div>
+     <!--    <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="#">Dashboard</a></li>
             <li><a href="#">Settings</a></li>
@@ -49,18 +55,18 @@
           <form class="navbar-form navbar-right">
             <input type="text" class="form-control" placeholder="Search...">
           </form>
-        </div>
+        </div> -->
       </div>
     </nav>
 
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li ><a href="#">Reserve Status</a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
+		  <label data-toggle="collapse" data-target="#menu_room">Reporting</label>
+          <ul id='menu_room' class="nav nav-sidebar collapse in">
+            <li><a href="javascript:void(0);" onclick=page.redirect('item_reserve.html') ><span class='glyphicon glyphicon-chevron-right'></span>Reservation</a></li>
+			<li><a href="javascript:void(0);" onclick=page.redirect('item_payment.html') ><span class='glyphicon glyphicon-chevron-right'></span>Paymented</a></li>
+			<li><a href="javascript:void(0);" onclick=page.redirect('item_room_availabel.html') ><span class='glyphicon glyphicon-chevron-right'></span>Room Available</a></li>
           </ul>
 		  <label data-toggle="collapse" data-target="#menu_room">Mapping Manager</label>
           <ul id='menu_room' class="nav nav-sidebar collapse in">
@@ -241,7 +247,9 @@
 	<script src="../plugin/jquery/datatable/jquery.dataTables.min.js"></script>
 	
     <script src="../plugin/bootstraps/js/bootstrap.min.js"></script>
+	<script src="../plugin/jquery/moment.js"></script>
 	<script src="../plugin/bootstraps/select/js/bootstrap-select.min.js"></script>
+	<script src='../plugin/bootstraps/js/bootstrap-datetimepicker.js' ></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
     <script src="../plugin/jquery/holder.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

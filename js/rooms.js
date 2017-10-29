@@ -327,7 +327,8 @@ function set_package_list(items,room_name,room_id){
 			}
 			
 			if(package.payment_online==1){
-				result+= "<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> "+pages.message.internet +"</div>";
+				//onclick='reserve.modal_internet()';
+				result+= "<div class='col-sm-3'  style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> "+pages.message.internet +"</div>";
 			}
 			else{
 				result+= "<div class='col-sm-3' style='cursor:pointer;'><span class='glyphicon glyphicon-remove'></span> "+pages.message.no_internet +"</div>";

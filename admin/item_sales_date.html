@@ -19,6 +19,28 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<label for="pack_date_start" class='col-md-3 control-label'>เริ่มต้น</label>
+		<div class='col-md-3'>
+			<div class="input-group date" id='btn_find_start' >
+			<input type="text" class="form-control" id="find_date_start" name='find_date_start' placeholder="" />
+			  <span class="input-group-addon">
+					<span class="glyphicon glyphicon-calendar"></span>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="pack_date_end" class='col-md-3 control-label'>สิ้นสุด</label>
+		<div class='col-md-3'>
+			<div class="input-group date" id='btn_find_end' >
+			<input type="text" class="form-control" id="find_date_end" name='find_date_end' placeholder="" />
+			  <span class="input-group-addon">
+					<span class="glyphicon glyphicon-calendar"></span>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="form-group">
 		<label for="price_id" class='col-md-3 control-label'>&nbsp;</label>
 		<div class='col-md-9'>
 			<button class='btn btn-success' id='btn_search' type='button' ><span class='glyphicon glyphicon-search'></span> Search</button>
@@ -28,7 +50,8 @@
 </div>
 <table class='table table-striped' id='data_loader'  >
 </table>
-<button class='btn btn-primary' onclick=page.show_modal("sales_date_add.html","Create&nbsp;Sales&nbsp;Date") ><span class='glyphicon glyphicon-plus'></span> Add</button>
+<button class='btn btn-primary' onclick=page.show_modal("sale_date_add.html","Create&nbsp;Sales&nbsp;Date") ><span class='glyphicon glyphicon-plus'></span> Add</button>
+<button class='btn btn-danger' id='btn_delete' ><span class='glyphicon glyphicon-trash'></span> Delete</button>
 <!--show modal-->
 <!-- Modal -->
 <div class="modal fade bs-example-modal-md" id="modaldialog" tabindex="-1" role="dialog" aria-labelledby="modaltitle">
@@ -53,8 +76,14 @@
 <script>
 $(document).ready(function(){
 
-//datasource='services/sales_date_service.php?type=list' 
+	//	initial
+	$('#btn_find_start').datetimepicker({"format":"DD/MM/YYYY"});
+	$('#btn_find_end').datetimepicker({"format":"DD/MM/YYYY"});
+	page.complete(reload_datatable);
+	
 
+//datasource='services/sales_date_service.php?type=list' 
+	var table = null;
 	$.getJSON("services/room_service.php?type=listobject",function(resp){
 		$.each(resp.result,function(id,data){
 			var opt = new Option(data.title, data.id);
@@ -78,6 +107,10 @@ $(document).ready(function(){
 	});
 	
 	$.getJSON("services/price_service.php?type=listobject",function(resp){
+	
+		//default null
+		var opt = new Option("ALL", "");
+		$("#price_id").append(opt);
 		$.each(resp.result,function(id,data){
 			var opt = new Option(data.title, data.id);
 			$("#price_id").append(opt);
@@ -86,22 +119,88 @@ $(document).ready(function(){
 
 	$('#btn_search').click(function(){
 	
+		list_delete = [];  //reset delete list
 		var room_type = $('#room_type').val();
 		var pack_id = $('#pack_id').val();
 		var price_id = $('#price_id').val();
-		var endpoint = 'services/sales_date_service.php?type=list&room_type='+room_type+'&pack_id='+pack_id+'&price_id='+price_id;
+		var find_start = $('#find_date_start').val() != "" ? moment($('#find_date_start').val(),'DD/MM/YYYY').format('YYYY-MM-DD') : "" ;
+		var find_end = $('#find_date_end').val() != "" ? moment($('#find_date_end').val(),'DD/MM/YYYY').format('YYYY-MM-DD') : "" ;
+		var endpoint = 'services/sales_date_service.php?type=list&room_type='+room_type+'&pack_id='+pack_id+'&price_id='+price_id+"&find_start="+find_start+"&find_end="+find_end;
+		//var data = {"hello":"123"};
+		
+		//assign data source after searching.
+		$('#data_loader').attr('datasource',endpoint);
+		
 		$('#data_loader').html("");
 		$.getJSON(endpoint,function(resp){
 		
 		   $('#data_loader').html(resp.result);
-		   
-		   $('#data_loader').DataTable({
-				"pagingType": "full_numbers"
-			}); 
+			//check initial available
+			/*
+			if ( $.fn.dataTable.isDataTable('#data_loader') ){
+				console.log("exist DataTable")
+				table.destroy();
+			}
+			
+			table = $('#data_loader').DataTable({"pagingType": "full_numbers"});
+			*/
+			reload_datatable();
 			
 		});
 
 	});
 	
+	
+	
+	$('#btn_delete').click(function(){
+	
+		if(confirm("confirm deleting ?")){
+	
+			var endpoint = 'services/sales_date_service.php?type=remove';
+			var data = JSON.stringify({"deletes":list_delete});
+			var method = 'POST';
+			
+			utility.service(endpoint,method,data,function(resp){
+				
+				if(resp.result == null) alert("Error : process delete.");
+				alert(resp.result);
+				list_delete = [];//clear item list 
+				$('#btn_search').click();
+			});
+		}
+		
+	});
+	
 });
+
+
+var list_delete = [];
+function flag_sale_delete(id){
+	list_delete.push(id);
+}
+
+function flag_sale_undelete(id){
+	list_delete = jQuery.grep(list_delete,function(item,index){ return item != id });
+}
+
+function delete_change(obj){
+	var id = obj.getAttribute("data-id");
+	if(obj.checked)
+		flag_sale_delete(id);
+	else{
+		flag_sale_undelete(id);
+	}
+}
+
+function reload_datatable(){
+	if ( $.fn.dataTable.isDataTable('#data_loader') ){
+		console.log("exist DataTable")
+		table.destroy();
+	}
+	
+	table = $('#data_loader').DataTable({"pagingType": "full_numbers"});
+}
+
+
+
 </script>

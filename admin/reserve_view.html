@@ -1,0 +1,159 @@
+<link href="../plugin/jquery/summernote/summernote.css" rel="stylesheet">
+<form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
+	<ul id='menutab' class="nav nav-tabs nav-default">
+		<li role="presentation" class='active'>
+			<a class='menutab' href="#info" data-toggle="tab">info</a>
+		</li>
+		<li role="presentation">
+			<a class='menutab' href="#rooms" data-toggle="tab">room</a>
+		</li>
+	</ul>
+	<div class='tab-content' style='margin-top:10px;'>
+		<div id='info' class="tab-pane fade in active">
+			<div class="form-group">
+				<label for="id" class='col-md-3 control-label'>unique</label>
+				<div class='col-md-3'>
+					<input type='text' class='form-control' id='unique' name='unique' readonly>
+				</div>
+			</div>
+			<div class="form-group">
+					<label for="code" class='col-md-3 control-label'>รหัสสินค้า</label>
+					<div class='col-md-3'>
+						<input type="text" class="form-control" id="code" name='code' placeholder="กรอกจำนวนสินค้า" value='' />
+					</div>
+				</div>
+			<div class="form-group">
+					<label for="cate_name" class='col-md-3 control-label'>ประเภทสินค้า</label>
+					<div class='col-md-9'>
+						<select class='form-control' data-live-search="true" data id='cate_type' name='cate_type' ></select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="cate_model_type" class='col-md-3 control-label'>สินค้า</label>
+					<div class='col-md-9'>
+						<select class='form-control' data-live-search="true" id='cate_model_type' name='cate_model_type' ></select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="pro_model_type" class='col-md-3 control-label'>อุปกรณ์</label>
+					<div class='col-md-9'>
+						<select class='form-control' data-live-search="true" id='pro_model_type' name='pro_model_type' ></select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="unit" class='col-md-3 control-label'>จำนวนสินค้า</label>
+					<div class='col-md-3'>
+						<input type="text" class="form-control" id="unit" name='unit' placeholder="กรอกจำนวนสินค้า" value='' />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="uni" class='col-md-3 control-label'>ราคาสินค้า</label>
+					<div class='col-md-3'>
+						<input type="text" class="form-control" id="price" name='price' placeholder="กรอกราคาสินค้า" value='' />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="thumbnail" class='col-md-3 control-label'>รูปตัวอย่างสินค้า</label>
+					<div class='col-md-5'>
+						<input type="file" class="form-control" id="thumbnail" name='thumbnail' placeholder="รูปตัวอย่างสินค้า"  />
+					</div>
+					<div class='col-sm-1'>
+						<a href='#' class='btn btn-success' id='thumbnail_view' name='thumbnail_view' target='blank'>view</a>
+					</div>
+				</div>
+					<div class="form-group">
+					<label for="detail" class='col-md-3 control-label'>รายละเอียดสินค้า</label>
+					<div class='col-md-9'>
+						<textarea class="form-control" id="detail" name='detail' placeholder="รูปตัวอย่างสินค้า"  /></textarea>
+					</div>
+				</div>
+			<div class="form-group">
+				<label for="status" class='col-md-3 control-label'>สถานะ</label>
+				<div class='col-md-3'>
+					<div class="material-switch pull-left">
+						<input id="status" name="status" type="checkbox"/>
+						<label for="status" class="label-success"></label>
+					</div>
+				</div>
+			</div>	
+		</div>
+		<div id='rooms' class="tab-pane fade">
+			<table class='table table-striped' id='room_list'  >
+			</table>
+		</div>
+	</div>
+	
+</form>
+<div class='row'>
+	<div class="col-sm-offset-3 col-sm-9">
+		<br/>
+		<button class='btn btn-success' onclick=page.save('services/cate_product_service.php?type=modify','form_save') ><span class='glyphicon glyphicon-ok'></span> save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+	</div>
+</div>
+<script src='../plugin/jquery/summernote/summernote.js' ></script>
+<script>
+
+$(document).ready(function(){
+
+	$.getJSON("services/pro_model_service.php?type=listobject",function(resp){
+		$.each(resp.result,function(id,data){
+			var opt = new Option(data.name, data.id);
+			$("#pro_model_type").append(opt);
+		});
+		$("#pro_model_type").selectpicker();
+	});	
+
+	$.getJSON("services/cate_service.php?type=listobject",function(resp){
+		$("#cate_type").selectpicker('destroy');
+		if(resp.result == undefined) return ;
+		$.each(resp.result,function(id,data){
+			var opt = new Option(data.name, data.id);
+			$("#cate_type").append(opt);
+		});
+
+		//first loading.
+		$("#cate_type").change();
+		$("#cate_type").selectpicker();
+	});	
+
+
+	$('#cate_type').change(function(){
+	 	var parent = this.value;
+		$.getJSON("services/cate_model_service.php?type=listobject&parentid="+parent,function(resp){
+			$("#cate_model_type").selectpicker('destroy');
+			$("#cate_model_type").html("");
+			if(resp.result == undefined) return ;
+			$.each(resp.result,function(id,data){
+				var opt = new Option(data.name, data.id);
+				$("#cate_model_type").append(opt);
+			});
+
+			$("#cate_model_type").selectpicker();
+		});	
+	});
+
+	$('#detail').summernote({ height: 400 });
+	
+	$('#btn_upload_image').click(function(){
+		var id = $('#id').val();
+		var endpoint = "services/cate_product_service.php?type=upload_gallery";
+		var data = new FormData($('#form_save')[0]);
+		$.post(endpoint,data,function(resp){
+			
+			alert("Upload Success");
+			
+			var endpoint = "services/cate_product_service.php?type=list_gallery&id="+id;
+			$.getJSON(endpoint,function(resp){
+			
+				$('#product_gallery').html(resp.result);
+				
+			});
+			
+		});	
+	});
+	
+	
+	
+});
+
+</script>

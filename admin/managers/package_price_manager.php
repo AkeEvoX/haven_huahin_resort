@@ -131,17 +131,51 @@ class Package_Price_Manager{
 			log_debug("package price> get item > " . $e->getMessage());
 		}
 	}
-
-	function list_item(){
+	
+	function item_object($price_id,$pack_id){
 		try{
 			
-			$sql = "select room.title_en as room_type,map.id,pack.title_en as pack_name,price.name as price_type,map.price,map.status ";
+			$sql = "select room.title_en as room_type,map.id,pack.title_en as pack_name,pack.id as pack_id,price.id as price_id,price.name as price_type,map.price,map.status ";
 			$sql .=  "from room_prices map ";
 			$sql .= "left join packages pack on pack.id = map.pack_id ";
 			$sql .= "left join price_type price on price.id = map.price_id ";
-			$sql .= "left join room_types room on pack.room_type = room.id ; ";
+			$sql .= "left join room_types room on pack.room_type = room.id  where 1=1 ";
 			
-			log_warning("package price> get list > " . $sql);
+			
+			if($pack_id!=""){
+				$sql .= "and price.id=".$price_id;
+			}
+			if($price_id!=""){
+				$sql .= " and pack.id =".$pack_id." ";
+			}
+			
+			log_warning("package price> get item object > " . $sql );
+			
+			$result = $this->mysql->execute($sql);
+			
+			return $result;
+		}catch(Exception $e){
+			log_debug("package price> get item object > error >".$e->getMessage());
+		}
+	}
+
+	function list_item($price_id,$pack_id){
+		try{
+			
+			$sql = "select room.title_en as room_type,map.id,pack.title_en as pack_name,price.id as price_id,price.name as price_type,map.price,map.status ";
+			$sql .=  "from room_prices map ";
+			$sql .= "left join packages pack on pack.id = map.pack_id ";
+			$sql .= "left join price_type price on price.id = map.price_id ";
+			$sql .= "left join room_types room on pack.room_type = room.id  where 1=1 ";
+			
+			if($price_id!=""){
+				$sql .= "and price.id=".$price_id;
+			}
+			if($pack_id!=""){
+				$sql .= " and pack.id =".$pack_id." ";
+			}
+			
+			log_warning("package price> get list > " . $sql );
 			
 			$result = $this->mysql->execute($sql);
 			

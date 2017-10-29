@@ -1,7 +1,7 @@
 <?php
 require_once("../../lib/database.php");
 require_once("../../lib/logger.php");
-class Sales_Date_Manager{
+class Reserve_Manager{
 	
 	protected $mysql;
 	function __construct(){
@@ -80,42 +80,16 @@ class Sales_Date_Manager{
 		
 	}
 	
-	
-	function delete_item($id){
-		
-		try{
-			
-			$sql = "delete from room_packages";
-			$sql .= " where id='".$id."' ";
-			
-			log_warning("sales date  > delete item > " . $sql);
-			
-			$result = $this->mysql->execute($sql);
-			
-			if($result=="true"){
-				$result = "DELETE SUCCESS.";
-			}else{
-				$result = "DELETE FAILURE.";
-			}
-			
-			return $result;
-		}catch(Exception $e){
-			log_debug("sales date > delete item > error > " . $e->getMessage());
-		}
-		
-	}
-	
 	function get_item($id){
 		try{
-	
-			$sql = "select dates.id,dates.pack_date,dates.room_unit,dates.status,unit.price ";
-			$sql .= ",room.id as room_type,room.title_en as room_name,pack.id as pack_id ,pack.title_en as pack_name,price.id as price_id, price.`name` as price_name ";
-			$sql .= "from room_packages dates ";
-			$sql .= "left join room_prices unit on unit.id = dates.room_price_id ";
-			$sql .= "left join packages pack on pack.id = unit.pack_id ";
-			$sql .= "left join price_type price on price.id = unit.price_id ";
-			$sql .= "left join room_types room on pack.room_type = room.id where 1=1 ";
-			$sql .= "and dates.id='".$id."' ";
+			
+			$sql = "select id,unique_key,reserve_startdate as start_date,reserve_enddate as end_date "; 
+			$sql .= ",price_option,price_sum,price_service,price_vat,price_net, "; 
+			$sql .= ",reserve_status as status,adults,children,children_2,night,acc_code "; 
+			$sql .= ",concat(title_name,first_name,' ',last_name) as cust_name,concat(prefix,mobile) as cust_mobile "; 
+			$sql .= ",birthdate,email,create_date as register_date "; 
+			$sql .= "from reserve_info where id=$id ";
+			
 			log_warning("sales date > get item > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
@@ -126,46 +100,43 @@ class Sales_Date_Manager{
 		}
 	}
 
-	function list_item($room_type,$pack_id,$price_id,$find_start,$find_end){
+	function list_item($unique,$customer,$mobile,$find_start,$find_end){
 		try{
-		
 			
-			$sql = "select dates.id,dates.pack_date,dates.room_unit,dates.status,unit.price ";
-			$sql .= ",room.title_en as room_name,pack.title_en as pack_name,price.`name` as price_name ";
-			$sql .= "from room_packages dates ";
-			$sql .= "left join room_prices unit on unit.id = dates.room_price_id ";
-			$sql .= "left join packages pack on pack.id = unit.pack_id ";
-			$sql .= "left join price_type price on price.id = unit.price_id ";
-			$sql .= "left join room_types room on pack.room_type = room.id where 1=1 ";
 			
-			if($room_type!=""){
-				$sql .= "and room.id='$room_type' " ;
+			$sql = "select id,unique_key,reserve_startdate as start_date,reserve_enddate as end_date,price_net,reserve_status as status ";
+			$sql .= ",concat(title_name,first_name,' ',last_name) as cust_name,concat(prefix,mobile) as cust_mobile ";
+			$sql .= ",create_date as register_date  ";
+			$sql .= "from reserve_info where 1=1 ";
+			
+			if($unique!=""){
+				$sql .= "and unique_key='$unique' " ;
 			}
 			
-			if($pack_id!=""){
-				$sql .= "and pack.id='$pack_id' " ;
+			if($customer!=""){
+				$sql .= "and concat(first_name,' ',last_name)  like '%$customer%' " ;
 			}
 			
-			if($price_id!=""){
-				$sql .= "and price.id='$price_id' " ;
+				if($mobile!=""){
+				$sql .= "and concat(prefix,mobile) like '%$mobile%' " ;
 			}
 			
 			if($find_start !="" && $find_end!=""){
 				//DD//MM/YYYY
 				$find_start = $find_start. " 00:00:00";
 				$find_end = $find_end. " 23:59:59";
-				$sql .= "and dates.pack_date between '$find_start' and '$find_end' ";
+				$sql .= "and create_date between '$find_start' and '$find_end' ";
 				
 			}
-			$sql .= "order by dates.pack_date ";
+			$sql .= "order by create_date ";
 			
-			log_warning("sales date> get list > " . $sql);
+			log_warning("reserve > get list > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
 			
 			return $result;
 		}catch(Exception $e){
-			log_debug("sales date > get list > error >".$e->getMessage());
+			log_debug("reserve > get list > error >".$e->getMessage());
 		}
 	}
 }

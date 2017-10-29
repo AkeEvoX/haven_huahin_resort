@@ -57,6 +57,8 @@ reserve.get_confirmation = function(callback){
 		var expire_date = utility.date_format(expire_date.format('YYYY-MM-DD'),lang) + " , 00:00 (UTC+07:00) ";
 		//var date = moment(result.data.info.date_start).add('days',14).format('DD/MM/YYYY');
 		
+		//moment('2017-10-13 00:00:00').diff(moment(new Date()),'days')
+		
 		//set format expire date 
 		//reserve.info.expire_date = moment(reserve.info.expire_date).format('DD/MM/YYYY');
 		//console.log(date + " || " + result.data.info.date_start);

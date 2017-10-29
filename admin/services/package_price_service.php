@@ -17,6 +17,9 @@ switch($type){
 	case "item": 
 		$result =  GetItem();
 	break;
+	case "itemobject": 
+		$result =  Itemobject();
+	break;
 	case "create": 
 		$result = CreateItem();
 	break;
@@ -72,14 +75,40 @@ function DeleteItem(){
 	return $result;
 }
 
-function Listobject(){
-
+function Itemobject(){
+	
+	$price_id = GetParameter("price_id");
+	$pack_id = GetParameter("pack_id");
 	$base = new Package_Price_Manager();
-	$dataset = $base->list_item();
+	$dataset = $base->item_object($price_id,$pack_id);
+	if($dataset){
+		
+		$row = $dataset->fetch_object();
+		$result = array("id"=>$row->id,"title"=>$row->price_type,"price"=>$row->price);
+		
+	}
+
+	global $result_code; //call global variable
+	$result_code = "0";
+	return $result;
+	
+}
+
+function Listobject(){
+	
+	$price_id = GetParameter("price_id");
+	$pack_id = GetParameter("pack_id");
+	$base = new Package_Price_Manager();
+	$dataset = $base->list_item($price_id,$pack_id);
 	if($dataset){
 		
 		while($row = $dataset->fetch_object()){
-			$result[] = array("id"=>$row->id,"title"=>$row->title_en,"price"=>$row->package_price);
+			$result[] = array(
+			"id"=>$row->id
+			,"title"=>$row->price_type
+			,"price"=>$row->price
+			,"price_id"=>$row->price_id
+			);
 		}
 	}
 
@@ -91,7 +120,7 @@ function Listobject(){
 function ListItem(){
 	
 	$base = new Package_Price_Manager();
-	$dataset = $base->list_item();
+	$dataset = $base->list_item("","");
 
 	$result .= initial_column();
 

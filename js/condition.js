@@ -40,11 +40,12 @@ condition.cancel_room = function(enable,expiredate,callback){
 	var result = {"title":"","desc":""};
 	var title = "";
 	var desc = "";
-	
-	//check date is over 14 day
+		//check date is over 14 day
 	var current_date = moment(new Date());
 	var expire_date = moment(moment(expiredate,"DD/MM/YYYY"));
 	var daydiff = expire_date.diff(current_date,'days');
+	
+	console.log('daydiff is ' + daydiff);
 	
 	if(daydiff < 0 ){
 		enable = "0"; //disable cancel room  when rent  a room is minimum 14 day .

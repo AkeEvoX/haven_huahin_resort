@@ -1,0 +1,49 @@
+<form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
+	<div class="form-group">
+				<label for="id" class='col-md-3 control-label'>ID</label>
+				<div class='col-md-2'>
+					<input type="text" class="form-control" id="id" name='id' placeholder="" value='' readonly />
+				</div>
+			</div>
+	<div class="form-group">
+			<label for="room_name" class='col-md-3 control-label'>ประเภทห้อง / Room Type</label>
+			<div class='col-md-4'>
+				<input type="text" class="form-control" id="room_name" name='room_name' placeholder="" value='' readonly />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="pack_id" class='col-md-3 control-label'>ประเภทแพ็กเกจ / Package Type</label>
+			<div class='col-md-4'>
+				<input type="text" class="form-control" id="pack_name" name='pack_name' placeholder="" value='' readonly />
+			</div>
+		</div>
+			<div class="form-group">
+			<label for="price_name" class='col-md-3 control-label'>ประเภทราคา / Price Type</label>
+			<div class='col-md-4'>
+				<input type="text" class="form-control" id="price_name" name='price_name' placeholder="" value='' readonly />
+			</div>
+		</div>
+		<div class="form-group">
+				<label for="pack_date" class='col-md-3 control-label'>วันที่</label>
+				<div class='col-md-3'>
+					<input type="text" class="form-control" id="pack_date" name='pack_date' placeholder="" value='' readonly />
+				</div>
+			</div>
+		<div class="form-group">
+				<label for="price" class='col-md-3 control-label'>ราคา</label>
+				<div class='col-md-2'>
+					<input type="text" class="form-control" id="price" name='price' placeholder="" value='' readonly />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="room_unit" class='col-md-3 control-label'>จำนวนห้อง</label>
+				<div class='col-md-2'>
+					<input type="text" class="form-control" id="room_unit" name='room_unit' placeholder="" value='' readonly />
+				</div>
+			</div>
+</form>
+<div class='row'>
+	<div class="col-sm-offset-3 col-sm-9">
+		<button class='btn btn-success' onclick=page.save('services/sales_date_service.php?type=remove','form_save') ><span class='glyphicon glyphicon-ok'></span>save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+	</div>
+</div>

@@ -17,7 +17,10 @@ $customer=null;
 $payment=null;
 
 if(isset($data)){
-
+	
+	//convert expire to DD/MM/YYYY
+	$expire = date("d/m/Y", strtotime($data->reserve_expire));
+	
 	$info = array(
 				"date_start"=>$data->reserve_startdate
 				,"date_end"=>$data->reserve_enddate

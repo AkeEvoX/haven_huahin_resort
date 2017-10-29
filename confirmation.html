@@ -271,6 +271,7 @@
 		var endpoint = "services/rooms.php";
 		var method ="get";
 		var data ={"service":"package","id":pack_id,"lang":pages.lang()};
+		var expireDate = moment(reserve.info.expire_date).format("DD/MM/YYYY");
 		utility.service(endpoint,method,data,function(resp){
 		
 			console.warn('get condition for room.');
@@ -291,8 +292,8 @@
 			});
 	
 			//level 3
-			condition.cancel_room(resp.data.cancel_room,reserve.info.expire_date,function(resp){
-			
+			condition.cancel_room(resp.data.cancel_room,expireDate,function(resp){
+				
 				$('.lb_condition_lv3').html(resp.title);
 				$('.lb_condition_lv3_desc_1').html(resp.desc);
 			});
