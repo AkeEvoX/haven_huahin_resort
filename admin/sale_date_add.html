@@ -12,9 +12,9 @@
 			</div>
 		</div>
 			<div class="form-group">
-			<label for="price_type" class='col-md-3 control-label'>ประเภทราคา / Price Type</label>
+			<label for="price_id_add" class='col-md-3 control-label'>ประเภทราคา / Price Type</label>
 			<div class='col-md-4'>
-				<select class='form-control' id='price_type' name='price_type' ></select>
+				<select class='form-control' id='price_id_add' name='price_id_add' ></select>
 				<input type='hidden' id='room_price_id' name='room_price_id' />
 			</div>
 		</div>
@@ -71,7 +71,7 @@
 $(document).ready(function(){
 
 	$.getJSON("services/room_service.php?type=listobject",function(resp){
-		$("#price_type").html("");
+		$("#price_id_add").html("");
 		$.each(resp.result,function(id,data){
 			var opt = new Option(data.title, data.id);
 			$("#room_type_add").append(opt);
@@ -105,21 +105,23 @@ $(document).ready(function(){
 	$("#pack_id_add").change(function(){
 		var val = this.value;
 		var endpoint = "services/package_price_service.php?type=listobject&pack_id="+val;
-		$("#price_type").html("");
+		$("#price_id_add").html("");
 		$.getJSON(endpoint,function(resp){
-			$.each(resp.result,function(id,data){
-				var opt = new Option(data.title, data.price_id);
-				$("#price_type").append(opt);
-			});
-			//trigger price change for display price.
-			$("#price_type").change();
+		
+			if(resp.result == undefined ) return;
+			
+				$.each(resp.result,function(id,data){
+					var opt = new Option(data.title, data.price_id);
+					$("#price_id_add").append(opt);
+				});
+				//trigger price change for display price.
+				$("#price_id_add").change();
+			
 		});
 		
-	
-		//$("#price_type").change();
 	});
 
-	$("#price_type").change(function(){
+	$("#price_id_add").change(function(){
 	
 		console.log("trigger price type changed.");
 		var val = this.value;
@@ -128,10 +130,11 @@ $(document).ready(function(){
 		var data = {"price_id":val,"pack_id":pack_id};
 		$('#price').val("");
 		$.getJSON(endpoint,function(resp){
-			if(resp.result != null ){
+			if(resp.result == undefined ) return;
+			
 				$('#price').val(resp.result.price);
 				$('#room_price_id').val(resp.result.id);
-			}
+			
 		});
 	});
 	

@@ -17,6 +17,7 @@ page.complete = function(callback){
 		if(callback==undefined && cache_callback != undefined){
 			if(cache_callback!=null){			
 				cache_callback();
+				console.warn("event page complete.");
 				cache_callback = null;
 			}
 		}
@@ -112,6 +113,17 @@ page.data_reload = function(){
 	$.getJSON(datasource,function(resp){
 		data.html(resp.result);
 		page.complete();
+		
+		//default initial datable
+		try{
+			if ( $.fn.dataTable.isDataTable('#data_loader') ){
+				console.log("exist DataTable")
+				table.destroy();
+			}
+			
+			table = $('#data_loader').DataTable({"pagingType": "full_numbers"});
+		}
+		catch(e){}
 	});
 }
 
@@ -120,7 +132,7 @@ function assign_value(objName,value){
 	var obj = $('#'+objName);
 	
 	switch (obj.prop("type")) {
-		case "textarea":
+		case "hidden":
 		case "text" :
 			obj.val(value);
 		break;

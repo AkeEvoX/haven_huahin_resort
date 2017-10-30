@@ -9,20 +9,20 @@
 			<label for="room_name" class='col-md-3 control-label'>ประเภทห้อง / Room Type</label>
 			<div class='col-md-4'>
 				<input type="text" class="form-control" id="room_name" name='room_name' placeholder="" value='' readonly/>
-				<input type="hidden" class="form-control" id="room_type" name='room_type' readonly/>
+				<input type="hidden" class="form-control" id="room_type_edit" name='room_type_edit' readonly/>
 			</div>
 		</div>
 		<div class="form-group">
 			<label for="pack_id" class='col-md-3 control-label'>ประเภทแพ็กเกจ / Package Type</label>
 			<div class='col-md-4'>
 				<input type="text" class="form-control" id="pack_name" name='pack_name' placeholder="" value='' readonly/>
-				<input type="hidden" class="form-control" id="pack_id" name='pack_id' readonly/>
+				<input type="hidden" class="form-control" id="pack_id_edit" name='pack_id_edit' readonly/>
 			</div>
 		</div>
 			<div class="form-group">
 			<label for="price_type" class='col-md-3 control-label'>ประเภทราคา / Price Type</label>
 			<div class='col-md-4'>
-				<select class='form-control' id='price_type' name='price_type' ></select>
+				<select class='form-control' id='price_id_edit' name='price_id_edit' ></select>
 			</div>
 		</div>
 		<div class="form-group">
@@ -61,28 +61,46 @@
 <script>
 $(document).ready(function(){
 
-	$.getJSON("services/price_service.php?type=listobject",function(resp){
-		$.each(resp.result,function(id,data){
-			var opt = new Option(data.title, data.id);
-			$("#price_type").append(opt);
-		});
-	});	
+	//event after load page complete
+	page.complete(function(){
 	
-	$("#price_type").change(function(){
-	
-		var val = this.value;
-		var pack_id = $('#pack_id').val();
-		var endpoint = "services/package_price_service.php?type=itemobject&price_id="+val+"&pack_id="+pack_id;
-		var data = [{"price_id":val,"pack_id":pack_id}];
+		var pack_id = $('#pack_id_edit').val();
+		$.getJSON("services/package_price_service.php?type=listobject&pack_id="+pack_id,function(resp){
 		
-		if(pack_id==null) return;
-		
-		$.getJSON(endpoint,data,function(resp){
+			if(resp.result==undefined) return ;
 			
-			if(resp.result != null || resp.result.price!=null){
-				$('#price').val(resp.result.price);
-			}
+			$.each(resp.result,function(id,data){
+				var opt = new Option(data.title, data.id);
+				$("#price_id_edit").append(opt);
+			});
+			
+			
+			var select_id = $('#price_id_edit').attr('data-selected');
+			$('#price_id_edit').val(select_id);
+			
+		});	
+		//event price change after load page complete
+		$("#price_id_edit").change(function(){
+	
+			var room_price_id = this.value;
+			var endpoint = "services/package_price_service.php?type=itemobject&room_price_id="+room_price_id;
+			
+			if(pack_id==null) return;
+		
+			$.getJSON(endpoint,function(resp){
+			
+				if(resp.result==undefined) {
+					console.warn("can't get price.");
+					return;
+				}
+				
+				if(resp.result != null || resp.result.price!=null){
+					$('#price').val(resp.result.price);
+				}
+			});
 		});
+	
 	});
+	
 });
 </script>

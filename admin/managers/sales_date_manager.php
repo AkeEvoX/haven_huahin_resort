@@ -109,7 +109,7 @@ class Sales_Date_Manager{
 		try{
 	
 			$sql = "select dates.id,dates.pack_date,dates.room_unit,dates.status,unit.price ";
-			$sql .= ",room.id as room_type,room.title_en as room_name,pack.id as pack_id ,pack.title_en as pack_name,price.id as price_id, price.`name` as price_name ";
+			$sql .= ",room.id as room_type,room.title_en as room_name,pack.id as pack_id ,pack.title_en as pack_name,dates.room_price_id as price_id, price.`name` as price_name ";
 			$sql .= "from room_packages dates ";
 			$sql .= "left join room_prices unit on unit.id = dates.room_price_id ";
 			$sql .= "left join packages pack on pack.id = unit.pack_id ";

@@ -65,7 +65,7 @@ function ModifyItem(){
 	
 $base = new Sales_Date_Manager();
 $id = GetParameter("id");
-$room_price_id = GetParameter("price_type");
+$room_price_id = GetParameter("price_id_edit");
 $room_unit = GetParameter("room_unit");
 $status = (GetParameter("status") == "on") ? "1" : "0";
 
@@ -158,11 +158,11 @@ function GetItem(){
 
 	$result = array(
 		"id"=>$row->id,
-		"room_type"=>$row->room_type,
+		"room_type_edit"=>$row->room_type,
 		"room_name"=>$row->room_name,
-		"pack_id"=>$row->pack_id,
+		"pack_id_edit"=>$row->pack_id,
 		"pack_name"=>$row->pack_name,
-		"price_type"=>$row->price_id,
+		"price_id_edit"=>$row->price_id,//field room_price_id
 		"price_name"=>$row->price_name,
 		"price"=>$row->price,
 		"room_unit"=>$row->room_unit,

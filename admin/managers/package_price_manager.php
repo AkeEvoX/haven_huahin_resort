@@ -132,7 +132,7 @@ class Package_Price_Manager{
 		}
 	}
 	
-	function item_object($price_id,$pack_id){
+	function item_object($room_price_id,$price_id,$pack_id){
 		try{
 			
 			$sql = "select room.title_en as room_type,map.id,pack.title_en as pack_name,pack.id as pack_id,price.id as price_id,price.name as price_type,map.price,map.status ";
@@ -141,6 +141,9 @@ class Package_Price_Manager{
 			$sql .= "left join price_type price on price.id = map.price_id ";
 			$sql .= "left join room_types room on pack.room_type = room.id  where 1=1 ";
 			
+			if($room_price_id!=""){
+				$sql .= "and map.id=".$room_price_id;
+			}
 			
 			if($pack_id!=""){
 				$sql .= "and price.id=".$price_id;
@@ -159,7 +162,7 @@ class Package_Price_Manager{
 		}
 	}
 
-	function list_item($price_id,$pack_id){
+	function list_item($room_price_id,$price_id,$pack_id){
 		try{
 			
 			$sql = "select room.title_en as room_type,map.id,pack.title_en as pack_name,price.id as price_id,price.name as price_type,map.price,map.status ";
@@ -168,9 +171,14 @@ class Package_Price_Manager{
 			$sql .= "left join price_type price on price.id = map.price_id ";
 			$sql .= "left join room_types room on pack.room_type = room.id  where 1=1 ";
 			
+			if($room_price_id!=""){
+				$sql .= "and map.id=".$room_price_id;
+			}
+			
 			if($price_id!=""){
 				$sql .= "and price.id=".$price_id;
 			}
+			
 			if($pack_id!=""){
 				$sql .= " and pack.id =".$pack_id." ";
 			}

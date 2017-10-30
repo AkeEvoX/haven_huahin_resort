@@ -79,8 +79,9 @@ function Itemobject(){
 	
 	$price_id = GetParameter("price_id");
 	$pack_id = GetParameter("pack_id");
+	$room_price_id = GetParameter("room_price_id");
 	$base = new Package_Price_Manager();
-	$dataset = $base->item_object($price_id,$pack_id);
+	$dataset = $base->item_object($room_price_id,$price_id,$pack_id);
 	if($dataset){
 		
 		$row = $dataset->fetch_object();
@@ -98,8 +99,9 @@ function Listobject(){
 	
 	$price_id = GetParameter("price_id");
 	$pack_id = GetParameter("pack_id");
+	$room_price_id = GetParameter("room_price_id");
 	$base = new Package_Price_Manager();
-	$dataset = $base->list_item($price_id,$pack_id);
+	$dataset = $base->list_item($room_price_id,$price_id,$pack_id);
 	if($dataset){
 		
 		while($row = $dataset->fetch_object()){
@@ -120,7 +122,7 @@ function Listobject(){
 function ListItem(){
 	
 	$base = new Package_Price_Manager();
-	$dataset = $base->list_item("","");
+	$dataset = $base->list_item("","","");
 
 	$result .= initial_column();
 

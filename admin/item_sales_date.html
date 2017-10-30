@@ -79,11 +79,9 @@ $(document).ready(function(){
 	//	initial
 	$('#btn_find_start').datetimepicker({"format":"DD/MM/YYYY"});
 	$('#btn_find_end').datetimepicker({"format":"DD/MM/YYYY"});
-	page.complete(reload_datatable);
 	
-
 //datasource='services/sales_date_service.php?type=list' 
-	var table = null;
+	
 	$.getJSON("services/room_service.php?type=listobject",function(resp){
 		$.each(resp.result,function(id,data){
 			var opt = new Option(data.title, data.id);
@@ -102,21 +100,36 @@ $(document).ready(function(){
 				var opt = new Option(data.title, data.id);
 				$("#pack_id").append(opt);
 			});
+			
+			$("#pack_id").change();
 		});	
 	
 	});
 	
-	$.getJSON("services/price_service.php?type=listobject",function(resp){
-	
-		//default null
+	$("#pack_id").change(function(){
+		var val = this.value;
+		var endpoint = "services/package_price_service.php?type=listobject&pack_id="+val;
+		$("#price_id").html("");
 		var opt = new Option("ALL", "");
 		$("#price_id").append(opt);
-		$.each(resp.result,function(id,data){
-			var opt = new Option(data.title, data.id);
-			$("#price_id").append(opt);
+		$.getJSON(endpoint,function(resp){
+		
+			
+			if(resp.result==undefined) {
+				console.warn("price list not found.");
+				return;
+			}
+			
+			$.each(resp.result,function(id,data){
+				opt = new Option(data.title, data.price_id);
+				$("#price_id").append(opt);
+			});
+			//trigger price change for display price.
+			$("#price_id").change();
 		});
-	});	
-
+		
+	});
+	
 	$('#btn_search').click(function(){
 	
 		list_delete = [];  //reset delete list
@@ -126,7 +139,6 @@ $(document).ready(function(){
 		var find_start = $('#find_date_start').val() != "" ? moment($('#find_date_start').val(),'DD/MM/YYYY').format('YYYY-MM-DD') : "" ;
 		var find_end = $('#find_date_end').val() != "" ? moment($('#find_date_end').val(),'DD/MM/YYYY').format('YYYY-MM-DD') : "" ;
 		var endpoint = 'services/sales_date_service.php?type=list&room_type='+room_type+'&pack_id='+pack_id+'&price_id='+price_id+"&find_start="+find_start+"&find_end="+find_end;
-		//var data = {"hello":"123"};
 		
 		//assign data source after searching.
 		$('#data_loader').attr('datasource',endpoint);
@@ -136,15 +148,7 @@ $(document).ready(function(){
 		
 		   $('#data_loader').html(resp.result);
 			//check initial available
-			/*
-			if ( $.fn.dataTable.isDataTable('#data_loader') ){
-				console.log("exist DataTable")
-				table.destroy();
-			}
-			
-			table = $('#data_loader').DataTable({"pagingType": "full_numbers"});
-			*/
-			reload_datatable();
+			page.data_reload();
 			
 		});
 
@@ -191,16 +195,5 @@ function delete_change(obj){
 		flag_sale_undelete(id);
 	}
 }
-
-function reload_datatable(){
-	if ( $.fn.dataTable.isDataTable('#data_loader') ){
-		console.log("exist DataTable")
-		table.destroy();
-	}
-	
-	table = $('#data_loader').DataTable({"pagingType": "full_numbers"});
-}
-
-
 
 </script>
