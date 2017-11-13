@@ -120,11 +120,7 @@ function ListItem(){
 	$result .= initial_column();
 
 	if($dataset){
-		
-		/*
-<div class="material-switch pull-left"><input id="status" name="status" type="checkbox"/><label for="status" class="label-success"></label></div>
-		*/
-		
+	
 		while($row = $dataset->fetch_object()){
 			
 			$item_status = $row->status == 1? '<span class="glyphicon glyphicon-ok" style="color:green;" ></span>' : '<span class="glyphicon glyphicon-remove" style="color:red;" ></span>' ;

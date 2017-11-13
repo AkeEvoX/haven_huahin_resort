@@ -26,6 +26,17 @@ switch($type){
 	case "remove" :
 		$result = DeleteRoom();
 	break;
+		case "upload_gallery" :
+		$result = call_upload_gallery($_POST);
+	break;
+	case "list_gallery" :
+		$id = GetParameter("id");
+		$result = ListGallery($id);
+	break;
+	case "del_gallery":
+		$id = GetParameter("id");
+		$result = Delete_Gallery($id);
+	break;
 }
 
 echo json_encode(array("result"=> $result ,"code"=>$result_code));
@@ -70,6 +81,18 @@ function DeleteRoom(){
 	return $result;
 }
 
+function Delete_Gallery(){
+	$base = new Room_Manager();
+	$id = GetParameter("id");
+	$base->delete_room_gallery($id);
+	$result = "delete success";
+	global $result_code; //call global variable
+	$result_code="0";
+	return $result;
+}
+
+
+
 function Listobject(){
 
 	$base = new Room_Manager();
@@ -84,6 +107,16 @@ function Listobject(){
 	global $result_code; //call global variable
 	$result_code = "0";
 	return $result;
+}
+
+function initial_column(){
+	$column = "<thead><tr>";
+	$column .= "<th class='col-md-1'>No</th>";
+	$column .= "<th class='col-md-4'>Title</th>";
+	$column .= "<th class='col-md-1'>Seq</th>";
+	$column .= "<th></th>";
+	$column .= "</tr></thead><tbody>";
+	return $column;
 }
 
 function ListRoom(){
@@ -123,6 +156,7 @@ function GetRoomType(){
 		"id"=>$row->id,
 		"title_th"=>$row->title_th,
 		"title_en"=>$row->title_en,
+		"product_gallery"=>ListGallery($row->id),
 		"seq"=>$row->seq
 	);
 	global $result_code; //call global variable
@@ -130,14 +164,52 @@ function GetRoomType(){
 	return $result ;
 }
 
-function initial_column(){
-	$column = "<thead><tr>";
-	$column .= "<th class='col-md-1'>No</th>";
-	$column .= "<th class='col-md-4'>Title</th>";
-	$column .= "<th class='col-md-1'>Seq</th>";
-	$column .= "<th></th>";
-	$column .= "</tr></thead><tbody>";
-	return $column;
+
+function call_upload_gallery($args){
+	
+	$base = new Room_Manager();
+	$total = count($_FILES['file_image']['name']);
+	$id = $args["id"];
+	
+	for($i=0;$i<$total;$i++){
+		
+		$source  = $_FILES['file_image']['tmp_name'][$i];
+		if($source!=""){
+			
+			$name = $_FILES['file_image']['name'][$i];
+			$dir =  "images/rooms/".$id."/";
+			createdir("../../".$dir);
+			$ext = pathinfo($_FILES['file_image']['name'][$i],PATHINFO_EXTENSION);
+			$filename = date("s").gettimeofday()["usec"].".".$ext;
+			$distination =  "../../".$dir.$filename;
+			
+			upload_image($source,$distination);
+			$result = $base->insert_gallery($id,$dir.$filename);
+		}
+	}
+	
+	return "upload complete";
+	
+}
+
+function ListGallery($id){
+	
+	$base = new Room_Manager();
+	$dataset = $base->list_gallery($id);
+	
+	if($dataset->num_rows===0){
+		$result .= "ไม่พบรูปภาพ";
+	}
+	else {
+		while($row = $dataset->fetch_object()){
+			$result.= "<div class='col-md-4' id='".$row->id."'>";
+			$result.= "<span style='cursor:pointer' class='glyphicon glyphicon-remove' data-id='".$row->id."' onclick='del_image(this)'></span>";
+			$result.= "<img class='img-responsive' style='height:172.88px' src='../".$row->image."' />";
+			$result.= "</div>";
+		}
+	}
+	
+	return $result;
 }
 
 ?>

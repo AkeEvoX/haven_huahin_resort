@@ -150,4 +150,12 @@ function datediff($startdate,$enddate){
 	return (strtotime($enddate) - strtotime($startdate))/  ( 60 * 60 * 24 );
 }
 
+
+function createdir($directory)
+{		
+		if(!is_dir($directory))  //validate found directory
+			mkdir($directory,0777,true);
+}
+
+
 ?>

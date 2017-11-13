@@ -2,92 +2,220 @@
 <form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
 	<ul id='menutab' class="nav nav-tabs nav-default">
 		<li role="presentation" class='active'>
-			<a class='menutab' href="#info" data-toggle="tab">info</a>
+			<a class='menutab' href="#info" data-toggle="tab">Info</a>
 		</li>
 		<li role="presentation">
-			<a class='menutab' href="#rooms" data-toggle="tab">room</a>
+			<a class='menutab' href="#rooms" data-toggle="tab">Room</a>
+		</li>
+		<li role="presentation">
+			<a class='menutab' href="#options" data-toggle="tab">Options</a>
+		</li>
+		<li role="presentation">
+			<a class='menutab' href="#payment" data-toggle="tab">Payment</a>
 		</li>
 	</ul>
 	<div class='tab-content' style='margin-top:10px;'>
 		<div id='info' class="tab-pane fade in active">
-			<div class="form-group">
-				<label for="id" class='col-md-3 control-label'>unique</label>
-				<div class='col-md-3'>
-					<input type='text' class='form-control' id='unique' name='unique' readonly>
-				</div>
-			</div>
-			<div class="form-group">
-					<label for="code" class='col-md-3 control-label'>รหัสสินค้า</label>
-					<div class='col-md-3'>
-						<input type="text" class="form-control" id="code" name='code' placeholder="กรอกจำนวนสินค้า" value='' />
-					</div>
-				</div>
-			<div class="form-group">
-					<label for="cate_name" class='col-md-3 control-label'>ประเภทสินค้า</label>
-					<div class='col-md-9'>
-						<select class='form-control' data-live-search="true" data id='cate_type' name='cate_type' ></select>
+			<div class='row'>
+				<div class='col-sm-6'>
+				<div class="form-group">
+					<label for="unique_key" class='col-md-4 control-label'>Reserve ID</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='unique_key' name='unique_key' readonly>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="cate_model_type" class='col-md-3 control-label'>สินค้า</label>
-					<div class='col-md-9'>
-						<select class='form-control' data-live-search="true" id='cate_model_type' name='cate_model_type' ></select>
+					<label for="cust_name" class='col-md-4 control-label'>Customer Name</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='cust_name' name='cust_name' readonly>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="pro_model_type" class='col-md-3 control-label'>อุปกรณ์</label>
-					<div class='col-md-9'>
-						<select class='form-control' data-live-search="true" id='pro_model_type' name='pro_model_type' ></select>
+					<label for="cust_mobile" class='col-md-4 control-label'>Mobile</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='cust_mobile' name='cust_mobile' readonly>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="unit" class='col-md-3 control-label'>จำนวนสินค้า</label>
-					<div class='col-md-3'>
-						<input type="text" class="form-control" id="unit" name='unit' placeholder="กรอกจำนวนสินค้า" value='' />
+					<label for="email" class='col-md-4 control-label'>Email</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='email' name='email' readonly>
 					</div>
 				</div>
 				<div class="form-group">
-					<label for="uni" class='col-md-3 control-label'>ราคาสินค้า</label>
-					<div class='col-md-3'>
-						<input type="text" class="form-control" id="price" name='price' placeholder="กรอกราคาสินค้า" value='' />
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="thumbnail" class='col-md-3 control-label'>รูปตัวอย่างสินค้า</label>
-					<div class='col-md-5'>
-						<input type="file" class="form-control" id="thumbnail" name='thumbnail' placeholder="รูปตัวอย่างสินค้า"  />
-					</div>
-					<div class='col-sm-1'>
-						<a href='#' class='btn btn-success' id='thumbnail_view' name='thumbnail_view' target='blank'>view</a>
+					<label for="birthdate" class='col-md-4 control-label'>BirthDate</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='birthdate' name='birthdate' readonly>
 					</div>
 				</div>
 					<div class="form-group">
-					<label for="detail" class='col-md-3 control-label'>รายละเอียดสินค้า</label>
-					<div class='col-md-9'>
-						<textarea class="form-control" id="detail" name='detail' placeholder="รูปตัวอย่างสินค้า"  /></textarea>
+					<label for="register_date" class='col-md-4 control-label'>Booking Date</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='register_date' name='register_date' readonly>
 					</div>
 				</div>
-			<div class="form-group">
-				<label for="status" class='col-md-3 control-label'>สถานะ</label>
-				<div class='col-md-3'>
-					<div class="material-switch pull-left">
-						<input id="status" name="status" type="checkbox"/>
-						<label for="status" class="label-success"></label>
+				<div class="form-group">
+					<label for="night" class='col-md-4 control-label'>Nights</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='night' name='night' readonly>
 					</div>
 				</div>
-			</div>	
+			</div>
+				<div class='col-sm-6'>
+				<div class="form-group">
+					<label for="start_date" class='col-md-4 control-label'>Check - IN</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='start_date' name='start_date' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="end_date" class='col-md-4 control-label'>Check - OUT</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='end_date' name='end_date' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="price_sum" class='col-md-4 control-label'>Total</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='price_sum' name='price_sum' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="price_service" class='col-md-4 control-label'>Service</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='price_service' name='price_service' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="price_vat" class='col-md-4 control-label'>Vat</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='price_vat' name='price_vat' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="price_net" class='col-md-4 control-label'>Total Net</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='price_net' name='price_net' readonly>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class='row'>
+				<div class="form-group">
+					<label for="remark" class='col-md-2 control-label'>Remark </label>
+					<div class='col-md-8'>
+						<textarea class="form-control" id="remark" name='remark' placeholder=""  /></textarea>
+					</div>
+				</div>
+			</div>
+			
+			
 		</div>
 		<div id='rooms' class="tab-pane fade">
-			<table class='table table-striped' id='room_list'  >
+			<div class='row'>
+				<div class='col-sm-6'>
+					<div class="form-group">
+						<label for="room_name" class='col-md-4 control-label'>Room Name</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='room_name' name='room_name' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="pack_name" class='col-md-4 control-label'>Package</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='pack_name' name='pack_name' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="bed_name" class='col-md-4 control-label'>Bed</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='bed_name' name='bed_name' readonly>
+						</div>
+					</div>
+				</div>
+				<div class='col-sm-6'>
+					<div class="form-group">
+						<label for="adults" class='col-md-4 control-label'>Adults</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='adults' name='adults' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="children" class='col-md-4 control-label'>Childen 5 - 11</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='children' name='children' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="children_2" class='col-md-4 control-label'>Childen 0 - 4</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='children_2' name='children_2' readonly>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id='options' class="tab-pane fade">
+			<table class='table table-striped' id='option_list'  >
 			</table>
+		</div>
+		<div id='payment' class="tab-pane fade">
+			<div class='row'>
+				<div class='col-sm-6'>
+					<div class="form-group">
+						<label for="payment_type" class='col-md-4 control-label'>Payment Type</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='payment_type' name='payment_type' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="payment_bank" class='col-md-4 control-label'>Banking</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='payment_bank' name='payment_bank' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="payment_bank" class='col-md-4 control-label'>Holder</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='payment_holder' name='payment_holder' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="payment_date" class='col-md-4 control-label'>Payment Date</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='payment_date' name='payment_date' readonly>
+						</div>
+					</div>
+				</div>
+				<div class='col-sm-6'>
+					<div class="form-group">
+						<label for="payment_amount" class='col-md-4 control-label'>Payment Amount</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='payment_amount' name='payment_amount' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="payment_evident" class='col-md-4 control-label'>Payment evident</label>
+						<div class='col-md-8'>
+							<a class='btn btn-primary' id='payment_evident' target='_blank'name='payment_evident' >view<a/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="payment_remark" class='col-md-4 control-label'>Payment evident</label>
+						<div class='col-md-8'>
+							<textarea class='form-control' rows='5' id='payment_remark' name='payment_remark'></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	
 </form>
 <div class='row'>
-	<div class="col-sm-offset-3 col-sm-9">
+	<div class="col-sm-offset-10 col-sm-1">
 		<br/>
-		<button class='btn btn-success' onclick=page.save('services/cate_product_service.php?type=modify','form_save') ><span class='glyphicon glyphicon-ok'></span> save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+		<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
 	</div>
 </div>
 <script src='../plugin/jquery/summernote/summernote.js' ></script>
@@ -95,64 +223,36 @@
 
 $(document).ready(function(){
 
-	$.getJSON("services/pro_model_service.php?type=listobject",function(resp){
-		$.each(resp.result,function(id,data){
-			var opt = new Option(data.name, data.id);
-			$("#pro_model_type").append(opt);
+
+   //#initial object
+   $('#remark').summernote({ height: 200 });
+   $('#remark').summernote('disable');
+   
+   page.complete(function(){
+   
+		var unique = $('#unique_key').val();
+		get_option(unique);
+		console.log('load page complte');
+   });
+   
+   function get_option(unique){
+   
+		var endpoint = "services/reserve_service.php?type=list_option&unique="+unique;
+		$.getJSON(endpoint,function(resp){
+			$('#option_list').html(resp.result);
 		});
-		$("#pro_model_type").selectpicker();
-	});	
-
-	$.getJSON("services/cate_service.php?type=listobject",function(resp){
-		$("#cate_type").selectpicker('destroy');
-		if(resp.result == undefined) return ;
-		$.each(resp.result,function(id,data){
-			var opt = new Option(data.name, data.id);
-			$("#cate_type").append(opt);
+   
+   }
+   
+   function get_payment(unique){
+		var endpoint = "services/reserve_service.php?type=get_payment&unique="+unique;
+		$.getJSON(endpoint,function(resp){
+		
+			//$('#option_list').html(resp.result);
+			
 		});
+   }
 
-		//first loading.
-		$("#cate_type").change();
-		$("#cate_type").selectpicker();
-	});	
-
-
-	$('#cate_type').change(function(){
-	 	var parent = this.value;
-		$.getJSON("services/cate_model_service.php?type=listobject&parentid="+parent,function(resp){
-			$("#cate_model_type").selectpicker('destroy');
-			$("#cate_model_type").html("");
-			if(resp.result == undefined) return ;
-			$.each(resp.result,function(id,data){
-				var opt = new Option(data.name, data.id);
-				$("#cate_model_type").append(opt);
-			});
-
-			$("#cate_model_type").selectpicker();
-		});	
-	});
-
-	$('#detail').summernote({ height: 400 });
-	
-	$('#btn_upload_image').click(function(){
-		var id = $('#id').val();
-		var endpoint = "services/cate_product_service.php?type=upload_gallery";
-		var data = new FormData($('#form_save')[0]);
-		$.post(endpoint,data,function(resp){
-			
-			alert("Upload Success");
-			
-			var endpoint = "services/cate_product_service.php?type=list_gallery&id="+id;
-			$.getJSON(endpoint,function(resp){
-			
-				$('#product_gallery').html(resp.result);
-				
-			});
-			
-		});	
-	});
-	
-	
 	
 });
 

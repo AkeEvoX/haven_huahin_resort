@@ -1,11 +1,21 @@
 <form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
-<div class="form-group">
+<ul id='menutab' class="nav nav-tabs nav-default">
+		<li role="presentation" class='active'>
+			<a class='menutab' href="#info" data-toggle="tab">Info</a>
+		</li>
+		<li role="presentation">
+			<a class='menutab' href="#picture" data-toggle="tab">Picture</a>
+		</li>
+	</ul>
+	<div class='tab-content' style='margin-top:10px;'>
+		<div id='info' class="tab-pane fade in active">
+			<div class="form-group">
 				<label for="id" class='col-md-3 control-label'>No</label>
 				<div class='col-md-9'>
 					<input type="text" class="form-control" id="id" name='id' value='' readonly />
 				</div>
 			</div>
-		<div class="form-group">
+			<div class="form-group">
 				<label for="title_th" class='col-md-3 control-label'>Name Thai</label>
 				<div class='col-md-9'>
 					<input type="text" class="form-control" id="title_th" name='title_th' placeholder="Room Name Thai" value='' />
@@ -23,9 +33,69 @@
 					<input type="text" class="form-control" id="seq" name='seq' placeholder="Sequence" value='' maxlength='3' />
 				</div>
 			</div>
+		</div>
+		<div id='picture' class="tab-pane fade in">
+			<form id='form_upload' action='' method='post' enctype="multipart/form-data" >
+				<div class="form-group">
+					<label for="status" class='col-md-3 control-label'>เพิ่มรูปสินค้า</label>
+					<div class='col-md-5'>
+						 <div class="input-group">
+						  <input type="file" class="form-control" id="file_image" name="file_image[]" multiple="multiple"  placeholder="รูปสินค้า"  />
+						  <span class="input-group-btn">
+							<button id='btn_upload_image' class="btn btn-default" type="button">Upload</button>
+						  </span>
+						</div>
+					</div>
+				</div>
+			</form>
+			<div id='product_gallery' ></div>
+		</div>
+	</div>	
 </form>
 <div class='row'>
 	<div class='col-md-12 text-right'>
 		<button class='btn btn-success' onclick=page.save('services/room_service.php?type=modify','form_save') ><span class='glyphicon glyphicon-ok'></span>save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
 	</div>
 </div>
+<script>
+$(document).ready(function(){
+	$('#btn_upload_image').click(function(){
+		var id = $('#id').val();
+		var endpoint = "services/room_service.php?type=upload_gallery";
+		var data = new FormData($('#form_save')[0]);
+		$.post(endpoint,data,function(resp){
+			
+			alert("Upload Success");
+			
+			var endpoint = "services/room_service.php?type=list_gallery&id="+id;
+			$.getJSON(endpoint,function(resp){
+			
+				$('#product_gallery').html(resp.result);
+				
+			});
+			
+		});	
+	});
+	
+	
+	
+});
+
+function del_image(obj){
+  var id = $(obj).attr('data-id');
+  if(confirm("confirm delete ? ")){
+		var endpoint = "services/room_service.php?type=del_gallery";
+		var data = new FormData();
+		data.append('id',id);
+		$.post(endpoint,data,function(resp){
+		
+			var data = JSON.parse(resp);
+			alert(data.result);
+			//delete element 
+			$('#'+id).remove();
+		});
+  }
+  console.log('delete id =' + id);
+}
+
+</script>

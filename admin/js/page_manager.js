@@ -127,6 +127,30 @@ page.data_reload = function(){
 	});
 }
 
+page.load_menu = function(){
+
+	var endpoint = "services/userinfo.php";
+	$.post(endpoint,function(resp){
+		
+		console.warn(resp.result.role);
+		
+		switch(resp.result.role){
+			case "1":
+				$('#menu_list').load('menu_admin.html');
+			break;
+			case "2":
+				$('#menu_list').load('menu_user.html');
+			break;
+			default :
+				window.location='login.html';
+				console.log('force logout');
+			break;
+		} 
+		page.redirect('item_reserve.html');
+		
+	},"JSON");
+}
+
 function assign_value(objName,value){
 
 	var obj = $('#'+objName);

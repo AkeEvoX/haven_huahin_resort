@@ -1,0 +1,25 @@
+<form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
+<div class="form-group">
+				<label for="id" class='col-md-3 control-label'>User No</label>
+				<div class='col-md-2'>
+					<input type="text" class="form-control" id="id" name='id' value='' readonly />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="firstname" class='col-md-3 control-label'>Firstname</label>
+				<div class='col-md-4'>
+					<input type="text" class="form-control" id="firstname" name='firstname'  value='' readonly/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lastname" class='col-md-3 control-label'>Lastname</label>
+				<div class='col-md-4'>
+					<input type="text" class="form-control" id="lastname" name='lastname' value='' readonly/>
+				</div>
+			</div>
+</form>
+<div class='row'>
+	<div class="col-sm-offset-3 col-sm-9">
+		<button class='btn btn-success' onclick=page.save('services/user_service.php?type=remove','form_save') ><span class='glyphicon glyphicon-ok'></span>save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+	</div>
+</div>

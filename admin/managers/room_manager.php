@@ -22,16 +22,16 @@ class Room_Manager{
 		$this->mysql->disconnect();
 	}
 	
-	function insert_room_type($title_th,$title_en,$seq){
+	function insert_gallery($id,$path){
 		
 		try{
 			
 			$create_by = 0; //system
 			
-			$sql = "insert into room_types(title_th,title_en,seq,create_by,create_date) ";
-			$sql .= "values('$title_th','$title_en',$seq,'$create_by',now()) ";
+			$sql = "insert into room_gallery(room_type,image,create_by,create_date) ";
+			$sql .= "values('$id','$path','$create_by',now()) ";
 			
-			log_warning("insert_room_type > " . $sql);
+			log_warning("room > gallery > insert > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
 			
@@ -43,7 +43,32 @@ class Room_Manager{
 			
 			return $result;
 		}catch(Exception $e){
-			log_debug($e->getMessage());
+			log_debug("room > gallery > insert > " .$e->getMessage());
+		}
+	}
+	
+	function insert_room_type($title_th,$title_en,$seq){
+		
+		try{
+			
+			$create_by = 0; //system
+			
+			$sql = "insert into room_types(title_th,title_en,seq,create_by,create_date) ";
+			$sql .= "values('$title_th','$title_en',$seq,'$create_by',now()) ";
+			
+			log_warning("room > insert > " . $sql);
+			
+			$result = $this->mysql->execute($sql);
+			
+			if($result=="true"){
+				$result = "INSERT SUCCESS.";
+			}else{
+				$result = "INSERT FAILURE.";
+			}
+			
+			return $result;
+		}catch(Exception $e){
+			log_debug("room > insert > " . $e->getMessage());
 		}
 		
 	}
@@ -58,7 +83,7 @@ class Room_Manager{
 			$sql .= " title_th='$title_th',title_en='$title_en',seq='$seq' ,update_by='$update_by' ,update_date=now() ";
 			$sql .= " where id='".$id."';";
 			
-			log_warning("edit_room_type > " . $sql);
+			log_warning("room > modity > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
 			
@@ -70,7 +95,7 @@ class Room_Manager{
 			
 			return $result;
 		}catch(Exception $e){
-			log_debug($e->getMessage());
+			log_debug("room > modity > " . $e->getMessage());
 		}
 		
 	}
@@ -83,7 +108,7 @@ class Room_Manager{
 			$sql = "delete from room_types ";
 			$sql .= " where id='".$id."' ";
 			
-			log_warning("delete_room_type > " . $sql);
+			log_warning("room > delete > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
 			
@@ -95,23 +120,47 @@ class Room_Manager{
 			
 			return $result;
 		}catch(Exception $e){
-			log_debug($e->getMessage());
+			log_debug("room > delete > " . $e->getMessage());
 		}
 		
 	}
+	
+	function delete_room_gallery($id){
+		
+		try{
+			
+			$sql = "delete from room_gallery ";
+			$sql .= " where id='".$id."' ";
+			
+			log_warning("room > gallery >  delete > " . $sql);
+			
+			$result = $this->mysql->execute($sql);
+			
+			if($result=="true"){
+				$result = "DELETE SUCCESS.";
+			}else{
+				$result = "DELETE FAILURE.";
+			}
+			
+			return $result;
+		}catch(Exception $e){
+			log_debug("room > gallery > delete > " . $e->getMessage());
+		}
+		
+	}
+	
 	
 	function get_room_type($id){
 		try{
 			
 			$sql = "select * from  room_types where id='".$id."' ";
-			log_warning("get_room_type > " . $sql);
+			log_warning("room > get > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
 			
 			return $result;
 		}catch(Exception $e){
-			log_debug($e->getMessage());
-			//echo "Cannot insert_room_type : ".$e->getMessage();
+			log_debug("room > get > " .$e->getMessage());
 		}
 	}
 
@@ -119,15 +168,28 @@ class Room_Manager{
 		try{
 			
 			$sql = "select * from  room_types";
-			log_warning("list_room_type > " . $sql);
+			log_warning("room > list > " . $sql);
 			
 			$result = $this->mysql->execute($sql);
 			
 			return $result;
 		}catch(Exception $e){
-			log_debug($e->getMessage());
-			//echo "Cannot insert_room_type : ".$e->getMessage();
+			log_debug("room > list > " . $e->getMessage());
 		}
+	}
+	
+	function list_gallery($id){
+		try{
+			
+			$sql = "select * from  room_gallery where room_type='$id' ";
+			log_warning("room > gallery > list > " . $sql);
+			$result = $this->mysql->execute($sql);
+			
+			return $result;
+		}catch(Exception $e){
+			log_debug("room > gallery > list > " .$e->getMessage());
+		}
+		
 	}
 }
 

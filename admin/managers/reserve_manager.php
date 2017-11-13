@@ -84,10 +84,11 @@ class Reserve_Manager{
 		try{
 			
 			$sql = "select id,unique_key,reserve_startdate as start_date,reserve_enddate as end_date "; 
-			$sql .= ",price_option,price_sum,price_service,price_vat,price_net, "; 
+			$sql .= ",price_option,price_sum,price_service,price_vat,price_net "; 
 			$sql .= ",reserve_status as status,adults,children,children_2,night,acc_code "; 
 			$sql .= ",concat(title_name,first_name,' ',last_name) as cust_name,concat(prefix,mobile) as cust_mobile "; 
 			$sql .= ",birthdate,email,create_date as register_date "; 
+			$sql .= ",payment_type,payment_bank,payment_holder,payment_date,payment_amount,payment_evident ,payment_remark "; 
 			$sql .= "from reserve_info where id=$id ";
 			
 			log_warning("sales date > get item > " . $sql);
@@ -96,11 +97,52 @@ class Reserve_Manager{
 			
 			return $result;
 		}catch(Exception $e){
-			log_debug("package price> get item > " . $e->getMessage());
+			log_debug("reserve > get item > " . $e->getMessage());
 		}
 	}
+	
+	function get_room($id){
+		try{
+			
+			$sql = "select room.title_en as room_name,pack.title_en as pack_name "; 
+			$sql .= ",bed.title_en as bed_name "; 
+			$sql .= "from reserve_rooms as reserve ";
+			$sql .= "left join packages as pack on pack.id = reserve.pack_id ";
+			$sql .= "left join room_types as room on pack.room_type = room.id ";
+			$sql .= "left join bed_type bed on bed.id = reserve.bed_key ";
+			$sql .= "where reserve.unique_key = '$id'; ";
+			
+			log_warning("reserve > get room > " . $sql);
+			
+			$result = $this->mysql->execute($sql);
+			
+			return $result;
+		}catch(Exception $e){
+			log_debug("reserve > get room > " . $e->getMessage());
+		}
+	}
+	
+	function get_options($id){
+		try{
+			
+			$sql = "select opt.title_en as option_name,opt.price  ";
+			$sql .= "from reserve_options booking_option ";
+			$sql .= "left join room_options opt on booking_option.option_key = opt.id ";
+			$sql .= "where unique_key='$id' ;";
+			
+			log_warning("reserve > get option > " . $sql);
+			
+			$result = $this->mysql->execute($sql);
+			
+			return $result;
+		}catch(Exception $e){
+			log_debug("reserve > get option > " . $e->getMessage());
+		}
+		
+	}
+	
 
-	function list_item($unique,$customer,$mobile,$find_start,$find_end){
+	function list_item($unique,$customer,$mobile,$find_start,$find_end,$status){
 		try{
 			
 			
@@ -128,7 +170,12 @@ class Reserve_Manager{
 				$sql .= "and create_date between '$find_start' and '$find_end' ";
 				
 			}
-			$sql .= "order by create_date ";
+			if($status!=""){
+				
+				$sql.=" and reserve_info.reserve_status=$status  ";
+				
+			}
+			$sql .= "order by create_date limit 500";  //maximum 500 record
 			
 			log_warning("reserve > get list > " . $sql);
 			
