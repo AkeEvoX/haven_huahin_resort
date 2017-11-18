@@ -180,33 +180,38 @@
 							<input type='text' class='form-control' id='payment_holder' name='payment_holder' readonly>
 						</div>
 					</div>
-					<div class="form-group">
+					
+				</div>
+				<div class='col-sm-6'>
+				<div class="form-group">
 						<label for="payment_date" class='col-md-4 control-label'>Payment Date</label>
 						<div class='col-md-8'>
 							<input type='text' class='form-control' id='payment_date' name='payment_date' readonly>
 						</div>
 					</div>
-				</div>
-				<div class='col-sm-6'>
 					<div class="form-group">
 						<label for="payment_amount" class='col-md-4 control-label'>Payment Amount</label>
 						<div class='col-md-8'>
 							<input type='text' class='form-control' id='payment_amount' name='payment_amount' readonly>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="payment_evident" class='col-md-4 control-label'>Payment evident</label>
-						<div class='col-md-8'>
-							<a class='btn btn-primary' id='payment_evident' target='_blank'name='payment_evident' >view<a/>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="payment_remark" class='col-md-4 control-label'>Payment evident</label>
-						<div class='col-md-8'>
-							<textarea class='form-control' rows='5' id='payment_remark' name='payment_remark'></textarea>
-						</div>
-					</div>
 				</div>
+			</div>
+			<div class='row'>
+			<div class="form-group">
+						<label for="payment_evident" class='col-md-2 control-label'>Evident</label>
+						<div class='col-md-8'>
+							<img class='img-responsive ' onerror="this.src='../images/common/unavaliable.jpg'" style='cursor:pointer' onclick=javascript:pop_image(this.src); id='payment_evident' name='payment_evident' />
+						</div>
+					</div>
+			</div>
+			<div class='row'>
+				<div class="form-group">
+						<label for="payment_remark" class='col-md-2 control-label'>Remark</label>
+						<div class='col-md-8'>
+							<textarea class='form-control' id='payment_remark' name='payment_remark'></textarea>
+						</div>
+					</div>
 			</div>
 		</div>
 	</div>
@@ -225,7 +230,10 @@ $(document).ready(function(){
 
 
    //#initial object
-   $('#remark').summernote({ height: 200 });
+   $('#payment_remark').summernote({ height: 150 });
+   $('#payment_remark').summernote('disable');
+   
+   $('#remark').summernote({ height: 150 });
    $('#remark').summernote('disable');
    
    page.complete(function(){
@@ -233,8 +241,17 @@ $(document).ready(function(){
 		var unique = $('#unique_key').val();
 		get_option(unique);
 		console.log('load page complte');
+		
    });
    
+});
+
+
+   function pop_image(src){
+		window.open(src,'_blank');
+   }
+   
+      
    function get_option(unique){
    
 		var endpoint = "services/reserve_service.php?type=list_option&unique="+unique;
@@ -252,8 +269,6 @@ $(document).ready(function(){
 			
 		});
    }
-
-	
-});
+   
 
 </script>

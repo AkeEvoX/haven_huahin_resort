@@ -181,6 +181,9 @@ function assign_value(objName,value){
 				case "A":
 					obj.prop('href',value);
 				break;
+				case "IMG":
+					obj.attr('src',value);
+				break;
 				case "DIV":
 					obj.html(value);
 				break;

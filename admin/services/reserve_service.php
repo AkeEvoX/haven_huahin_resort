@@ -271,6 +271,15 @@ function GetItem(){
 	
 	$room_obj = $room_data->fetch_object();
 	
+	
+	//default image not found.
+	$payment_evident ='../images/common/unavaliable.jpg'; 
+	
+	
+	if($row->payment_evident != "")
+		$payment_evident  = '../'.$row->payment_evident;
+		
+	
 
 	$result = array(
 		"id"=>$row->id,
@@ -298,7 +307,7 @@ function GetItem(){
 		"payment_holder"=>$row->payment_holder,
 		"payment_date"=>$row->payment_date,
 		"payment_amount"=>$row->payment_amount,
-		"payment_evident"=>$row->payment_evident,
+		"payment_evident"=>$payment_evident,
 		"payment_remark"=>$row->payment_remark,
 		"room_name"=>$room_obj->room_name,
 		"pack_name"=>$room_obj->pack_name,
