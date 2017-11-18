@@ -1,0 +1,147 @@
+<form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
+		<div class="form-group">
+			<label for="room_name" class='col-md-3 control-label'>ประเภทห้อง / Room Type</label>
+			<div class='col-md-4'>
+				<select class="form-control" id="room_type_add" name='room_type_add' ></select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="pack_id" class='col-md-3 control-label'>ประเภทแพ็กเกจ / Package Type</label>
+			<div class='col-md-4'>
+				<select class="form-control" id="pack_id_add" name='pack_id_add' ></select>
+			</div>
+		</div>
+			<div class="form-group">
+			<label for="price_id_add" class='col-md-3 control-label'>ประเภทราคา / Price Type</label>
+			<div class='col-md-4'>
+				<select class='form-control' id='price_id_add' name='price_id_add' ></select>
+				<input type='hidden' id='room_price_id' name='room_price_id' />
+			</div>
+		</div>
+		<div class="form-group">
+				<label for="pack_date_start" class='col-md-3 control-label'>เริ่มต้น</label>
+				<div class='col-md-3'>
+					<div class="input-group date" id='btn_calendar' >
+					<input type="text" class="form-control" id="pack_date_start" name='pack_date_start' placeholder="" />
+					  <span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="pack_date_end" class='col-md-3 control-label'>สิ้นสุด</label>
+				<div class='col-md-3'>
+					<div class="input-group date" id='btn_calendar_end' >
+					<input type="text" class="form-control" id="pack_date_end" name='pack_date_end' placeholder="" />
+					  <span class="input-group-addon">
+							<span class="glyphicon glyphicon-calendar"></span>
+						</span>
+					</div>
+				</div>
+			</div>
+		<div class="form-group">
+				<label for="price" class='col-md-3 control-label'>ราคา</label>
+				<div class='col-md-2'>
+					<input type="text" class="form-control" id="price" name='price' placeholder="" value='' readonly />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="room_unit" class='col-md-3 control-label'>จำนวนห้อง</label>
+				<div class='col-md-2'>
+					<input type="text" class="form-control" id="room_unit" name='room_unit' placeholder="" value='' />
+				</div>
+			</div>
+		<div class="form-group">
+			<label for="status" class='col-md-3 control-label'>Status</label>
+			<div class='col-md-3'>
+				<div class="material-switch pull-left">
+					<input id="status" name="status" type="checkbox" />
+					<label for="status" class="label-success"></label>
+				</div>
+			</div>
+		</div>
+</form>
+<div class='row'>
+	<div class="col-sm-offset-3 col-sm-9">
+		<button class='btn btn-success' onclick=page.save('services/sales_date_service.php?type=create','form_save') ><span class='glyphicon glyphicon-ok'></span>save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+	</div>
+</div>
+<script>
+$(document).ready(function(){
+
+	$.getJSON("services/room_service.php?type=listobject",function(resp){
+		$("#price_id_add").html("");
+		$.each(resp.result,function(id,data){
+			var opt = new Option(data.title, data.id);
+			$("#room_type_add").append(opt);
+		});
+		$("#room_type_add").change();
+	});	
+	/*
+	$.getJSON("services/price_service.php?type=listobject",function(resp){
+		$.each(resp.result,function(id,data){
+			var opt = new Option(data.title, data.id);
+			$("#price_type").append(opt);
+		});
+	});	
+	*/
+	
+	$("#room_type_add").change(function(){
+		var val = this.value;
+		var endpoint = "services/package_service.php?type=listobject&room_type="+val;
+		$("#pack_id_add").html("");
+		$('#price').val("");
+		$.getJSON(endpoint,function(resp){
+			$.each(resp.result,function(id,data){
+				var opt = new Option(data.title, data.id);
+				$("#pack_id_add").append(opt);
+			});
+			//trigger price change for display price.
+			$("#pack_id_add").change();
+		});
+	});
+	
+	$("#pack_id_add").change(function(){
+		var val = this.value;
+		var endpoint = "services/package_price_service.php?type=listobject&pack_id="+val;
+		$("#price_id_add").html("");
+		$.getJSON(endpoint,function(resp){
+		
+			if(resp.result == undefined ) return;
+			
+				$.each(resp.result,function(id,data){
+					var opt = new Option(data.title, data.price_id);
+					$("#price_id_add").append(opt);
+				});
+				//trigger price change for display price.
+				$("#price_id_add").change();
+			
+		});
+		
+	});
+
+	$("#price_id_add").change(function(){
+	
+		console.log("trigger price type changed.");
+		var val = this.value;
+		var pack_id = $('#pack_id_add').val();
+		var endpoint = "services/package_price_service.php?type=itemobject&price_id="+val+"&pack_id="+pack_id;
+		var data = {"price_id":val,"pack_id":pack_id};
+		$('#price').val("");
+		$.getJSON(endpoint,function(resp){
+			if(resp.result == undefined ) return;
+			
+				$('#price').val(resp.result.price);
+				$('#room_price_id').val(resp.result.id);
+			
+		});
+	});
+	
+		//set calendar & initial page
+	$('#btn_calendar').datetimepicker({"format":"DD/MM/YYYY"});
+	$('#btn_calendar_end').datetimepicker({"format":"DD/MM/YYYY"});
+	
+	
+});
+</script>

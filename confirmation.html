@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/home.dwt.php" codeOutsideHTMLIsLocked="false" -->
 <head>
-<title>Thai Haven Resort</title>
+<title>Welcome to Haven Resort</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -25,8 +25,8 @@
 					<table class='table table-bordered text-center'>
 					<tr >
 						<td class='col-md-10' style='background-color:#4EB022;color:#fff'>
-							<h4><span class='lb_thankyou'>ขอขอบคุณ การจองของท่านได้รับการยืนยันแล้ว !</span></h4>
-							<span class='lb_send_email'>อีเมลล์ยืนยันถูกส่งไปยัง </span><span id='customer_email' >..</span>
+							<h4><span class='lb_thankyou'></span></h4>
+							<span class='lb_send_email'></span><span id='customer_email' ></span>
 						</td>
 						<td class='col-md-2 text-center' style='background-color:#333333;'><a href='javascript:void(0);' id='btn_print'><span class='glyphicon glyphicon-print' style='font-size:32px;'></span><br/>Print</a></td>
 					</tr>
@@ -71,32 +71,29 @@
 					</td>
 				</tr>
 				<tr>
-					<td class='col-md-8'>
+					<td class='col-md-8 col-sm-6'>
 						<div id='list_reserve'></div>
 					</td>
-					<td class='col-md-4 text-center'>
-						<div class='row rowspan'>
-							<span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span></br>
-							<label><span class='lb_best_price'>Best Price</span></label>
+					<td class='col-md-4 col-sm-4 text-center'>
+						<p>
+							<!-- <span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span></br> -->
+							<label class='lb_condition_lv1'></label>
 							<p>
-								<span class='lb_info_1'></span>
+								<span class='lb_condition_lv1_desc'></span>
 							</p>
-						</div>
-						<div class='row rowspan'>
-							<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span></br>
-							<label><span class='lb_amount_reserve'></span></label>
+						<p>
+						<p>
+							<!-- <span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span></br> -->
+							<label class='lb_condition_lv2'></label>
+							<p class='lb_condition_lv2_desc'></p>
+						</p>
+						<p>
+							<!-- <span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span></br> -->
+							<label class='lb_condition_lv3'></label><br/>
 							<p>
-								<span class='lb_evident'></span>
+							<span class='lb_condition_lv3_desc_1'> </span><span class='lb_condition_lv3_desc_2'></span>
 							</p>
-						</div>
-						<div class='row rowspan'>
-							<span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span></br>
-							<label><span class='lb_cancel_info'></span></label><br/>
-							<div class='col-md-12'>
-							<span class='lb_condition_1'>
-							</span><span id='cancel_date'></span><span class='lb_condition_2'></span>
-	</div>
-						</div>
+						</p>
 					</td>
 				</tr>
 				<tr>
@@ -234,13 +231,13 @@
 <script src='js/utility.js' ></script>
 <script src='js/pages.js' ></script>
 <script src='js/reserve.js' ></script>
-
+<script src='js/condition.js' ></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
 
 	   pages.init("confirmation");
-	   reserve.get_confirmation();
+	   reserve.get_confirmation(show_condition);
 	   
 	   	$('#payment_date_ctrl').datetimepicker({
 			format:'DD/MM/YYYY HH:mm',
@@ -266,6 +263,44 @@
 
    
    });
+   
+   
+   function show_condition(){
+   
+		var pack_id = reserve.rooms[0].package;
+		var endpoint = "services/rooms.php";
+		var method ="get";
+		var data ={"service":"package","id":pack_id,"lang":pages.lang()};
+		var expireDate = moment(reserve.info.expire_date).format("DD/MM/YYYY");
+		utility.service(endpoint,method,data,function(resp){
+		
+			console.warn('get condition for room.');
+			console.log(resp)
+		
+			//level 1
+			condition.food_service(resp.data.food_service,function(resp){
+
+				$('.lb_condition_lv1').html(resp.title);
+				$('.lb_condition_lv1_desc').html(resp.desc);
+			});
+			
+			//level 2
+			condition.pay_now(resp.data.payment_online,function(resp){
+			
+				$('.lb_condition_lv2').html(resp.title);
+				$('.lb_condition_lv2_desc').html(resp.desc);
+			});
+	
+			//level 3
+			condition.cancel_room(resp.data.cancel_room,expireDate,function(resp){
+				
+				$('.lb_condition_lv3').html(resp.title);
+				$('.lb_condition_lv3_desc_1').html(resp.desc);
+			});
+		
+		});
+		
+   }
       
   </script>
 </body>

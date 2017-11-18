@@ -1,0 +1,122 @@
+<h1>List Reservation</h1><hr/>
+<div class='form-horizontal'>
+	<div class='col-sm-6'>
+		<div class="form-group">
+			<label for="unique" class='col-md-4 control-label'>Reserve ID</label>
+			<div class='col-md-8'>
+				<input type="text" class="form-control" id="unique" name='unique' placeholder="" />
+			</div>
+		</div>
+		<div class="form-group">
+		<label for="customer" class='col-md-4 control-label'>Customer Name</label>
+		<div class='col-md-8'>
+			<input type="text" class="form-control" id="customer" name='customer' placeholder="" />
+		</div>
+		</div>
+		<div class="form-group">
+			<label for="mobile" class='col-md-4 control-label'>Mobile</label>
+			<div class='col-md-8'>
+				<input type="text" class="form-control" id="mobile" name='mobile' placeholder="" />
+			</div>
+		</div>
+	</div>
+	<div class='col-sm-6'>
+		<div class="form-group">
+			<label for="find_date_start" class='col-md-4 control-label'>เริ่มต้น</label>
+			<div class='col-md-6'>
+				<div class="input-group date" id='btn_find_start' >
+				<input type="text" class="form-control" id="find_date_start" name='find_date_start' placeholder="" />
+				  <span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="find_date_end" class='col-md-4 control-label'>สิ้นสุด</label>
+			<div class='col-md-6'>
+				<div class="input-group date" id='btn_find_end' >
+				<input type="text" class="form-control" id="find_date_end" name='find_date_end' placeholder="" />
+				  <span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group text-center">
+		<label for="price_id" class='col-md-3 control-label'>&nbsp;</label>
+		<div class='col-md-9'>
+			<button class='btn btn-success' id='btn_search' type='button' ><span class='glyphicon glyphicon-search'></span> Search</button>
+		</div>
+	</div>	
+</div>
+<table class='table table-striped' id='data_loader'  >
+</table>
+<!--show modal-->
+<!-- Modal -->
+<div class="modal fade bs-example-modal-md" id="modaldialog" tabindex="-1" role="dialog" aria-labelledby="modaltitle">
+  <div class="modal-dialog modal-lg" role="document" style='width:80%;'>
+    <div class="modal-content" >
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="modaltitle">&nbsp;</h4>
+			</div>
+			<div class="modal-body"  >
+				<div id="modalcontent" style='height:auto;width:100%;'>
+					loading...
+				</div>
+			</div>
+		<div class='modal-footer'>
+		<span id='error_msg'></span>
+		</div>
+    </div>
+  </div>
+</div>
+<!--show modal-->
+<script>
+$(document).ready(function(){
+
+	//	initial
+	$('#btn_find_start').datetimepicker({"format":"DD/MM/YYYY"});
+	$('#btn_find_end').datetimepicker({"format":"DD/MM/YYYY"});
+	page.complete(reload_datatable);
+	
+	$('#btn_search').click(function(){
+	
+		var unique = $('#unique').val();
+		var customer = $('#customer').val();
+		var mobile = $('#mobile').val();
+		var find_start = $('#find_date_start').val() != "" ? moment($('#find_date_start').val(),'DD/MM/YYYY').format('YYYY-MM-DD') : "" ;
+		var find_end = $('#find_date_end').val() != "" ? moment($('#find_date_end').val(),'DD/MM/YYYY').format('YYYY-MM-DD') : "" ;
+		var endpoint = 'services/reserve_service.php?type=list&unique='+unique+'&customer='+customer+'&mobile='+mobile+'&find_start='+find_start+'&find_end='+find_end;
+		//var data = {"hello":"123"};
+		
+		//assign data source after searching.
+		$('#data_loader').attr('datasource',endpoint);
+		
+		$('#data_loader').html("");
+		$.getJSON(endpoint,function(resp){
+		
+		   $('#data_loader').html(resp.result);
+			reload_datatable();
+			
+		});
+
+	});
+	
+});
+
+var table = null;
+function reload_datatable(){
+	if ( $.fn.dataTable.isDataTable('#data_loader') ){
+		console.log("exist DataTable")
+		table.destroy();
+	}
+	
+	table = $('#data_loader').DataTable({"pagingType": "full_numbers"});
+}
+
+
+
+</script>

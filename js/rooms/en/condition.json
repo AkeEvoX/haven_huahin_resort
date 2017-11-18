@@ -1,0 +1,26 @@
+{
+	"enable_foodservice": {
+		"title": "<span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span> <br>Best Price",
+		"desc": "You are on the hotel website, you will receive <br/>The best price "
+	},
+	"disable_foodeservice": {
+		"title": "<span class='glyphicon glyphicon-thumbs-up' style='color:red;font-size:28px;'></span> <br>Best Price",
+		"desc": "You are on the hotel website, you will receive <br/>The best price "
+	},
+	"enable_cancelroom": {
+		"title": "<span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span><br/>Can be changed and discarded.",
+		"desc": "This offer can be canceled or modified without charge up to date. {0} , 00:00 (UTC+07:00) (Calculated from 14 Days before stay) Included in the total payment to the hotel."
+	},
+	"disable_cancelroom": {
+		"title": "<span class='glyphicon glyphicon-remove' style='color:red;font-size:28px;'></span><br/>Cannot be changed and discarded.",
+		"desc": "Non refundable and cannot be amended or modified ."
+	},
+	"enable_paynow": {
+		"title": "<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span><br/>Internet payment",
+		"desc": "Make full payment online In secure systems "
+	},
+	"disable_paynow": {
+		"title": "<span class='glyphicon glyphicon-shopping-cart' style='color:red;font-size:28px;'></span><br/>Internet payment",
+		"desc": "Make full payment online In secure systems "
+	}
+}

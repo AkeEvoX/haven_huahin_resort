@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/home.dwt.php" codeOutsideHTMLIsLocked="false" -->
 <head>
-<title>Welcome to haven huahin resort.</title>
+<title>Welcome to Haven Resort</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -102,11 +102,11 @@
 							<div id='service_value' class='col-md-9'><span class='lb_reception_time'></span></div>
 						</div>
 						<div class='row rowspan'>
-							<div id='checkin_title' class='col-md-2'><span class='lb_checkin'></span></div>
+							<div id='checkin_title' class='col-md-2'><span class='lb_checkin_info'></span></div>
 							<div id='checkin_value' class='col-md-9'><span class='lb_checkin_time'></span></div>
 						</div>
 						<div class='row rowspan'>
-							<div id='checkout_title' class='col-md-2'><span class='lb_checkout'></span></div>
+							<div id='checkout_title' class='col-md-2'><span class='lb_checkout_info'></span></div>
 							<div id='checkout_value' class='col-md-9'><span class='lb_checkout_time'></span></div>
 						</div>
 						<div class='row rowspan'>
@@ -116,29 +116,28 @@
 					</td>
 				</tr>
 				<tr>
-					<td class='col-md-8'>
+					<td class='col-md-8 col-sm-8'>
 						<div id='list_reserve'></div>
 					</td>
-					<td class='col-md-4 text-center'>
-						<div class='row rowspan'>
-							<span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span></br>
-							<label class='lb_best_price' >ราคาดีที่สุด</label>
-							<p class='lb_hotel_title'>
-								ท่านกำลังอยู่ที่เว็บไซต์ของโรงแรม ท่านจะได้รับ <br/>ราคาที่ดีที่สุดเนื่องจากไม่มีการผ่านคนกลาง
+					<td class='col-md-4 col-sm-4 text-center'>
+						<p>
+							<!-- <span class='glyphicon glyphicon-thumbs-up' style='color:green;font-size:28px;'></span></br> -->
+							<label class='lb_condition_lv1' ></label>
+							<p class='lb_condition_lv1_desc'>
 							</p>
-						</div>
-						<div class='row rowspan'>
-							<span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span></br>
-							<label class='lb_payment_title'>ชำระเฉพาะเงินจอง</label>
-							<p class='lb_evident_title'></p>
-						</div>
-						<div class='row rowspan'>
-							<span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span></br>
-							<label class='lb_title_cancel'>สามารถเปลี่ยนแปลงและยกเลิกได้</label><br/>
-							<div class='col-md-12'>
-							<span class='lb_cancel_1'>ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมเนียมจนถึงวันที่ </span><span id='reserve_expire'>4 มีนาคม 2560</span>, 00:00 (UTC+07:00) <span class='lb_cancel_2'> (คำนวณจาก 14 วันก่อนการเข้าพัก) รวมเป็นเงินที่ต้องชำระให้กับโรงแรมทั้งสิ้น</span>
-	</div>
-						</div>
+						</p>
+						<p>
+							<!-- <span class='glyphicon glyphicon-shopping-cart' style='color:green;font-size:28px;'></span></br> -->
+							<label class='lb_condition_lv2'></label>
+							<p class='lb_condition_lv2_desc'></p>
+						</p>
+						<p>
+							<!-- <span class='glyphicon glyphicon-ok' style='color:green;font-size:28px;'></span></br> -->
+							<label class='lb_condition_lv3'></label><br/>
+							<p>
+							<span class='lb_condition_lv3_desc_1'> </span><span class='lb_condition_lv3_desc_2'></span>
+							</p>
+						</p>
 					</td>
 				</tr>
 				<form id='reserve_form' action='' method='post' >
@@ -204,13 +203,13 @@
 					<td class='col-md-12 text-center' colspan='2'>
 						<div class="row form-group">
 								<input type="checkbox" id="check_confirm" placeholder="" maxlength="60"  />
-								<label for="check_confirm"><span class='lb_condition_1'>การดำเนินการเลือกจองห้องพัก ท่านอ่านและยอมรับ </span><a href='javascript:void(0);' onclick='popup_condition()'  ><span class='lb_condition_2'>เงื่อนไขการขาย</span></a> <span class='lb_condition_3'>และ </span><a href='javascript:void(0);' onclick='popup_privacy()'><span class='lb_condition_4'>นโยบายความเป็นส่วนตัว</span></a><span class='lb_condition_5'> เรียบร้อยแล้ว</span></label>
+								<label for="check_confirm"><span class='lb_condition_1'>การดำเนินการเลือกจองห้องพัก ท่านอ่านและยอมรับ </span><a href='javascript:void(0);' onclick='popup_condition()'  ><span class='lb_condition_2'>เงื่อนไขการขาย</span></a> <span class='lb_condition_3'><span class='lb_condition_5'> เรียบร้อยแล้ว</span></label>
 						 </div><!--confirm reserve-->
 						 <div class="row form-group">
 								<button type='submit' id='btn_confirm' class='btn btn-default brown col-sm-offset-4 col-sm-4' style='min-height:50px;' disabled><span class='lb_btn_reserve'>ยืนยันการจอง</span></button>
 						 </div><!--submit confirm-->
 						 <div class="row rowspan text-center">
-						 <p ><span class='lb_offer'>ข้อเสนอนี้สามารถยกเลิกหรือแก้ไขได้โดยไม่มีค่าธรรมดาเนียมจนถึงวันที่ </span> <span id='cancel_date'>4 มีนาคม 2560</span>, 00:00 (UTC+07:00)</p>
+						 <p ><span class='lb_offer_bak'></span> <span id='cancel_date_bak'></span></p>
 						 </div>
 						 <div class="row form-group">
 							<div class='col-md-12'>
@@ -262,6 +261,7 @@
 <script src='js/utility.js' ></script>
 <script src='js/pages.js' ></script>
 <script src='js/reserve.js' ></script>
+<script src='js/condition.js' ></script>
 <script type="text/javascript">
 
 	$(document).ready(function(){
@@ -280,7 +280,6 @@
 	   });
 	   
 	   
-	   
 	   $('#check_confirm').on('change',function(){
 	   
 			var check = !$(this).is(':checked');
@@ -288,29 +287,45 @@
 			
 	   });
 	   
-	   reserve.get_summary();
+	   reserve.get_summary(show_condition);
+	   
    });
    
-   //load service for package
-   /*
-   function load_package_info(){
+   function show_condition(){
+   
 		var pack_id = reserve.rooms[0].package;
 		var endpoint = "services/rooms.php";
 		var method ="get";
 		var data ={"service":"package","id":pack_id,"lang":pages.lang()};
 		utility.service(endpoint,method,data,function(resp){
 		
-			//load food service is enable
-			//$('#').load();
-			//load cancel rooms
-			$('#').load();
-			//load payment online
-			$('#').load();
+			console.log(resp);
 			
-			//utility.modal_default(pages.message.condition_package_btn,resp.data.conditions);
+			//level 1
+			condition.food_service(resp.data.food_service,function(resp){
+
+				$('.lb_condition_lv1').html(resp.title);
+				$('.lb_condition_lv1_desc').html(resp.desc);
+			});
+			
+			//level 2
+			condition.pay_now(resp.data.payment_online,function(resp){
+			
+				$('.lb_condition_lv2').html(resp.title);
+				$('.lb_condition_lv2_desc').html(resp.desc);
+			});
+	
+			//level 3
+			condition.cancel_room(resp.data.cancel_room,reserve.info.expire_date,function(resp){
+			
+				$('.lb_condition_lv3').html(resp.title);
+				$('.lb_condition_lv3_desc_1').html(resp.desc);
+			});
+		
 		});
+		
    }
-   */
+  
    function popup_condition(){
    
 		var pack_id = reserve.rooms[0].package;
@@ -318,20 +333,13 @@
 		var method ="get";
 		var data ={"service":"package","id":pack_id,"lang":pages.lang()};
 		utility.service(endpoint,method,data,function(resp){
-		
+			
 			utility.modal_default(pages.message.condition_package_btn,resp.data.conditions);
+			
 		});
 		
    }
-   function popup_privacy(){
-		var pack_id = reserve.rooms[0].package;
-		var endpoint = "services/rooms.php";
-		var method ="get";
-		var data ={"service":"package","id":pack_id,"lang":pages.lang()};
-		utility.service(endpoint,method,data,function(resp){
-			utility.modal_default(pages.message.condition_package_btn,resp.data.conditions);
-		});
-   }
+   
   </script>
 </body>
 </html>

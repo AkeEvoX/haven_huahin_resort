@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/home.dwt.php" codeOutsideHTMLIsLocked="false" -->
 <head>
-<title>Welcome to Reservation</title>
+<title>Welcome to Haven Resort</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<meta name='viewport' content='width=device-width, initial-scale=1'>
@@ -122,7 +122,8 @@
 						  </div>
 						</div>
 						<div class='col-sm-9 text-right'><br>
-							<input type='button' class='btn btn-warning' id='btn_apply' Value='Apply'/>
+							<!-- <input type='button' class='btn btn-warning' id='btn_apply' Value='Apply'/> -->
+							<button id='btn_apply' class='btn btn-warning' type='button' ><span class='lb_apply'></span></button>
 						</div>
 					</div>
 			  </div>
@@ -153,7 +154,7 @@
 				<hr/>
 			</div>
 			<div class='row'>
-				<button id='btn_submit' type='submit' class='btn btn-default brown col-sm-offset-1 col-sm-10' style='min-height:50px;' disabled><span class='lb_submit'>ตรวจสอบความถูกต้อง</span></button>
+				<button id='btn_submit' type='submit' class='btn btn-default brown col-sm-offset-1 col-sm-10' style='min-height:50px;' disabled><span class='lb_submit'></span></button>
 			</div>
 			<input type='hidden' id='data_reserve' name='data_reserve' />
 			
@@ -231,6 +232,20 @@ pages.init("selection_room");
 	$(document).ready(function(){
 		
 		pages.init("selection_room");
+		
+		/*
+		$('#datetimepicker6').datetimepicker();
+        $('#datetimepicker7').datetimepicker({
+            useCurrent: false //Important! See issue #1075
+        });
+        $("#datetimepicker6").on("dp.change", function (e) {
+            $('#datetimepicker7').data("DateTimePicker").minDate(e.date);
+        });
+        $("#datetimepicker7").on("dp.change", function (e) {
+            $('#datetimepicker6').data("DateTimePicker").maxDate(e.date);
+        });
+		
+		*/
 
 		$('#btn_checkin').datetimepicker({"format":"DD/MM/YYYY", minDate:new Date()}).on('dp.change',function(e){
 			var s_date = moment(e.date.format('YYYY-MM-DD'));

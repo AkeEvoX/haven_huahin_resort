@@ -1,6 +1,6 @@
 var reserve = {};
 
-reserve.get_confirmation = function(){
+reserve.get_confirmation = function(callback){
 
 	var reserve_id = utility.querystr("reserve_id");
 	$('#reserve_id').html(reserve_id);
@@ -8,7 +8,7 @@ reserve.get_confirmation = function(){
 	var endpoint = "services/reserve.php";
 	var method = "get";
 	var args = {"key":reserve_id,"_":new Date().getMilliseconds()};
-
+	var lang = pages.lang(); 
 	utility.service(endpoint,method,args,function(result){
 
 		console.log(result);
@@ -21,7 +21,6 @@ reserve.get_confirmation = function(){
 			
 			alert(pages.message.reserve_not_found);
 			//'Sorry!! Not Found Information Reserve.'
-			
 		}
 		if(result.data.customer!=null){
 			
@@ -32,7 +31,9 @@ reserve.get_confirmation = function(){
 		
 		//reserve info
 		if(result.data.info!=null){
-			var info = result.data.info;
+			
+			reserve.info =result.data.info;
+			var info = reserve.info;
 			var item = "<div class='row'>";
 			item += "<div class='col-md-3'><label>"+pages.message.guest+"</label></div>";
 			item += "<div class='col-md-4'>";
@@ -50,12 +51,28 @@ reserve.get_confirmation = function(){
 			$('#list_reserve').append(item);
 		}
 		
-
-		var date = moment(result.data.info.date_start).add('days',14).format('DD/MM/YYYY');
-		//console.log(date + " || " + result.data.info.date_start);
-		var cancel_date = utility.date_format_th(date);
-		$('#cancel_date').html(cancel_date);
+		var current_date = moment(new Date());
+		var expire_date = moment(reserve.info.expire_date);
+		var diffdate = expire_date.diff(current_date,'days');
+		var expire_date = utility.date_format(expire_date.format('YYYY-MM-DD'),lang) + " , 00:00 (UTC+07:00) ";
+		//var date = moment(result.data.info.date_start).add('days',14).format('DD/MM/YYYY');
 		
+		//moment('2017-10-13 00:00:00').diff(moment(new Date()),'days')
+		
+		//set format expire date 
+		//reserve.info.expire_date = moment(reserve.info.expire_date).format('DD/MM/YYYY');
+		//console.log(date + " || " + result.data.info.date_start);
+		//var cancel_date = utility.date_format_th(date);
+		
+		if(diffdate >= 0)  //check expire is over 14 days
+			$('#cancel_date').html(expire_date);
+		
+		if(result.data.reserve != undefined){
+			
+			reserve.rooms = result.data.reserve.rooms;
+			reserve.options = result.data.reserve.options;
+			reserve.summary = result.data.reserve.summary;
+		}
 		
 		//define information
 		if(result.data != undefined){
@@ -178,23 +195,23 @@ reserve.get_confirmation = function(){
 
 		
 	
-	});
+	},callback);
 
 };
 
-reserve.get_summary = function(){
+reserve.get_summary = function(callback){
 
 	var endpoint = "services/info.php";
 	var method="get";
 	var args = {"_":new Date().getMilliseconds()};
-	var lang = 'en';
+	var lang = pages.lang(); 
 	utility.service(endpoint,method,args,function(result){
 		
 		console.log(result);
 		var money_pattern = /(\d)(?=(\d\d\d)+(?!\d))/g;   //format money
 		var summary_price = 0;
 		//set rooms info;
-		reserve.info = result.data.info;
+		reserve.info = result.info;
 		
 		if(result.info==null) { 
 			alert('Sorry!! Not Found Information Reserve.');
@@ -209,16 +226,19 @@ reserve.get_summary = function(){
 			
 			var start_date = moment(info.start_date,'DD-MM-YYYY').format('YYYY-MM-DD') ;
 			var end_date =  moment(info.end_date,'DD-MM-YYYY').format('YYYY-MM-DD') ;
-			var expire_date = moment(info.expire_date,'DD-MM-YYYY').format('YYYY-MM-DD') ;
+			var expire_date = moment(info.expire_date,'DD-MM-YYYY');
+			var current_date = moment(new Date());
+			var diffdate = expire_date.diff(current_date,'days');
+			var expire_date = utility.date_format(expire_date.format('YYYY-MM-DD'),lang) + " , 00:00 (UTC+07:00) ";
+			console.log('expire diff date = '+diffdate); 
+			
 			$('#date_start').html(utility.date_format(start_date,lang));
 			$('#date_end').html(utility.date_format(end_date,lang));
 			
-			//var date = moment(info.start_date,'DD/MM/YYYY').add('days',14).format('DD/MM/YYYY');
-			//console.log("exp : " + date + " || start :" + info.start_date);
-			var expire_date = utility.date_format(expire_date,lang);// utility.date_format_th(date);
-			$('#cancel_date').html(expire_date);
-			$('#reserve_expire').html(expire_date);
-
+			
+			if(diffdate >= 0) //check expire is over 14 days
+				$('#cancel_date').html(expire_date);
+			
 			var rent ="";
 			rent = pages.message.adults +" "+ info.adults + " "+pages.message.person;
 			rent += pages.message.children_2 +" "+ info.children_2 + " " + pages.message.person;
@@ -333,7 +353,7 @@ reserve.get_summary = function(){
 
 		$('#list_reserve').append(item);
 
-	});
+	},callback);
 }
 
 reserve.get_receipt = function(){

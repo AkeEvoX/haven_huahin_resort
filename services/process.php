@@ -2,22 +2,22 @@
 session_start();
 include("../lib/common.php");
 include("../managers/reserve_manager.php");
-
+include("../managers/room_manager.php");
 
 $_step = GetParameter("step");
 
 switch($_step){
 	case "1":
-		step_one($_POST);
+		step_one($_POST);  //quick reservation
 	break;
 	case "2":
-		step_two($_POST);
+		step_two($_POST);//select room
 	break;
 	case "3":
-		step_three($_POST);
+		step_three($_POST);//select option
 	break;
 	case "4":
-		step_four($_POST);
+		step_four($_POST);//summary
 	break;
 	case "5":
 
@@ -39,8 +39,10 @@ function step_one($args){
 	$children_2 = $args["children_2"];
 	$code = $args["code"];
 	$start_date = $args["check_in_date"];//str_replace('/','-',$date);
-	$end_date = date('d/m/Y',strtotime(str_replace('/','-',$start_date). "+ ". $night ."days")) ;
-	$expire_date = date('d/m/Y',strtotime(date('d-m-Y').'+ 14days'));
+	$end_date = date('d/m/Y',strtotime(str_replace('/','-',$start_date). "+ ". $night ."days"));
+	
+	//expire on 14 day before check in 
+	$expire_date = date('d/m/Y',strtotime(str_replace('/','-',$start_date).'- 14days'));
 	$data = array("date"=>$date
 		,"night"=>$night
 		,"adults"=>$adults
@@ -68,8 +70,7 @@ function step_two($data){
 	$_SESSION["info"]["children"] = $data["child_amount"];
 	$_SESSION["info"]["children_2"] = $data["child_2_amount"];
 	$_SESSION["info"]["code"] = $data["promo_code"];
-	$_SESSION["info"]["expire_date"] = date('d/m/Y',strtotime(str_replace('/','-',$data["checkpoint_date"]). "+ 14days")) ;
-	
+	$_SESSION["info"]["expire_date"] = date('d/m/Y',strtotime(str_replace('/','-',$data["checkpoint_date"]). "- 14days")) ;
 	//summary
 	//$reserve = json_decode($data["data_reserve"]); 
 	
@@ -163,13 +164,15 @@ function step_four($data){
 	
 	/*insert to database*/	
 	$base = new Reserve_Manager();
-	//$unique_key = generateRandomString();
+	
 	$unique_key = $base->insert_reserve($info,$customer,$payment,$_SESSION["reserve"]->summary);
 	
 	$_SESSION["unique_key"] = $unique_key;
 	$_SESSION["reserve"]->info = $info;
 	/*insert rooms*/
+	$pack_id = "";//package is support single package. 
 	foreach($_SESSION["reserve"]->rooms as $val){
+		$pack_id = $val->package;
 		$base->insert_rooms($unique_key,$val->package,$val->price,$val->bed,$val->adults,$val->older_children,$val->young_children);
 	}
 	
@@ -179,7 +182,12 @@ function step_four($data){
 			$base->insert_options($unique_key,$val->key,$val->price,$val->desc);
 		}
 	}
-
+	
+	/*get package condition*/
+	$base_room = new Room_Manager();
+	$package_obj = $base_room->get_item_package($pack_id,'en'); //fix language 
+	$package_info = $package_obj->fetch_object();
+	
 	/*notify mail for reserve complete.*/
 	$cust_name = $customer["title"]." ".$customer["fname"]." ".$customer["lname"];
 	$receive[] = array("email"=>$customer["email"],"alias"=>$cust_name);
@@ -191,13 +199,33 @@ function step_four($data){
 	$message = str_replace("{reserve_id}",$unique_key,$message);
 	$message = str_replace("{start_date}",full_date_format($info["start_date"],"en"),$message);
 	$message = str_replace("{end_date}",full_date_format($info["end_date"],"en"),$message);
-	$message = str_replace("{expire_date}",full_date_format($info["expire_date"],"en"),$message);
+	//$message = str_replace("{expire_date}",full_date_format($info["expire_date"],"en"),$message);
 	$message = str_replace("{adults}",$info["adults"],$message);
 	$message = str_replace("{children_2}",$info["children_2"],$message);
 	$message = str_replace("{children_1}",$info["children"],$message);
 	$message = str_replace("{customer_name}",$customer["title"]." ".$customer["fname"]." ".$customer["lname"],$message);
 	$message = str_replace("{customer_mobile}",$customer["prefix_mobile"].$customer["mobile"],$message);
 	$message = str_replace("{customer_email}",$customer["email"],$message);
+	
+	/*chack rule cancelled of room */
+	if($package_info->cancel_room=="1"){
+		
+		$expire_date = full_date_format($info["expire_date"],"en");
+		$rule_cancel = "Cancellation Policy <br><small>";
+		$rule_cancel .= "This offer can be canceled or modified free of charge until ".$expire_date.", 00:00 (UTC).<br>";
+		$rule_cancel .= "In case of cancellation after this date, a penalty of 100% of full stay will apply.<br>";
+		$rule_cancel .= "In case of no-show, a penalty of 100% of full stay will apply.<br></small>";
+		$message = str_replace("{rule_cancel_room}",$rule_cancel,$message);		
+	}
+	else{ // a rule cancel is balnk.
+		$message = str_replace("{rule_cancel_room}",'',$message);	
+	}
+	
+	//echo "condition is ".$package_info->conditions."<br/>";
+	//{condition_detail}
+	$message = str_replace("{condition_detail}",$package_info->conditions,$message);
+	
+	/*reserve information */
 	$message = str_replace("{list_reserve}",set_email_list_reserve($_SESSION["reserve"]),$message);
 
 	SendMail($receive,$sender,$subject,$message,$sender_name);

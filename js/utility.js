@@ -169,20 +169,19 @@ utility.date_format_th = function (date){
 }
 
 utility.date_format = function (date,lang){
-	
+
 	var dates = null;
-	if(date.indexOf('-')!=0){
+	if(date.indexOf('-')>=0){
 		dates = moment(date,'YYYY-MM-DD').format('DD-MM-YYYY').split("-");
-		//moment(date,'YYYY-MM-DD').format('DD/MM/YYYY')
 	}
-	else if(date.indexOf('/')!=0){
-		dates = moment(date,'YYYY/MM/DD').format('DD-MM-YYYY').split("-")//date.split("/");
+	else if(date.indexOf('/')>=0){
+		//dates = moment(date,'YYYY/MM/DD').format('DD-MM-YYYY').split("-");
+		dates = moment(date,'DD/MM/YYYY').format('DD-MM-YYYY').split("-");
 	}
 	
-	//var dates = date.split("/");
 	var months = Array();
 	var day = dates[0];
-	var month = parseInt(dates[1].replace("0",""))-1;
+	var month = parseInt(dates[1])-1;
 	var year =0;
 	
 	if(lang=="th"){
@@ -192,6 +191,7 @@ utility.date_format = function (date,lang){
 	{
 		months = [" January "," Febuary "," March "," April "," May "," June "," July "," August "," September "," October "," November "," December "];	
 		year =parseInt(dates[2]);
+		
 	}
 	
 	return day + months[month] + year ; 
@@ -216,6 +216,9 @@ utility.datetime_format = function(date,lang){
 	result += " " + time;
 
 	return result;
+}
+utility.daysInMonth = function(month,year) {
+    return new Date(year, month, 0).getDate();
 }
 
 utility.createCookie = function (name,value,days) {

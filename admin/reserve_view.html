@@ -1,0 +1,274 @@
+<link href="../plugin/jquery/summernote/summernote.css" rel="stylesheet">
+<form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
+	<ul id='menutab' class="nav nav-tabs nav-default">
+		<li role="presentation" class='active'>
+			<a class='menutab' href="#info" data-toggle="tab">Info</a>
+		</li>
+		<li role="presentation">
+			<a class='menutab' href="#rooms" data-toggle="tab">Room</a>
+		</li>
+		<li role="presentation">
+			<a class='menutab' href="#options" data-toggle="tab">Options</a>
+		</li>
+		<li role="presentation">
+			<a class='menutab' href="#payment" data-toggle="tab">Payment</a>
+		</li>
+	</ul>
+	<div class='tab-content' style='margin-top:10px;'>
+		<div id='info' class="tab-pane fade in active">
+			<div class='row'>
+				<div class='col-sm-6'>
+				<div class="form-group">
+					<label for="unique_key" class='col-md-4 control-label'>Reserve ID</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='unique_key' name='unique_key' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="cust_name" class='col-md-4 control-label'>Customer Name</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='cust_name' name='cust_name' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="cust_mobile" class='col-md-4 control-label'>Mobile</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='cust_mobile' name='cust_mobile' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="email" class='col-md-4 control-label'>Email</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='email' name='email' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="birthdate" class='col-md-4 control-label'>BirthDate</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='birthdate' name='birthdate' readonly>
+					</div>
+				</div>
+					<div class="form-group">
+					<label for="register_date" class='col-md-4 control-label'>Booking Date</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='register_date' name='register_date' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="night" class='col-md-4 control-label'>Nights</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='night' name='night' readonly>
+					</div>
+				</div>
+			</div>
+				<div class='col-sm-6'>
+				<div class="form-group">
+					<label for="start_date" class='col-md-4 control-label'>Check - IN</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='start_date' name='start_date' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="end_date" class='col-md-4 control-label'>Check - OUT</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='end_date' name='end_date' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="price_sum" class='col-md-4 control-label'>Total</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='price_sum' name='price_sum' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="price_service" class='col-md-4 control-label'>Service</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='price_service' name='price_service' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="price_vat" class='col-md-4 control-label'>Vat</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='price_vat' name='price_vat' readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="price_net" class='col-md-4 control-label'>Total Net</label>
+					<div class='col-md-8'>
+						<input type='text' class='form-control' id='price_net' name='price_net' readonly>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class='row'>
+				<div class="form-group">
+					<label for="remark" class='col-md-2 control-label'>Remark </label>
+					<div class='col-md-8'>
+						<textarea class="form-control" id="remark" name='remark' placeholder=""  /></textarea>
+					</div>
+				</div>
+			</div>
+			
+			
+		</div>
+		<div id='rooms' class="tab-pane fade">
+			<div class='row'>
+				<div class='col-sm-6'>
+					<div class="form-group">
+						<label for="room_name" class='col-md-4 control-label'>Room Name</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='room_name' name='room_name' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="pack_name" class='col-md-4 control-label'>Package</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='pack_name' name='pack_name' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="bed_name" class='col-md-4 control-label'>Bed</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='bed_name' name='bed_name' readonly>
+						</div>
+					</div>
+				</div>
+				<div class='col-sm-6'>
+					<div class="form-group">
+						<label for="adults" class='col-md-4 control-label'>Adults</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='adults' name='adults' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="children" class='col-md-4 control-label'>Childen 5 - 11</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='children' name='children' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="children_2" class='col-md-4 control-label'>Childen 0 - 4</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='children_2' name='children_2' readonly>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id='options' class="tab-pane fade">
+			<table class='table table-striped' id='option_list'  >
+			</table>
+		</div>
+		<div id='payment' class="tab-pane fade">
+			<div class='row'>
+				<div class='col-sm-6'>
+					<div class="form-group">
+						<label for="payment_type" class='col-md-4 control-label'>Payment Type</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='payment_type' name='payment_type' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="payment_bank" class='col-md-4 control-label'>Banking</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='payment_bank' name='payment_bank' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="payment_bank" class='col-md-4 control-label'>Holder</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='payment_holder' name='payment_holder' readonly>
+						</div>
+					</div>
+					
+				</div>
+				<div class='col-sm-6'>
+				<div class="form-group">
+						<label for="payment_date" class='col-md-4 control-label'>Payment Date</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='payment_date' name='payment_date' readonly>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="payment_amount" class='col-md-4 control-label'>Payment Amount</label>
+						<div class='col-md-8'>
+							<input type='text' class='form-control' id='payment_amount' name='payment_amount' readonly>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class='row'>
+			<div class="form-group">
+						<label for="payment_evident" class='col-md-2 control-label'>Evident</label>
+						<div class='col-md-8'>
+							<img class='img-responsive ' onerror="this.src='../images/common/unavaliable.jpg'" style='cursor:pointer' onclick=javascript:pop_image(this.src); id='payment_evident' name='payment_evident' />
+						</div>
+					</div>
+			</div>
+			<div class='row'>
+				<div class="form-group">
+						<label for="payment_remark" class='col-md-2 control-label'>Remark</label>
+						<div class='col-md-8'>
+							<textarea class='form-control' id='payment_remark' name='payment_remark'></textarea>
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+	
+</form>
+<div class='row'>
+	<div class="col-sm-offset-10 col-sm-1">
+		<br/>
+		<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+	</div>
+</div>
+<script src='../plugin/jquery/summernote/summernote.js' ></script>
+<script>
+
+$(document).ready(function(){
+
+
+   //#initial object
+   $('#payment_remark').summernote({ height: 150 });
+   $('#payment_remark').summernote('disable');
+   
+   $('#remark').summernote({ height: 150 });
+   $('#remark').summernote('disable');
+   
+   page.complete(function(){
+   
+		var unique = $('#unique_key').val();
+		get_option(unique);
+		console.log('load page complte');
+		
+   });
+   
+});
+
+
+   function pop_image(src){
+		window.open(src,'_blank');
+   }
+   
+      
+   function get_option(unique){
+   
+		var endpoint = "services/reserve_service.php?type=list_option&unique="+unique;
+		$.getJSON(endpoint,function(resp){
+			$('#option_list').html(resp.result);
+		});
+   
+   }
+   
+   function get_payment(unique){
+		var endpoint = "services/reserve_service.php?type=get_payment&unique="+unique;
+		$.getJSON(endpoint,function(resp){
+		
+			//$('#option_list').html(resp.result);
+			
+		});
+   }
+   
+
+</script>

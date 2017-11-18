@@ -4,6 +4,9 @@
 .bg-black { background-color: #454545; }
 .bg-heading {  background-color:#f5f5f5; }
 .border-line { border-color:#ddd; }
+body{font-size:12px;}
+.btn {font-size:12px;}
+.form-control {font-size:12px;}
 
 .brown {
     background:#a18b12;

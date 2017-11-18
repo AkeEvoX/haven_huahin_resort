@@ -79,7 +79,7 @@ class Room_Manager{
 			$sql .= "where pack.status=1 and pack.special_date=0 and COALESCE(vrr.unit, 0) < pack_price.room_unit ";
 			$sql .= "or (pack.special_date=".$range." and COALESCE(vrr.unit, 0) < pack_price.room_unit) "; //-- for tomorrow 
 			$sql .= "or (pack.special_date <= ".$range." and pack.special_date > 30 and COALESCE(vrr.unit, 0) < pack_price.room_unit)";    // -- reserve more 31 day
-			$sql .= "or (pack.special_date = datediff('".$enddate."','".$startdate."') and COALESCE(vrr.unit, 0) < pack_price.room_unit) ;"; //-- continue reserve day;
+			$sql .= "or (pack.special_date = datediff('".$enddate."','".$startdate."') and pack.special_date<>1 and COALESCE(vrr.unit, 0) < pack_price.room_unit) ;"; //-- continue reserve day;
 
 			$result = $this->mysql->execute($sql);
 

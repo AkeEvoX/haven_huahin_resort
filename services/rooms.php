@@ -91,19 +91,19 @@ function call_item_package($id,$money,$lang){
 		$money = $row->package_price;
 	}
 	
-		$result = array(
-			"id"=>$row->id,
-			"title"=>$row->title,
-			"price"=>$money,
-			"food_service"=>$row->food_service,
-			"cancel_room"=>$row->cancel_room,
-			"payment_online"=>$row->payment_online,
-			"max_person"=>$row->max_person,
-			"extra_bed"=>$row->extra_bed,
-			"extra_price_children"=>$row->extra_price_children,
-			"extra_price_adults"=>$row->extra_price_adults,
-			"detail"=>$row->detail,
-			"conditions"=>$row->conditions);
+	$result = array(
+	"id"=>$row->id,
+	"title"=>$row->title,
+	"price"=>$money,
+	"food_service"=>$row->food_service,
+	"cancel_room"=>$row->cancel_room,
+	"payment_online"=>$row->payment_online,
+	"max_person"=>$row->max_person,
+	"extra_bed"=>$row->extra_bed,
+	"extra_price_children"=>$row->extra_price_children,
+	"extra_price_adults"=>$row->extra_price_adults,
+	"detail"=>$row->detail,
+	"conditions"=>$row->conditions);
 	
 	return $result;
 }

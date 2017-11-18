@@ -3,7 +3,7 @@ pages.init = function(name){
 	
 	var lang = pages.lang();
 	console.log("language init: "+lang);
-	var path = "js/pages/"+lang+"/"+name+".json";
+	var path = "js/pages/"+lang+"/"+name+".json?_=" + new Date().getMilliseconds();
 	$.getJSON(path,function (resp){
 		//console.warn(resp);
 		$.each(resp,function(title,val){
@@ -17,7 +17,7 @@ pages.init = function(name){
 	});
 	
 	//get common language
-	path = "js/pages/"+lang+"/common.json";
+	path = "js/pages/"+lang+"/common.json?_=" + new Date().getMilliseconds() ;
 	$.getJSON(path,function(resp){
 			console.log("get common message.");
 			pages.message = resp;

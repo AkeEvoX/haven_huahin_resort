@@ -9,11 +9,12 @@
 "lb_children_2":"Children 5 - 11 Year",
 "lb_children":"Children 0 - 4 Year",
 "lb_code":" Access Code",
-"lb_select_room":"Choose your room.",
-"lb_best_room":"You get the best rates as there is no middleman: you are on the hotel website",
+"lb_select_room":"Select your room.",
+"lb_best_room":"",
 "lb_summary":"summary",
 "lb_total_detail":"Details",
 "lb_room_unit":"Room",
 "lb_night_unit":"Night",
-"lb_submit":"Check the accuracy"
+"lb_submit":"Next",
+"lb_apply":"Apply"
 }

@@ -23,3 +23,22 @@
   </div>
 </div>
 	<!--show modal-->
+<script>
+$(document).ready(function(){
+
+	page.complete(reload_datatable);
+
+
+	
+});
+
+var table = null;
+function reload_datatable(){
+	if ( $.fn.dataTable.isDataTable('#data_loader') ){
+		console.log("exist DataTable")
+		table.destroy();
+	}
+	
+	table = $('#data_loader').DataTable({"pagingType": "full_numbers"});
+}
+</script>

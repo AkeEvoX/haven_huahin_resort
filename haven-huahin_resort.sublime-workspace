@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"templ",
+				"templete_master〔variable〕"
+			],
+			[
 				"un",
 				"undefined"
 			],
@@ -55,46 +59,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "selection_room.html",
-			"settings":
-			{
-				"buffer_size": 14537,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "js/selection.js",
-			"settings":
-			{
-				"buffer_size": 20291,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "js/utility.js",
-			"settings":
-			{
-				"buffer_size": 4732,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "templete_room.html",
-			"settings":
-			{
-				"buffer_size": 4071,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "payment_manual.html",
-			"settings":
-			{
-				"buffer_size": 5657,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -128,20 +92,45 @@
 	},
 	"file_history":
 	[
+		"/Users/iake.air/Sites/starsanitaryware/config/datasource.ini",
+		"/Users/iake.air/Sites/prakongmitt/controller/connect_procedure.php",
+		"/Users/iake.air/Sites/starsanitaryware/lib/datasource.ini",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/selection.js",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/rooms.js",
+		"/Users/iake.air/Sites/haven_huahin_resort/selection_room.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/managers/room_manager.php",
+		"/Users/iake.air/Sites/webgadget/lib/logger.php",
+		"/Users/iake.air/Sites/haven_huahin_resort/services/rooms.php",
+		"/Users/iake.air/OneDrive/SourceCode/php/haven_huahin_resort/sql/sql_get_reserve_room_detail",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/utility.js",
+		"/Users/iake.air/Sites/haven_huahin_resort/summary.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/pages/en/common.json",
+		"/Users/iake.air/Sites/haven_huahin_resort/managers/reserve_manager.php",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/pages/en/selection_room.json",
+		"/Users/iake.air/Sites/haven_huahin_resort/confirmation.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/reserve.js",
+		"/Users/iake.air/Sites/haven_huahin_resort/cancel_confirm.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/pages/en/cancellation.json",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/pages/en/summary.json",
+		"/Users/iake.air/Sites/haven_huahin_resort/cancellation.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/js/pages/en/confirmation.json",
 		"/Users/iake.air/Sites/haven_huahin_resort/services/process.php",
+		"/Users/iake.air/Sites/haven_huahin_resort/services/reserve.php",
+		"/Users/iake.air/Sites/haven_huahin_resort/option_reserve.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/services/test.php",
+		"/Users/iake.air/Sites/haven_huahin_resort/services/cancel.php",
 		"/Users/iake.air/Sites/haven_huahin_resort/summery.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/templete_room.html",
+		"/Users/iake.air/OneDrive/SourceCode/php/starsanitaryware/deploy/lib/common.php",
+		"/Users/iake.air/OneDrive/SourceCode/php/starsanitaryware/deploy/lib/datasource.ini",
+		"/Users/iake.air/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/iake.air/Sites/haven_huahin_resort/quick_reservation.html",
+		"/Users/iake.air/Sites/haven_huahin_resort/payment_manual.html",
 		"/Users/iake.air/Sites/haven_huahin_resort/verify/success.html",
 		"/Users/iake.air/Sites/haven_huahin_resort/verify/error.html",
 		"/Users/iake.air/Sites/haven_huahin_resort/lib/common.php",
 		"/Users/iake.air/Sites/haven_huahin_resort/services/test_mail.php",
-		"/Users/iake.air/Sites/haven_huahin_resort/confirmation.html",
-		"/Users/iake.air/Sites/haven_huahin_resort/js/reserve.js",
 		"/Users/iake.air/Sites/haven_huahin_resort/js/common.js",
-		"/Users/iake.air/Sites/haven_huahin_resort/managers/reserve_manager.php",
-		"/Users/iake.air/Sites/haven_huahin_resort/option_reserve.html",
-		"/Users/iake.air/Sites/haven_huahin_resort/managers/room_manager.php",
-		"/Users/iake.air/Sites/haven_huahin_resort/services/rooms.php",
-		"/Users/iake.air/Sites/haven_huahin_resort/js/pages/en/selection_room.json",
 		"/Users/iake.air/Sites/haven_huahin_resort/js/rooms/th/superior.json",
 		"/Users/iake.air/Sites/haven_huahin_resort/js/rooms/th/suite_sea.json",
 		"/Users/iake.air/Sites/haven_huahin_resort/js/rooms/th/suite.json",
@@ -155,22 +144,13 @@
 		"/Users/iake.air/Sites/haven_huahin_resort/js/rooms/EN/villa.json",
 		"/Users/iake.air/Sites/haven_huahin_resort/js/rooms/EN/villa_sea.json",
 		"/Users/iake.air/Sites/haven_huahin_resort/js/rooms/en/suite_sea.json",
-		"/Users/iake.air/Sites/haven_huahin_resort/js/utility.js",
 		"/Users/iake.air/Sites/haven_huahin_resort/services/daysofweek.php",
 		"/Users/iake.air/Sites/haven_huahin_resort/view_detail_room.html",
-		"/Users/iake.air/Sites/haven_huahin_resort/quick_reservation.html",
 		"/Users/iake.air/Sites/haven_huahin_resort/receipt.html",
 		"/Users/iake.air/Sites/haven_huahin_resort/js/rooms/deluxe.json",
 		"/Users/iake.air/Sites/haven_huahin_resort/view_detail_superior.html",
-		"/Users/iake.air/Sites/haven_huahin_resort/services/reserve.php",
-		"/Users/iake.air/Sites/haven_huahin_resort/js/selection.js",
-		"/Users/iake.air/Sites/haven_huahin_resort/services/cancel.php",
-		"/Users/iake.air/Sites/haven_huahin_resort/cancel_confirm.html",
-		"/Users/iake.air/Sites/haven_huahin_resort/cancellation.html",
 		"/Users/iake.air/Sites/haven_huahin_resort/logs/warning_2017-03-08.log",
 		"/Users/iake.air/Sites/haven_huahin_resort/services/info.php",
-		"/Users/iake.air/Sites/haven_huahin_resort/selection_room.html",
-		"/Users/iake.air/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/Users/iake.air/Sites/haven_huahin_resort/lib/datasource.ini",
 		"/Users/iake.air/Sites/haven_huahin_resort/reserve.php",
 		"/Users/iake.air/Sites/haven_huahin_resort/_htaccess",
@@ -213,7 +193,6 @@
 		"/Users/iake.air/Sites/starsanitaryware/lib/connecter.php",
 		"/Users/iake.air/Sites/starsanitaryware/index.html",
 		"/Users/iake.air/Sites/starsanitaryware/css/theme.default.css",
-		"/Users/iake.air/Sites/starsanitaryware/config/datasource.ini",
 		"/Users/iake.air/Sites/starsanitaryware/products.html",
 		"/Users/iake.air/Sites/starsanitaryware/css/category.css",
 		"/Users/iake.air/Sites/starsanitaryware/about.html",
@@ -240,22 +219,7 @@
 		"/Users/iake.air/Sites/starsanitaryware/js/org_reference.js",
 		"/Users/iake.air/Sites/starsanitaryware/js/about.js",
 		"/Users/iake.air/Sites/starsanitaryware/lib/common.php",
-		"/Users/iake.air/Sites/starsanitaryware/series.html",
-		"/Users/iake.air/Sites/starsanitaryware/showroom.html",
-		"/Users/iake.air/Sites/starsanitaryware/catalog.html",
-		"/Users/iake.air/Sites/starsanitaryware/css/icon.css",
-		"/Users/iake.air/Sites/starsanitaryware/admin/login.html",
-		"/Users/iake.air/Sites/starsanitaryware/css/navbar.css",
-		"/Users/iake.air/OneDrive/SourceCode/php/starsanitaryware/backup db/stardb_20161028.sql",
-		"/Users/iake.air/Sites/starsanitaryware/logs/warning_2016-10-30.log",
-		"/Users/iake.air/Sites/starsanitaryware/services/organization.php",
-		"/Users/iake.air/Sites/starsanitaryware/controller/OrgManager.php",
-		"/Users/iake.air/Sites/starsanitaryware/css/referal.css",
-		"/Users/iake.air/Sites/starsanitaryware/css/about.css",
-		"/Users/iake.air/Sites/controlcenter/index.html",
-		"/Users/iake.air/Sites/starsanitaryware/js/productdetail.js",
-		"/Users/iake.air/Sites/starsanitaryware/plugin/css/hover-effects.css",
-		"/Users/iake.air/Sites/starsanitaryware/lib/database.php"
+		"/Users/iake.air/Sites/starsanitaryware/series.html"
 	],
 	"find":
 	{
@@ -275,6 +239,41 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"set_package_list",
+			"get_room_packages",
+			"call_item_package",
+			"conditions",
+			"modaldialog",
+			"get_room_package",
+			"btn",
+			"condition",
+			"list_room",
+			"set_package_list",
+			"set_room_list",
+			"get_room_package",
+			"call_room_package",
+			"call_rooms_available",
+			"view_list_room",
+			"set_package_list",
+			"room_option",
+			"lb_cancel_title",
+			"lb_title_desc",
+			"please",
+			"you",
+			"make",
+			"lb_condition_1",
+			"total",
+			"datediff",
+			"date_format_th",
+			"moment",
+			"days",
+			"add('days'",
+			"add_date",
+			"get_templete",
+			"get_room_gallery",
+			"get_room_bed",
+			"child_amount",
+			"child_amount_2",
 			"view_list_room",
 			"comment",
 			"form>",
@@ -367,26 +366,7 @@
 			"naviitem",
 			"selectProductGroup",
 			"source",
-			"img",
-			"date_default_timezone_set",
-			"loadCategoryRestaurant",
-			"ï",
-			"ï»",
-			"ï»¿",
-			"right",
-			"netcalculate",
-			"\";\n",
-			"5",
-			"\")\n",
-			"\";\n",
-			"=\"\">",
-			"                \n",
-			"?>",
-			"60px",
-			"source\n",
-			"get\n",
-			"source\n",
-			">\n"
+			"img"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -405,147 +385,8 @@
 	"groups":
 	[
 		{
-			"selected": 4,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "selection_room.html",
-					"settings":
-					{
-						"buffer_size": 14537,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								12900,
-								12900
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3322.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "js/selection.js",
-					"settings":
-					{
-						"buffer_size": 20291,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								19283,
-								19283
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 7730.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "js/utility.js",
-					"settings":
-					{
-						"buffer_size": 4732,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4293,
-								4305
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 2340.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "templete_room.html",
-					"settings":
-					{
-						"buffer_size": 4071,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								197,
-								208
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "payment_manual.html",
-					"settings":
-					{
-						"buffer_size": 5657,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1871,
-								1871
-							]
-						],
-						"settings":
-						{
-							"auto_complete": false,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1665.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],

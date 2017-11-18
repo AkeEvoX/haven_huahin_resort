@@ -130,12 +130,12 @@ function view_list_room(resp){
 		templete_master = utility.get_templete("templete_room.html");
 		$.each(resp.data.rooms,function(index,room){
 			
-			//console.log(item);
 			//var room =  item;//resp.data.rooms[index];
 			var templete = templete_master;
 			templete = templete.replace("{room_name}",room.room_name);
 			templete = templete.replace("{link_pop_detail}",set_room_detail(room.room_id));
 			templete = templete.replace("{message.detail}",pages.message.btn_room_detail);
+			templete = templete.replace("{note_bed}",pages.message.note_bed);
 			templete = templete.replace("{bed_list}",set_bed_list(room.beds,room.room_id));
 			templete = templete.replace("{gallery_list}",set_gallery_list(room.gallerys,room.room_id));
 			templete = templete.replace("{package_list}",set_package_list(room.packages,room.room_name,room.room_id));
@@ -174,11 +174,12 @@ function set_room_detail(room_id){
 
 rooms.modal_room_detail =function (id){
 	
+
 	if(id==='1'){
-		call_room_detail_modal("Deluxe","deluxe","1");
+		call_room_detail_modal("Superior","superior","1");
 	}
 	else if(id==='2'){
-		call_room_detail_modal("Superior","superior","2");
+		call_room_detail_modal("Deluxe","deluxe","2");
 	}
 	else if(id==='3'){
 		call_room_detail_modal("Villa","villa","3");
@@ -187,7 +188,7 @@ rooms.modal_room_detail =function (id){
 		call_room_detail_modal("Villa @ Sea","villa_sea","4");
 	}
 	else if(id==='5'){
-		call_room_detail_modal("Suite","Suite","5");
+		call_room_detail_modal("Suite","suite","5");
 	}
 	else if(id==='6'){
 		call_room_detail_modal("Suite @ Sea","suite_sea","6");
@@ -326,7 +327,8 @@ function set_package_list(items,room_name,room_id){
 			}
 			
 			if(package.payment_online==1){
-				result+= "<div class='col-sm-3' onclick='reserve.modal_internet()'; style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> "+pages.message.internet +"</div>";
+				//onclick='reserve.modal_internet()';
+				result+= "<div class='col-sm-3'  style='cursor:pointer;'><span class='glyphicon glyphicon-credit-card'></span> "+pages.message.internet +"</div>";
 			}
 			else{
 				result+= "<div class='col-sm-3' style='cursor:pointer;'><span class='glyphicon glyphicon-remove'></span> "+pages.message.no_internet +"</div>";
