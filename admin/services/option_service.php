@@ -140,7 +140,7 @@ function GetItem(){
 		"price"=>$row->price,
 		"detail_th"=>$row->detail_th,
 		"detail_en"=>$row->detail_en,
-		"image"=>$row->image,
+		"image"=>'../'.$row->image,
 		"remark_th"=>$row->remark_th,
 		"remark_en"=>$row->remark_en
 	);

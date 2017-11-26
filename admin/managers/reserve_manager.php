@@ -146,10 +146,14 @@ class Reserve_Manager{
 		try{
 			
 			
-			$sql = "select id,unique_key,reserve_startdate as start_date,reserve_enddate as end_date,price_net,reserve_status as status ";
+			$sql = "select reserve_info.id,unique_key,reserve_startdate as start_date,reserve_enddate as end_date,price_net,reserve_status as status ,s.value as status_name ";
 			$sql .= ",concat(title_name,first_name,' ',last_name) as cust_name,concat(prefix,mobile) as cust_mobile ";
 			$sql .= ",create_date as register_date  ";
-			$sql .= "from reserve_info where 1=1 ";
+			$sql .= "from reserve_info ";
+			$sql .= "left join reserve_status s on reserve_info.reserve_status = s.key  ";
+			$sql .= "where 1=1 ";
+			
+			
 			
 			if($unique!=""){
 				$sql .= "and unique_key='$unique' " ;

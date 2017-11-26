@@ -133,18 +133,6 @@ function ListPayment(){
 		
 		while($row = $dataset->fetch_object()){
 			
-			switch($row->status) {
-				case "0": //booking
-					$item_status =  "booking";
-				break;
-				case "1"://payment
-					$item_status =  "payment";
-				break;
-				case "2"://cancel
-					$item_status =  "cancel";
-				break;
-			}
-			
 			$result .= "<tr>";
 			$result .="<td>".$row->unique_key."</td>";
 			$result .="<td>".date('d/m/Y',strtotime($row->start_date)) ."</td>";
@@ -152,7 +140,7 @@ function ListPayment(){
 			$result .="<td>".date('d/m/Y',strtotime($row->register_date)) ."</td>";
 			$result .="<td>".$row->cust_name ."</td>";
 			$result .="<td>".$row->cust_mobile ."</td>";
-			$result .="<td>".$item_status ."</td>";
+			$result .="<td>".$row->status_name ."</td>";
 			$result .="<td><button class='btn btn-warning' data-id='".$row->id."' data-item='services/reserve_service.php?type=item' data-page='reserve_view.html' data-title='Reserve View' onclick='page.modify(this);'><span class='glyphicon glyphicon-pencil'></span> VIew</button> </td>";
 			$result .= "</tr>";
 			
@@ -177,18 +165,6 @@ function ListBooking(){
 		
 		while($row = $dataset->fetch_object()){
 			
-			switch($row->status) {
-				case "0": //booking
-					$item_status =  "booking";
-				break;
-				case "1"://payment
-					$item_status =  "payment";
-				break;
-				case "2"://cancel
-					$item_status =  "cancel";
-				break;
-			}
-			
 			$result .= "<tr>";
 			$result .="<td>".$row->unique_key."</td>";
 			$result .="<td>".date('d/m/Y',strtotime($row->start_date)) ."</td>";
@@ -196,7 +172,7 @@ function ListBooking(){
 			$result .="<td>".date('d/m/Y',strtotime($row->register_date)) ."</td>";
 			$result .="<td>".$row->cust_name ."</td>";
 			$result .="<td>".$row->cust_mobile ."</td>";
-			$result .="<td>".$item_status ."</td>";
+			$result .="<td>".$row->status_name ."</td>";
 			$result .="<td><button class='btn btn-warning' data-id='".$row->id."' data-item='services/reserve_service.php?type=item' data-page='reserve_view.html' data-title='Reserve View' onclick='page.modify(this);'><span class='glyphicon glyphicon-pencil'></span> VIew</button> </td>";
 			$result .= "</tr>";
 			
@@ -228,17 +204,6 @@ function ListItem(){
 		
 		while($row = $dataset->fetch_object()){
 			
-			switch($row->status) {
-				case "0": //booking
-					$item_status =  "booking";
-				break;
-				case "1"://payment
-					$item_status =  "payment";
-				break;
-				case "2"://cancel
-					$item_status =  "cancel";
-				break;
-			}
 			//$item_status = $row->status == 1? '<span class="glyphicon glyphicon-ok" style="color:green;" ></span>' : '<span class="glyphicon glyphicon-remove" style="color:red;" ></span>' ;
 			
 			$result .= "<tr>";
@@ -248,7 +213,7 @@ function ListItem(){
 			$result .="<td>".date('d/m/Y',strtotime($row->register_date)) ."</td>";
 			$result .="<td>".$row->cust_name ."</td>";
 			$result .="<td>".$row->cust_mobile ."</td>";
-			$result .="<td>".$item_status ."</td>";
+			$result .="<td>".$row->status_name ."</td>";
 			$result .="<td><button class='btn btn-warning' data-id='".$row->id."' data-item='services/reserve_service.php?type=item' data-page='reserve_view.html' data-title='Reserve View' onclick='page.modify(this);'><span class='glyphicon glyphicon-pencil'></span> VIew</button> </td>";
 			$result .= "</tr>";
 			
@@ -349,10 +314,10 @@ function initial_column_option(){
 
 function initial_column(){
 	$column = "<thead><tr>";
-	$column .= "<th class='col-md-2'>Unique</th>";
-	$column .= "<th class='col-md-2'>StartDate</th>";
-	$column .= "<th class='col-md-2'>EndDate</th>";
-	$column .= "<th class='col-md-2'>Register</th>";
+	$column .= "<th class='col-md-2'>Booking no.</th>";
+	$column .= "<th class='col-md-2'>Check in</th>";
+	$column .= "<th class='col-md-2'>Check out</th>";
+	$column .= "<th class='col-md-2'>Booking Date</th>";
 	$column .= "<th class='col-md-2'>Customer</th>";
 	$column .= "<th class='col-md-1'>Mobile</th>";
 	$column .= "<th class='col-md-1'>Status</th>";
