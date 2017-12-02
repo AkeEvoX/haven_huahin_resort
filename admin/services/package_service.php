@@ -36,12 +36,24 @@ $base = new Package_Manager();
 
 $title_th = GetParameter("title_th");
 $title_en = GetParameter("title_en");
+$detail_th = GetParameter("detail_th");
+$detail_en = GetParameter("detail_en");
+$condition_th = GetParameter("condition_th");
+$condition_en = GetParameter("condition_en");
 $room_type = GetParameter("room_type");
 $food_service = (GetParameter("food_service")=="on") ? "1" : "0" ;
 $cancel_room = (GetParameter("cancel_room") == "on") ? "1" : "0";
 $payment_online = (GetParameter("payment_online") == "on") ? "1" : "0";
 $status = (GetParameter("status") == "on") ? "1" : "0";
-$result = $base->insert_item($title_th,$title_en,$room_type,$food_service,$cancel_room,$payment_online,$status);
+$max_person = GetParameter("max_person");
+$extra_bed = GetParameter("extra_bed");
+$extra_price_adults = GetParameter("extra_price_adults");
+$extra_price_children = GetParameter("extra_price_children");
+$special_date = GetParameter("special_date");
+
+
+$result = $base->insert_item($title_th,$title_en,$detail_th,$detail_en,$condition_th,$condition_en,$room_type,$food_service,$cancel_room
+	,$payment_online,$max_person,$extra_bed,$extra_price_adults,$extra_price_children,$special_date,$status);
 
 global $result_code; //call global variable
 $result_code="0";
@@ -55,13 +67,23 @@ $base = new Package_Manager();
 $id = GetParameter("id");
 $title_th = GetParameter("title_th");
 $title_en = GetParameter("title_en");
+$detail_th = GetParameter("detail_th");
+$detail_en = GetParameter("detail_en");
+$condition_th = GetParameter("condition_th");
+$condition_en = GetParameter("condition_en");
 $room_type = GetParameter("room_type");
 $food_service = (GetParameter("food_service")=="on") ? "1" : "0" ;
 $cancel_room = (GetParameter("cancel_room") == "on") ? "1" : "0";
 $payment_online = (GetParameter("payment_online") == "on") ? "1" : "0";
 $status = (GetParameter("status") == "on") ? "1" : "0";
+$max_person = GetParameter("max_person");
+$extra_bed = GetParameter("extra_bed");
+$extra_price_adults = GetParameter("extra_price_adults");
+$extra_price_children = GetParameter("extra_price_children");
+$special_date = GetParameter("special_date");
 
-$result = $base->edit_item($id,$title_th,$title_en,$room_type,$food_service,$cancel_room,$payment_online,$status);
+$result = $base->edit_item($id,$title_th,$title_en,$detail_th,$detail_en,$condition_th,$condition_en,$room_type,$food_service,$cancel_room
+	,$payment_online,$max_person,$extra_bed,$extra_price_adults,$extra_price_children,$special_date,$status);
 global $result_code; //call global variable
 $result_code="0";
 return $result;

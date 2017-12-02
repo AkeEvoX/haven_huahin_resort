@@ -7,6 +7,9 @@
 		<li role="presentation">
 			<a class='menutab' href="#additional" data-toggle="tab">additional</a>
 		</li>
+		<li role="presentation">
+			<a class='menutab' href="#wording" data-toggle="tab">wording</a>
+		</li>
 	</ul>
 	<div class='tab-content' style='margin-top:10px;'>
 		<div id='mapping' class="tab-pane fade in active">
@@ -109,6 +112,32 @@
 			</div>
 			
 		</div>
+		<div id='wording' class='tab-pane fade'>
+			<div class="form-group">
+				<label for="detail_th" class='col-md-3 control-label'>Detail Thai</label>
+				<div class='col-md-9'>
+					<textarea id='detail_th' name='detail_th' class='form-control' ></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="detail_en" class='col-md-3 control-label'>Detail English</label>
+				<div class='col-md-9'>
+					<textarea id='detail_en' name='detail_en' class='form-control' ></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="condition_th" class='col-md-3 control-label'>Condition Thai</label>
+				<div class='col-md-9'>
+					<textarea id='condition_th' name='condition_th' class='form-control' ></textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="condition_en" class='col-md-3 control-label'>Condition English</label>
+				<div class='col-md-9'>
+					<textarea id='condition_en' name='condition_en' class='form-control' ></textarea>
+				</div>
+			</div>
+		</div>
 	</div>
 			
 	
@@ -122,6 +151,11 @@
 <script>
 $(document).ready(function(){
 
+	$('#detail_th').summernote({ height: 300 });
+	$('#condition_th').summernote({ height: 500 });
+	$('#detail_en').summernote({ height: 300 });
+	$('#condition_en').summernote({ height: 500 });
+
 	$.getJSON("services/room_service.php?type=listobject","_=123",function(resp){
 		$.each(resp.result,function(id,data){
 			var opt = new Option(data.title, data.id);
@@ -129,5 +163,9 @@ $(document).ready(function(){
 		});
 		console.log("show room type : complete");
 	});	
+	
+	
+	
+	
 });
 </script>
