@@ -40,8 +40,8 @@ $room_type = GetParameter("room_type");
 $food_service = (GetParameter("food_service")=="on") ? "1" : "0" ;
 $cancel_room = (GetParameter("cancel_room") == "on") ? "1" : "0";
 $payment_online = (GetParameter("payment_online") == "on") ? "1" : "0";
-
-$result = $base->insert_item($title_th,$title_en,$room_type,$food_service,$cancel_room,$payment_online);
+$status = (GetParameter("status") == "on") ? "1" : "0";
+$result = $base->insert_item($title_th,$title_en,$room_type,$food_service,$cancel_room,$payment_online,$status);
 
 global $result_code; //call global variable
 $result_code="0";
@@ -59,8 +59,9 @@ $room_type = GetParameter("room_type");
 $food_service = (GetParameter("food_service")=="on") ? "1" : "0" ;
 $cancel_room = (GetParameter("cancel_room") == "on") ? "1" : "0";
 $payment_online = (GetParameter("payment_online") == "on") ? "1" : "0";
+$status = (GetParameter("status") == "on") ? "1" : "0";
 
-$result = $base->edit_item($id,$title_th,$title_en,$room_type,$food_service,$cancel_room,$payment_online);
+$result = $base->edit_item($id,$title_th,$title_en,$room_type,$food_service,$cancel_room,$payment_online,$status);
 global $result_code; //call global variable
 $result_code="0";
 return $result;
@@ -144,6 +145,16 @@ function GetItem(){
 		"food_service"=>$row->food_service,
 		"cancel_room"=>$row->cancel_room,
 		"payment_online"=>$row->payment_online,
+		"package_price"=>$row->package_price,
+		"max_person"=>$row->max_person,
+		"extra_bed"=>$row->extra_bed,
+		"extra_price_adults"=>$row->extra_price_adults,
+		"extra_price_children"=>$row->extra_price_children,
+		"special_date"=>$row->special_date,
+		"detail_th"=>$row->detail_th,
+		"detail_en"=>$row->detail_en,
+		"condition_th"=>$row->condition_th,
+		"condition_en"=>$row->condition_en,
 		"status"=>$row->status
 	);
 	global $result_code; //call global variable

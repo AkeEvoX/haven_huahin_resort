@@ -1,7 +1,7 @@
-<h1>Price Manager</h1><hr/>
-<table class='table table-striped' id='data_loader' datasource='services/price_service.php?type=list' >
+<h1>Minimum Reserve Manager</h1><hr/>
+<table class='table table-striped' id='data_loader' datasource='services/limitation_service.php?type=list'>
 </table>
-<button class='btn btn-primary' onclick=page.show_modal("price_add.html","Create&nbsp;Price") ><span class='glyphicon glyphicon-plus'></span> Add</button>
+<button class='btn btn-primary' onclick=page.show_modal("limitation_add.html","Create&nbsp;Minimum&nbsp;Reserve") ><span class='glyphicon glyphicon-plus'></span> Add</button>
 <!--show modal-->
 <!-- Modal -->
 <div class="modal fade bs-example-modal-md" id="modaldialog" tabindex="-1" role="dialog" aria-labelledby="modaltitle">
@@ -22,7 +22,7 @@
     </div>
   </div>
 </div>
-<!--show modal-->
+	<!--show modal-->
 <script>
 $(document).ready(function(){
 
@@ -40,4 +40,5 @@ function reload_datatable(){
 	
 	table = $('#data_loader').DataTable({"pagingType": "full_numbers"});
 }
+
 </script>

@@ -22,16 +22,17 @@ class Package_Manager{
 		$this->mysql->disconnect();
 	}
 	
-	function insert_item($title_th,$title_en,$detail_th,$detail_en,$conditon_th,$condition_en,$room_type,$isFoodService,$isCancelRoom
-	,$isPaymenOnline,$max_person,$extra_bed,$extra_price_adults,$extra_price_children,$special_date){
+	function insert_item($title_th,$title_en,$detail_th,$detail_en,$conditon_th,$condition_en,$room_type,$food_service,$cancel_room
+	,$payment_online,$max_person,$extra_bed,$extra_price_adults,$extra_price_children,$special_date,$status){
 		
 		try{
 			
 			$create_by = "0";
 			$create_date = "now()";
+			
 			$sql = "insert into packages (title_th,title_en,detail_th,detail_en,condition_th,condition_en,room_type,food_service,cancel_room,payment_online ";
 			$sql = "max_person,extra_bed,extra_price_adults,extra_price_children,special_date,create_by,create_date) ";
-			$sql .= "values('$title_th','$title_en','$detail_en','$condition_th','$condition_en','$room_type','$isFoodService','$isCancelRoom','$isPaymenOnline' ";
+			$sql .= "values('$title_th','$title_en','$detail_en','$condition_th','$condition_en','$room_type','$food_service','$cancel_room','$payment_online' ";
 			$sql .= " ,'$max_person','$extra_bed','$extra_price_adults','$extra_price_children','$special_date' ";
 			$sql .= " $status,$create_by,$create_date)  ";
 			
@@ -53,7 +54,8 @@ class Package_Manager{
 		
 	}
 	
-	function edit_item($id,$title_th,$title_en,$room_type,$food_service,$cancel_room,$payment_online){
+	function edit_item($id,$title_th,$title_en,$detail_th,$detail_en,$conditon_th,$condition_en,$room_type,$food_service,$cancel_room
+	,$payment_online,$max_person,$extra_bed,$extra_price_adults,$extra_price_children,$special_date,$status){
 		
 		try{
 
@@ -67,6 +69,12 @@ class Package_Manager{
 			$sql .= ",food_service='$food_service' ";
 			$sql .= ",cancel_room='$cancel_room' ";
 			$sql .= ",payment_online='$payment_online' ";
+			$sql .= ",max_person='$max_person' ";
+			$sql .= ",extra_bed='$extra_bed' ";
+			$sql .= ",extra_price_adults='$extra_price_adults' ";
+			$sql .= ",extra_price_children='$extra_price_children' ";
+			$sql .= ",special_date='$special_date' ";
+			$sql .= ",status='$status' ";
 			$sql .= ",update_by=$update_by ";
 			$sql .= ",update_date=$update_date ";
 			$sql .= " where id='".$id."';";

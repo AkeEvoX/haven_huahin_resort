@@ -27,7 +27,8 @@ function check_room_match(room_id){
 	return true;
 }
 
-function add_room(id,name,type,price,room_id,limit_people,extra_adults,extra_children){
+function add_room(pack_id,name,type,price,room_id,limit_people,extra_adults,extra_children){
+	
 	
 	var list = $('#list_reserve');
 	var item = "";
@@ -39,6 +40,19 @@ function add_room(id,name,type,price,room_id,limit_people,extra_adults,extra_chi
 	var young_children = $('#child_amount').val();
 	var person = parseFloat(adults) + parseFloat(older_children);
 	var night = $("#night_unit").val();
+	var startdate = moment($("#checkpoint_date").val(),'DD/MM/YYYY').format('YYYY-MM-DD');
+	var min_day = get_minimum_days(pack_id,startdate);
+	
+	//04/12/2017
+	
+	/* verify reserve minimum days */
+	if(night < min_day ){
+		
+		var str = pages.message.warning_minimum_days.replace("{0}",min_day);
+		alert(str);
+		return;
+		
+	}
 	
 	if(check_room_match(room_id)==false)
 	{
@@ -68,7 +82,7 @@ function add_room(id,name,type,price,room_id,limit_people,extra_adults,extra_chi
 	name = decodeURIComponent(name);
 	type = decodeURIComponent(type);
 	//console.warn("add room >  " + key +"|"+ id + "|" + name + "|"+type+"|"+price+"|"+bed+"|"+adults+"|"+older_children+"|"+young_children);
-	var room = { "key" : key ,"package":id, "room":name , "type" : type ,"room_id":room_id, "price" : price 
+	var room = { "key" : key ,"package":pack_id, "room":name , "type" : type ,"room_id":room_id, "price" : price 
 	,"bed":bed,"bed_name":bed_name,"adults":adults,"older_children":older_children
 	,"young_children":young_children ,"person":person.toString()
 	};
@@ -95,6 +109,24 @@ function del_room(key){
 	$('#'+key).remove();
 	reserve.rooms = jQuery.grep(reserve.rooms,function(item,index){ return item.key != key });
 	reserve.calculate();
+}
+
+function get_minimum_days(pack_id,date){
+	var unit = 0;
+	
+	var url = 'services/verify_reserve.php?service=minimum_days&pack_id='+pack_id+'&date='+date;	
+	
+	$.ajax({
+		  dataType: "json",
+		  url: url,
+		  async: false, 
+		  success: function(resp) {
+			  unit = resp.result.days;
+		  }
+		});
+	
+	
+	return unit;
 }
 
 reserve.reset_room = function(){
@@ -476,32 +508,6 @@ function call_room_detail_modal(title,room_name,room_type){
 
 	$('#view_condition').css('display','none');
 	$('#modaldialog').modal();
-}
-
-//remove
-function add_default_condition(){
-	var condition= "";
-	
-	condition += "<p>Terms & Conditions</p>";
-	condition += "<p>* Full payment in advance required. Yur credit card will be charged at the time of reservation.<br/>";
-	condition += "* Rules & Restrictions Payments for bookings at Advance Purchase/Non-Refundable rates are not refundable and bookings may not be modified.<br/>";
-	condition += "* The above rate are not include breakfast.<br/>";
-	condition += "* If you depart early or you cancel or fail to honor this reservation for any reason, you will not receive any credit or refund. <br/>";
-	condition += "* Extensions will require a new reservation for the additional date(s), subject to availability and prevailing rates, and this rate shall not apply<br/>";
-	condition += "* This rate is not combinable with any other offers and promotions and is not available to groups.<br/>";
-	condition += "* Rates are subject to availability.<br/>";
-	condition += "* Rates are quoted in Thai Baht(THB)<br/>";
-	condition += "* Rates quoted are subjected to 7% government tax and 10% service charge.<br/>";
-	condition += "* Rate is subject to change without notice.</p>";
-	condition += "<p>* Check in time is from 14:00 hours & Check out until 12:00 noon.<br/>";
-	condition += "* Please note that children age 12 and older are charged the adult rate. Please include them in the number entered in the No. of Aduts box.<br/>";
-	condition += "* Children below 12 years old sharing the existing bed with parents stay free. Breakfast for child is charged THB 234 per child per day subject to Tax and Servce Charge.<br/>";
-	condition += "* Baby cot is free and advance request must be made.<br/>";
-	condition += "* Extra bed is charge at THB 1020 per bed per night subject to tax and service charge and full daily breakfast.<br/>";
-	condition += "* Exchange rates for information only.<br/>";
-	condition += "* Please do not hesitate to contact us at the following e-amil address: rsvn@haven-huahin.com, we are at your disposal for any further information you need.<br/>";
-	
-	return condition;
 }
 
 function view_dayofweek(resp){

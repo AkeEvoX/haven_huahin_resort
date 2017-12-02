@@ -1,0 +1,43 @@
+<form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
+	<div class="form-group">
+		<label for="id" class='col-md-3 control-label'>ID</label>
+		<div class='col-md-2'>
+			<input type="text" class="form-control" id="id" name='id' placeholder="" value='' readonly/>
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="room_name" class='col-md-3 control-label'>Room Name</label>
+		<div class='col-md-4'>
+			<input type='text' id='room_name' name='room_name' class='form-control' readonly />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="pack_name" class='col-md-3 control-label'>Package Name</label>
+		<div class='col-md-4'>
+			<input type='text'   id="pack_name" name='pack_name'  class="form-control" readonly />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="start_date" class='col-md-3 control-label'>Start Date</label>
+		<div class='col-md-3'>
+			<input type="text" class="form-control" id="start_date" name='start_date' readonly  />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="end_date" class='col-md-3 control-label'>End Date</label>
+		<div class='col-md-3'>
+			<input type="text" class="form-control" id="end_date" name='end_date' placeholder="" readonly />
+		</div>
+	</div>
+	<div class="form-group">
+		<label for="min_reserve" class='col-md-3 control-label'>Days</label>
+		<div class='col-md-2'>
+			<input type="text" class="form-control" id="min_reserve" name='min_reserve' readonly />
+		</div>
+	</div>
+</form>
+<div class='row'>
+<div class='col-md-12 text-right'>
+<button class='btn btn-success' onclick=page.save('services/limitation_service.php?type=remove','form_save') ><span class='glyphicon glyphicon-ok'></span>save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+</div>
+</div>

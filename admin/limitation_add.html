@@ -1,0 +1,77 @@
+<form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
+		<div class="form-group">
+			<label for="title_th" class='col-md-3 control-label'>Room Name</label>
+			<div class='col-md-4'>
+				<select id='room_type' name='room_type' class='form-control' />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="pack_id" class='col-md-3 control-label'>Package Name</label>
+			<div class='col-md-4'>
+				<select  id="pack_id" name='pack_id'  class="form-control" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="start_date" class='col-md-3 control-label'>Start Date</label>
+			<div class='col-md-3'>
+				<div class="input-group date" id='btn_calendar' >
+				<input type="text" class="form-control" id="start_date" name='start_date' placeholder="" />
+				  <span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="end_date" class='col-md-3 control-label'>End Date</label>
+			<div class='col-md-3'>
+				<div class="input-group date" id='btn_calendar_end' >
+				<input type="text" class="form-control" id="end_date" name='end_date' placeholder="" />
+				  <span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="min_reserve" class='col-md-3 control-label'>Days</label>
+			<div class='col-md-2'>
+				<input type="text" class="form-control" id="min_reserve" name='min_reserve' placeholder="Minimum Days" value=''  maxlength='2' />
+			</div>
+		</div>
+</form>
+<div class='row'>
+<div class='col-md-12 text-right'>
+<button class='btn btn-success' onclick=page.save('services/limitation_service.php?type=create','form_save') ><span class='glyphicon glyphicon-ok'></span>save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
+</div>
+</div>
+<script>
+$(document).ready(function(){
+
+	$.getJSON("services/room_service.php?type=listobject",function(resp){
+		$.each(resp.result,function(id,data){
+			var opt = new Option(data.title, data.id);
+			$("#room_type").append(opt);
+		});
+		
+		//default change value;
+		$("#room_type").change();
+	});	
+	
+	$("#room_type").change(function(){
+		var id = this.value;
+		$("#pack_id").html("");
+		$.getJSON("services/package_service.php?type=listobject&room_type="+id,function(resp){
+			$.each(resp.result,function(id,data){
+				var opt = new Option(data.title, data.id);
+				$("#pack_id").append(opt);
+			});
+		});	
+	
+	});
+	
+		//set calendar & initial page
+	$('#btn_calendar').datetimepicker({"format":"YYYY-MM-DD"});
+	$('#btn_calendar_end').datetimepicker({"format":"YYYY-MM-DD"});
+});
+</script>

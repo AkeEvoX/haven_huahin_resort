@@ -1,61 +1,124 @@
+<link href="../plugin/jquery/summernote/summernote.css" rel="stylesheet">
 <form id='form_save' action='' method='post' enctype="multipart/form-data" class='form-horizontal'>
-<div class="form-group">
+	<ul id='menutab' class="nav nav-tabs nav-default">
+		<li role="presentation" class='active'>
+			<a class='menutab' href="#mapping" data-toggle="tab">Mapping</a>
+		</li>
+		<li role="presentation">
+			<a class='menutab' href="#additional" data-toggle="tab">additional</a>
+		</li>
+	</ul>
+	<div class='tab-content' style='margin-top:10px;'>
+		<div id='mapping' class="tab-pane fade in active">
+			<div class="form-group">
 				<label for="id" class='col-md-3 control-label'>No</label>
 				<div class='col-md-9'>
 					<input type="text" class="form-control" id="id" name='id' value='' readonly />
 				</div>
 			</div>
-		<div class="form-group">
+			<div class="form-group">
 				<label for="title_th" class='col-md-3 control-label'>ชื่อแพ็คเกจ</label>
 				<div class='col-md-9'>
 					<input type="text" class="form-control" id="title_th" name='title_th' placeholder="Room Name Thai" value='' />
 				</div>
 			</div>
-		<div class="form-group">
-			<label for="title_en" class='col-md-3 control-label'>Package Name</label>
-			<div class='col-md-9'>
-				<input type="text" class="form-control" id="title_en" name='title_en' placeholder="Room Name English" value='' />
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="title_en" class='col-md-3 control-label'>ประเภทห้อง / Room Type</label>
-			<div class='col-md-9'>
-				<select class='form-control' id='room_type' name='room_type' ></select>
-			</div>
-		</div>
-		<div class="form-group">
-			<label for="food_service" class='col-md-3 control-label'>Food Service</label>
-			<div class='col-md-1'>
-				<div class="material-switch pull-left">
-					<input id="food_service" name="food_service" type="checkbox"/>
-					<label for="food_service" class="label-success"></label>
+			<div class="form-group">
+				<label for="title_en" class='col-md-3 control-label'>Package Name</label>
+				<div class='col-md-9'>
+					<input type="text" class="form-control" id="title_en" name='title_en' placeholder="Room Name English" value='' />
 				</div>
 			</div>
-		</div>
-		<div class="form-group">
-			<label for="cancel_room" class='col-md-3 control-label'>Cancel Room</label>
+			<div class="form-group">
+				<label for="title_en" class='col-md-3 control-label'>ประเภทห้อง / Room Type</label>
+				<div class='col-md-9'>
+					<select class='form-control' id='room_type' name='room_type' ></select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="food_service" class='col-md-3 control-label'>Food Service</label>
+				<div class='col-md-1'>
+					<div class="material-switch pull-left">
+						<input id="food_service" name="food_service" type="checkbox"/>
+						<label for="food_service" class="label-success"></label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="cancel_room" class='col-md-3 control-label'>Cancel Room</label>
+				<div class='col-md-3'>
+					<div class="material-switch pull-left">
+						<input id="cancel_room" name="cancel_room" type="checkbox"/>
+						<label for="cancel_room" class="label-success"></label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="payment_online" class='col-md-3 control-label'>Payment Online</label>
+				<div class='col-md-3'>
+					<div class="material-switch pull-left">
+						<input id="payment_online" name="payment_online" type="checkbox"/>
+						<label for="payment_online" class="label-success"></label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+			<label for="stauts" class='col-md-3 control-label'>Status</label>
 			<div class='col-md-3'>
 				<div class="material-switch pull-left">
-					<input id="cancel_room" name="cancel_room" type="checkbox"/>
-					<label for="cancel_room" class="label-success"></label>
+					<input id="status" name="status" type="checkbox"  />
+					<label for="status" class="label-success"></label>
 				</div>
 			</div>
 		</div>
-		<div class="form-group">
-			<label for="payment_online" class='col-md-3 control-label'>Payment Online</label>
-			<div class='col-md-3'>
-				<div class="material-switch pull-left">
-					<input id="payment_online" name="payment_online" type="checkbox"/>
-					<label for="payment_online" class="label-success"></label>
+		</div>
+		<div id='additional' class="tab-pane fade">
+			<div class='col-sm-6'>
+				<div class="form-group">
+					<label for="max_person" class='col-md-6 control-label'>Limit person</label>
+					<div class='col-md-6'>
+						<input type="text" class="form-control" id="max_person" name='max_person' placeholder="Limit Person per room" value='' />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="special_date" class='col-md-6 control-label'>mininum reserve</label>
+					<div class='col-md-6'>
+						<input type="text" class="form-control" id="special_date" name='special_date' placeholder="minimum reserve" value='' />
+					</div>
 				</div>
 			</div>
+			<div class='col-sm-6'>
+				<div class="form-group">
+					<label for="extra_bed" class='col-md-6 control-label'>Extra bed</label>
+					<div class='col-md-6'>
+						<input type="text" class="form-control" id="extra_bed" name='extra_bed' placeholder="extra bed amount" value='' />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="extra_price_adults" class='col-md-6 control-label'>Extra adults price </label>
+					<div class='col-md-6'>
+						<input type="text" class="form-control" id="extra_price_adults" name='extra_price_adults' placeholder="extra price adult " value='' />
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="extra_price_children" class='col-md-6 control-label'>Extra children price </label>
+					<div class='col-md-6'>
+						<input type="text" class="form-control" id="extra_price_children" name='extra_price_children' placeholder="extra price children " value='' />
+					</div>
+				</div>
+				
+			</div>
+			
 		</div>
+	</div>
+			
+	
 </form>
 <div class='row'>
 	<div class="col-sm-offset-3 col-sm-9">
 		<button class='btn btn-success' onclick=page.save('services/package_service.php?type=modify','form_save') ><span class='glyphicon glyphicon-ok'></span>save</button>&nbsp;<button type='button' onclick='page.hide_modal()' class='btn btn-warning btn-sm' ><span class='glyphicon glyphicon-remove'></span> cancel</button>
 	</div>
 </div>
+<script src='../plugin/jquery/summernote/summernote.js' ></script>
 <script>
 $(document).ready(function(){
 

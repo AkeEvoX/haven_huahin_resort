@@ -76,6 +76,7 @@ page.modify = function(obj){
 	data.append("id",id);
 	page.show_modal(_page,_title,function(){
 		$.post(_item,data,function(resp){
+			console.warn(resp);
 			$.each(resp.result,function(name,data){
 				assign_value(name,data);
 			});

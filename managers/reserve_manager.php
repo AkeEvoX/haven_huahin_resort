@@ -35,6 +35,24 @@ class Reserve_Manager{
 		
 	}
 
+	function get_minimum_days($pack_id,$date){
+		
+		try{
+
+			$sql = "select * from reserve_limitation ";
+			$sql .= "where startdate <= '$date' and enddate >= '$date' ";
+			$sql .= "and pack_id='$pack_id' ;";
+			$result = $this->mysql->execute($sql);
+
+			log_warning("get_resrve_limitation > " . $sql);
+			
+			return  $result;
+		}
+		catch(Exception $e){
+			echo "Cannot Get Reserve limitation : ".$e->getMessage();
+		}
+		
+	}
 	
 	function get_reserve_options($unique_key,$lang){
 		
