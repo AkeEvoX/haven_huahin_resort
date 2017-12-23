@@ -14,7 +14,7 @@ $result_verify = $base->verify_cancel($key,$email);
 $verify = $result_verify->fetch_object();
 
 if($verify->found=="0" or $verify->cancel_room == "0"){
-	echo "<script>alert('Sorry !!! cannot cancel reservation. \\n information not match or a room can't cancelleing is not found.');window.location='../cancel_confirm.html';</script>";
+	echo "<script>alert('Sorry !!! cannot cancel reservation. \\n information not match or a room can\'t cancelleing is not found.'); window.location='../cancel_confirm.html';</script>";
 	exit();
 }
 else{
@@ -52,11 +52,12 @@ function send_mail_cancel($key){
 	$message = str_replace("{customer_name}",$cust_fullname,$message);
 	$message = str_replace("{customer_mobile}",$reserve["customer"]->mobile,$message);
 	$message = str_replace("{customer_email}",$reserve["customer"]->email,$message);
+	$message = str_replace("{special_request}",$reserve["customer"]->comment,$message);
 	$message = str_replace("{list_reserve}",set_email_list_reserve($reserve),$message);
 	
 	
 	$receive = array($reserve["customer"]->email =>"customer");
-	$sender = "contact@baankunnan.com";
+	$sender = "system@haven-huahin.com";
 	$sender_name = "system haven huahin resort";
 	$subject = "Your Reservation has been cancelled";
 
@@ -87,8 +88,8 @@ function set_email_list_reserve($reserve){
 		}
 	}
 
-	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: Service Charge </td><td class='text-right'>฿ ".number_format($summary->serivce,2)."</td></tr>";
-	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: VAT  </td><td class='text-right'>฿ ".number_format($summary->vat,2)."</td></tr>";
+	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Service Charge </td><td class='text-right'>฿ ".number_format($summary->serivce,2)."</td></tr>";
+	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>VAT  </td><td class='text-right'>฿ ".number_format($summary->vat,2)."</td></tr>";
 	$result .= "<tr><td><b>Total<b/></td><td></td><td class='text-right'>฿ ".number_format($summary->sum,2)."</td></tr>";
 
 	//options
@@ -103,7 +104,7 @@ function set_email_list_reserve($reserve){
 		}
 	}
 
-	$result .= "<tr><td>&nbsp;</td><td  class='table_small' >The taxes which are not included are to be paid to the hotel. The total amount is: </td><td class='text-right'>฿ ".number_format($summary->net,2)."</td></tr>";
+	$result .= "<tr><td>&nbsp;</td><td  class='table_small' ></td><td class='text-right'>฿ ".number_format($summary->net,2)."</td></tr>";
 	$result .= "</table>";
 
 	return $result;
@@ -129,7 +130,6 @@ function get_reserve($uniqueKey,$lang){
 		,"children"=>$data->children
 		,"children_2"=>$data->children_2
 		,"code"=>$data->acc_code
-		,"comment"=>$data->reserve_comment
 	);
 
 	$customer = array(
@@ -140,6 +140,7 @@ function get_reserve($uniqueKey,$lang){
 		,"prefix_mobile"=>$data->prefix
 		,"mobile"=>$data->mobile
 		,"birthdate"=>$data->birthdate
+		,"comment"=>$data->reserve_comment
 		);
 	$summary = array(
 		"amount"=>$data->reserve_amount

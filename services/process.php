@@ -19,11 +19,7 @@ switch($_step){
 	case "4":
 		step_four($_POST);//summary
 	break;
-	case "5":
-
-	break;
 }
-//
 
 //find date available
 function step_one($args){
@@ -71,24 +67,9 @@ function step_two($data){
 	$_SESSION["info"]["children_2"] = $data["child_2_amount"];
 	$_SESSION["info"]["code"] = $data["promo_code"];
 	$_SESSION["info"]["expire_date"] = date('d/m/Y',strtotime(str_replace('/','-',$data["checkpoint_date"]). "- 14days")) ;
-	//summary
-	//$reserve = json_decode($data["data_reserve"]); 
-	
-	/*
-	//print value room reserve
-	foreach($reserve as $val){
-		
-		echo $val->key ."|" .$val->room ."|".$val->type ."|".$val->price ."|"."<br/>";
-		
-	}
-	*/
-	//echo "reserve is > </br>";
-	//print_r($_SESSION["reserve"]);
-	//var_dump($_SESSION["reserve"]);
-	//echo "<br/>---------</br>";
-	//echo json_decode($item);
+
 	log_warning("step 2 get reserve object >" . $item);
-	//redirect to next page
+	/* redirect to next page */
 	header("Location: ../option_reserve.html");
 	
 	exit();
@@ -118,10 +99,12 @@ function step_three($data){
 	//net
 	$net = $sum+round($price_option,2);
 
-	$_SESSION["reserve"]->summary->vat=$vat;
-	$_SESSION["reserve"]->summary->service=$service;
-	$_SESSION["reserve"]->summary->sum = $sum;
-	$_SESSION["reserve"]->summary->net=$net;
+	$_SESSION["reserve"]->summary->vat=number_format($vat,2);
+	$_SESSION["reserve"]->summary->service=number_format($service,2);
+	$_SESSION["reserve"]->summary->sum = number_format($sum,2);
+	$_SESSION["reserve"]->summary->net=number_format($net,2);
+	
+	var_dump($_SESSION["reserve"]->summary);
 	
 	header("Location: ../summary.html");
 	exit();
@@ -156,11 +139,17 @@ function step_four($data){
 	,"title"=>$data["title"]
 	,"fname"=>$data["fname"]
 	,"lname"=>$data["lname"]
-	,"prefix_mobile"=>$data["prefix_mobile"]
 	,"birthdate"=>$birth_date
-	,"mobile"=>$data["mobile"]);
+	,"prefix_mobile"=>$data["prefix_mobile"]
+	,"mobile"=>$data["mobile"]
+	,"comment"=>$data["comment"]
+	);
 
 	$_SESSION["customer"] = $customer;
+	
+	/* replace , to empty */
+	$_SESSION["reserve"]->summary->sum = str_replace(",","",$_SESSION["reserve"]->summary->sum);
+	$_SESSION["reserve"]->summary->net = str_replace(",","",$_SESSION["reserve"]->summary->net);
 	
 	/*insert to database*/	
 	$base = new Reserve_Manager();
@@ -192,20 +181,23 @@ function step_four($data){
 	$cust_name = $customer["title"]." ".$customer["fname"]." ".$customer["lname"];
 	$receive[] = array("email"=>$customer["email"],"alias"=>$cust_name);
 	$sender = "contact@baankunnan.com";
+	//$sender = "system@haven-huahin.com";  /* production */
 	$sender_name = "system haven huahin resort";
 	$subject = "Thank You Reservation";
-	//$message = "Your ID is ".$unique_key;
+	
 	$message = file_get_contents("../templete_email_booking.html");
 	$message = str_replace("{reserve_id}",$unique_key,$message);
 	$message = str_replace("{start_date}",full_date_format($info["start_date"],"en"),$message);
 	$message = str_replace("{end_date}",full_date_format($info["end_date"],"en"),$message);
-	//$message = str_replace("{expire_date}",full_date_format($info["expire_date"],"en"),$message);
+	
 	$message = str_replace("{adults}",$info["adults"],$message);
 	$message = str_replace("{children_2}",$info["children_2"],$message);
 	$message = str_replace("{children_1}",$info["children"],$message);
 	$message = str_replace("{customer_name}",$customer["title"]." ".$customer["fname"]." ".$customer["lname"],$message);
 	$message = str_replace("{customer_mobile}",$customer["prefix_mobile"].$customer["mobile"],$message);
 	$message = str_replace("{customer_email}",$customer["email"],$message);
+	$message = str_replace("{special_request}",$customer["comment"],$message);
+	
 	
 	/*chack rule cancelled of room */
 	if($package_info->cancel_room=="1"){
@@ -221,8 +213,7 @@ function step_four($data){
 		$message = str_replace("{rule_cancel_room}",'',$message);	
 	}
 	
-	//echo "condition is ".$package_info->conditions."<br/>";
-	//{condition_detail}
+	/*show package condition*/
 	$message = str_replace("{condition_detail}",$package_info->conditions,$message);
 	
 	/*reserve information */
@@ -241,10 +232,10 @@ function step_five($data){
 function set_email_list_reserve($reserve){
 
 	$info = $reserve->info;
-	$date_start = full_date_format($info->start_date,"en");
-	$date_end = full_date_format($info->end_date,"en");
+	$date_start = full_date_format($info["start_date"],"en");
+	$date_end = full_date_format($info["end_date"],"en");
 	$result = "<table>";
-	$result .= "<tr><td colspan='3' style='font-size:8px;'>Reservation details, from ".$date_start." to ".$date_end." </td></tr>";
+	$result .= "<tr><td colspan='3' style='font-size:11px;'>Reservation details, from ".$date_start." to ".$date_end." </td></tr>";
 
 	$summary = $reserve->summary;
 	$rooms = $reserve->rooms;
@@ -262,8 +253,8 @@ function set_email_list_reserve($reserve){
 		}
 	}
 
-	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: Service Charge </td><td class='text-right'>฿ ".number_format($summary->service,2)."</td></tr>";
-	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Not included: VAT  </td><td class='text-right'>฿ ".number_format($summary->vat,2)."</td></tr>";
+	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>Service Charge </td><td class='text-right'>฿ ".number_format($summary->service,2)."</td></tr>";
+	$result .= "<tr class='table_small' ><td>&nbsp;</td><td>VAT  </td><td class='text-right'>฿ ".number_format($summary->vat,2)."</td></tr>";
 	$result .= "<tr><td><b>Total<b/></td><td></td><td class='text-right'>฿ ".number_format($summary->sum,2)."</td></tr>";
 
 	//##options##
@@ -280,7 +271,7 @@ function set_email_list_reserve($reserve){
 
 	
 	
-	$result .= "<tr><td>&nbsp;</td><td  class='table_small' >The taxes which are not included are to be paid to the hotel. The total amount is: </td><td class='text-right'>฿ ".number_format($summary->net,2)."</td></tr>";
+	$result .= "<tr><td>&nbsp;</td><td  class='table_small' ></td><td class='text-right'>฿ ".number_format($summary->net,2)."</td></tr>";
 	$result .= "</table>";
 
 	return $result;

@@ -37,6 +37,7 @@ function send_mail_complete($key){
 	$message = str_replace("{customer_name}",$cust_fullname,$message);
 	$message = str_replace("{customer_mobile}",$reserve["customer"]->mobile,$message);
 	$message = str_replace("{customer_email}",$reserve["customer"]->email,$message);
+	$message = str_replace("{special_request}",$reserve["customer"]->comment,$message);
 	$message = str_replace("{list_reserve}",set_email_list_reserve($reserve),$message);
 
 	$receive = array($reserve["customer"]->email =>"customer");
@@ -115,7 +116,6 @@ $payment=null;
 		,"children"=>$data->children
 		,"children_2"=>$data->children_2
 		,"code"=>$data->acc_code
-		,"comment"=>$data->reserve_comment
 	);
 
 	$customer = array(
@@ -126,12 +126,13 @@ $payment=null;
 		,"prefix_mobile"=>$data->prefix
 		,"mobile"=>$data->mobile
 		,"birthdate"=>$data->birthdate
+		,"comment"=>$data->reserve_comment
 		);
 	$summary = array(
-		"amount"=>$data->reserve_amount
-		,"charge"=>$data->reserve_charge
-		,"tax"=>$data->reserve_tax
-		,"net"=>$data->reserve_net
+		"sum"=>$data->price_sum
+		,"serivce"=>$data->price_service
+		,"vat"=>$data->price_vat
+		,"net"=>$data->price_net
 	);
 
 //## ger reserve room  ##

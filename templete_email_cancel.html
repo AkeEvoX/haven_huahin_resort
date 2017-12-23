@@ -60,8 +60,8 @@ small {
 <table>
 <tr>
 <td class='table_border text-center'>
-	<small>Your booking has been cancelled</small><br>
-	<span style='font-size:8px;'>Trouble viewing this email? <a href='#' >Click here. </a></span><p>
+	<small>Your cancellation has been confirmed.</small><br>
+	<!-- <span style='font-size:8px;'>Trouble viewing this email? <a href='#' >Click here. </a></span><p> -->
 	<!-- <h3>Booking cancelled for Haven Resort Hua Hin - {reserve_id}</h3> -->
 </td>
 </tr>
@@ -69,7 +69,7 @@ small {
 	<td class='table_border' style='background-color:gray;' >
 	<table>
 	<tr>
-	<td ><img src='https://reserve.baankunnan.com/images/icon_hotel.jpg' alt="Logo" title="Logo" style="display:block"/></td>
+	<td ><img src="http://www.haven-huahin.com/images/icon_hotel.jpg" alt="Logo" title="Logo" style="display:block"/></td>
 	<td style='vertical-align:middle;color:white;'><h3> Haven Resort Hua hin </h3></td>
 	</tr>
 	</table>
@@ -78,13 +78,13 @@ small {
 <tr >
 	<td class='table_border' >
 	Dear : {customer_name}<br/>
-	เราเสียใจที่คุณได้ยกเลิกการเข้าพักของคุณที่ Haven Resort Hua Hin จาก {start_date} ถึง {end_date}. เราหวังว่าคุณจะพักกับเราในครั้งถัดไป!
+	We regret that you cancel your stay at Haven Resort Hua Hin from {start_date} to {end_date}
+We hope you will stay with us next time.
 	</td>
 </tr>
 <tr >
 	<td class='table_border' style='text-align:center;'>
-	<h3>
-	Booking cancelled for Haven Resort Hua Hin
+	<h3>Your reservation has been canceled.
 	<h3>
 	</td>
 </tr>
@@ -107,46 +107,26 @@ small {
 	</td>
 </tr>
 <tr>
-	<td class='table_border condition'>
-		Cancellation Policy <br><small>
-		This offer can be canceled or modified free of charge until {expire_date}, 00:00 (UTC).<br>
-		In case of cancellation after this date, a penalty of 100% of full stay will apply.<br>
-		In case of no-show, a penalty of 100% of full stay will apply.<br></small>
+	<td class='table_border'><b>Special Request <b/>: {special_request}</td>
+</tr>
+<tr >
+	<td class='table_border condition' style='padding:0;'>
+	<table style='width:100%;'>
+	<tr>
+		<td width='50%' class='text-top'>{cancel_policy}</td>
+		<td style='border-left:1px solid #999999;' class='text-top'>{payment_policy}</td>
+	</tr>
+	</table>
 	</td>
 </tr>
 <tr>
-	<td class='table_border' ><small>
-	Terms & Conditions
-	<p>
-	* Rates are quoted in Thai Baht (THB).<br>
-	* Rates quoted are subjected to 7% government tax and 10% service charge.<br>
-	* A credit card number is required to confirm the booking.<br>
-	</p>
-	<p>
-	If cancelled or modified up to 14 days before date of arrival, no fee will be charge.<br>
-	If cancelled or mordified later or in case of no-show, the total price of the reservation<br>
-	will be charge.<br>
-	*Deposit 100 percent of the first night will be charge at least 14 days period to arrival.<br>
-	* Check in time is from 14:00 hours & Check out until 12:00 noon.<br>
-	* Please note that children age 12 and older are charged the adult rate. Please include them in the number entered in the No. of Adults box.<br>
-	* Children below 12 years old sharing the existing bed with parents stay free. Breakfast for child is charged THB 234 per child per day subject to Tax and Service Charge.<br>
-	* Baby cot is free and advance request must be made. <br>
-	* Extra bed is charge at THB 1020 per bed per night subject to tax and service charge and full daily breakfast<br>
-	* Exchange rates for information only.<br>
-	* Method of Payment: On personal account upon departure.<br>
-	* Rate is subject to change without notice.<br>
-	* Should you wish to change an existing reservation, you are required to cancel the existing booking and proceed to create a new reservation. This maybe done by visiting our website www.haven-huahin.com<br>
-	* Should you wish to cancel an existing reservation, simply click on the reservation link at our website www.haven-huahin.com<br>
-	* Please do not hesitate to contact us at the following e-mail address: rsvn@haven-huahin.com, we are at your disposal for any further information you need. <br>
-	</p>
-	</small>
-	</td>
+	<td class='table_border' >{condition_detail}</td>
 </tr>
 <tr>
 	<td class='text-center'>
 		<p>
 			<h4><b>Haven Resort Hua Hin Client Service</b></h4>
-				<small>If you have any question, you can send an email to: support@havenresort.com </small><br>
+				<small>If you have any question, you can send an email to: rsvn@havenresort.com </small><br>
 		</p>
 	</td>
 </tr>

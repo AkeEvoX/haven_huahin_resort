@@ -147,7 +147,7 @@ page.load_menu = function(){
 				console.log('force logout');
 			break;
 		} 
-		page.redirect('item_reserve.html');
+		page.redirect('item_booking.html');
 		
 	},"JSON");
 }

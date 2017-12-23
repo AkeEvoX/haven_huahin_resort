@@ -31,7 +31,6 @@ if(isset($data)){
 				,"children"=>$data->children
 				,"children_2"=>$data->children_2
 				,"code"=>$data->acc_code
-				,"comment"=>$data->reserve_comment
 				);
 
 	$customer = array(
@@ -42,6 +41,7 @@ if(isset($data)){
 				,"prefix_mobile"=>$data->prefix
 				,"mobile"=>$data->mobile
 				,"birthdate"=>$data->birthdate
+				,"comment"=>$data->reserve_comment
 				);
 
 	$summary = array(

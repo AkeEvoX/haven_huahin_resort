@@ -20,7 +20,7 @@ table tr td {
 }
 
 .table_small {
-	font-size:8px;
+	font-size:11px;
 	color:gray;
 }
 
@@ -68,8 +68,8 @@ small {
 	<td class='table_border' style='background-color:gray;' >
 	<table>
 	<tr>
-	<td ><img src="https://reserve.baankunnan.com/images/icon_hotel.jpg" alt="Logo" title="Logo" style="display:block"/></td>
-	<td style='vertical-align:middle;color:white;'><h3> Haven Resort Hua hin </h3></td>
+		<td ><img src="http://www.haven-huahin.com/images/icon_hotel.jpg" alt="Logo" title="Logo" style="display:block"/></td>
+		<td style='vertical-align:middle;color:white;'><h3> Haven Resort Hua hin </h3></td>
 	</tr>
 	</table>
 	</td>
@@ -78,7 +78,8 @@ small {
 	<td class='table_border' >
 	<small>
 	Dear : {customer_name}<br/>
-	ขอบคุณที่ท่านเลือก Haven Resort Hua Hin เพื่อการเข้าพักระหว่าง {start_date} ถึง {end_date}. เรารอคอยที่จะทำให้การเข้าพักของท่านมีความสะดวกสบายและน่าประทับใจ!
+	Thank you for booking with Haven Resort Hua Hin to stay from {start_date} to {end_date} We’re looking forward to make your stay comfortable and memorable!
+
 	</small>
 	</td>
 </tr>
@@ -124,30 +125,32 @@ small {
 	</td>
 </tr>
 <tr>
-	<td class='table_border' >
-		Your Booking
+	<td class='table_border' >Your Booking</td>
+</tr>
+<tr>
+	<td class='table_border'>{list_reserve}</td>
+</tr>
+<tr>
+	<td class='table_border'><b>Special Request </b>: {special_request}</td>
+</tr>
+<tr >
+	<td class='table_border condition' style='padding:0;'>
+	<table style='width:100%;'>
+	<tr>
+		<td width='50%' class='text-top'>{cancel_policy}</td>
+		<td style='border-left:1px solid #999999;' class='text-top'>{payment_policy}</td>
+	</tr>
+	</table>
 	</td>
 </tr>
 <tr>
-	<td class='table_border'>
-	{list_reserve}
-	</td>
-</tr>
-<tr>
-	<td class='table_border condition'>
-		{rule_cancel_room}
-	</td>
-</tr>
-<tr>
-	<td class='table_border' ><small>{condition_detail}
-	</small>
-	</td>
+	<td class='table_border' >{condition_detail}</td>
 </tr>
 <tr>
 	<td class='text-center'>
 		<p>
 			<h4><b>Haven Resort Hua Hin Client Service</b></h4>
-				<small>If you have any question, you can send an email to: support@havenresort.com </small><br>
+				<small>If you have any question, you can send an email to: rsvn@haven-huahin.com </small><br>
 		</p>
 	</td>
 </tr>

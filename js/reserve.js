@@ -115,13 +115,13 @@ reserve.get_confirmation = function(callback){
 			
 			var service = parseFloat(summary.service) ;
 			var vat = parseFloat(summary.vat);
-			var sum = parseFloat(summary.sum) ;	//summary.amount
-			var net_parse = parseFloat(summary.net);
+			var sum = summary.sum ;	//summary.amount
+			var net_parse = summary.net;
 
-			sum = parseFloat(sum).toFixed(2).replace(money_pattern,"$1,");
+			sum = sum.replace(money_pattern,"$1,");
 			service = parseFloat(service).toFixed(2).replace(money_pattern,"$1,");
 			vat = parseFloat(vat).toFixed(2).replace(money_pattern,"$1,");
-			net = parseFloat(net_parse).toFixed(2).replace(money_pattern,"$1,");
+			net = net_parse.replace(money_pattern,"$1,");
 
 			var item = "<div class='row'>";
 			item += "<div class='col-md-3'>"+pages.message.service+"</div>";
@@ -291,8 +291,8 @@ reserve.get_summary = function(callback){
 
 		//summary room price
 		if(reserve.summary!=undefined){
-			
-			var sum = parseFloat(reserve.summary.sum).toFixed(2).replace(money_pattern,"$1,");
+			//var_dump(reserve.summary);
+			var sum = reserve.summary.sum.replace(money_pattern,"$1,");
 			var service = parseFloat(reserve.summary.service).toFixed(2).replace(money_pattern,"$1,");
 			var vat = parseFloat(reserve.summary.vat).toFixed(2).replace(money_pattern,"$1,");
 			
@@ -345,7 +345,7 @@ reserve.get_summary = function(callback){
 		}
 
 		//summary net price 
-		var net = parseFloat(reserve.summary.net).toFixed(2).replace(money_pattern,"$1,");
+		var net = reserve.summary.net.replace(money_pattern,"$1,");
 		var item = "<div class='row rowspan'>";
 		item += "<div class='col-md-offset-2 col-md-7'><pre><h4>"+pages.message.total_payment+"</h4></pre></div>";
 		item += "<div class='col-md-3 text-right'><pre><h4>฿ "+net+"</h4></pre></div>";
@@ -419,14 +419,17 @@ reserve.get_receipt = function(){
 		if(summary!=null){
 			
 			
-			var sum = parseFloat(summary.sum);	
+			var sum = summary.sum;	
 			var service = parseFloat(summary.service) ;
 			var vat = parseFloat(summary.vat);
-			var net = parseFloat(summary.net);
-			sum = parseFloat(sum).toFixed(2).replace(money_pattern,"$1,");
+			var net = summary.net;
+			
+			//console.log("sum is " + sum);
+			
+			sum = sum.replace(money_pattern,"$1,");
 			service = parseFloat(service).toFixed(2).replace(money_pattern,"$1,");
 			vat = parseFloat(vat).toFixed(2).replace(money_pattern,"$1,");
-			net = parseFloat(net).toFixed(2).replace(money_pattern,"$1,");
+			net = net.replace(money_pattern,"$1,");
 			
 			//console.log("service="+service_price);
 			

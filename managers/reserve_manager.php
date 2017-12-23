@@ -76,7 +76,7 @@ class Reserve_Manager{
 		
 		try{
 
-			$sql = " select rr.unique_key,p.id,p.title_".$lang." as title ,rt.title_".$lang." as room_type,rr.room_price,bt.title_".$lang." as bed_name,p. id as pack_id  ";
+			$sql = " select rr.unique_key,p.id,p.title_".$lang." as title ,rt.title_".$lang." as room_type,rr.room_price,bt.title_".$lang." as bed_name ";
 			$sql .= " from reserve_rooms rr inner join packages p on rr.pack_id = p.id ";
 			$sql .= " left join room_types rt on p.room_type = rt.id ";
 			$sql .= " left join bed_type bt on rr.bed_key = bt.id ";
@@ -158,7 +158,7 @@ class Reserve_Manager{
 			$sql .= " ,email ,title_name,first_name,last_name,prefix,mobile,birthdate,create_date) ";
 			$sql .= " values('$unique_key','$reserve_startdate','$reserve_enddate','$reserve_expire','$reserve_status' ";
 			$sql .= " ,'$reserve_comment',$adults,$children,$children_2,$night,'$code'  ";
-			$sql .= " ,$price_room,$price_option,$price_sum,$price_service,$price_vat,$price_net ";
+			$sql .= " ,$price_room,$price_option,'$price_sum',$price_service,$price_vat,'$price_net' ";
 			$sql .= " ,'$email','$title_name','$first_name','$last_name','$prefix','$mobile','$birthdate',$create_date); ";
 
 			

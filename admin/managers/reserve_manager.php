@@ -84,6 +84,7 @@ class Reserve_Manager{
 		try{
 			
 			$sql = "select id,unique_key,reserve_startdate as start_date,reserve_enddate as end_date "; 
+			$sql .= ",reserve_expire,reserve_comment "; 
 			$sql .= ",price_option,price_sum,price_service,price_vat,price_net "; 
 			$sql .= ",reserve_status as status,adults,children,children_2,night,acc_code "; 
 			$sql .= ",concat(title_name,first_name,' ',last_name) as cust_name,concat(prefix,mobile) as cust_mobile "; 

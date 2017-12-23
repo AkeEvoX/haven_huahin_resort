@@ -42,10 +42,10 @@ function SendMail($receive,$sender,$subject,$message,$sender_name)
 		$mail->SMTPAuth = true;
 		$mail->IsSMTP();
 		$mail->SMTPDebug = 1;
-		$mail->SMTPSecure = "tls";
+		//$mail->SMTPSecure = "tls";
 		$mail->Host="smtp.gmail.com";//smtp.gmail.com
 		$mail->Port="587";//ssl :: 465 or tls :: 587
-		//$mail->IsHTML(true);
+		$mail->IsHTML(true);
 		$mail->Username = "svargalok@gmail.com"; 
 		$mail->Password = "trinity@59"; 
 		
@@ -55,6 +55,9 @@ function SendMail($receive,$sender,$subject,$message,$sender_name)
 		foreach($receive as $to){
 			$mail->AddAddress($to["email"],$to["alias"]);
 		}
+		
+		//CC MAIL
+		//$mail->AddCC("neosvargalok@hotmail.com");
 		
 		if(!$mail->Send()) {
 			//echo "Mailer Error: " . $mail->ErrorInfo;
