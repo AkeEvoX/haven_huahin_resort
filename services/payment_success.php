@@ -39,6 +39,34 @@ function send_mail_complete($key){
 	$message = str_replace("{customer_email}",$reserve["customer"]->email,$message);
 	$message = str_replace("{special_request}",$reserve["customer"]->comment,$message);
 	$message = str_replace("{list_reserve}",set_email_list_reserve($reserve),$message);
+	
+	/* get package info */
+	$rooms = (array)$reserve['rooms'];
+	$pack_id = $rooms[0]["key"];
+	$base_room = new Room_Manager();
+	$package_obj = $base_room->get_item_package($pack_id,'en'); //fix language 
+	$package_info = $package_obj->fetch_object();
+	
+		/* initial policy */
+	$package_name = $package_info->title;
+	$date_range = datediff(date('Y-m-d'),$reserve["info"]->date_start); 
+	$lang = 'en';
+	
+	/* cancel policy */
+	$expire_date = full_date_format($reserve["info"]->date_expire,"en");
+	$cancel_policy = get_cancel_policy($package_name,$date_range,$lang);
+	$cancel_policy = str_replace('{expire_date}',$expire_date,$cancel_policy);
+	$message = str_replace("{cancel_policy}",$cancel_policy,$message);		
+	
+	/* payment policy */
+	$payment_policy = get_payment_policy($package_name,$date_range,$lang);
+	$message = str_replace('{payment_policy}',$payment_policy,$message);	
+	
+	/*show package condition*/
+	$message = str_replace("{condition_detail}",get_condition($date_range,$package_info),$message);
+	
+	/* initial email */
+	$cust_name = $reserve['customer']->title . ' '. $reserve['customer']->fname . ' '.$reserve['customer']->lname;
 
 	$receive = array($reserve["customer"]->email =>"customer");
 	$sender = "contact@baankunnan.com";
@@ -176,5 +204,38 @@ $payment=null;
 	return $reserve;
 }
 
+
+function get_condition($date_range,$package_info){
+	
+	$result = "";
+	if($date_range <= 14 and strpos(strtolower($package_info->title), 'internet') !== false){
+		$result = "<b>Terms & conditions </b><br/><br/>";
+		$result = "* The above rate are include breakfast. <br/>";
+		$result .= "* Full payment in advance required. Your credit card will be charged at the time of reservation. <br/>";
+		$result .= "* Cancellation NO REFUND in the event of the reservation being cancelled, amended or no show.  <br/>";
+		$result .= "* If you depart early or you cancel or fail to honor this reservation for any reason, you will not receive any credit or refund. <br/>";
+		$result .= "* Extensions will require a new reservation for the additional date(s), subject to availability and prevailing rates, and this rate shall not apply.  <br/>";
+		$result .= "* This rate is not combinable with any other offers and promotions and is not available to groups. <br/>";
+		$result .= "* Rates are subject to availability. <br/>";
+		$result .= "* Rates are quoted in Thai Baht(THB). <br/>";
+		$result .= "* Rates quoted are subjected to 7% government tax and 10% service charge. <br/>";
+		$result .= "* Rate is subject to change without notice. <br/><br/>";
+		$result .= "* Check in time is from 14:00 hours & Check out until 12:00 noon. <br/>";
+		$result .= "* Please note that children age 12 and older are charged the adult rate. Please include them in the number entered   in the No. of Adults box. <br/>";
+		$result .= "* Children between 5 to 11 years old sharing the existing bed include breakfast is charged THB 234 per child per day. <br/>";
+		$result .= "Or and extra bed with breakfast is THB 510 per child per day. Rates are subject to Tax and Service Charge. <br/>";
+		$result .= "* Baby cot is free and advance request must be made.  <br/>";
+		$result .= "* Extra bed over 12 years old with full daily breakfast is charge at THB 1020 per bed per night subject to tax and service charge. <br/>"; 
+		$result .= "* Should you wish to change an existing reservation, you are required to cancel the existing booking and proceed to create a new reservation. This maybe done by visiting our website www.haven-huahin.com <br/>";
+		$result .= "* Should you wish to cancel an existing reservation, simply click on the reservation link at our website www.haven-huahin.com <br/>";
+		$result .= "* Please do not hesitate to contact us at the following e-mail address: rsvn@haven-huahin.com, we are at your disposal for any further information you need. <br/>";
+	}
+	else{
+		$result  = $package_info->conditions;
+	}
+	
+	return $result;
+		
+}
 
 ?>
