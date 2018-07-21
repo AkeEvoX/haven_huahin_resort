@@ -46,8 +46,8 @@ function SendMail($receive,$sender,$subject,$message,$sender_name)
 		$mail->Host="smtp.gmail.com";//smtp.gmail.com
 		$mail->Port="587";//ssl :: 465 or tls :: 587
 		//$mail->IsHTML(true);
-		$mail->Username = "svargalok@gmail.com"; 
-		$mail->Password = "trinity@59"; 
+		$mail->Username = ""; 
+		$mail->Password = ""; 
 		
 		$mail->SetFrom($sender, $sender_name);
 
